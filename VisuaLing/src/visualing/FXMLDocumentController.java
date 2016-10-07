@@ -26,27 +26,29 @@ import javafx.scene.Node;
  */
 public class FXMLDocumentController implements Initializable {
     
-    @FXML
-    private Label label;
-    
+    @FXML private Label label;
+    @FXML private javafx.scene.control.Button boutonAnnuler;
+    @FXML private javafx.scene.control.Button buttonConnexion ;
     
     //Bouton pour aller a la prochaine scene, soit l'interface d'acceuil
     @FXML
-    public void bouton_connexion (ActionEvent event)throws IOException {
+    public void bouton_connexionAction (ActionEvent event)throws IOException {
         Parent interface_acceuil_parent = FXMLLoader.load (getClass().getResource("Interface_acceuil.fxml"));
         Scene interface_acceuil_scene = new Scene (interface_acceuil_parent); 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage window = (Stage) buttonConnexion.getScene().getWindow();
         window.setScene(interface_acceuil_scene);
         window.show();
-        
-        
-        
-        
-        
+  
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-    
+   
+    @FXML
+    private void bouton_AnnulerAction (ActionEvent event) throws IOException {
+       Stage window = (Stage) boutonAnnuler.getScene().getWindow();
+       window.close(); 
+    }
+        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

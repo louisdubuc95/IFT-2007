@@ -9,7 +9,7 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.Interface_choix_modeController">
    <children>
       <Label layoutX="219.0" layoutY="38.0" prefHeight="17.0" prefWidth="257.0" text="Choix Mode de jeu" />
-      <Button layoutX="90.0" layoutY="149.0" mnemonicParsing="false" onAction="#bouton_tempsreel" text="Temps reel" />
-      <Button layoutX="74.0" layoutY="200.0" mnemonicParsing="false" onAction="#bouton_imageparimage" text="Image par image" />
+      <Button fx:id="boutonTempsReel" layoutX="90.0" layoutY="149.0" mnemonicParsing="false" onAction="#bouton_TempsReelAction" text="Temps reel" />
+      <Button fx:id="boutonImageParImage" layoutX="74.0" layoutY="207.0" mnemonicParsing="false" onAction="#bouton_ImageParImageAction" text="Image par image" />
    </children>
 </AnchorPane>

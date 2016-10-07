@@ -27,12 +27,14 @@ public class Interface_creer_sport_TRController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    @FXML private javafx.scene.control.Button boutonInterfaceTempsReel ;
     @FXML
     //Accéder a l'interface pour créer une séquence en temps réel
-    public void bouton_interface_temps_reel (ActionEvent event)throws IOException {
+    public void bouton_InterfaceTempsReelAction (ActionEvent event)throws IOException {
         Parent interface_TR_parent = FXMLLoader.load (getClass().getResource("Interface_temps_reel.fxml"));
         Scene interface_imageparimage_scene = new Scene (interface_TR_parent); 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage window = (Stage) boutonInterfaceTempsReel.getScene().getWindow();
         window.setScene(interface_imageparimage_scene);
         window.show();
     }

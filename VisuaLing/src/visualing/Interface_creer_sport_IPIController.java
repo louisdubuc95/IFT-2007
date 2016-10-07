@@ -21,16 +21,24 @@ import javafx.fxml.FXML;
  *
  * @author 
  */
+
+
+
 public class Interface_creer_sport_IPIController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    @FXML private javafx.scene.control.Button boutonInterfaceImageParImage ;
+    
     //Accéder a l'interface image par image 
+    
+    
     @FXML
-      public void bouton_interface_imageparimage (ActionEvent event)throws IOException {
+      public void bouton_InterfaceImageParImageAction (ActionEvent event)throws IOException {
         Parent interface_imageparimage_parent = FXMLLoader.load (getClass().getResource("Interface_image_par_image.fxml"));
         Scene interface_imageparimage_scene = new Scene (interface_imageparimage_parent); 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage window = (Stage) boutonInterfaceImageParImage.getScene().getWindow();
         window.setScene(interface_imageparimage_scene);
         window.show();
       }

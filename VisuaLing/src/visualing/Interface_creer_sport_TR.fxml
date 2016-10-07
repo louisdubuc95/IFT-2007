@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.Interface_creer_sport_TRController">
    <children>
-      <Button layoutX="274.0" layoutY="267.0" mnemonicParsing="false" onAction="#bouton_interface_temps_reel" text="Creer sport" />
+      <Button fx:id="boutonInterfaceTempsReel" layoutX="274.0" layoutY="267.0" mnemonicParsing="false" onAction="#bouton_InterfaceTempsReelAction" text="Creer sport" />
       <Label layoutX="241.0" layoutY="82.0" prefHeight="17.0" prefWidth="173.0" text="Creer sport temps réel" />
    </children>
 </AnchorPane>
