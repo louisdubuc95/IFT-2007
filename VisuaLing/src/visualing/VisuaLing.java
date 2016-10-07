@@ -24,7 +24,7 @@ public class VisuaLing extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene); 
-        stage.setTitle("VisuaLing");
+        stage.setTitle("VisuaLigue");
         stage.show();
     }
 

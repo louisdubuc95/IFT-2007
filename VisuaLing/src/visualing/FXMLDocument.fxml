@@ -12,7 +12,7 @@
         <Button fx:id="buttonConnexion" layoutX="62.0" layoutY="154.0" onAction="#bouton_connexionAction" text="Connexion" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <Button fx:id="boutonAnnuler" layoutX="168.0" layoutY="154.0" mnemonicParsing="false" onAction="#bouton_AnnulerAction" prefHeight="25.0" prefWidth="71.0" text="Annuler" />
-      <Label layoutX="84.0" layoutY="14.0" text="VisuaLing">
+      <Label layoutX="84.0" layoutY="14.0" text="VisuaLigue">
          <font>
             <Font name="Malgun Gothic" size="29.0" />
          </font>
