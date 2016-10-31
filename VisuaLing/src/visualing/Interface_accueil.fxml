@@ -34,13 +34,13 @@
             <Image url="@../Photo/load.png" />
          </image>
       </ImageView>
-      <Button layoutX="115.0" layoutY="594.0" mnemonicParsing="false" text="Nouveau jeu" />
-      <Button layoutX="357.0" layoutY="594.0" mnemonicParsing="false" text="Charger" />
+      <Button fx:id="boutonNouveau" layoutX="115.0" layoutY="594.0" mnemonicParsing="false" onAction="#boutonNouveauAction" text="Nouveau jeu" />
+      <Button fx:id="boutonCharger" layoutX="357.0" layoutY="594.0" mnemonicParsing="false" onAction="#boutonChargerAction" text="Charger" />
       <ImageView fitHeight="119.0" fitWidth="119.0" layoutX="544.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/2189-512.png" />
          </image>
       </ImageView>
-      <Button layoutX="574.0" layoutY="594.0" mnemonicParsing="false" text="Quitter" />
+      <Button fx:id="boutonQuitter" layoutX="574.0" layoutY="594.0" mnemonicParsing="false" onAction="#boutonQuitterAction" text="Quitter" />
    </children>
 </AnchorPane>

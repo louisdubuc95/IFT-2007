@@ -37,7 +37,8 @@ public class Interface_accueilController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
+    //test commentaire
     @FXML
     private void boutonNouveauAction(ActionEvent event)throws IOException {
         Parent Interface_choix_mode_parent = FXMLLoader.load (getClass().getResource("Interface_choix_mode.fxml"));
