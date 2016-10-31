@@ -17,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.control.Button ; 
+import javafx.scene.control.TextArea;
 
 
 /**
@@ -32,9 +34,21 @@ public class Interface_choix_modeController implements Initializable {
      */
     //Accéder a l'interface de création de sport temps réel
     
-    @FXML private javafx.scene.control.Button boutonTempsReel ;
-    @FXML private javafx.scene.control.Button boutonImageParImage ;
+    @FXML private Button boutonTempsReel ;    @FXML private Button boutonImageParImage ;
+    @FXML private Button boutonannuler; 
+   
     
+    
+    
+    @FXML 
+    public void bouton_annuler (ActionEvent event) throws IOException {
+        Parent interface_acceuil_Parent = FXMLLoader.load (getClass().getResource("Interface_accueil.fxml"));
+        Scene interface_acceuil_scene = new Scene (interface_acceuil_Parent); 
+        Stage window = (Stage) boutonannuler.getScene().getWindow();
+        window.setScene(interface_acceuil_scene);
+        window.show();
+        
+    }
     @FXML
      public void bouton_TempsReelAction (ActionEvent event)throws IOException {
         Parent tempsreel_parent = FXMLLoader.load (getClass().getResource("Interface_creer_sport_TR.fxml"));
@@ -42,8 +56,7 @@ public class Interface_choix_modeController implements Initializable {
         Stage window = (Stage) boutonTempsReel.getScene().getWindow();
         window.setScene(tempsreel_scene);
         window.show();
-     }
-      //Accéder  a l'interface de création de sport image par image
+     }      //Accéder  a l'interface de création de sport image par image
       @FXML
         public void bouton_ImageParImageAction (ActionEvent event)throws IOException {
         Parent imageparimage_parent = FXMLLoader.load (getClass().getResource("Interface_creer_sport_IPI.fxml"));

@@ -24,14 +24,14 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="345.0" prefWidth="964.0">
                      <children>
-                      <AnchorPane layoutY="7.0" minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="964.0">
+                      <AnchorPane layoutX="7.0" layoutY="8.0" minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="964.0">
                            <children>
                               <Label layoutX="304.0" layoutY="292.0" text="Position en x :" />
                               <Label layoutX="491.0" layoutY="292.0" text="Position en y:" />
-                              <TextField layoutX="378.0" layoutY="287.0" prefHeight="27.0" prefWidth="37.0" />
-                              <TextField layoutX="575.0" layoutY="287.0" prefHeight="27.0" prefWidth="37.0" />
-                              <Label layoutX="415.0" layoutY="292.0" text="m" />
-                              <Label layoutX="622.0" layoutY="292.0" text="m" />
+                              <TextField layoutX="380.0" layoutY="287.0" prefHeight="27.0" prefWidth="37.0" />
+                              <TextField layoutX="566.0" layoutY="287.0" prefHeight="27.0" prefWidth="37.0" />
+                              <Label layoutX="426.0" layoutY="292.0" text="m" />
+                              <Label layoutX="615.0" layoutY="292.0" text="m" />
                               <Button layoutX="99.0" layoutY="244.0" mnemonicParsing="false" text="Attaquant" />
                               <Button layoutX="415.0" layoutY="244.0" mnemonicParsing="false" text="Defenseur" />
                               <Button layoutX="759.0" layoutY="244.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Gardien" />
