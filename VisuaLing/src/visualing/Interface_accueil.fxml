@@ -8,29 +8,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="457.0" prefWidth="417.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.Interface_acceuilController">
+<AnchorPane id="AnchorPane" prefHeight="505.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.Interface_acceuilController">
    <children>
-      <Label layoutX="104.0" layoutY="14.0" prefHeight="70.0" prefWidth="227.0" text="VisuaLigue">
+      <Label layoutX="156.0" layoutY="14.0" prefHeight="70.0" prefWidth="227.0" text="VisuaLigue">
          <font>
             <Font name="Calibri Light" size="48.0" />
          </font></Label>
-      <ImageView fitHeight="80.0" fitWidth="79.0" layoutX="273.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="80.0" fitWidth="79.0" layoutX="318.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/load.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="71.0" fitWidth="70.0" layoutX="94.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="71.0" fitWidth="70.0" layoutX="168.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/adds-add-file-icon.png" />
          </image>
       </ImageView>
-      <Label layoutX="97.0" layoutY="409.0" text="Nouveau jeu ">
+      <Label layoutX="171.0" layoutY="452.0" text="Nouveau jeu ">
          <font>
             <Font name="Calibri Light" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="281.0" layoutY="408.0" text="Charger jeu" />
-      <ImageView fitHeight="242.0" fitWidth="465.0" layoutX="36.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="327.0" layoutY="451.0" text="Charger jeu" />
+      <ImageView fitHeight="279.0" fitWidth="446.0" layoutX="66.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/Evgeny%20Kuznetsov.jpg" />
          </image>
