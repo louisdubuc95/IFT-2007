@@ -10,9 +10,9 @@
 <AnchorPane id="AnchorPane" prefHeight="250.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.Interface_creer_sport_TRController">
    <children>
       <Button fx:id="boutonInterfaceTempsReel" layoutX="147.0" layoutY="188.0" mnemonicParsing="false" onAction="#bouton_InterfaceTempsReelAction" text="Creer sport" />
-      <Label layoutX="164.0" layoutY="36.0" prefHeight="17.0" prefWidth="173.0" text="Nouveau sport temps réel">
+      <Label prefHeight="55.0" prefWidth="511.0" text="Nouveau sport temps réel">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="Calibri Light" size="48.0" />
          </font></Label>
       <Button fx:id="boutonAnnulerTR" layoutX="268.0" layoutY="188.0" mnemonicParsing="false" onAction="#bouton_AnnulerAction" prefHeight="25.0" prefWidth="76.0" text="Annuler" />
       <TextField fx:id="txtNomSportsTR" layoutX="75.0" layoutY="66.0" prefHeight="25.0" prefWidth="294.0" promptText="Enter nom du sport" />

@@ -19,7 +19,7 @@
             <Image url="@../Photo/11917681_gif-nikita-kucherovs-world-cup-goal_a678d193_m.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="124.0" fitWidth="406.0" layoutX="167.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="124.0" fitWidth="406.0" layoutX="14.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/Capture.PNG" />
          </image>
