@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
  import javafx.scene.image.Image;
  import javafx.scene.image.ImageView;
+import javafx.scene.control.Button; 
 
 /**
  * FXML Controller class
@@ -30,6 +32,7 @@ public class Interface_image_par_imageController implements Initializable {
 
     //@FXML
     private ImageView imgSurface;
+    private Button boutonQuitter ;
     //private String memImage;
 
     public void getImageInterface(String imageSurface){
@@ -42,10 +45,15 @@ public class Interface_image_par_imageController implements Initializable {
 //            imgSurface.setImage(image);
 //            }
       }
-
+    
+    public void quitterjeu () {
+        Platform.exit();
+        
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO
+    
+    } 
     }    
-}
+
 

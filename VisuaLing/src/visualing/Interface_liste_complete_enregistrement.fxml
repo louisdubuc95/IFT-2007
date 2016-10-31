@@ -19,6 +19,6 @@
          </content>
       </ScrollPane>
       <Button layoutX="90.0" layoutY="385.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="89.0" text="Ouvrir" />
-      <Button layoutX="422.0" layoutY="385.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="89.0" text="Annuler" />
+      <Button layoutX="422.0" layoutY="385.0" mnemonicParsing="false" onAction="#boutouAnnuler" prefHeight="35.0" prefWidth="89.0" text="Annuler" />
    </children>
 </AnchorPane>
