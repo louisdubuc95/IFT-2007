@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -25,6 +26,11 @@ import javafx.scene.Node;
  */
 public class Interface_liste_complete_enregistrementController implements Initializable {
 
+    @FXML
+    private Button boutonOuvrir;
+    @FXML
+    private Button boutonAnnuler;
+
     /**
      * Initializes the controller class.
      */
@@ -32,5 +38,18 @@ public class Interface_liste_complete_enregistrementController implements Initia
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void boutonOuvrirAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void boutonAnnulerAction(ActionEvent event)throws IOException {
+        Parent Interface_accueil_parent = FXMLLoader.load (getClass().getResource("Interface_accueil.fxml"));
+        Scene Interface_accueil_scene = new Scene (Interface_accueil_parent); 
+        Stage window = (Stage) boutonAnnuler.getScene().getWindow();
+        window.setScene(Interface_accueil_scene);
+        window.show();
+    }
     
 }
