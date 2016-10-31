@@ -5,6 +5,7 @@
  */
 package visualing;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +17,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
+ import javafx.scene.image.Image;
+ import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -24,12 +28,24 @@ import javafx.fxml.FXML;
  */
 public class Interface_image_par_imageController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    //@FXML
+    private ImageView imgSurface;
+    //private String memImage;
+
+    public void getImageInterface(String imageSurface){
+        System.out.println (imageSurface);
+//        if(!imageSurface.equals("chemin"))
+//        {
+//            //File imageFile = new File(imageSurface);
+//            //if (imageFile.exists()) {
+//            Image image = new Image(imageSurface);
+//            imgSurface.setImage(image);
+//            }
+      }
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL location, ResourceBundle resources) {
+        //TODO
     }    
-    
 }
+
