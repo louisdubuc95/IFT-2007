@@ -72,6 +72,8 @@ public class Interface_creer_sport_IPIController implements Initializable {
            FileChooser fileChooser = new FileChooser();
            fileChooser.setTitle("Choisir une image");
            fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Fichier image", "*.png", "*.jpg"));
+           File cheminDefault = new File("\\111129633_equipe18\\VisuaLing\\src\\Photo");
+           fileChooser.setInitialDirectory(cheminDefault);
            
            File selectedFile = fileChooser.showOpenDialog(window);
            if (selectedFile != null) {
