@@ -26,28 +26,31 @@ import javafx.scene.control.Button;
  */
 public class Interface_liste_complete_enregistrementController implements Initializable {
 
-    private Button bouton_Annuler;
+   @FXML private Button butonAnnuler; 
 
     /**
      * Initializes the controller class.
      */
-    
-    @FXML 
-    public void boutouAnnuler (ActionEvent event) throws IOException {
-        Parent interface_acceuil_Parent = FXMLLoader.load (getClass().getResource("Interface_accueil.fxml"));
-        Scene interface_acceuil_scene= new Scene (interface_acceuil_Parent);
-        Stage window = (Stage) bouton_Annuler.getScene().getWindow();
-        window.setScene(interface_acceuil_scene);
-        window.show();
-    
-    }
+   
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
 
-
- 
+        @FXML
+        public void btnAnnuler (ActionEvent event)throws IOException {
+        Parent btn_Annuler_parent = FXMLLoader.load (getClass().getResource("Interface_accueil.fxml"));
+        Scene btn_Annuler_scene = new Scene (btn_Annuler_parent); 
+        Stage window = (Stage)  butonAnnuler.getScene().getWindow();
+        window.setScene(btn_Annuler_scene);
+        window.show();
+      }
+    @FXML
+        public void btnCharger (ActionEvent event)throws IOException {
+        
+      }
+  
+    
  
 }
