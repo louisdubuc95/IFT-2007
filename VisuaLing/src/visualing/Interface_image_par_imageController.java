@@ -22,7 +22,8 @@ import javafx.scene.image.ImageView;
  import javafx.scene.image.Image;
  import javafx.scene.image.ImageView;
 import javafx.scene.control.Button; 
-
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.MenuBar;
 /**
  * FXML Controller class
  *
@@ -33,6 +34,8 @@ public class Interface_image_par_imageController implements Initializable {
     //@FXML
     private ImageView imgSurface;
     private Button boutonQuitter ;
+    private MenuItem exit ;
+    
     //private String memImage;
 
     public void getImageInterface(String imageSurface){
@@ -46,14 +49,25 @@ public class Interface_image_par_imageController implements Initializable {
 //            }
       }
     
-    public void quitterjeu () {
+    @FXML 
+    private void quitterJeu (final ActionEvent event){
         Platform.exit();
         
     }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
     
     } 
+
+    @FXML
+    private void sauvegarderJeu(ActionEvent event) {
+    }
+
+    @FXML
+    private void chargerJeu(ActionEvent event) {
+    }
     }    
 
 

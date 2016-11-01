@@ -24,23 +24,29 @@
             <Image url="@../Photo/Capture.PNG" />
          </image>
       </ImageView>
-      <ImageView fitHeight="106.0" fitWidth="119.0" layoutX="103.0" layoutY="470.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Photo/adds-add-file-icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="119.0" fitWidth="119.0" layoutX="327.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Photo/load.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="boutonNouveau" layoutX="115.0" layoutY="594.0" mnemonicParsing="false" onAction="#boutonNouveauAction" text="Nouveau jeu" />
-      <Button fx:id="boutonCharger" layoutX="357.0" layoutY="594.0" mnemonicParsing="false" onAction="#boutonChargerAction" text="Charger" />
-      <ImageView fitHeight="119.0" fitWidth="119.0" layoutX="544.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Photo/2189-512.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="boutonQuitter" layoutX="574.0" layoutY="594.0" mnemonicParsing="false" onAction="#boutonQuitterAction" text="Quitter" />
+      <Button fx:id="boutonNouveau" layoutX="75.0" layoutY="483.0" mnemonicParsing="false" onAction="#boutonNouveauAction" prefHeight="127.0" prefWidth="135.0">
+         <graphic>
+            <ImageView fitHeight="126.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/adds-add-file-icon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="boutonCharger" layoutX="308.0" layoutY="483.0" mnemonicParsing="false" onAction="#boutonChargerAction" prefHeight="134.0" prefWidth="142.0">
+         <graphic>
+            <ImageView fitHeight="131.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/load.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="boutonQuitter" layoutX="527.0" layoutY="483.0" mnemonicParsing="false" onAction="#boutonQuitterAction" prefHeight="134.0" prefWidth="142.0">
+         <graphic>
+            <ImageView fitHeight="119.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/2189-512.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>
