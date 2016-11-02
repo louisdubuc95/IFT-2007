@@ -35,6 +35,18 @@ public class Interface_temps_reelController implements Initializable {
         // TODO
     }    
     
+    @FXML
+    public void setImageInterface(String imageSurface){
+        System.out.println (imageSurface);
+//        if(!imageSurface.equals("chemin"))
+//        {
+//            //File imageFile = new File(imageSurface);
+//            //if (imageFile.exists()) {
+//            Image image = new Image(imageSurface);
+//            imgSurface.setImage(image);
+//            }
+      }
+    
     @FXML 
     private void quitterJeu (ActionEvent event){
         Platform.exit();
