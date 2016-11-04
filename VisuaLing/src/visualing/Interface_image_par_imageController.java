@@ -86,7 +86,14 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
     @FXML
-    private void ajouterJoueurAction(ActionEvent event) {
+    private void ajouterJoueurAction(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle("Ajout Joueur");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          
+          //Show la nouvelle window
+          stage.show();
     }
     
     @FXML
@@ -94,8 +101,7 @@ public class Interface_image_par_imageController implements Initializable {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout obstacle");
-          stage.setScene(new Scene((VBox) loader.load()));
-          Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
+          stage.setScene(new Scene((AnchorPane) loader.load()));
           
           //Show la nouvelle window
           stage.show();

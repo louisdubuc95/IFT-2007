@@ -98,12 +98,12 @@
             </Menu>
             <Menu mnemonicParsing="false">
                <graphic>
-                  <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
+                  <Button fx:id="boutonAjouterJoueur" mnemonicParsing="false" onAction="#ajouterJoueurAction" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
                </graphic>
             </Menu>
             <Menu mnemonicParsing="false">
                <graphic>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="123.0" text="Obstacle" />
+                  <Button fx:id="boutonAjouterObstacle" mnemonicParsing="false" onAction="#ajouterObstacleAction" prefHeight="50.0" prefWidth="123.0" text="Obstacle" />
                </graphic>
             </Menu>
             <Menu mnemonicParsing="false">

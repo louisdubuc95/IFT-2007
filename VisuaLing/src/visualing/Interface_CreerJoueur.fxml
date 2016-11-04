@@ -11,9 +11,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="484.0" prefWidth="1215.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.ModifObstacleController">
-  <children>
-    <AnchorPane blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" mouseTransparent="true" prefHeight="409.0" prefWidth="527.0" VBox.vgrow="ALWAYS">
+<AnchorPane blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" prefHeight="481.0" prefWidth="1212.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.Interface_CreerJoueurController">
       <children>
             <Label layoutX="31.0" layoutY="37.0" text="Créer un joueur">
                <font>
@@ -65,12 +63,10 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <Button layoutX="1131.0" layoutY="445.0" mnemonicParsing="false" prefWidth="70.0" text="Annuler" />
+            <Button fx:id="boutonAnnuler" layoutX="1131.0" layoutY="445.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefWidth="70.0" text="Annuler" />
             <Button layoutX="1050.0" layoutY="445.0" mnemonicParsing="false" prefWidth="70.0" text="Ok" />
       </children>
          <effect>
             <Blend />
          </effect>
     </AnchorPane>
-  </children>
-</VBox>

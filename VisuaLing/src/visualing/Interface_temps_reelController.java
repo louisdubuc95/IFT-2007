@@ -31,6 +31,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.StageStyle;
 /**
  * FXML Controller class
  *
@@ -41,6 +42,8 @@ public class Interface_temps_reelController implements Initializable {
     
     @FXML private MenuItem exit ;
     @FXML private ImageView imgSurface;
+    @FXML private Button boutonAjouterJoueur;
+    @FXML private Button boutonAjouterObstacle;
     
     
     //coordonée
@@ -86,6 +89,28 @@ public class Interface_temps_reelController implements Initializable {
     @FXML
     private void chargerJeu (ActionEvent event){
         
+    }
+    
+    @FXML
+    private void ajouterJoueurAction(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle("Ajout Joueur");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          
+          //Show la nouvelle window
+          stage.show();
+    }
+    
+    @FXML
+    private void ajouterObstacleAction(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle("Ajout obstacle");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          
+          //Show la nouvelle window
+          stage.show();
     }
    
     @FXML

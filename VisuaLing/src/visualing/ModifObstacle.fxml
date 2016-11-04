@@ -10,11 +10,9 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.ModifObstacleController">
-  <children>
-    <AnchorPane blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" mouseTransparent="true" prefHeight="409.0" prefWidth="527.0" VBox.vgrow="ALWAYS">
+<AnchorPane blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" prefHeight="409.0" prefWidth="527.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.ModifObstacleController">
       <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Créer un obstacle">
+            <Label layoutX="14.0" layoutY="14.0" mouseTransparent="true" text="Créer un obstacle">
                <font>
                   <Font name="Calibri Light" size="48.0" />
                </font>
@@ -71,7 +69,7 @@
             <Pane layoutX="186.0" layoutY="361.0" prefHeight="27.0" prefWidth="155.0">
                <children>
                   <Button mnemonicParsing="false" prefWidth="70.0" text="Ok" />
-                  <Button layoutX="85.0" mnemonicParsing="false" prefWidth="70.0" text="Annuler" />
+                  <Button fx:id="boutonAnnuler" layoutX="85.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefWidth="70.0" text="Annuler" />
                </children>
             </Pane>
       </children>
@@ -79,5 +77,3 @@
             <Blend />
          </effect>
     </AnchorPane>
-  </children>
-</VBox>
