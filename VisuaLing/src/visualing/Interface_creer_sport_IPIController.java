@@ -63,7 +63,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
         Stage window = (Stage) boutonCreerSportsIPI.getScene().getWindow();
         window.setScene(interface_imageparimage_scene);
         window.show();
-        getInterfaceIPI();
+     //   getInterfaceIPI();
       }
     
     //Accèdre au module parcourir image
@@ -92,7 +92,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
         window.show();
     }
     
-    public void getInterfaceIPI() throws IOException {
+   /*public void getInterfaceIPI() throws IOException {
         //instanse de FXML loader
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Interface_image_par_image.fxml"));
@@ -101,7 +101,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
         Interface_image_par_imageController IPIController = loader.getController();
         IPIController.setImageInterface(lblCheminImage.getText());
     }
-
+*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //TODO

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="813.0" prefWidth="1145.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.Interface_image_par_imageController">
+<AnchorPane id="AnchorPane" prefHeight="813.0" prefWidth="1145.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.Interface_temps_reelController">
    <children>
       <ImageView fitHeight="77.0" fitWidth="84.0" layoutX="35.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -50,11 +50,6 @@
             <Image url="@../Photo/info-icon-63443.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="572.0" fitWidth="1124.0" layoutX="16.0" layoutY="233.0" pickOnBounds="true">
-         <image>
-            <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
-         </image>
-      </ImageView>
       <MenuBar layoutY="-4.0" prefHeight="26.0" prefWidth="1145.0">
         <menus>
           <Menu mnemonicParsing="false" text="Fichier">
@@ -92,5 +87,12 @@
             <Image url="@../Photo/Capture.PNG" />
          </image>
       </ImageView>
+      <ImageView fitHeight="537.0" fitWidth="1138.0" layoutX="4.0" layoutY="268.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="coordonee" layoutX="7.0" layoutY="268.0" onMouseExited="#sortieInterface" onMouseMoved="#coordonnee_interface" prefHeight="537.0" prefWidth="1132.0" />
+      <Label fx:id="labelcoordonnee" layoutX="35.0" layoutY="218.0" text="X: 0 , Y: 0" />
    </children>
 </AnchorPane>
