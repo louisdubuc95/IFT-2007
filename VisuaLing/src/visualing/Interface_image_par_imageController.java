@@ -30,6 +30,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.*;// 
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -40,6 +43,8 @@ public class Interface_image_par_imageController implements Initializable {
 
     @FXML private ImageView imgSurface;
     @FXML private Button boutonQuitter ;
+    @FXML private Button boutonAjouterJoueur; 
+    @FXML private Button boutonAjouterObstacle;
     
     //coordonée
     @FXML private Label labelcoordonneeI;
@@ -78,6 +83,22 @@ public class Interface_image_par_imageController implements Initializable {
 
     @FXML
     private void chargerJeu(ActionEvent event) {
+    }
+    
+    @FXML
+    private void ajouterJoueurAction(ActionEvent event) {
+    }
+    
+    @FXML
+    private void ajouterObstacleAction(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle("Ajout obstacle");
+          stage.setScene(new Scene((VBox) loader.load()));
+          Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
+          
+          //Show la nouvelle window
+          stage.show();
     }
 
     /**
