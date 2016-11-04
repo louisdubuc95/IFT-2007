@@ -10,8 +10,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualing.Interface_image_par_imageController">
    <children>
-      <Label fx:id="labelcoordonneeI" layoutX="823.0" layoutY="58.0" text="X: 0    Y:  0" />
-      <Label fx:id="coordoneeI" layoutX="15.0" layoutY="168.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" prefHeight="537.0" prefWidth="1056.0" />
       <ImageView fitHeight="537.0" fitWidth="1062.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true">
          <image>
             <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
@@ -129,5 +127,7 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label fx:id="coordoneeI" layoutX="12.0" layoutY="169.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" prefHeight="537.0" prefWidth="1062.0" />
+      <Label fx:id="labelcoordonneeI" layoutX="599.0" layoutY="125.0" text="X : 0   Y : 0" />
    </children>
 </AnchorPane>

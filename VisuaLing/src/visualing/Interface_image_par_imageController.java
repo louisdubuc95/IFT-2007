@@ -71,6 +71,10 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML
     private void chargerJeu(ActionEvent event) {
     }
+
+    /**
+     *
+     */
     @FXML
     public void coordonnee_interfaceI (){
         coordoneeI.setOnMouseMoved(new EventHandler<MouseEvent>() {
@@ -80,14 +84,18 @@ public class Interface_image_par_imageController implements Initializable {
           // on va remplacer la grandeur par les parametres entré par l'utilisateur.
           //je suis pas certain si je peux mettre ca ici ou il faut que ce soit dans le controleur de larman. 
           // et je sais pas trop comment limité au centième...ca reste a voir
-        String msg = "X : "       + event.getX()/17.32      + " Y : "       + event.getY()/20.73;
-        labelcoordonneeI.setText(msg);
-        System.out.println(msg);
+        String msg1 = "X : "       + event.getX()/17.32      + " Y : "       + event.getY()/20.73;
+        labelcoordonneeI.setText(msg1);
+       
         }
     });
     }
     //Lamnbda expression "->" c'est la même chose que la fonction coordonee_interface. C'est juste plus rapide codé comme ça 
     //lorsque l'utilisateur sort la souris de l'interface de jeu, remet le conteur a zero. 
+
+    /**
+     *
+     */
    @FXML
    public void sortieInterfaceI () {
       coordoneeI.setOnMouseExited((MouseEvent) -> {
