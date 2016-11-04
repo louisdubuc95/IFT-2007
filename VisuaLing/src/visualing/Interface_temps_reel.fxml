@@ -31,8 +31,8 @@
             </Menu>
           <Menu mnemonicParsing="false" text="Modifier">
             <items>
-              <MenuItem mnemonicParsing="false" text="Nouveau joueur" />
-                  <MenuItem mnemonicParsing="false" text="Nouvel obstacle" />
+              <MenuItem mnemonicParsing="false" onAction="#ajouterJoueurAction" text="Nouveau joueur" />
+                  <MenuItem mnemonicParsing="false" onAction="#ajouterObstacleAction" text="Nouvel obstacle" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Supprimer joueur" />
                   <MenuItem mnemonicParsing="false" text="Supprimer obstacle" />
@@ -182,7 +182,7 @@
             </Menu>
             <Menu mnemonicParsing="false">
                <graphic>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+                  <Button mnemonicParsing="false" onAction="#sauvegarderAction" prefHeight="50.0" prefWidth="58.0">
                      <graphic>
                         <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>

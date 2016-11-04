@@ -56,8 +56,8 @@
                         <TextField layoutX="223.0" layoutY="88.0" prefHeight="27.0" prefWidth="37.0" />
                         <Label layoutX="130.0" layoutY="93.0" text="m" />
                         <Label layoutX="262.0" layoutY="93.0" text="m" />
-                        <Button layoutX="176.0" layoutY="150.0" mnemonicParsing="false" text="Parcourir" />
-                        <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="92.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+                        <Button fx:id="boutonParcourir" layoutX="176.0" layoutY="150.0" mnemonicParsing="false" onAction="#boutonParcourirAction" text="Parcourir" />
+                        <ImageView fx:id="ivImage" fitHeight="72.0" fitWidth="75.0" layoutX="92.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Photo/default-placeholder.png" />
                            </image>
@@ -68,7 +68,7 @@
             </SplitPane>
             <Pane layoutX="186.0" layoutY="361.0" prefHeight="27.0" prefWidth="155.0">
                <children>
-                  <Button mnemonicParsing="false" prefWidth="70.0" text="Ok" />
+                  <Button fx:id="boutonOk" mnemonicParsing="false" onAction="#boutonOkAction" prefWidth="70.0" text="Ok" />
                   <Button fx:id="boutonAnnuler" layoutX="85.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefWidth="70.0" text="Annuler" />
                </children>
             </Pane>

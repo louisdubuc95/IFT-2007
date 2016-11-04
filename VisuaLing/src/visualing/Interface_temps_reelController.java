@@ -81,16 +81,6 @@ public class Interface_temps_reelController implements Initializable {
         Platform.exit();
     }
     
-    @FXML 
-    private void sauvegarderJeu (ActionEvent event){
-        
-    }
-    
-    @FXML
-    private void chargerJeu (ActionEvent event){
-        
-    }
-    
     @FXML
     private void ajouterJoueurAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
@@ -107,6 +97,17 @@ public class Interface_temps_reelController implements Initializable {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout obstacle");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          
+          //Show la nouvelle window
+          stage.show();
+    }
+    
+    @FXML
+    private void sauvegarderAction(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_Sauvegarde.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle("Sauvegarder");
           stage.setScene(new Scene((AnchorPane) loader.load()));
           
           //Show la nouvelle window

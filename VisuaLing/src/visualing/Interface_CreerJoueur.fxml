@@ -30,9 +30,9 @@
                               <TextField layoutX="566.0" layoutY="287.0" prefHeight="27.0" prefWidth="37.0" />
                               <Label layoutX="426.0" layoutY="292.0" text="m" />
                               <Label layoutX="615.0" layoutY="292.0" text="m" />
-                              <Button layoutX="99.0" layoutY="244.0" mnemonicParsing="false" text="Attaquant" />
-                              <Button layoutX="415.0" layoutY="244.0" mnemonicParsing="false" text="Defenseur" />
-                              <Button layoutX="759.0" layoutY="244.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Gardien" />
+                              <Button fx:id="boutonAttaquant" layoutX="99.0" layoutY="244.0" mnemonicParsing="false" onAction="#boutonAttaquantAction" text="Attaquant" />
+                              <Button fx:id="boutonDefenseur" layoutX="415.0" layoutY="244.0" mnemonicParsing="false" onAction="#boutonDefenseurAction" text="Defenseur" />
+                              <Button fx:id="boutonGuardien" layoutX="759.0" layoutY="244.0" mnemonicParsing="false" onAction="#boutonGuardienAction" prefHeight="25.0" prefWidth="74.0" text="Gardien" />
                               <ImageView fitHeight="203.0" fitWidth="209.0" layoutX="32.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Photo/sp-oilers-a-20151106.jpg" />
@@ -63,8 +63,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <Button fx:id="boutonAnnuler" layoutX="1131.0" layoutY="445.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefWidth="70.0" text="Annuler" />
-            <Button layoutX="1050.0" layoutY="445.0" mnemonicParsing="false" prefWidth="70.0" text="Ok" />
+            <Button fx:id="boutonAnnuler" layoutX="462.0" layoutY="442.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefWidth="70.0" text="Annuler" />
       </children>
          <effect>
             <Blend />

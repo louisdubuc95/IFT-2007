@@ -5,6 +5,7 @@
  */
 package visualing;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -26,13 +27,35 @@ import javafx.stage.StageStyle;
 public class Interface_CreerJoueurController implements Initializable {
     
     @FXML private Button boutonAnnuler;
+    @FXML private Button boutonAttaquant;
+    @FXML private Button boutonDefenseur;
+    @FXML private Button boutonGuardien;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }   
+    }  
+    
+    @FXML 
+    public void boutonAttaquantAction(ActionEvent event) throws MalformedURLException{
+        Stage stage = (Stage) boutonAttaquant.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML 
+    public void boutonDefenseurAction(ActionEvent event) throws MalformedURLException{
+        Stage stage = (Stage) boutonDefenseur.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML 
+    public void boutonGuardienAction(ActionEvent event) throws MalformedURLException{
+        Stage stage = (Stage) boutonGuardien.getScene().getWindow();
+        stage.close();
+    }
     
     public void boutonAnnulerAction(ActionEvent event) {
           Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
