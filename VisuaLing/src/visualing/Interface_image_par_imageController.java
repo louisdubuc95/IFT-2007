@@ -48,7 +48,7 @@ public class Interface_image_par_imageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     } 
 
-    public void getImageInterface(String imageSurface){
+    public void setImageInterface(String imageSurface){
         System.out.println (imageSurface);
 //        if(!imageSurface.equals("chemin"))
 //        {

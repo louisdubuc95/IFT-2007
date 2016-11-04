@@ -56,6 +56,7 @@ public class Interface_creer_sport_TRController implements Initializable {
         Stage window = (Stage) boutonInterfaceTempsReel.getScene().getWindow();
         window.setScene(interface_imageparimage_scene);
         window.show();
+        getInterfaceIPI();
     }
     
     //Accèdre au module parcourir image
@@ -83,7 +84,19 @@ public class Interface_creer_sport_TRController implements Initializable {
         window.setScene(Interface_choix_mode_scene);
         window.show();
     }
-      
+    
+    // Insanse de controlleur et passe le parametre
+    @FXML
+    public void getInterfaceIPI() throws IOException {
+        //instanse de FXML loader
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Interface_image_par_image.fxml"));
+        Parent root = loader.load();
+        //Créer une instance du controlleur 
+        Interface_image_par_imageController IPIController = loader.getController();
+        IPIController.setImageInterface(lblCheminImage.getText());
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
