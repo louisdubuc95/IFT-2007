@@ -22,8 +22,10 @@ import javafx.event.EventHandler;
 import java.io.File;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.StageStyle;
 /**
  * FXML Controller class
  *
@@ -55,15 +57,26 @@ public class Interface_creer_sport_IPIController implements Initializable {
     @FXML
     private TextField txtDimensionY;
     
+    public static String image;
+    
     //Accéder a l'interface image par image 
     @FXML
       public void bouton_InterfaceImageParImageAction (ActionEvent event)throws IOException {
-        Parent interface_imageparimage_parent = FXMLLoader.load (getClass().getResource("Interface_image_par_image.fxml"));
-        Scene interface_imageparimage_scene = new Scene (interface_imageparimage_parent); 
-        Stage window = (Stage) boutonCreerSportsIPI.getScene().getWindow();
-        window.setScene(interface_imageparimage_scene);
-        window.show();
-     //   getInterfaceIPI();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle(txtNomIPI.getText() + " - mode Image par Image");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
+          
+          //Appel la classe qui set l'image
+          IPIController.setImageInterface(lblCheminImage.getText());
+          
+          //Show la nouvelle window
+          stage.show();
+          
+          //Ferme le window actuel
+          stage = (Stage) boutonCreerSportsIPI.getScene().getWindow();
+          stage.close();
       }
     
     //Accèdre au module parcourir image
@@ -91,17 +104,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
         window.setScene(interface_choix_mode_scene);
         window.show();
     }
-    
-   /*public void getInterfaceIPI() throws IOException {
-        //instanse de FXML loader
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Interface_image_par_image.fxml"));
-        Parent root = loader.load();
-        //Créer une instance du controlleur 
-        Interface_image_par_imageController IPIController = loader.getController();
-        IPIController.setImageInterface(lblCheminImage.getText());
-    }
-*/
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //TODO

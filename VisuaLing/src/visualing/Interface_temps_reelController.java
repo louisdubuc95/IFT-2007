@@ -6,10 +6,14 @@
 package visualing;
 
 import java.awt.event.*; //MouseEvent
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import javafx.scene.Parent;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +27,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.MenuBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
 /**
@@ -33,12 +39,14 @@ import javafx.scene.input.MouseEvent;
 public class Interface_temps_reelController implements Initializable {
 
     
-    private MenuItem exit ;
+    @FXML private MenuItem exit ;
+    @FXML private ImageView imgSurface;
     
     
     //coordonée
     @FXML private Label labelcoordonnee;
     @FXML private Label  coordonee ;
+    
     /**
      * Initializes the controller class.
      */
@@ -48,16 +56,22 @@ public class Interface_temps_reelController implements Initializable {
     }    
     
     @FXML
-    public void setImageInterface(String imageSurface){
-        System.out.println (imageSurface);
-//        if(!imageSurface.equals("chemin"))
-//        {
-//            //File imageFile = new File(imageSurface);
-//            //if (imageFile.exists()) {
-//            Image image = new Image(imageSurface);
-//            imgSurface.setImage(image);
-//            }
-      }
+    public void setImageInterface(String imageSurface) {
+        try {
+        if(!imageSurface.equals("chemin"))
+        {
+            File imageFile = new File(imageSurface);
+            if (imageFile.exists()) {
+                
+                    String imagepath = imageFile.toURI().toURL().toString();
+                    Image image = new Image(imagepath);
+                    imgSurface.setImage(image);
+                    }
+        }
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }
     
     @FXML 
     private void quitterJeu (ActionEvent event){

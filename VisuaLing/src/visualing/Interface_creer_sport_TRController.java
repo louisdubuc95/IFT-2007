@@ -20,7 +20,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -51,12 +53,21 @@ public class Interface_creer_sport_TRController implements Initializable {
     
     //Accéder a l'interface pour créer une séquence en temps réel
     public void bouton_InterfaceTempsReelAction (ActionEvent event)throws IOException {
-        Parent interface_TR_parent = FXMLLoader.load (getClass().getResource("Interface_temps_reel.fxml"));
-        Scene interface_imageparimage_scene = new Scene (interface_TR_parent); 
-        Stage window = (Stage) boutonInterfaceTempsReel.getScene().getWindow();
-        window.setScene(interface_imageparimage_scene);
-        window.show();
-        getInterfaceIPI();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle(txtNomSportsTR.getText() + " - mode Temps Reel");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
+          
+          //Appel la classe qui set l'image
+          IPIController.setImageInterface(lblCheminImage.getText());
+          
+          //Show la nouvelle window
+          stage.show();
+          
+          //Ferme le window actuel
+          stage = (Stage) boutonInterfaceTempsReel.getScene().getWindow();
+          stage.close();
     }
     
     //Accèdre au module parcourir image
@@ -84,19 +95,7 @@ public class Interface_creer_sport_TRController implements Initializable {
         window.setScene(Interface_choix_mode_scene);
         window.show();
     }
-    
-    // Insanse de controlleur et passe le parametre
-    @FXML
-    public void getInterfaceIPI() throws IOException {
-        //instanse de FXML loader
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Interface_image_par_image.fxml"));
-        Parent root = loader.load();
-        //Créer une instance du controlleur 
-        Interface_image_par_imageController IPIController = loader.getController();
-        IPIController.setImageInterface(lblCheminImage.getText());
-    }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

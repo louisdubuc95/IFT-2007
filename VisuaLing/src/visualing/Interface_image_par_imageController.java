@@ -5,10 +5,14 @@
  */
 package visualing;
 
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -34,30 +38,34 @@ import javafx.scene.input.MouseEvent;
  */
 public class Interface_image_par_imageController implements Initializable {
 
-    //@FXML
-    private ImageView imgSurface;
-    private Button boutonQuitter ;
-    
+    @FXML private ImageView imgSurface;
+    @FXML private Button boutonQuitter ;
     
     //coordonée
     @FXML private Label labelcoordonneeI;
     @FXML private Label  coordoneeI ;
     
-    //private String memImage;
-      @Override
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
-    } 
 
-    public void setImageInterface(String imageSurface){
-        System.out.println (imageSurface);
-//        if(!imageSurface.equals("chemin"))
-//        {
-//            //File imageFile = new File(imageSurface);
-//            //if (imageFile.exists()) {
-//            Image image = new Image(imageSurface);
-//            imgSurface.setImage(image);
-//            }
-      }
+    }
+
+    public void setImageInterface(String imageSurface) {
+        try {
+        if(!imageSurface.equals("chemin"))
+        {
+            File imageFile = new File(imageSurface);
+            if (imageFile.exists()) {
+                
+                    String imagepath = imageFile.toURI().toURL().toString();
+                    Image image = new Image(imagepath);
+                    imgSurface.setImage(image);
+                    }
+        }
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }
     
     @FXML 
     private void quitterJeu (final ActionEvent event){
@@ -102,11 +110,8 @@ public class Interface_image_par_imageController implements Initializable {
           String msg = "X : 0"+", Y : 0";
           labelcoordonneeI.setText(msg);
       });
-              }
-    
-    
-    
-   
-    }    
+    }
+
+}    
 
 
