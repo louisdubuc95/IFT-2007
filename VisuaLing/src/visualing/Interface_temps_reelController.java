@@ -78,12 +78,12 @@ public class Interface_temps_reelController implements Initializable {
     public void coordonnee_interface (){
         coordonee.setOnMouseMoved(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent event) {
-          // 1132 (nb de pixel de largeur) / 18.57 = 60.96m (grandeur patinoire nhl) 
+          // 1056 (nb de pixel de largeur) / 18.57 = 60.96m (grandeur patinoire nhl) 
           // 537  (nb de pixel de hauteur  / 20.73 = 25.8m (grandeur patinoire ngl)
           // on va remplacer la grandeur par les parametres entré par l'utilisateur.
           //je suis pas certain si je peux mettre ca ici ou il faut que ce soit dans le controleur de larman. 
           // et je sais pas trop comment limité au centième...ca reste a voir
-        String msg = "X : "       + event.getX()/18.57      + " Y : "       + event.getY()/20.73;
+        String msg = "X : "       + event.getX()/17.32      + " Y : "       + event.getY()/20.73;
         labelcoordonnee.setText(msg);
         }
     });
