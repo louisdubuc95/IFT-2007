@@ -5,6 +5,7 @@
  */
 package visualing;
 
+import java.awt.Point;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,7 +31,7 @@ public class Interface_CreerJoueurController implements Initializable {
     @FXML private Button boutonAttaquant;
     @FXML private Button boutonDefenseur;
     @FXML private Button boutonGuardien;
-
+    private Point t ; 
     /**
      * Initializes the controller class.
      */
