@@ -160,7 +160,6 @@ public class Interface_image_par_imageController implements Initializable {
     }
     //Lamnbda expression "->" c'est la même chose que la fonction coordonee_interface. C'est juste plus rapide codé comme ça 
     //lorsque l'utilisateur sort la souris de l'interface de jeu, remet le conteur a zero. 
-
     /**
      *
      */
