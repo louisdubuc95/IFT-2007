@@ -55,6 +55,34 @@ public class Interface_image_par_imageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+    
+    public void nouveauSportAction(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle("Nouveau Sport");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          //Show la nouvelle window
+          stage.show();
+    }
+    
+    
+    public void ChargerAction(ActionEvent event) throws IOException {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_liste_complete_enregistrement.fxml"));
+      Stage stage = new Stage(StageStyle.DECORATED);
+      stage.setTitle("Charger Jeu");
+      stage.setScene(new Scene((AnchorPane) loader.load()));
+      //Show la nouvelle window
+      stage.show();
+    }
+    
+      public void OuvrirInfoAction(ActionEvent event) throws IOException {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_InfoBox.fxml"));
+      Stage stage = new Stage(StageStyle.DECORATED);
+      stage.setTitle("Informations");
+      stage.setScene(new Scene((AnchorPane) loader.load()));
+      //Show la nouvelle window
+      stage.show();
+    }
 
     public void setImageInterface(String imageSurface) {
         try {

@@ -25,15 +25,14 @@
             <Menu mnemonicParsing="false" text="Fichier">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Sauvegarder" />
-                  <MenuItem mnemonicParsing="false" text="Charger" />
+                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Charger" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Sport">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Nouveau sport" />
-                  <MenuItem mnemonicParsing="false" text="Modifier surface" />
+                  <MenuItem mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Modifier">
@@ -47,7 +46,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Aide">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" onAction="#OuvrirInfoAction" text="Informations" />
                </items>
             </Menu>
          </menus>
@@ -119,18 +118,6 @@
          </graphic>
          <tooltip>
             <Tooltip text="Avancer" />
-         </tooltip>
-      </Button>
-      <Button layoutX="952.0" layoutY="34.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
-         <graphic>
-            <ImageView fitHeight="38.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Photo/info-icon-63443.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Aide" />
          </tooltip>
       </Button>
       <Button layoutX="1016.0" layoutY="34.0" mnemonicParsing="false" onAction="#sauvegarderAction" prefHeight="50.0" prefWidth="58.0">
