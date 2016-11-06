@@ -9,6 +9,18 @@ package domain.joueur;
  *
  * @author louis
  */
-public class Joueur {
+import java.awt.Color;
+import java.awt.Point; 
+
+
+public class Joueur{
+    
+    private Color color ; 
+    
+    public Joueur (Point point){
+        //super(point); 
+        this.color=Color.RED ;
+    }
+    
     
 }

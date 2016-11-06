@@ -33,6 +33,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 
 /**
@@ -45,8 +46,8 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private ImageView imgSurface;
     @FXML private Button boutonQuitter ;
     @FXML private Button boutonAjouterJoueur; 
-    @FXML private Button boutonObjectif;
-    @FXML private Button boutonAjouterObstacle;
+    @FXML private ToggleButton boutonObjectif;
+    @FXML private ToggleButton boutonAjouterObstacle;
     @FXML private Button boutonSauvegarder;
     @FXML private Button boutonChangerSports;
     @FXML MenuBar menuBarSport;
@@ -61,6 +62,8 @@ public class Interface_image_par_imageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+    
+    
     
     public void nouveauSportAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
@@ -170,13 +173,16 @@ public class Interface_image_par_imageController implements Initializable {
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout obstacle");
           stage.setScene(new Scene((AnchorPane) loader.load()));
-          
           //Show la nouvelle window
           stage.show();
     }
+    @FXML
+    public void ajouterObstacleInterface (){
+        
+    }
           
     @FXML
-    private void ajouterObjectifButton(ActionEvent event) throws IOException {
+    public void ajouterObjectifButton(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerObjectif.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout objectif");
@@ -186,7 +192,11 @@ public class Interface_image_par_imageController implements Initializable {
           stage.show();
     }
     
-    
+    @FXML
+    public void ajouterObjectifInterface (){
+        
+    }
+     
     
     
     @FXML

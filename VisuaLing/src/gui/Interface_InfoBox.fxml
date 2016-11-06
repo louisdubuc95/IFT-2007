@@ -27,6 +27,7 @@
             </TextArea>
          </items>
             </SplitPane>
+      <Box />
       </children>
          <effect>
             <Blend />
