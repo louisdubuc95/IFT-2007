@@ -32,6 +32,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
@@ -208,6 +209,18 @@ public class Interface_image_par_imageController implements Initializable {
           
           //Show la nouvelle window
           stage.show();
+    }
+    
+    @FXML 
+    private void ajouterJoueurInterface() {
+        imgSurface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override public void handle(MouseEvent event){
+                System.out.println("clicked");
+                final Circle clip = new Circle(event.getX(), event.getY(), 100);
+                imgSurface.setClip(clip);
+            }
+         });
+                
     }
 
     /**
