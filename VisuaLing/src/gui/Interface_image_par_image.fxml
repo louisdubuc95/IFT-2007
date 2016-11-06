@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
+   <children>
+      <ImageView fx:id="imgSurface" fitHeight="537.0" fitWidth="1062.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="461.0" layoutX="14.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Photo/Capture.PNG" />
+         </image>
+      </ImageView>
+      <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="1084.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Fichier">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Sauvegarder" />
+                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Charger" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sport">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Modifier">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ajouterJoueurAction" text="Nouveau joueur" />
+                  <MenuItem mnemonicParsing="false" onAction="#ajouterObstacleAction" text="Nouvel obstacle" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer joueur" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer obstacle" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Aide">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#OuvrirInfoAction" text="Informations" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Button layoutX="135.0" layoutY="34.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="111.0" text="Dessiner" />
+      <Button fx:id="boutonAjouterObstacle" layoutX="384.0" layoutY="34.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" prefHeight="50.0" prefWidth="123.0" text="Obstacle" />
+      <Button fx:id="boutonAjouterJoueur" layoutX="255.0" layoutY="34.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
+      <Button layoutX="73.0" layoutY="34.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="34.0">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/load.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Ouvrir" />
+         </tooltip>
+      </Button>
+      <Button layoutX="11.0" layoutY="34.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="56.0">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/plainicon.com-42949-256px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Nouveau" />
+         </tooltip>
+      </Button>
+      <Button layoutX="513.0" layoutY="34.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/9c815f4d.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Reculer" />
+         </tooltip>
+      </Button>
+      <Button layoutX="577.0" layoutY="34.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+         <graphic>
+            <ImageView fitHeight="46.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/375.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="641.0" layoutY="34.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="37.0">
+         <graphic>
+            <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/Pause.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="705.0" layoutY="33.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/fast-forward-256.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Avancer" />
+         </tooltip>
+      </Button>
+      <Button layoutX="1016.0" layoutY="34.0" mnemonicParsing="false" onAction="#sauvegarderAction" prefHeight="50.0" prefWidth="58.0">
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Photo/export-icon-5.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Sauvegarder" />
+         </tooltip>
+      </Button>
+      <Label fx:id="coordoneeI" layoutX="12.0" layoutY="169.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" prefHeight="537.0" prefWidth="1062.0" />
+      <Label fx:id="labelcoordonneeI" layoutX="599.0" layoutY="125.0" text="X : 0   Y : 0" />
+   </children>
+</AnchorPane>

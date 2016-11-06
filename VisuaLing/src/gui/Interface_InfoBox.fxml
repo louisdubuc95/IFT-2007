@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" prefHeight="479.0" prefWidth="481.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_CreerJoueurController">
+      <children>
+            <Label layoutX="31.0" layoutY="37.0" text="Informations">
+               <font>
+                  <Font name="Calibri Light" size="48.0" />
+               </font>
+            </Label>
+            <SplitPane layoutX="31.0" layoutY="92.0" prefHeight="327.0" prefWidth="366.0">
+         <items>
+            <TextArea prefHeight="200.0" prefWidth="200.0" text="&#10;&#10;&#10;&#10;&#10;Informations a venir.">
+               <font>
+                  <Font name="Calibri Light" size="18.0" />
+               </font>
+            </TextArea>
+         </items>
+            </SplitPane>
+      </children>
+         <effect>
+            <Blend />
+         </effect>
+    </AnchorPane>

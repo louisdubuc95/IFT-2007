@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.embed.swing.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="708.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_temps_reelController">
+   <children>
+      <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="1069.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Fichier">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#sauvegarderJeu" text="Sauvegarder" />
+                  <MenuItem mnemonicParsing="false" onAction="#chargerJeu" text="Charger" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Sport">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Nouveau sport" />
+                  <MenuItem mnemonicParsing="false" text="Modifier surface" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Modifier">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#ajouterJoueurAction" text="Nouveau joueur" />
+                  <MenuItem mnemonicParsing="false" onAction="#ajouterObstacleAction" text="Nouvel obstacle" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer joueur" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer obstacle" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Aide">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ImageView fitHeight="42.0" fitWidth="461.0" layoutX="14.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Photo/Capture.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgSurface" fitHeight="537.0" fitWidth="1062.0" layoutX="4.0" layoutY="164.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="coordonee" layoutX="5.0" layoutY="164.0" onMouseExited="#sortieInterface" onMouseMoved="#coordonnee_interface" prefHeight="537.0" prefWidth="1056.0" />
+      <Label fx:id="labelcoordonnee" layoutX="758.0" layoutY="92.0" text="X: 0    Y:  0" />
+      <MenuBar layoutY="27.0" prefHeight="58.0" prefWidth="1069.0">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="56.0">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/plainicon.com-42949-256px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Nouveau" />
+                     </tooltip>
+                  </Button>
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" prefHeight="17.0" prefWidth="34.0">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/load.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Ouvrir" />
+                     </tooltip>
+                  </Button>
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="111.0" text="Dessiner" />
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button fx:id="boutonAjouterJoueur" mnemonicParsing="false" onAction="#ajouterJoueurAction" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button fx:id="boutonAjouterObstacle" mnemonicParsing="false" onAction="#ajouterObstacleAction" prefHeight="50.0" prefWidth="123.0" text="Obstacle" />
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/9c815f4d.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Reculer" />
+                     </tooltip>
+                  </Button>
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+                     <graphic>
+                        <ImageView fitHeight="46.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/375.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="37.0">
+                     <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/Pause.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/fast-forward-256.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Avancer" />
+                     </tooltip>
+                  </Button>
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/info-icon-63443.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Aide" />
+                     </tooltip>
+                  </Button>
+               </graphic>
+            </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" onAction="#sauvegarderAction" prefHeight="50.0" prefWidth="58.0">
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/export-icon-5.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Sauvegarder" />
+                     </tooltip>
+                  </Button>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </MenuBar>
+   </children>
+</AnchorPane>

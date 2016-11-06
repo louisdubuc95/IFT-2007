@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="434.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_liste_complete_enregistrementController">
+   <children>
+      <Label layoutX="134.0" layoutY="14.0" prefHeight="47.0" prefWidth="332.0" text="Choisir un projet">
+         <font>
+            <Font name="Calibri Light" size="48.0" />
+         </font></Label>
+      <ScrollPane layoutX="57.0" layoutY="69.0" prefHeight="307.0" prefWidth="486.0">
+         <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="320.0" prefWidth="466.0" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="butonAnnuler" layoutX="358.0" layoutY="395.0" mnemonicParsing="false" onAction="#btnAnnuler" prefHeight="25.0" prefWidth="114.0" text="Annuler" />
+      <Button fx:id="butonCharger" layoutX="117.0" layoutY="395.0" mnemonicParsing="false" onAction="#btnCharger" prefHeight="25.0" prefWidth="114.0" text="Charger" />
+   </children>
+</AnchorPane>
