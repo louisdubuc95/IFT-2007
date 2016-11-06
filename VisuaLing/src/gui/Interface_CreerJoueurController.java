@@ -57,9 +57,10 @@ public class Interface_CreerJoueurController implements Initializable {
     
     @FXML
     public void boutonAccepterAction(ActionEvent event) {
-          Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
-          stage.close();
-          color = colorPicker.getValue();       
+        color = colorPicker.getValue();
+        Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
+        stage.close();
+       
     }  
     
     @FXML
