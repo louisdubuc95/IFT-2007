@@ -72,7 +72,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    
+   
     }
     
     
@@ -232,12 +232,12 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
     @FXML 
-    private void ajouterJoueurInterface() {
-      
+    public void ajouterJoueurInterface() {
         canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override public void handle(MouseEvent event){
                 GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                gc.setFill(Color.GREEN);
+                
+                //gc.setFill(colorJoueur);
                 gc.fillOval(event.getX(),event.getY(),20,20);
             }
          });

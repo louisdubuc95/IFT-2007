@@ -34,7 +34,7 @@
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="332.0" prefWidth="0.0" />
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="332.0" prefWidth="194.0">
                                  <children>
-                                    <ColorPicker layoutX="39.0" layoutY="183.0" prefHeight="55.0" prefWidth="188.0" />
+                                    <ColorPicker fx:id="colorPicker" layoutX="39.0" layoutY="183.0" prefHeight="55.0" prefWidth="188.0" />
                                     <Label layoutX="45.0" layoutY="66.0" prefHeight="40.0" prefWidth="176.0" text="Choisissez la couleur d'équipe ">
                                        <font>
                                           <Font name="Calibri Light" size="14.0" />
@@ -53,7 +53,7 @@
                         <Label layoutX="279.0" layoutY="107.0" text="Position du joueur:" />
                         <TextField layoutX="399.0" layoutY="65.0" prefHeight="25.0" prefWidth="176.0" />
                         <TextField layoutX="399.0" layoutY="103.0" prefHeight="25.0" prefWidth="176.0" />
-                        <Button layoutX="291.0" layoutY="205.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Accepter" />
+                        <Button layoutX="291.0" layoutY="205.0" mnemonicParsing="false" onAction="#boutonAccepterAction" prefHeight="25.0" prefWidth="76.0" text="Accepter" />
                               <Button fx:id="boutonAnnuler" layoutX="499.0" layoutY="205.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefHeight="25.0" prefWidth="76.0" text="Annuler" />
                         <Label layoutX="296.0" layoutY="147.0" text="Orientation :" />
                         <TextField layoutX="399.0" layoutY="143.0" prefHeight="25.0" prefWidth="176.0" />

@@ -11,10 +11,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -31,7 +35,11 @@ public class Interface_CreerJoueurController implements Initializable {
     @FXML private Button boutonAttaquant;
     @FXML private Button boutonDefenseur;
     @FXML private Button boutonGuardien;
+    @FXML private ColorPicker colorPicker;
     private Point t ; 
+    
+    @FXML public Color color;
+    
     /**
      * Initializes the controller class.
      */
@@ -44,9 +52,20 @@ public class Interface_CreerJoueurController implements Initializable {
     public void boutonAnnulerAction(ActionEvent event) {
           Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
           stage.close();
-          //Interface_image_par_imageController.boutonObjectif.setDisable(false);
-                  
+          //Interface_image_par_imageController.boutonObjectif.setDisable(false);         
+    } 
+    
+    @FXML
+    public void boutonAccepterAction(ActionEvent event) {
+          Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
+          stage.close();
+          color = colorPicker.getValue();       
     }  
+    
+    @FXML
+    public Color getColor(){
+        return color;
+    }
     
     
     
