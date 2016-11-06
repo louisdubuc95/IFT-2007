@@ -62,6 +62,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonSauvegarder;
     @FXML private Button boutonChangerSports;
     @FXML MenuBar menuBarSport;
+    @FXML Canvas canevasInterface;
     
     //coordonée
     @FXML private Label labelcoordonneeI;
@@ -232,16 +233,18 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML 
     private void ajouterJoueurInterface() {
-        
-        imgSurface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+      
+        canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
             
             @Override public void handle(MouseEvent event){
                 System.out.println("clicked");
-                Circle clip = new Circle(event.getX(), event.getY(), 100);
-                imgSurface.setClip(clip);
+//                Circle clip = new Circle(event.getX(), event.getY(), 100);
+//                imgSurface.setClip(clip);
                 
-                Canvas canvas = new Canvas(300, 250);
-                GraphicsContext gc = canvas.getGraphicsContext2D();
+                //Canvas canvas = new Canvas(300, 250);
+                GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                gc.setLineWidth(5);
+                gc.fillOval(event.getX(),event.getY(),20,20);
             }
          });
                 
