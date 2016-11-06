@@ -53,6 +53,8 @@ public class Interface_temps_reelController implements Initializable {
     @FXML private Label labelcoordonnee;
     @FXML private Label  coordonee ;
     
+    @FXML private String imagePath;
+    
     /**
      * Initializes the controller class.
      */
@@ -63,6 +65,7 @@ public class Interface_temps_reelController implements Initializable {
     
     @FXML
     public void setImageInterface(String imageSurface) {
+        imagePath = imageSurface;
         try {
         if(!imageSurface.equals("chemin"))
         {
@@ -106,9 +109,8 @@ public class Interface_temps_reelController implements Initializable {
           stage.show();
     }
     
-        @FXML
+      @FXML
       public void bouton_ChangerSports (ActionEvent event)throws IOException {
-        System.out.println("test");
         Stage window = (Stage) menuBarSport.getScene().getWindow();
            FileChooser fileChooser = new FileChooser();
            fileChooser.setTitle("Choisir une image");
@@ -117,8 +119,28 @@ public class Interface_temps_reelController implements Initializable {
            File selectedFile = fileChooser.showOpenDialog(window);
            if (selectedFile != null) {
                String path = selectedFile.getPath();
+               imagePath = path;
                setImageInterface(path);
            }
+      }
+      
+      @FXML
+      public void bouton_changerMode (ActionEvent event)throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          //stage.setTitle(txtNomIPI.getText() + " - mode Image par Image");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
+          
+          //Appel la classe qui set l'image
+          IPIController.setImageInterface(imagePath);
+          
+          //Show la nouvelle window
+          stage.show();
+          
+          //Ferme le window actuel
+          stage = (Stage) menuBarSport.getScene().getWindow();
+          stage.close();
 
       }
     

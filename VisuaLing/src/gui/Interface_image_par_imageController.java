@@ -107,7 +107,6 @@ public class Interface_image_par_imageController implements Initializable {
         //Accèdre au module parcourir image
     @FXML
       public void bouton_ChangerSports (ActionEvent event)throws IOException {
-        System.out.println("test");
         Stage window = (Stage) menuBarSport.getScene().getWindow();
            FileChooser fileChooser = new FileChooser();
            fileChooser.setTitle("Choisir une image");

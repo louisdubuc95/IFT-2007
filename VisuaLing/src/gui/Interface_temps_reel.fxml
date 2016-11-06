@@ -20,6 +20,8 @@
               <MenuItem mnemonicParsing="false" onAction="#sauvegarderJeu" text="Sauvegarder" />
                   <MenuItem mnemonicParsing="false" onAction="#chargerJeu" text="Charger" />
                   <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#bouton_changerMode" text="Changer mode" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
             </items>
           </Menu>
