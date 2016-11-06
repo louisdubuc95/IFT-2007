@@ -42,6 +42,7 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#ajouterJoueurAction" text="Nouveau joueur" />
                   <MenuItem mnemonicParsing="false" onAction="#ajouterObstacleAction" text="Nouvel obstacle" />
+                  <MenuItem mnemonicParsing="false" text="Nouveau objectif" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Supprimer joueur" />
                   <MenuItem mnemonicParsing="false" text="Supprimer obstacle" />
