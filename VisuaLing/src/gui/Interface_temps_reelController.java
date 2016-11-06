@@ -99,6 +99,16 @@ public class Interface_temps_reelController implements Initializable {
     }
     
     @FXML
+    public void nouveauSportAction(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle("Nouveau Sport");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          //Show la nouvelle window
+          stage.show();
+    }
+    
+    @FXML
     private void ajouterObstacleAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
@@ -123,6 +133,16 @@ public class Interface_temps_reelController implements Initializable {
                setImageInterface(path);
            }
       }
+      
+      @FXML
+      public void ChargerAction(ActionEvent event) throws IOException {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_accueil.fxml"));
+      Stage stage = new Stage(StageStyle.DECORATED);
+      stage.setTitle("Charger Jeu");
+      stage.setScene(new Scene((AnchorPane) loader.load()));
+      //Show la nouvelle window
+      stage.show();
+    }
       
       @FXML
       public void bouton_changerMode (ActionEvent event)throws IOException {

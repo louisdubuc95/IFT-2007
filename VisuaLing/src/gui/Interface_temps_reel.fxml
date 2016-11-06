@@ -23,12 +23,12 @@
             <Tooltip text="Aide" />
          </tooltip>
       </Button>
-      <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="1069.0">
+      <MenuBar fx:id="menuBarSport" layoutY="1.0" prefHeight="26.0" prefWidth="1069.0">
         <menus>
           <Menu mnemonicParsing="false" text="Fichier">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#sauvegarderJeu" text="Sauvegarder" />
-                  <MenuItem mnemonicParsing="false" onAction="#chargerJeu" text="Charger" />
+              <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Sauvegarder" />
+                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Ouvrir" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#bouton_changerMode" text="Changer mode" />
                   <SeparatorMenuItem mnemonicParsing="false" />
@@ -37,7 +37,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Sport">
               <items>
-                <MenuItem mnemonicParsing="false" text="Nouveau sport" />
+                <MenuItem mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
                   <MenuItem mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Changer sport" />
               </items>
             </Menu>
@@ -124,7 +124,7 @@
       <Button fx:id="boutonAjouterObstacle" layoutX="326.0" layoutY="35.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" prefHeight="50.0" prefWidth="123.0" text="Obstacle" />
       <Button fx:id="boutonAjouterJoueur" layoutX="194.0" layoutY="35.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
       <Button layoutX="455.0" layoutY="36.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="111.0" text="Dessiner" />
-      <Button layoutX="79.0" layoutY="35.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="34.0">
+      <Button layoutX="79.0" layoutY="35.0" mnemonicParsing="false" onAction="#ChargerAction" prefHeight="17.0" prefWidth="34.0">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -136,7 +136,7 @@
             <Tooltip text="Ouvrir" />
          </tooltip>
       </Button>
-      <Button layoutX="14.0" layoutY="35.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="56.0">
+      <Button layoutX="14.0" layoutY="35.0" mnemonicParsing="false" onAction="#nouveauSportAction" prefHeight="48.0" prefWidth="56.0">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>

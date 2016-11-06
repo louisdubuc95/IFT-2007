@@ -70,7 +70,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     
     public void ChargerAction(ActionEvent event) throws IOException {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_liste_complete_enregistrement.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_accueil.fxml"));
       Stage stage = new Stage(StageStyle.DECORATED);
       stage.setTitle("Charger Jeu");
       stage.setScene(new Scene((AnchorPane) loader.load()));

@@ -53,14 +53,14 @@ public class Interface_creer_sport_TRController implements Initializable {
     
     //Accéder a l'interface pour créer une séquence en temps réel
     public void bouton_InterfaceTempsReelAction (ActionEvent event)throws IOException {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_temps_reel.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle(txtNomSportsTR.getText() + " - mode Temps Reel");
           stage.setScene(new Scene((AnchorPane) loader.load()));
-          Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
+          Interface_temps_reelController TRcontrolleur = loader.<Interface_temps_reelController>getController();
           
           //Appel la classe qui set l'image
-          IPIController.setImageInterface(lblCheminImage.getText());
+          TRcontrolleur.setImageInterface(lblCheminImage.getText());
           
           //Show la nouvelle window
           stage.show();

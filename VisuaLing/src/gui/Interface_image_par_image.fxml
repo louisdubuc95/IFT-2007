@@ -25,7 +25,7 @@
             <Menu mnemonicParsing="false" text="Fichier">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Sauvegarder" />
-                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Charger" />
+                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Ouvrir" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Changer mode" />
                   <SeparatorMenuItem mnemonicParsing="false" />
