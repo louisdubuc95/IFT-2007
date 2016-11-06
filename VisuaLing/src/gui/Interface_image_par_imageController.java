@@ -235,15 +235,9 @@ public class Interface_image_par_imageController implements Initializable {
     private void ajouterJoueurInterface() {
       
         canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            
             @Override public void handle(MouseEvent event){
-                System.out.println("clicked");
-//                Circle clip = new Circle(event.getX(), event.getY(), 100);
-//                imgSurface.setClip(clip);
-                
-                //Canvas canvas = new Canvas(300, 250);
                 GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                gc.setLineWidth(5);
+                gc.setFill(Color.GREEN);
                 gc.fillOval(event.getX(),event.getY(),20,20);
             }
          });
