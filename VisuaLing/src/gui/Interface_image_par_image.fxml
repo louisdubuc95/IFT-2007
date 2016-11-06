@@ -54,9 +54,9 @@
       <Button layoutX="135.0" layoutY="34.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="111.0" text="Dessiner" />
       <Button fx:id="boutonAjouterObstacle" layoutX="384.0" layoutY="34.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" prefHeight="50.0" prefWidth="123.0" text="Obstacle" />
       <Button fx:id="boutonAjouterJoueur" layoutX="255.0" layoutY="34.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
-      <Button layoutX="73.0" layoutY="34.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="34.0">
+      <Button layoutX="73.0" layoutY="34.0" mnemonicParsing="false" onAction="#ChargerAction" prefHeight="17.0" prefWidth="34.0">
          <graphic>
-            <ImageView fitHeight="40.0" fitWidth="59.0" onMouseClicked="#ChargerAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Photo/load.png" />
                </image>
@@ -66,9 +66,9 @@
             <Tooltip text="Ouvrir" />
          </tooltip>
       </Button>
-      <Button layoutX="11.0" layoutY="34.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="56.0">
+      <Button layoutX="11.0" layoutY="34.0" mnemonicParsing="false" onAction="#nouveauSportAction" prefHeight="48.0" prefWidth="56.0">
          <graphic>
-            <ImageView fitHeight="32.0" fitWidth="43.0" onMouseClicked="#nouveauSportAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Photo/plainicon.com-42949-256px.png" />
                </image>
