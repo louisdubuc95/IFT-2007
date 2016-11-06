@@ -40,7 +40,6 @@ public class Interface_CreerJoueurController implements Initializable {
         // TODO
     }  
     
-
     
     public void boutonAnnulerAction(ActionEvent event) {
           Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
