@@ -40,23 +40,7 @@ public class Interface_CreerJoueurController implements Initializable {
         // TODO
     }  
     
-    @FXML 
-    public void boutonAttaquantAction(ActionEvent event) throws MalformedURLException{
-        Stage stage = (Stage) boutonAttaquant.getScene().getWindow();
-        stage.close();
-    }
-    
-    @FXML 
-    public void boutonDefenseurAction(ActionEvent event) throws MalformedURLException{
-        Stage stage = (Stage) boutonDefenseur.getScene().getWindow();
-        stage.close();
-    }
-    
-    @FXML 
-    public void boutonGuardienAction(ActionEvent event) throws MalformedURLException{
-        Stage stage = (Stage) boutonGuardien.getScene().getWindow();
-        stage.close();
-    }
+
     
     public void boutonAnnulerAction(ActionEvent event) {
           Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
