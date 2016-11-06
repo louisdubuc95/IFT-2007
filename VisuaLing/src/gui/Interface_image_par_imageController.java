@@ -228,21 +228,21 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
     @FXML 
-    public void ajouterJoueurInterface() {
+    public void ajouterJoueurInterface() throws IOException {
         canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override public void handle(MouseEvent event){
-                GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                //color = Color.BLACK;
-                gc.setFill(color);
-                gc.fillOval(event.getX(),event.getY(),20,20);
-            }
+                    GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                    gc.setFill(color);
+                    gc.fillOval(event.getX(),event.getY(),20,20);
+                }
+            
          });
-                
     }
+                
     
     @FXML 
     public void setColor(Color colorparam){
-        this.color = colorparam;
+        color = colorparam;
     }
 
     /**
