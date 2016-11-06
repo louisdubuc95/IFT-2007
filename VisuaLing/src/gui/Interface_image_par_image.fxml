@@ -20,12 +20,14 @@
             <Image url="@../Photo/Capture.PNG" />
          </image>
       </ImageView>
-      <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="1084.0">
+      <MenuBar fx:id="menuBarSport" layoutY="1.0" prefHeight="26.0" prefWidth="1084.0">
          <menus>
             <Menu mnemonicParsing="false" text="Fichier">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Sauvegarder" />
                   <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Charger" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Changer mode" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
                </items>
@@ -33,6 +35,7 @@
             <Menu mnemonicParsing="false" text="Sport">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
+                  <MenuItem mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Changer sport" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Modifier">
@@ -78,7 +81,7 @@
             <Tooltip text="Nouveau" />
          </tooltip>
       </Button>
-      <Button layoutX="513.0" layoutY="34.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+      <Button layoutX="717.0" layoutY="35.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -90,7 +93,7 @@
             <Tooltip text="Reculer" />
          </tooltip>
       </Button>
-      <Button layoutX="577.0" layoutY="34.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+      <Button layoutX="781.0" layoutY="35.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
          <graphic>
             <ImageView fitHeight="46.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -99,7 +102,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="641.0" layoutY="34.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="37.0">
+      <Button layoutX="845.0" layoutY="35.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="37.0">
          <graphic>
             <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -108,7 +111,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="705.0" layoutY="33.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+      <Button layoutX="909.0" layoutY="34.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -134,5 +137,6 @@
       </Button>
       <Label fx:id="coordoneeI" layoutX="12.0" layoutY="169.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" prefHeight="537.0" prefWidth="1062.0" />
       <Label fx:id="labelcoordonneeI" layoutX="599.0" layoutY="125.0" text="X : 0   Y : 0" />
+      <Button layoutX="514.0" layoutY="33.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="123.0" text="Objectif" />
    </children>
 </AnchorPane>

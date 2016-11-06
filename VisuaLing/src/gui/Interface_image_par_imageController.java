@@ -32,6 +32,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
 
 /**
@@ -46,6 +47,8 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonAjouterJoueur; 
     @FXML private Button boutonAjouterObstacle;
     @FXML private Button boutonSauvegarder;
+    @FXML private Button boutonChangerSports;
+    @FXML MenuBar menuBarSport;
     
     //coordonée
     @FXML private Label labelcoordonneeI;
@@ -100,6 +103,23 @@ public class Interface_image_par_imageController implements Initializable {
                     Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }
+    
+        //Accèdre au module parcourir image
+    @FXML
+      public void bouton_ChangerSports (ActionEvent event)throws IOException {
+        System.out.println("test");
+        Stage window = (Stage) menuBarSport.getScene().getWindow();
+           FileChooser fileChooser = new FileChooser();
+           fileChooser.setTitle("Choisir une image");
+           fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Fichier image", "*.png", "*.jpg"));
+           
+           File selectedFile = fileChooser.showOpenDialog(window);
+           if (selectedFile != null) {
+               String path = selectedFile.getPath();
+               setImageInterface(path);
+           }
+
+      }
     
     @FXML 
     private void quitterJeu (final ActionEvent event){

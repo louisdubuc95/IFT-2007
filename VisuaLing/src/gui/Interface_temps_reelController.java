@@ -32,6 +32,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
 /**
  * FXML Controller class
@@ -45,6 +46,7 @@ public class Interface_temps_reelController implements Initializable {
     @FXML private ImageView imgSurface;
     @FXML private Button boutonAjouterJoueur;
     @FXML private Button boutonAjouterObstacle;
+    @FXML MenuBar menuBarSport;
     
     
     //coordonée
@@ -103,6 +105,22 @@ public class Interface_temps_reelController implements Initializable {
           //Show la nouvelle window
           stage.show();
     }
+    
+        @FXML
+      public void bouton_ChangerSports (ActionEvent event)throws IOException {
+        System.out.println("test");
+        Stage window = (Stage) menuBarSport.getScene().getWindow();
+           FileChooser fileChooser = new FileChooser();
+           fileChooser.setTitle("Choisir une image");
+           fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Fichier image", "*.png", "*.jpg"));
+           
+           File selectedFile = fileChooser.showOpenDialog(window);
+           if (selectedFile != null) {
+               String path = selectedFile.getPath();
+               setImageInterface(path);
+           }
+
+      }
     
     @FXML
     private void sauvegarderAction(ActionEvent event) throws IOException {
