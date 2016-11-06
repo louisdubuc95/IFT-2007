@@ -42,10 +42,11 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#ajouterJoueurAction" text="Nouveau joueur" />
                   <MenuItem mnemonicParsing="false" onAction="#ajouterObstacleAction" text="Nouvel obstacle" />
-                  <MenuItem mnemonicParsing="false" text="Nouveau objectif" />
+                  <MenuItem mnemonicParsing="false" onAction="#ajouterObjectifButton" text="Nouveau objectif" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Supprimer joueur" />
                   <MenuItem mnemonicParsing="false" text="Supprimer obstacle" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer objectif" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Aide">
@@ -137,7 +138,7 @@
          </tooltip>
       </Button>
       <Label fx:id="coordoneeI" layoutX="12.0" layoutY="169.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" prefHeight="537.0" prefWidth="1062.0" />
-      <Label fx:id="labelcoordonneeI" layoutX="818.0" layoutY="152.0" text="X : 0   Y : 0" />
-      <Button layoutX="514.0" layoutY="33.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="123.0" text="Objectif" />
+      <Label fx:id="labelcoordonneeI" layoutX="702.0" layoutY="151.0" text="X : 0   Y : 0" />
+      <Button fx:id="boutonObjectif" layoutX="514.0" layoutY="33.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" prefHeight="50.0" prefWidth="123.0" text="Objectif" />
    </children>
 </AnchorPane>

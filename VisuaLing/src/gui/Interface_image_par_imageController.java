@@ -45,6 +45,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private ImageView imgSurface;
     @FXML private Button boutonQuitter ;
     @FXML private Button boutonAjouterJoueur; 
+    @FXML private Button boutonObjectif;
     @FXML private Button boutonAjouterObstacle;
     @FXML private Button boutonSauvegarder;
     @FXML private Button boutonChangerSports;
@@ -173,6 +174,20 @@ public class Interface_image_par_imageController implements Initializable {
           //Show la nouvelle window
           stage.show();
     }
+          
+    @FXML
+    private void ajouterObjectifButton(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerObjectif.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle("Ajout objectif");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          
+          //Show la nouvelle window
+          stage.show();
+    }
+    
+    
+    
     
     @FXML
     private void sauvegarderAction(ActionEvent event) throws IOException {
