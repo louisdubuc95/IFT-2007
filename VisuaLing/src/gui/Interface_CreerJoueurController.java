@@ -6,6 +6,7 @@
 package gui;
 
 import java.awt.Point;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,8 +39,6 @@ public class Interface_CreerJoueurController implements Initializable {
     @FXML private ColorPicker colorPicker;
     private Point t ; 
     
-    @FXML public Color color;
-    
     /**
      * Initializes the controller class.
      */
@@ -56,18 +55,18 @@ public class Interface_CreerJoueurController implements Initializable {
     } 
     
     @FXML
-    public void boutonAccepterAction(ActionEvent event) {
-        color = colorPicker.getValue();
-        Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
-        stage.close();
-       
+    public void boutonAccepterAction(ActionEvent event) throws IOException {
+        Color color = colorPicker.getValue();
+       // Color color  = Color.BLUE;
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setScene(new Scene((AnchorPane) fxmlLoader.load()));
+        
+        Interface_image_par_imageController IPIController = fxmlLoader.<Interface_image_par_imageController>getController();
+        IPIController.setColor(color);
+        
+        Stage window = (Stage) boutonAnnuler.getScene().getWindow();
+        window.close();
     }  
-    
-    @FXML
-    public Color getColor(){
-        return color;
-    }
-    
-    
-    
 }

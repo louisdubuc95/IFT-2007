@@ -41,6 +41,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
@@ -70,13 +71,12 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML private String imagePath;
     
+    @FXML private Color color;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
    
     }
-    
-    
-    
     
     public void nouveauSportAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
@@ -184,10 +184,6 @@ public class Interface_image_par_imageController implements Initializable {
           
     }
     
-   
-     
-   
-    
     @FXML
     private void ajouterObstacleAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
@@ -236,12 +232,17 @@ public class Interface_image_par_imageController implements Initializable {
         canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override public void handle(MouseEvent event){
                 GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                
-                //gc.setFill(colorJoueur);
+                //color = Color.BLACK;
+                gc.setFill(color);
                 gc.fillOval(event.getX(),event.getY(),20,20);
             }
          });
                 
+    }
+    
+    @FXML 
+    public void setColor(Color colorparam){
+        this.color = colorparam;
     }
 
     /**
