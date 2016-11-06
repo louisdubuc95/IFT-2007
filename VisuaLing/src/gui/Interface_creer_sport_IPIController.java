@@ -64,7 +64,14 @@ public class Interface_creer_sport_IPIController implements Initializable {
       public void bouton_InterfaceImageParImageAction (ActionEvent event)throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
-          stage.setTitle(txtNomIPI.getText() + " - mode Image par Image");
+          if(txtNomIPI.getText().trim().isEmpty())
+          {
+              stage.setTitle("Sans nom - mode Image par Image");
+          }
+          else
+          {
+              stage.setTitle(txtNomIPI.getText() + " - mode Image par Image");
+          }
           stage.setScene(new Scene((AnchorPane) loader.load()));
           Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
           

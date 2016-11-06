@@ -54,6 +54,8 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Label labelcoordonneeI;
     @FXML private Label  coordoneeI ;
     
+    @FXML private String imagePath;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -88,6 +90,7 @@ public class Interface_image_par_imageController implements Initializable {
     }
 
     public void setImageInterface(String imageSurface) {
+        imagePath = imageSurface;
         try {
         if(!imageSurface.equals("chemin"))
         {
@@ -115,9 +118,32 @@ public class Interface_image_par_imageController implements Initializable {
            File selectedFile = fileChooser.showOpenDialog(window);
            if (selectedFile != null) {
                String path = selectedFile.getPath();
+               imagePath = path;
                setImageInterface(path);
            }
-
+      }
+      
+    @FXML
+    public void bouton_changerMode (ActionEvent event)throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_temps_reel.fxml"));
+          Stage Window = (Stage) menuBarSport.getScene().getWindow();
+          Stage stage = new Stage(StageStyle.DECORATED);
+          String titreWindow = Window.getTitle();
+          titreWindow = titreWindow.replaceAll(" - mode Image par Image", "");
+          titreWindow = titreWindow + " - mode Temps Reel";
+          stage.setTitle(titreWindow);
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+          Interface_temps_reelController TRcontrolleur = loader.<Interface_temps_reelController>getController();
+          
+          //Appel la classe qui set l'image
+          TRcontrolleur.setImageInterface(imagePath);
+          
+          //Show la nouvelle window
+          stage.show();
+          
+          //Ferme le window actuel
+          stage = (Stage) menuBarSport.getScene().getWindow();
+          stage.close();
       }
     
     @FXML 

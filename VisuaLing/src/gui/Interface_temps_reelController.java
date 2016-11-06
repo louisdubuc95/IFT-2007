@@ -147,8 +147,12 @@ public class Interface_temps_reelController implements Initializable {
       @FXML
       public void bouton_changerMode (ActionEvent event)throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
+          Stage Window = (Stage) menuBarSport.getScene().getWindow();
           Stage stage = new Stage(StageStyle.DECORATED);
-          //stage.setTitle(txtNomIPI.getText() + " - mode Image par Image");
+          String titreWindow = Window.getTitle();
+          titreWindow = titreWindow.replaceAll(" - mode Temps Reel", "");
+          titreWindow = titreWindow + " - mode Image par Image";
+          stage.setTitle(titreWindow);
           stage.setScene(new Scene((AnchorPane) loader.load()));
           Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
           
@@ -161,7 +165,6 @@ public class Interface_temps_reelController implements Initializable {
           //Ferme le window actuel
           stage = (Stage) menuBarSport.getScene().getWindow();
           stage.close();
-
       }
     
     @FXML

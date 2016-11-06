@@ -55,7 +55,14 @@ public class Interface_creer_sport_TRController implements Initializable {
     public void bouton_InterfaceTempsReelAction (ActionEvent event)throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_temps_reel.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
-          stage.setTitle(txtNomSportsTR.getText() + " - mode Temps Reel");
+          if(txtNomSportsTR.getText().trim().isEmpty())
+          {
+              stage.setTitle("Sans nom - mode Temps Reel");
+          }
+          else
+          {
+              stage.setTitle(txtNomSportsTR.getText() + " - mode Temps Reel");
+          }
           stage.setScene(new Scene((AnchorPane) loader.load()));
           Interface_temps_reelController TRcontrolleur = loader.<Interface_temps_reelController>getController();
           

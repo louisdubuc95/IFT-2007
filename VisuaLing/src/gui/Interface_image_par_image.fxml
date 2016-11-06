@@ -27,7 +27,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Sauvegarder" />
                   <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Ouvrir" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Changer mode" />
+                  <MenuItem mnemonicParsing="false" onAction="#bouton_changerMode" text="Changer mode" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
                </items>
