@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="341.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_CreerObjectifController">
+   <children>
+      <Label layoutX="21.0" layoutY="36.0" text="Créer un objectif du sport">
+         <font>
+            <Font name="Calibri Light" size="48.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="11.0" layoutY="84.0" minHeight="0.0" minWidth="0.0" prefHeight="257.0" prefWidth="855.0">
+         <children>
+            <ImageView fitHeight="149.0" fitWidth="265.0" layoutX="14.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../NetBeansProjects/111129633_equipe18/VisuaLing/src/Photo/maxresdefault.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="boutonAnnuler" layoutX="765.0" layoutY="218.0" mnemonicParsing="false" onAction="#boutonQuitterAction" prefHeight="25.0" prefWidth="76.0" text="Annuler" />
+            <Button layoutX="369.0" layoutY="179.0" mnemonicParsing="false" text="Rondelle" />
+            <Button layoutX="533.0" layoutY="179.0" mnemonicParsing="false" text="Balle" />
+            <Button layoutX="688.0" layoutY="179.0" mnemonicParsing="false" text="Ballon" />
+            <ImageView fitHeight="101.0" fitWidth="131.0" layoutX="335.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../NetBeansProjects/111129633_equipe18/VisuaLing/src/Photo/927100-garconnet-ete-atteint-rondelle-envoye.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="101.0" fitWidth="116.0" layoutX="503.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../NetBeansProjects/111129633_equipe18/VisuaLing/src/Photo/silxballs-78mm-red.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="101.0" fitWidth="116.0" layoutX="662.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../NetBeansProjects/111129633_equipe18/VisuaLing/src/Photo/ballon-de-football1-1560x1561.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
