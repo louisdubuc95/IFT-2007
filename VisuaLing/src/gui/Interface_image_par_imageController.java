@@ -46,7 +46,7 @@ public class Interface_image_par_imageController implements Initializable {
 
     @FXML private ImageView imgSurface;
     @FXML private Button boutonQuitter ;
-    @FXML private Button boutonAjouterJoueur; 
+    @FXML private ToggleButton boutonAjouterJoueur; 
     @FXML private ToggleButton boutonObjectif;
     @FXML private ToggleButton boutonAjouterObstacle;
     @FXML private Button boutonSauvegarder;
@@ -61,8 +61,10 @@ public class Interface_image_par_imageController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+    boutonObjectif.setDisable(false);
+    
     }
+    
     
     
     
@@ -166,6 +168,14 @@ public class Interface_image_par_imageController implements Initializable {
           
           //Show la nouvelle window
           stage.show();
+          boutonObjectif.setDisable(true);
+          boutonAjouterObstacle.setDisable(true);
+    }
+     
+     
+    @FXML
+    public void ajouterJoueurInterface() {
+        
     }
     
     @FXML
