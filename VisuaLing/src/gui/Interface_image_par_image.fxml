@@ -136,7 +136,7 @@
          </tooltip>
       </Button>
       <Label fx:id="coordoneeI" layoutX="12.0" layoutY="169.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" prefHeight="537.0" prefWidth="1062.0" />
-      <Label fx:id="labelcoordonneeI" layoutX="599.0" layoutY="125.0" text="X : 0   Y : 0" />
+      <Label fx:id="labelcoordonneeI" layoutX="818.0" layoutY="152.0" text="X : 0   Y : 0" />
       <Button layoutX="514.0" layoutY="33.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="123.0" text="Objectif" />
    </children>
 </AnchorPane>
