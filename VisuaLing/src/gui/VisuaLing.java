@@ -16,16 +16,16 @@ import javafx.stage.Stage;
  * @author louis
  */
 public class VisuaLing extends Application {
- public static Stage primaryStage ;   
+   
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Interface_accueil.fxml"));
         
         Scene scene = new Scene(root);
         
-        primaryStage.setScene(scene); 
-        primaryStage.setTitle("VisuaLigue");
-        primaryStage.show();
+        stage.setScene(scene); 
+        stage.setTitle("VisuaLigue");
+        stage.show();
     }
 
     /**

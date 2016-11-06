@@ -40,10 +40,12 @@ public class Interface_CreerJoueurController implements Initializable {
         // TODO
     }  
     
-    
+    @FXML
     public void boutonAnnulerAction(ActionEvent event) {
           Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
           stage.close();
+          //Interface_image_par_imageController.boutonObjectif.setDisable(false);
+                  
     }  
     
     

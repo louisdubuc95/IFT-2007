@@ -36,7 +36,15 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
-
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
+import javafx.stage.Stage;
+  
 /**
  * FXML Controller class
  *
@@ -46,8 +54,10 @@ public class Interface_image_par_imageController implements Initializable {
 
     @FXML private ImageView imgSurface;
     @FXML private Button boutonQuitter ;
-    @FXML private ToggleButton boutonAjouterJoueur; 
+    @FXML private Button boutonAjouterJoueur; 
     @FXML private ToggleButton boutonObjectif;
+
+   
     @FXML private ToggleButton boutonAjouterObstacle;
     @FXML private Button boutonSauvegarder;
     @FXML private Button boutonChangerSports;
@@ -61,7 +71,6 @@ public class Interface_image_par_imageController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    boutonObjectif.setDisable(false);
     
     }
     
@@ -98,6 +107,7 @@ public class Interface_image_par_imageController implements Initializable {
 
     public void setImageInterface(String imageSurface) {
         imagePath = imageSurface;
+        
         try {
         if(!imageSurface.equals("chemin"))
         {
@@ -160,7 +170,7 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
     @FXML
-    private void ajouterJoueurAction(ActionEvent event) throws IOException {
+    public void ajouterJoueurAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout Joueur");
@@ -168,15 +178,14 @@ public class Interface_image_par_imageController implements Initializable {
           
           //Show la nouvelle window
           stage.show();
-          boutonObjectif.setDisable(true);
-          boutonAjouterObstacle.setDisable(true);
+         // boutonObjectif.setDisable(true);
+          //boutonAjouterObstacle.setDisable(true);
+          
     }
+    
+   
      
-     
-    @FXML
-    public void ajouterJoueurInterface() {
-        
-    }
+   
     
     @FXML
     private void ajouterObstacleAction(ActionEvent event) throws IOException {
@@ -223,11 +232,16 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML 
     private void ajouterJoueurInterface() {
+        
         imgSurface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            
             @Override public void handle(MouseEvent event){
                 System.out.println("clicked");
-                final Circle clip = new Circle(event.getX(), event.getY(), 100);
+                Circle clip = new Circle(event.getX(), event.getY(), 100);
                 imgSurface.setClip(clip);
+                
+                Canvas canvas = new Canvas(300, 250);
+                GraphicsContext gc = canvas.getGraphicsContext2D();
             }
          });
                 

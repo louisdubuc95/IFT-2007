@@ -57,7 +57,7 @@
          </menus>
       </MenuBar>
       <Button layoutX="135.0" layoutY="34.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="111.0" text="Dessiner" />
-      <Button fx:id="boutonAjouterJoueur" layoutX="255.0" layoutY="34.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
+      <Button fx:id="boutonAjouterJoueur" layoutX="255.0" layoutY="34.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
       <Button layoutX="73.0" layoutY="34.0" mnemonicParsing="false" onAction="#ChargerAction" prefHeight="17.0" prefWidth="34.0">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
