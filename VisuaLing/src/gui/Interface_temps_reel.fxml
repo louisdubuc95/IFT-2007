@@ -41,7 +41,7 @@
             <Menu mnemonicParsing="false" text="Sport">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
-                  <MenuItem mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Changer sport" />
+                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Changer sport" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Modifier">
@@ -115,8 +115,6 @@
             <Tooltip text="Reculer" />
          </tooltip>
       </Button>
-      <Button fx:id="boutonAjouterObstacle" layoutX="412.0" layoutY="34.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" prefHeight="50.0" prefWidth="123.0" text="Obstacle" />
-      <Button fx:id="boutonAjouterJoueur" layoutX="282.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
       <Button layoutX="163.0" layoutY="36.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="111.0" text="Dessiner" />
       <Button layoutX="79.0" layoutY="35.0" mnemonicParsing="false" onAction="#ChargerAction" prefHeight="17.0" prefWidth="34.0">
          <graphic>
@@ -145,6 +143,8 @@
       <TextField layoutX="751.0" layoutY="92.0" prefHeight="25.0" prefWidth="136.0" />
       <Label layoutX="687.0" layoutY="96.0" prefHeight="17.0" prefWidth="75.0" text="Modifier de" />
       <Label layoutX="897.0" layoutY="96.0" prefHeight="17.0" prefWidth="55.0" text="secondes" />
-      <Button layoutX="544.0" layoutY="35.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="123.0" text="Objectif" />
+      <ToggleButton fx:id="boutonAjouterJoueur" layoutX="289.0" layoutY="35.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="136.0" text="Ajouter un Joueur" />
+      <ToggleButton fx:id="boutonAjouterObstacle" layoutX="437.0" layoutY="35.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="111.0" text="Obstacle" />
+      <ToggleButton fx:id="boutonObjectif" layoutX="557.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="111.0" text="Objectif" />
    </children>
 </AnchorPane>

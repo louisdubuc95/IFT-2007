@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="715.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
    <children>
       <ImageView fx:id="imgSurface" fitHeight="537.0" fitWidth="1062.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true">
          <image>
@@ -37,7 +37,7 @@
             <Menu mnemonicParsing="false" text="Sport">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
-                  <MenuItem mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Changer sport" />
+                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Changer sport" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Modifier">
@@ -59,7 +59,6 @@
          </menus>
       </MenuBar>
       <Button layoutX="135.0" layoutY="34.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="111.0" text="Dessiner" />
-      <Button fx:id="boutonAjouterJoueur" layoutX="255.0" layoutY="34.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="49.0" prefWidth="123.0" text="Ajouter un Joueur" />
       <Button layoutX="73.0" layoutY="34.0" mnemonicParsing="false" onAction="#ChargerAction" prefHeight="17.0" prefWidth="34.0">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
@@ -140,6 +139,7 @@
       </Button>
       <Label fx:id="labelcoordonneeI" layoutX="702.0" layoutY="151.0" text="X : 0   Y : 0" />
       <ToggleButton fx:id="boutonObjectif" layoutX="502.0" layoutY="33.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="123.0" text="Objectif" />
-      <ToggleButton fx:id="boutonAjouterObstacle" layoutX="384.0" layoutY="33.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="111.0" text="Obstacle" />
+      <ToggleButton fx:id="boutonAjouterObstacle" layoutX="377.0" layoutY="33.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="111.0" text="Obstacle" />
+      <ToggleButton fx:id="boutonAjouterJoueur" layoutX="255.0" layoutY="33.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="109.0" text="Ajouter un joueur" />
    </children>
 </AnchorPane>

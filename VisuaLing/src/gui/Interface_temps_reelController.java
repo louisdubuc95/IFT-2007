@@ -5,12 +5,10 @@
  */
 package gui;
 
-import gui.Interface_image_par_imageController;
-import java.awt.event.*; //MouseEvent
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import javafx.scene.Parent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,25 +16,36 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.Node;
+import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
+ import javafx.scene.image.Image;
+ import javafx.scene.image.ImageView;
+import javafx.scene.control.Button; 
+import javafx.scene.control.*;// 
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.StageStyle;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.*;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.MenuBar;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import javafx.stage.StageStyle;
+import javafx.scene.shape.ArcType;
+import javafx.stage.Stage;
+  
 /**
  * FXML Controller class
  *
@@ -47,12 +56,13 @@ public class Interface_temps_reelController implements Initializable {
     
     @FXML private MenuItem exit ;
     @FXML private ImageView imgSurface;
-    @FXML private Button boutonAjouterJoueur;
-    @FXML private Button boutonAjouterObstacle;
+    @FXML private ToggleButton boutonAjouterJoueur;
+    @FXML private ToggleButton boutonAjouterObstacle;
     @FXML MenuBar menuBarSport;
     @FXML Canvas canevasInterface;
+    @FXML private ToggleButton boutonObjectif ;
     
-    @FXML private Boolean VerifAjoutJoueur = false;
+  
     
     
     //coordonée
@@ -68,7 +78,7 @@ public class Interface_temps_reelController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
     @FXML
@@ -96,15 +106,24 @@ public class Interface_temps_reelController implements Initializable {
     }
     
     @FXML
-    private void ajouterJoueurAction(ActionEvent event) throws IOException {
+    public void ajouterJoueurAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout Joueur");
           stage.setScene(new Scene((AnchorPane) loader.load()));
           
-          VerifAjoutJoueur = true;
-          //Show la nouvelle window
+          if (boutonAjouterJoueur.isSelected()){
           stage.show();
+          boutonObjectif.setDisable(true);
+          boutonAjouterObstacle.setDisable(true);
+        }
+        if (!boutonAjouterJoueur.isSelected()){
+           boutonObjectif.setDisable(false);
+           boutonAjouterObstacle.setDisable(false);
+           stage.close();
+        }  
+        
+    
     }
     
     @FXML
@@ -133,9 +152,42 @@ public class Interface_temps_reelController implements Initializable {
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout obstacle");
           stage.setScene(new Scene((AnchorPane) loader.load()));
-          
-          //Show la nouvelle window
+         if (boutonAjouterObstacle.isSelected()){
           stage.show();
+          boutonObjectif.setDisable(true);
+          boutonAjouterJoueur.setDisable(true);
+        }
+        if (!boutonAjouterObstacle.isSelected()){
+           boutonObjectif.setDisable(false);
+           boutonAjouterJoueur.setDisable(false);
+           stage.close();
+        }  
+         
+    }
+    @FXML
+    public void ajouterObstacleInterface (){
+        
+    }
+    
+    @FXML 
+    public void ajouterObjectifInterface (){
+        
+    }
+    @FXML public void ajouterObjectifButton (ActionEvent event) throws IOException {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerObjectif.fxml"));
+          Stage stage = new Stage(StageStyle.DECORATED);
+          stage.setTitle("Ajout objectif");
+          stage.setScene(new Scene((AnchorPane) loader.load()));
+         if (boutonObjectif.isSelected()){
+          stage.show();
+          boutonAjouterJoueur.setDisable(true);
+          boutonAjouterObstacle.setDisable(true);
+        }
+        if (!boutonObjectif.isSelected()){
+           boutonAjouterJoueur.setDisable(false);
+            boutonAjouterObstacle.setDisable(false);
+            stage.close();
+        }  
     }
     
       @FXML
@@ -199,19 +251,20 @@ public class Interface_temps_reelController implements Initializable {
     
     @FXML 
     public void ajouterJoueurInterface() throws IOException {
-        if(VerifAjoutJoueur == true)
-        {canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        
+       canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override public void handle(MouseEvent event){
+                   if(boutonAjouterJoueur.isSelected()){
                     GraphicsContext gc = canevasInterface.getGraphicsContext2D();
                     gc.setFill(color);
                     gc.fillOval(event.getX(),event.getY(),20,20);
-                    
+                   } 
                 }
          });
-        }
+       
     }
    
-    @FXML
+    /*@FXML
     public void coordonnee_interface (){
         coordonee.setOnMouseMoved(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent event) {
@@ -233,5 +286,5 @@ public class Interface_temps_reelController implements Initializable {
           String msg = "X : 0"+", Y : 0";
           labelcoordonnee.setText(msg);
       });
-   }
+   }*/
 }

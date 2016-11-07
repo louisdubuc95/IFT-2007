@@ -55,31 +55,31 @@ public class Interface_image_par_imageController implements Initializable {
 
     @FXML private ImageView imgSurface;
     @FXML private Button boutonQuitter ;
-    @FXML private Button boutonAjouterJoueur; 
+    @FXML private ToggleButton boutonAjouterJoueur; 
     @FXML private ToggleButton boutonObjectif;
-    @FXML private Canvas canevasInterface;
-    
-    @FXML private Boolean VerifAjoutJoueur = false;
+   
+    //@FXML private Boolean VerifAjoutJoueur = false;
 
    
     @FXML private ToggleButton boutonAjouterObstacle;
     @FXML private Button boutonSauvegarder;
     @FXML private Button boutonChangerSports;
     @FXML MenuBar menuBarSport;
-    
+    @FXML Canvas canevasInterface;
     
     //coordonée
     @FXML private Label labelcoordonneeI;
     @FXML private Label  coordoneeI ;
     
     @FXML private String imagePath;
-    
     @FXML private Color color;
     
-    
+     @FXML private ToggleGroup group ;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-   
+       // boutonAjouterJoueur.setToggleGroup(group);
+       // boutonObjectif.setToggleGroup(group);
+       // boutonAjouterJoueur.setToggleGroup(group);
     }
     
     public void nouveauSportAction(ActionEvent event) throws IOException {
@@ -176,27 +176,41 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML
     public void ajouterJoueurAction(ActionEvent event) throws IOException {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
-          Stage stage = new Stage(StageStyle.DECORATED);
-          stage.setTitle("Ajout Joueur");
-          stage.setScene(new Scene((AnchorPane) loader.load()));
-          
-          //Show la nouvelle window
-          VerifAjoutJoueur = true;
+        Stage stage = new Stage(StageStyle.DECORATED);
+        FXMLLoader loader ;
+        loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
+        stage.setTitle("Ajout Joueur");
+        stage.setScene(new Scene((AnchorPane) loader.load()));
+        if (boutonAjouterJoueur.isSelected()){
           stage.show();
-         // boutonObjectif.setDisable(true);
-          //boutonAjouterObstacle.setDisable(true);
-          
+          boutonObjectif.setDisable(true);
+          boutonAjouterObstacle.setDisable(true);
+        }
+        if (!boutonAjouterJoueur.isSelected()){
+           boutonObjectif.setDisable(false);
+           boutonAjouterObstacle.setDisable(false);
+           stage.close();
+        }  
+        
     }
     
     @FXML
-    private void ajouterObstacleAction(ActionEvent event) throws IOException {
+    public void ajouterObstacleAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout obstacle");
           stage.setScene(new Scene((AnchorPane) loader.load()));
-          //Show la nouvelle window
+         if (boutonAjouterObstacle.isSelected()){
           stage.show();
+          boutonObjectif.setDisable(true);
+          boutonAjouterJoueur.setDisable(true);
+        }
+        if (!boutonAjouterObstacle.isSelected()){
+           boutonObjectif.setDisable(false);
+           boutonAjouterJoueur.setDisable(false);
+           stage.close();
+        }  
+         
     }
     @FXML
     public void ajouterObstacleInterface (){
@@ -209,9 +223,16 @@ public class Interface_image_par_imageController implements Initializable {
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout objectif");
           stage.setScene(new Scene((AnchorPane) loader.load()));
-          
-          //Show la nouvelle window
+         if (boutonObjectif.isSelected()){
           stage.show();
+          boutonAjouterJoueur.setDisable(true);
+          boutonAjouterObstacle.setDisable(true);
+        }
+        if (!boutonObjectif.isSelected()){
+           boutonAjouterJoueur.setDisable(false);
+            boutonAjouterObstacle.setDisable(false);
+            stage.close();
+        }  
     }
     
     @FXML
@@ -233,16 +254,20 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
     @FXML 
-    public void ajouterJoueurInterface() throws IOException {
-        if(VerifAjoutJoueur == true)
-        {canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+    public void ajouterJoueurInterface()  {
+        
+        
+        canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override public void handle(MouseEvent event){
+                   if(boutonAjouterJoueur.isSelected()){
                     GraphicsContext gc = canevasInterface.getGraphicsContext2D();
                     gc.setFill(color);
-                    gc.fillOval(event.getX(),event.getY(),20,20); 
+                    gc.fillOval(event.getX(),event.getY(),20,20);
+                   }  
                 }
+            
          });
-        }
+        
     }
                 
     
