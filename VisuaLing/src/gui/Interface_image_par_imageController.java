@@ -73,6 +73,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML private Color color;
     
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
    
