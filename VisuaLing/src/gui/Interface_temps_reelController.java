@@ -99,6 +99,16 @@ public class Interface_temps_reelController implements Initializable {
     }
     
     @FXML
+    public void OuvrirInfoAction(ActionEvent event) throws IOException {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_InfoBox.fxml"));
+      Stage stage = new Stage(StageStyle.DECORATED);
+      stage.setTitle("Informations");
+      stage.setScene(new Scene((AnchorPane) loader.load()));
+      //Show la nouvelle window
+      stage.show();
+    }
+    
+    @FXML
     public void nouveauSportAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);

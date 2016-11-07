@@ -53,7 +53,7 @@
                   <MenuItem mnemonicParsing="false" text="Supprimer obstacle" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Aide">
+          <Menu mnemonicParsing="false" onAction="#OuvrirInfoAction" text="Aide">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
