@@ -25,6 +25,8 @@ import javafx.scene.control.Label;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.MenuBar;
@@ -32,6 +34,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
 /**
@@ -47,6 +50,9 @@ public class Interface_temps_reelController implements Initializable {
     @FXML private Button boutonAjouterJoueur;
     @FXML private Button boutonAjouterObstacle;
     @FXML MenuBar menuBarSport;
+    @FXML Canvas canevasInterface;
+    
+    @FXML private Boolean VerifAjoutJoueur = false;
     
     
     //coordonée
@@ -54,6 +60,8 @@ public class Interface_temps_reelController implements Initializable {
     @FXML private Label  coordonee ;
     
     @FXML private String imagePath;
+    
+    @FXML private Color color;
     
     /**
      * Initializes the controller class.
@@ -94,6 +102,7 @@ public class Interface_temps_reelController implements Initializable {
           stage.setTitle("Ajout Joueur");
           stage.setScene(new Scene((AnchorPane) loader.load()));
           
+          VerifAjoutJoueur = true;
           //Show la nouvelle window
           stage.show();
     }
@@ -187,6 +196,20 @@ public class Interface_temps_reelController implements Initializable {
           //Show la nouvelle window
           stage.show();
     }
+    
+    @FXML 
+    public void ajouterJoueurInterface() throws IOException {
+        if(VerifAjoutJoueur == true)
+        {canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override public void handle(MouseEvent event){
+                    GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                    gc.setFill(color);
+                    gc.fillOval(event.getX(),event.getY(),20,20);
+                    
+                }
+         });
+        }
+    }
    
     @FXML
     public void coordonnee_interface (){
@@ -210,5 +233,5 @@ public class Interface_temps_reelController implements Initializable {
           String msg = "X : 0"+", Y : 0";
           labelcoordonnee.setText(msg);
       });
-              }
+   }
 }

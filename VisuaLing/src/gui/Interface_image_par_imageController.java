@@ -57,6 +57,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonQuitter ;
     @FXML private Button boutonAjouterJoueur; 
     @FXML private ToggleButton boutonObjectif;
+    @FXML private Canvas canevasInterface;
     
     @FXML private Boolean VerifAjoutJoueur = false;
 
@@ -65,7 +66,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonSauvegarder;
     @FXML private Button boutonChangerSports;
     @FXML MenuBar menuBarSport;
-    @FXML Canvas canevasInterface;
+    
     
     //coordonée
     @FXML private Label labelcoordonneeI;
@@ -238,10 +239,8 @@ public class Interface_image_par_imageController implements Initializable {
             @Override public void handle(MouseEvent event){
                     GraphicsContext gc = canevasInterface.getGraphicsContext2D();
                     gc.setFill(color);
-                    gc.fillOval(event.getX(),event.getY(),20,20);
-                    
+                    gc.fillOval(event.getX(),event.getY(),20,20); 
                 }
-            
          });
         }
     }
