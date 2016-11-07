@@ -57,6 +57,8 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonQuitter ;
     @FXML private Button boutonAjouterJoueur; 
     @FXML private ToggleButton boutonObjectif;
+    
+    @FXML private Boolean VerifAjoutJoueur = false;
 
    
     @FXML private ToggleButton boutonAjouterObstacle;
@@ -179,6 +181,7 @@ public class Interface_image_par_imageController implements Initializable {
           stage.setScene(new Scene((AnchorPane) loader.load()));
           
           //Show la nouvelle window
+          VerifAjoutJoueur = true;
           stage.show();
          // boutonObjectif.setDisable(true);
           //boutonAjouterObstacle.setDisable(true);
@@ -230,14 +233,17 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML 
     public void ajouterJoueurInterface() throws IOException {
-        canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        if(VerifAjoutJoueur == true)
+        {canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override public void handle(MouseEvent event){
                     GraphicsContext gc = canevasInterface.getGraphicsContext2D();
                     gc.setFill(color);
                     gc.fillOval(event.getX(),event.getY(),20,20);
+                    
                 }
             
          });
+        }
     }
                 
     
