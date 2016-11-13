@@ -96,6 +96,6 @@ public class SurfaceJeu {
         }
         // Retirer commentaire lorsque la classe Coordonnee sera implementer
         //if(img!=null)
-            //m_image= img.getScaledInstance(Coordonee.largeurX, Coordonee.hauteurY, Image.SCALE_SMOOTH);   
+            //m_image= img.getScaledInstance(getLargeurInterfaceX(), getHauteurInterfaceY(), Image.SCALE_SMOOTH);   
     }
 }
