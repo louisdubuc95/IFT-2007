@@ -5,10 +5,13 @@
  */
 package domain;
 
+import domain.SurfaceJeu;
+
 /**
  *
  * @author louis
  */
 public class ImageParImage {
     
+    private String m_nomMode;
 }

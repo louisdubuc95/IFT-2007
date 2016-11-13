@@ -28,6 +28,10 @@ public class Joueur{
         m_couleurChandail = p_couleurChandail;
     }
     
+    public boolean EstMemeCoord(Point2D.Float p_coordJoueur){
+        return (m_position.equals(p_coordJoueur));
+    }
+    
     public int getId(){
         return m_idJoueur;
     }

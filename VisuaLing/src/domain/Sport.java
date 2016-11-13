@@ -5,18 +5,18 @@
  */
 package domain;
 
-import java.util.Date;
-import java.util.List;
-import javafx.util.Pair;
+import domain.SurfaceJeu;
 
 /**
  *
- * @author louis
+ * @author willl
  */
-public class Enregistrement {
-    private List<Pair<Date,String>> m_listeSerialize;
+public class Sport {
+    private String m_nomSport;
+    private String m_imageSurface;
     
-    public void serialize(){
-        //TODO
+    public void setImageSurface(String p_imageSurface){
+        m_imageSurface = p_imageSurface;
     }
+    
 }

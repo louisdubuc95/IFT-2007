@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package domain.obstacle;
+
+import java.awt.geom.Point2D;
 
 /**
  *
- * @author louis
+ * @author willl
  */
-public class TempsReel {
+public class Objectif {
     
-    private String nomMode;
+    
+    
 }
