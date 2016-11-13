@@ -28,7 +28,7 @@ public class Joueur{
         m_couleurChandail = p_couleurChandail;
     }
     
-    public boolean EstMemeCoord(Point2D.Float p_coordJoueur){
+    public boolean estMemeCoord(Point2D.Float p_coordJoueur){
         return (m_position.equals(p_coordJoueur));
     }
     

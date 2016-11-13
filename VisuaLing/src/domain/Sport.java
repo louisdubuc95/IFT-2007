@@ -6,6 +6,7 @@
 package domain;
 
 import domain.SurfaceJeu;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -13,9 +14,9 @@ import domain.SurfaceJeu;
  */
 public class Sport {
     private String m_nomSport;
-    private String m_imageSurface;
+    private Image m_imageSurface;
     
-    public void setImageSurface(String p_imageSurface){
+    public void setImageSurface(Image p_imageSurface){
         m_imageSurface = p_imageSurface;
     }
     
