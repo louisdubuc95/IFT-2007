@@ -66,7 +66,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonSauvegarder;
     @FXML private Button boutonChangerSports;
     @FXML MenuBar menuBarSport;
-    @FXML Canvas canevasInterface;
+    @FXML private Canvas canevasInterface;
     
     //coordonée
     @FXML private Label labelcoordonneeI;
@@ -299,14 +299,14 @@ public class Interface_image_par_imageController implements Initializable {
      */
     @FXML
     public void coordonnee_interfaceI (){
-        coordoneeI.setOnMouseMoved(new EventHandler<MouseEvent>() {
+        canevasInterface.setOnMouseMoved(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent event) {
           // 1056 (nb de pixel de largeur) / 18.57 = 60.96m (grandeur patinoire nhl) 
           // 537  (nb de pixel de hauteur  / 20.73 = 25.8m (grandeur patinoire ngl)
           // on va remplacer la grandeur par les parametres entré par l'utilisateur.
           //je suis pas certain si je peux mettre ca ici ou il faut que ce soit dans le controleur de larman. 
           // et je sais pas trop comment limité au centième...ca reste a voir
-        String msg1 = "X : "       + event.getX()/17.32      + " Y : "       + event.getY()/20.73;
+        String msg1 = "X : " + event.getX() + " Y : "  + event.getY();
         labelcoordonneeI.setText(msg1);
        
         }
@@ -320,7 +320,7 @@ public class Interface_image_par_imageController implements Initializable {
      */
    @FXML
    public void sortieInterfaceI () {
-      coordoneeI.setOnMouseExited((MouseEvent) -> {
+      canevasInterface.setOnMouseExited((MouseEvent) -> {
           String msg = "X : 0"+", Y : 0";
           labelcoordonneeI.setText(msg);
       });

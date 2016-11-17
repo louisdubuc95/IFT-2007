@@ -16,7 +16,7 @@
             <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
          </image>
       </ImageView>
-      <Canvas fx:id="canevasInterface" height="537.0" layoutX="12.0" layoutY="168.0" onMouseClicked="#ajouterJoueurInterface" width="1062.0" />
+      <Canvas fx:id="canevasInterface" height="537.0" layoutX="12.0" layoutY="168.0" onMouseClicked="#ajouterJoueurInterface" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" width="1062.0" />
       <ImageView fitHeight="42.0" fitWidth="461.0" layoutX="14.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/Capture.PNG" />
