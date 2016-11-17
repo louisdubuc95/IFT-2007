@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,31 +8,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="267.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_creer_sport_TRController">
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_creer_sport_TRController">
    <children>
-      <Button fx:id="boutonInterfaceTempsReel" layoutX="146.0" layoutY="218.0" mnemonicParsing="false" onAction="#bouton_InterfaceTempsReelAction" text="Creer sport" />
-      <Label prefHeight="55.0" prefWidth="511.0" text="Nouveau sport temps réel">
+      <Button fx:id="boutonInterfaceTempsReel" layoutX="84.0" layoutY="412.0" mnemonicParsing="false" onAction="#bouton_InterfaceTempsReelAction" text="Creer sport" />
+      <Label layoutX="17.0" layoutY="6.0" prefHeight="55.0" prefWidth="294.0" text="Nouveau sport">
          <font>
             <Font name="Calibri Light" size="48.0" />
          </font></Label>
-      <Button fx:id="boutonAnnulerTR" layoutX="267.0" layoutY="218.0" mnemonicParsing="false" onAction="#bouton_AnnulerAction" prefHeight="25.0" prefWidth="76.0" text="Annuler" />
-      <TextField fx:id="txtNomSportsTR" layoutX="75.0" layoutY="66.0" prefHeight="25.0" prefWidth="294.0" promptText="Enter nom du sport" />
-      <Label layoutX="39.0" layoutY="70.0" text="Nom:" />
-      <Label layoutX="39.0" layoutY="138.0" text="Dimensions:" />
-      <Label layoutX="131.0" layoutY="138.0" text="X:" />
-      <Label layoutX="219.0" layoutY="138.0" text="Y:" />
-      <TextField fx:id="txtDimensionX" layoutX="147.0" layoutY="134.0" prefHeight="25.0" prefWidth="37.0" />
-      <TextField fx:id="txtDimensionY" layoutX="243.0" layoutY="134.0" prefHeight="25.0" prefWidth="37.0" />
-      <Label layoutX="191.0" layoutY="138.0" prefHeight="17.0" prefWidth="16.0" text="m" />
-      <Label layoutX="287.0" layoutY="138.0" prefHeight="17.0" prefWidth="16.0" text="m" />
-      <Label layoutX="39.0" layoutY="168.0" text="Image surface:" />
-      <Button fx:id="boutonParcourirTR" layoutX="353.0" layoutY="164.0" mnemonicParsing="false" onAction="#bouton_parcourirAction" prefHeight="25.0" prefWidth="76.0" text="Parcourir" />
-      <Label fx:id="lblCheminImage" layoutX="122.0" layoutY="168.0" prefHeight="17.0" prefWidth="221.0" text="chemin" underline="true">
+      <Button fx:id="boutonAnnulerTR" layoutX="258.0" layoutY="412.0" mnemonicParsing="false" onAction="#bouton_AnnulerAction" prefHeight="25.0" prefWidth="76.0" text="Annuler" />
+      <TextField fx:id="txtNomSportsTR" alignment="CENTER" layoutX="55.0" layoutY="139.0" prefHeight="25.0" prefWidth="294.0" promptText="Veuillez entrer le nom du sport" />
+      <Label layoutX="22.0" layoutY="143.0" text="Nom:" />
+      <Label layoutX="23.0" layoutY="269.0" text="Dimensions:" />
+      <Label layoutX="145.0" layoutY="269.0" text="X:" />
+      <Label layoutX="247.0" layoutY="269.0" text="Y:" />
+      <TextField fx:id="txtDimensionX" layoutX="162.0" layoutY="265.0" prefHeight="25.0" prefWidth="37.0" />
+      <TextField fx:id="txtDimensionY" layoutX="263.0" layoutY="265.0" prefHeight="25.0" prefWidth="37.0" />
+      <Label layoutX="198.0" layoutY="269.0" prefHeight="17.0" prefWidth="16.0" text="m" />
+      <Label layoutX="301.0" layoutY="269.0" prefHeight="17.0" prefWidth="16.0" text="m" />
+      <Label layoutX="23.0" layoutY="340.0" text="Image surface:" />
+      <Button fx:id="boutonParcourirTR" layoutX="291.0" layoutY="317.0" mnemonicParsing="false" onAction="#bouton_parcourirAction" prefHeight="63.0" prefWidth="125.0" text="Parcourir" />
+      <Label fx:id="lblCheminImage" layoutX="108.0" layoutY="340.0" prefHeight="17.0" prefWidth="167.0" text="         path//du//chemin            " underline="true">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="40.0" layoutY="105.0" text="Nombre d'équipe:" />
-      <TextField layoutX="145.0" layoutY="101.0" prefHeight="25.0" prefWidth="37.0" />
+      <Label layoutX="22.0" layoutY="208.0" text="Nombre d'équipe:" />
+      <TextField layoutX="127.0" layoutY="204.0" prefHeight="25.0" prefWidth="77.0" />
+      <Label layoutX="17.0" layoutY="61.0" prefHeight="55.0" prefWidth="294.0" text="Temps Réel">
+         <font>
+            <Font name="Calibri Light" size="48.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="478.0" layoutY="47.0" prefHeight="414.0" prefWidth="591.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="1010.0" layoutY="14.0" mnemonicParsing="false" text="Charger" />
+      <Label layoutX="478.0" layoutY="18.0" text="Sports récemments créés:" />
    </children>
 </AnchorPane>
