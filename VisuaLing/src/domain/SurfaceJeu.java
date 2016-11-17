@@ -41,14 +41,14 @@ public class SurfaceJeu {
     
     public SurfaceJeu()
     {
-        m_ListeJoueur = new ArrayList();
-        m_ListeObstacle = new ArrayList();
-        m_ListeObjectifs = new ArrayList();
+        this.m_ListeJoueur = new ArrayList();
+        this.m_ListeObstacle = new ArrayList();
+        this.m_ListeObjectifs = new ArrayList();
         
-        m_joueur=new Joueur(new Point2D.Float(50.0f,50.0f),Color.BLACK);
+        this.m_joueur=new Joueur(new Point2D.Float(50.0f,50.0f),Color.BLACK);
         
-        m_Etat = false;
-        m_Temps = 0;
+        this.m_Etat = false;
+        this.m_Temps = 0;
     }
     
     public void addJoueur(Point2D.Float p_coordJoueur, Color p_colorChandail) {
