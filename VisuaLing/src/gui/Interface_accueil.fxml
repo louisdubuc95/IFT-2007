@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="487.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_accueilController">
+<AnchorPane id="AnchorPane" prefHeight="652.0" prefWidth="1172.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_accueilController">
    <children>
-      <Button fx:id="boutonQuitter" layoutX="851.0" layoutY="323.0" mnemonicParsing="false" onAction="#boutonQuitterAction" prefHeight="134.0" prefWidth="142.0">
+      <Button fx:id="boutonQuitter" layoutX="1010.0" layoutY="480.0" mnemonicParsing="false" onAction="#boutonQuitterAction" prefHeight="134.0" prefWidth="142.0">
          <tooltip>
             <Tooltip text="Quitter" />
          </tooltip>
@@ -21,7 +21,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="boutonNouveau" layoutX="854.0" layoutY="137.0" mnemonicParsing="false" onAction="#boutonNouveauAction" prefHeight="127.0" prefWidth="135.0">
+      <Button fx:id="boutonNouveau" layoutX="1014.0" layoutY="168.0" mnemonicParsing="false" onAction="#boutonNouveauAction" prefHeight="127.0" prefWidth="135.0">
          <tooltip>
             <Tooltip text="Nouveau" />
          </tooltip>
@@ -32,22 +32,22 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <ImageView fitHeight="329.0" fitWidth="223.0" layoutX="14.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="446.0" fitWidth="325.0" layoutX="19.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/605735054.jpg" />
          </image>
       </ImageView>
-      <ScrollPane layoutX="310.0" layoutY="168.0" prefHeight="286.0" prefWidth="484.0">
+      <ScrollPane fx:id="sp" layoutX="363.0" layoutY="168.0" prefHeight="446.0" prefWidth="641.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="321.0" prefWidth="484.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="448.0" prefWidth="625.0" />
         </content>
       </ScrollPane>
-      <Label layoutX="310.0" layoutY="137.0" prefHeight="26.0" prefWidth="105.0" text="Jeu sauvegardés">
+      <Label layoutX="368.0" layoutY="138.0" prefHeight="26.0" prefWidth="105.0" text="Jeu sauvegardés">
          <font>
             <Font name="Calibri Light" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="735.0" layoutY="138.0" mnemonicParsing="false" text="Charger" />
+      <Button layoutX="945.0" layoutY="139.0" mnemonicParsing="false" text="Charger" />
       <ImageView fitHeight="124.0" fitWidth="406.0" layoutX="14.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/Capture.PNG" />
