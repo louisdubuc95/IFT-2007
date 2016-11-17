@@ -67,6 +67,10 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonChangerSports;
     @FXML MenuBar menuBarSport;
     @FXML private Canvas canevasInterface;
+   
+    @FXML private CheckBox cbJoueurMax;
+    @FXML private TextField txtJoueurMax;
+    
     
     //coordonée
     @FXML private Label labelcoordonneeI;
@@ -287,11 +291,17 @@ public class Interface_image_par_imageController implements Initializable {
          });
         
     }
-                
     
-    @FXML 
-    public void setColor(Color colorparam){
-        color = colorparam;
+    @FXML
+    public void cb_maxJoueur (ActionEvent event) throws IOException {
+        if(cbJoueurMax.isSelected())
+        {
+            txtJoueurMax.setDisable(false);
+        }
+        else
+        {
+            txtJoueurMax.setDisable(true);
+        }
     }
 
     /**

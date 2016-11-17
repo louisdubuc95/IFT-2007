@@ -146,5 +146,7 @@
       <ToggleButton fx:id="boutonAjouterJoueur" layoutX="289.0" layoutY="35.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="136.0" text="Ajouter un Joueur" />
       <ToggleButton fx:id="boutonAjouterObstacle" layoutX="437.0" layoutY="35.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="111.0" text="Obstacle" />
       <ToggleButton fx:id="boutonObjectif" layoutX="557.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="111.0" text="Objectif" />
+      <CheckBox fx:id="cbJoueurMax" layoutX="274.0" layoutY="117.0" mnemonicParsing="false" onAction="#cb_maxJoueur" text="Nombre de joueur maximum par équipe" />
+      <TextField fx:id="txtJoueurMax" disable="true" layoutX="519.0" layoutY="113.0" prefHeight="25.0" prefWidth="55.0" />
    </children>
 </AnchorPane>
