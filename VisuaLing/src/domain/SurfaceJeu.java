@@ -62,6 +62,16 @@ public class SurfaceJeu {
         }
     }
     
+    public void addObstacle(Point2D.Float p_coordObstacle, Image p_image){
+        boolean ajouterObstacle = false;
+        
+        if(obstacleEstPresent(p_coordObstacle) == false){
+            m_ListeObstacle.add(new Obstacle(p_image, p_coordObstacle));
+            ajouterObstacle = true;
+            m_Etat = true;
+        }
+    }
+    
     public boolean joueurEstPresent(Point2D.Float p_coordJoueur)
     {
         return obtenirJoueur(p_coordJoueur) != null;
@@ -84,6 +94,29 @@ public class SurfaceJeu {
             compteurJoueur++;
         }
         return joueurTrouver;
+    }
+    
+    public boolean obstacleEstPresent(Point2D.Float p_obstacle){
+        return obtenirObstacle(p_obstacle) != null;
+    }
+    
+    public Obstacle obtenirObstacle (Point2D.Float p_coordObstacle)
+    {
+        Obstacle obstacleTrouver = null;
+        int compteurObstacle = 0;
+        Obstacle obstaclePresent;
+        
+        while(compteurObstacle < m_ListeObstacle.size() && obstacleTrouver == null)
+        {
+            obstaclePresent = m_ListeObstacle.get(compteurObstacle);
+            
+            if(obstaclePresent.estMemeCoord(p_coordObstacle))
+            {
+                obstacleTrouver = obstaclePresent;
+            }
+            compteurObstacle++;
+        }
+        return obstacleTrouver;
     }
     
     public boolean estVide(){
