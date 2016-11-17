@@ -19,11 +19,11 @@ public abstract class Objectif{
         this.m_position = p_point;
     }
      
-    public Point2D.Float getCoordonneesObs(){
+    public Point2D.Float getCoordonneesObj(){
         return m_position;
     }
     
-    public void setCoordonneesObs(Point2D.Float p_point){
+    public void setCoordonneesObj(Point2D.Float p_point){
         m_position = p_point;
     }
     
