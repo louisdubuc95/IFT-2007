@@ -24,8 +24,8 @@ public class Joueur{
     private boolean m_enPossesion;
     
     public Joueur (Point2D.Float p_point, Color p_couleurChandail){
-        m_position = p_point;
-        m_couleurChandail = p_couleurChandail;
+        this.m_position = p_point;
+        this.m_couleurChandail = p_couleurChandail;
     }
     
     public boolean estMemeCoord(Point2D.Float p_coordJoueur){
