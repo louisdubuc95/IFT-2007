@@ -72,6 +72,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
           {
               stage.setTitle(txtNomIPI.getText() + " - mode Image par Image");
           }
+          
           stage.setScene(new Scene((AnchorPane) loader.load()));
           Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
           

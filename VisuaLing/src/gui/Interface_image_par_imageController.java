@@ -5,6 +5,7 @@
  */
 package gui;
 
+import controller.VisuaLigueController;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +25,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
- import javafx.scene.image.Image;
- import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button; 
 import javafx.scene.control.*;// 
 import javafx.scene.control.*;
@@ -75,6 +76,10 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Color color;
     
      @FXML private ToggleGroup group ;
+     
+     //instance du controller de Larman
+     VisuaLigueController m_controller = new VisuaLigueController();
+     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
        // boutonAjouterJoueur.setToggleGroup(group);
@@ -114,19 +119,32 @@ public class Interface_image_par_imageController implements Initializable {
         imagePath = imageSurface;
         
         try {
-        if(!imageSurface.equals("chemin"))
-        {
-            File imageFile = new File(imageSurface);
-            if (imageFile.exists()) {
-                
+            if(!imageSurface.equals("chemin"))
+            {
+                File imageFile = new File(imageSurface);
+                if (imageFile.exists()) {
+
                     String imagepath = imageFile.toURI().toURL().toString();
                     Image image = new Image(imagepath);
                     imgSurface.setImage(image);
-                    }
-        }
-                } catch (MalformedURLException ex) {
-                    Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                    //m_controller.setImageSurface(imagePath);
                 }
+            }
+            else
+            {
+                //m_controller.setImageSurface("@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg");
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setNombreEquipeInterface(int nombreEquipe){
+        //TODO
+    }
+    
+    public void setDimensionTerrain(int X, int Y){
+        //TODO
     }
     
         //Accèdre au module parcourir image

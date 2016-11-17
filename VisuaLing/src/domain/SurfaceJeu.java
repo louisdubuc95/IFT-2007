@@ -37,12 +37,15 @@ public class SurfaceJeu {
     private Image m_imgFond;
     private boolean m_Etat;
     private int m_Temps;
+    private Joueur m_joueur;
     
     public SurfaceJeu()
     {
         m_ListeJoueur = new ArrayList();
         m_ListeObstacle = new ArrayList();
         m_ListeObjectifs = new ArrayList();
+        
+        m_joueur=new Joueur(new Point2D.Float(50.0f,50.0f),Color.BLACK);
         
         m_Etat = false;
         m_Temps = 0;
@@ -55,6 +58,7 @@ public class SurfaceJeu {
         {
             m_ListeJoueur.add(new Joueur(p_coordJoueur, p_colorChandail));
             ajouterJoueur = true;
+            m_Etat = true;
         }
     }
     
@@ -96,6 +100,6 @@ public class SurfaceJeu {
         }
         // Retirer commentaire lorsque la classe Coordonnee sera implementer
         //if(img!=null)
-            //m_image= img.getScaledInstance(getLargeurInterfaceX(), getHauteurInterfaceY(), Image.SCALE_SMOOTH);   
+            //m_imgFond= img.getScaledInstance(getLargeurInterfaceX(), getHauteurInterfaceY(), Image.SCALE_SMOOTH);   
     }
 }
