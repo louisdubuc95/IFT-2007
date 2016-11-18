@@ -42,10 +42,15 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
+import javafx.scene.image.ImageView ;
+import javafx.scene.layout.StackPane;
   
 /**
  * FXML Controller class
@@ -68,6 +73,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML MenuBar menuBarSport;
     @FXML private Canvas canevasInterface;
     
+    @FXML ImageView imgsurface ;
     //coordonée
     @FXML private Label labelcoordonneeI;
     @FXML private Label  coordoneeI ;
@@ -75,18 +81,27 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private String imagePath;
     @FXML private Color color;
     
-     @FXML private ToggleGroup group ;
+    @FXML private ToggleGroup group ;
+    private double x0, y0;
+    @FXML private StackPane stackSurface ; 
+    @FXML private AnchorPane anchor_pane ;
+    @FXML private Button btnnouveauSportAction;
+
      
      //instance du controller de Larman
      VisuaLigueController m_controller = new VisuaLigueController();
-     
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
        // boutonAjouterJoueur.setToggleGroup(group);
        // boutonObjectif.setToggleGroup(group);
        // boutonAjouterJoueur.setToggleGroup(group);
+    menuBarSport.prefWidthProperty().bind(anchor_pane.widthProperty());
+    
+   // btnnouveauSportAction.prefWidthProperty().bind(anchor_pane.widthProperty());
     }
     
+   
     public void nouveauSportAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
@@ -312,12 +327,74 @@ public class Interface_image_par_imageController implements Initializable {
         }
     });
     }
+    
+   @FXML
+    public void zoom (){
+    
+      canevasInterface.setOnScroll(new EventHandler<ScrollEvent>() {
+      @Override public void handle(ScrollEvent event) { 
+      double zoomFactor = 1.05;
+       double deltaY = event.getDeltaY();
+       //double deltaX = event.getDeltaX();
+       if (deltaY < 0) {
+                    zoomFactor = 2 - zoomFactor;
+                }   
+       
+       //stackSurface.setScaleX(stackSurface.getScaleY () * zoomFactor);
+      // stackSurface.setScaleY(stackSurface.getScaleY() * zoomFactor);
+       
+       
+     
+       canevasInterface.setScaleX(canevasInterface.getScaleX () * zoomFactor);
+       canevasInterface.setScaleY(canevasInterface.getScaleY() * zoomFactor);
+       imgsurface.setScaleX(canevasInterface.getScaleX () * zoomFactor);
+       imgsurface.setScaleY(canevasInterface.getScaleY() * zoomFactor);
+       event.consume();
+       System.out.println("sup");
+      
+    }   
+               });
+    }
+    /*canevasInterface.setOnScroll(new EventHandler<ScrollEvent>() {
+      @Override public void handle(ScrollEvent event) {
+       double zoomFactor = 1.05;
+       double deltaY = event.getDeltaY();
+       //double deltaX = event.getDeltaX();
+       if (deltaY < 0) {
+                    zoomFactor = 2 - zoomFactor;
+                }   
+       canevasInterface.setScaleX(canevasInterface.getScaleX () * zoomFactor);
+       canevasInterface.setScaleY(canevasInterface.getScaleY() * zoomFactor);
+            }
+    });
+      imgsurface.setOnScroll(new EventHandler<ScrollEvent>() {
+      @Override public void handle(ScrollEvent event) {
+       double zoomFactor = 1.05;
+       double deltaY = event.getDeltaY();
+      
+       //double deltaX = event.getDeltaX();
+       if (deltaY < 0) {
+                    zoomFactor = 2 - zoomFactor;
+                }
+            
+       imgsurface.setScaleX(imgsurface.getScaleX () * zoomFactor);
+       imgsurface.setScaleY(imgsurface.getScaleY() * zoomFactor);
+       event.consume();
+  System.out.println("sup");
+    }
+        });
+    
+    }  */
+
+            
     //Lamnbda expression "->" c'est la même chose que la fonction coordonee_interface. C'est juste plus rapide codé comme ça 
     //lorsque l'utilisateur sort la souris de l'interface de jeu, remet le conteur a zero. 
    
     /**
      *
      */
+    
+    
    @FXML
    public void sortieInterfaceI () {
       canevasInterface.setOnMouseExited((MouseEvent) -> {
