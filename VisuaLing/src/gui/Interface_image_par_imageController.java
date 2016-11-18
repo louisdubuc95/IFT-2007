@@ -77,6 +77,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private TextField txtJoueurMax;
     
     
+    
     @FXML ImageView imgsurface ;
     //coordonée
     @FXML private Label labelcoordonneeI;

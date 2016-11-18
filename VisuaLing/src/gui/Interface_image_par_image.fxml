@@ -112,34 +112,11 @@
             <Tooltip text="Sauvegarder" />
          </tooltip>
       </Button>
-      <Label fx:id="labelcoordonneeI" layoutX="939.0" layoutY="53.0" text="X : 0   Y : 0" />
-      <ToggleButton fx:id="boutonObjectif" layoutX="497.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="123.0" text="Objectif" />
-      <ToggleButton fx:id="boutonAjouterObstacle" layoutX="255.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="111.0" text="Obstacle" />
-      <ToggleButton fx:id="boutonAjouterJoueur" layoutX="375.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="109.0" text="Ajouter un joueur" />
-      <Button layoutX="71.0" layoutY="37.0" mnemonicParsing="false" onAction="#ChargerAction" prefHeight="17.0" prefWidth="34.0">
-         <graphic>
-            <ImageView fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Photo/load.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Ouvrir" />
-         </tooltip>
-      </Button>
-      <Button fx:id="btnnouveauSportAction" layoutX="8.0" layoutY="37.0" mnemonicParsing="false" onAction="#nouveauSportAction" prefHeight="48.0" prefWidth="56.0">
-         <graphic>
-            <ImageView fitHeight="32.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Photo/plainicon.com-42949-256px.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Nouveau" />
-         </tooltip>
-      </Button>
-      <Button layoutX="135.0" layoutY="37.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="109.0" text="Dessiner" />
+      <Label fx:id="labelcoordonneeI" layoutX="702.0" layoutY="151.0" text="X : 0   Y : 0" />
+      <ToggleButton fx:id="boutonObjectif" layoutX="502.0" layoutY="33.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="123.0" text="Objectif" />
+      <ToggleButton fx:id="boutonAjouterObstacle" layoutX="377.0" layoutY="33.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="111.0" text="Obstacle" />
+      <ToggleButton fx:id="boutonAjouterJoueur" layoutX="255.0" layoutY="33.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="109.0" text="Ajouter un joueur" />
+      <CheckBox fx:id="cbJoueurMax" layoutX="304.0" layoutY="104.0" mnemonicParsing="false" onAction="#cb_maxJoueur" text="Nombre de joueur maximum par équipe" />
+      <TextField fx:id="txtJoueurMax" disable="true" layoutX="551.0" layoutY="100.0" prefHeight="25.0" prefWidth="64.0" />
    </children>
 </AnchorPane>
