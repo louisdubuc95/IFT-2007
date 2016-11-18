@@ -32,6 +32,7 @@
             <Menu mnemonicParsing="false" text="Modifier">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#ajouterJoueurAction" text="Nouveau joueur" />
+                  <MenuItem mnemonicParsing="false" onAction="#ajouterEquipeAction" text="Nouvelle équipe" />
                   <MenuItem mnemonicParsing="false" onAction="#ajouterObstacleAction" text="Nouvel obstacle" />
                   <MenuItem mnemonicParsing="false" onAction="#ajouterObjectifButton" text="Nouveau objectif" />
                   <SeparatorMenuItem mnemonicParsing="false" />

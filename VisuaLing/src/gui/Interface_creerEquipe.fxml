@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="257.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_creerEquipeController">
+   <children>
+      <Label layoutX="91.0" layoutY="30.0" text="Créer une équipe">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="93.0" text="Nom de l'équipe :" />
+      <Label layoutX="79.0" layoutY="141.0" text="Couleur :" />
+      <ColorPicker fx:id="color_choix" layoutX="148.0" layoutY="136.0" />
+      <TextField fx:id="txt_nom" layoutX="148.0" layoutY="88.0" promptText="Entrer un nom" />
+      <Button fx:id="btn_enregistrer" layoutX="98.0" layoutY="204.0" mnemonicParsing="false" onAction="#enregistrer_equipe" text="Enregistrer" />
+      <Button fx:id="btn_annuler" layoutX="204.0" layoutY="204.0" mnemonicParsing="false" onAction="#annuler_" text="Annuler" />
+   </children>
+</AnchorPane>

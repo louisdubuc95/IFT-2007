@@ -413,6 +413,21 @@ public class Interface_image_par_imageController implements Initializable {
           labelcoordonneeI.setText(msg);
       });
     }
+   
+   @FXML
+    public void ajouterEquipeAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_creerEquipe.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+        
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        
+        Interface_creerEquipeController controller = fxmlLoader.<Interface_creerEquipeController>getController();
+        controller.initialize(this);
+        stage.show();
+    }
+
 
 }    
 
