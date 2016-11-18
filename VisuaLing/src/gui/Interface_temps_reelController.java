@@ -62,7 +62,8 @@ public class Interface_temps_reelController implements Initializable {
     @FXML Canvas canevasInterface;
     @FXML private ToggleButton boutonObjectif ;
     
-  
+    @FXML private CheckBox cbJoueurMax;
+    @FXML private TextField txtJoueurMax;
     
     
     //coordonée
@@ -263,7 +264,19 @@ public class Interface_temps_reelController implements Initializable {
          });
        
     }
-   
+    
+    @FXML
+    public void cb_maxJoueur (ActionEvent event) throws IOException {
+        if(cbJoueurMax.isSelected())
+        {
+            txtJoueurMax.setDisable(false);
+        }
+        else
+        {
+            txtJoueurMax.setDisable(true);
+        }
+    }
+  
     /*@FXML
     public void coordonnee_interface (){
         coordonee.setOnMouseMoved(new EventHandler<MouseEvent>() {
