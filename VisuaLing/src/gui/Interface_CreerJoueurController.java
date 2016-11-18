@@ -35,8 +35,7 @@ public class Interface_CreerJoueurController implements Initializable {
     @FXML private Button boutonAnnuler;
     @FXML private Button boutonAttaquant;
     @FXML private Button boutonDefenseur;
-    @FXML private Button boutonGuardien;
-    @FXML private ColorPicker colorPicker;
+    @FXML private Button boutonGuardien; 
     
     @FXML private Color color;
     @FXML private Point t ; 
@@ -58,7 +57,6 @@ public class Interface_CreerJoueurController implements Initializable {
     
     @FXML
     public void boutonAccepterAction(ActionEvent event) throws IOException {
-        color = colorPicker.getValue();
         
         Stage window = (Stage) boutonAnnuler.getScene().getWindow();
         window.close();
