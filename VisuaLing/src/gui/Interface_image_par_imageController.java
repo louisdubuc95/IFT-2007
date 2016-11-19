@@ -50,8 +50,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView ;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-  
+import javafx.scene.layout.VBox ;  
 /**
  * FXML Controller class
  *
@@ -89,21 +90,28 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private ToggleGroup group ;
     private double x0, y0;
     @FXML private StackPane stackSurface ; 
-    @FXML private AnchorPane anchor_pane ;
+    //@FXML private AnchorPane anchor_pane ;
     @FXML private Button btnnouveauSportAction;
-
-     
+    @FXML private VBox boiteverticale ; 
+    @FXML private HBox boiteHorizontaleBouton ; 
+    @FXML private Button boutonTransfert ;  
+    @FXML private Separator separateur1 ;
+    @FXML private Separator separateur5 ;
+    @FXML private Button boutonAvancer ;
+    //@FXML private 
      //instance du controller de Larman
      VisuaLigueController m_controller = new VisuaLigueController();
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       // boutonAjouterJoueur.setToggleGroup(group);
-       // boutonObjectif.setToggleGroup(group);
-       // boutonAjouterJoueur.setToggleGroup(group);
-    menuBarSport.prefWidthProperty().bind(anchor_pane.widthProperty());
-    
-   // btnnouveauSportAction.prefWidthProperty().bind(anchor_pane.widthProperty());
+       
+    menuBarSport.prefWidthProperty().bind(boiteverticale.widthProperty());
+    boiteHorizontaleBouton.prefWidthProperty().bind(boiteverticale.widthProperty());
+    separateur1.prefWidthProperty().bind(boutonAjouterJoueur.widthProperty());
+    separateur5.prefWidthProperty().bind(boutonTransfert.widthProperty());
+    separateur5.prefWidthProperty().bind(boiteHorizontaleBouton.widthProperty());
+    stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
+   
     }
     
    

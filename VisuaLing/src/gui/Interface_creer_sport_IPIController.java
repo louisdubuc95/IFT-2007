@@ -23,6 +23,7 @@ import java.io.File;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.StageStyle;
@@ -73,7 +74,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
               stage.setTitle(txtNomIPI.getText() + " - mode Image par Image");
           }
           
-          stage.setScene(new Scene((AnchorPane) loader.load()));
+          stage.setScene(new Scene((VBox) loader.load()));
           Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
           
           //Appel la classe qui set l'image
