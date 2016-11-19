@@ -135,4 +135,16 @@ public class SurfaceJeu {
         //if(img!=null)
             //m_imgFond= img.getScaledInstance(getLargeurInterfaceX(), getHauteurInterfaceY(), Image.SCALE_SMOOTH);   
     }
+    
+    public List<Joueur> getListeJoueur(){
+        return m_ListeJoueur;
+    }
+    
+    public List<Obstacle> getListeObstacle(){
+        return m_ListeObstacle;
+    }
+    
+    public List<Objectif> getListeObjectif(){
+        return m_ListeObjectifs;
+    }
 }

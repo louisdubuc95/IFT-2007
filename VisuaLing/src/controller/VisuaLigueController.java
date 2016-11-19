@@ -25,7 +25,7 @@ import java.util.LinkedList;
  * @author louis
  * Controlleur de Larman
  */
-public class VisuaLigueController {
+public class VisuaLigueController implements java.io.Serializable{
     
     SurfaceJeu m_surfaceJeu; 
     private List<Equipe> list_equipes = new LinkedList<>();
