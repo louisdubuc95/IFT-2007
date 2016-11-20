@@ -27,5 +27,5 @@ public abstract class Objectif{
         m_position = p_point;
     }
     
-    public abstract String getImage();
+    public abstract Image getImage();
 }

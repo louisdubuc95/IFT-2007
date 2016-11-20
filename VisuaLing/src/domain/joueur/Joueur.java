@@ -9,7 +9,7 @@ package domain.joueur;
  *
  * @author louis
  */
-import java.awt.Color;
+import javafx.scene.paint.Color;
 import java.awt.Point; 
 import java.awt.geom.Point2D;
 
@@ -20,16 +20,16 @@ public class Joueur{
     private String m_roleJoueur;
     private int m_oriantationJoueur;
     private Color m_couleurChandail ; 
-    private Point2D.Float m_position;
+    private Point2D.Float m_point;
     private boolean m_enPossesion;
     
     public Joueur (Point2D.Float p_point, Color p_couleurChandail){
-        this.m_position = p_point;
+        this.m_point = p_point;
         this.m_couleurChandail = p_couleurChandail;
     }
     
     public boolean estMemeCoord(Point2D.Float p_coordJoueur){
-        return (m_position.equals(p_coordJoueur));
+        return (m_point.equals(p_coordJoueur));
     }
     
     public int getId(){
@@ -49,7 +49,7 @@ public class Joueur{
     }
     
     public Point2D.Float getCoordonneesJoueur(){
-        return m_position;
+        return m_point;
     }
     
     public boolean getPossesion(){
@@ -65,7 +65,7 @@ public class Joueur{
     }
     
     public void setCoordonneesJoueur(Point2D.Float p_point){
-        m_position = p_point;
+        m_point = p_point;
     }
     
     public void setRoleJoueur(String p_roleJoueur){

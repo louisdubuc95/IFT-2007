@@ -9,7 +9,12 @@ import domain.coordoneeZoom.Coordonee;
 import domain.joueur.Joueur;
 import domain.obstacle.Objectif;
 import domain.obstacle.Obstacle;
-import java.awt.Color;
+import java.awt.BasicStroke;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -18,8 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javafx.scene.paint.Color;
 
 
 /**
@@ -30,6 +40,7 @@ import javax.imageio.ImageIO;
 public class SurfaceJeu {
     
     private Sport m_Sport;
+    private Coordonee m_Coordonee;
     private List<Joueur> m_ListeJoueur;
     private List<Obstacle> m_ListeObstacle;
     private List<Objectif> m_ListeObjectifs;
@@ -131,9 +142,65 @@ public class SurfaceJeu {
         } catch (IOException ex) {
             Logger.getLogger(SurfaceJeu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // Retirer commentaire lorsque la classe Coordonnee sera implementer
+         //Retirer commentaire lorsque la classe Coordonnee sera implementer
         //if(img!=null)
-            //m_imgFond= img.getScaledInstance(getLargeurInterfaceX(), getHauteurInterfaceY(), Image.SCALE_SMOOTH);   
+            //m_imgFond= img.getScaledInstance(m_Coordonee.getLargeurInterfaceX,m_Coordonee.getHauteurInterfaceY(), Image.SCALE_SMOOTH);   
+    }
+    
+     public void Dessiner(Canvas p_graphics)
+    {
+        Point2D.Float coordJoueur;
+        Point2D.Float coordObstacle;
+        Point2D.Float coordObjectif;
+        Image imgObs;
+        Image imgObj;
+        GraphicsContext gc = p_graphics.getGraphicsContext2D();
+        
+        for(int i=0;i < m_ListeJoueur.size();i++)
+        {
+            //Prend les joueurs de la liste 1 par 1
+            Joueur ajouterJoueur = m_ListeJoueur.get(i);    
+            
+            //Prend la couleur de joueur
+            Color couleurChandail = ajouterJoueur.getCouleurChandail();
+            
+            //Prend les coordonnée du joueur
+            coordJoueur = ajouterJoueur.getCoordonneesJoueur();
+                    
+            //Dessine le joueur
+            gc.setFill(couleurChandail);
+            gc.fillOval(coordJoueur.x,coordJoueur.y, 20,20);
+        }
+        
+        for(int j=0;j<m_ListeObstacle.size();j++)
+        {
+            //Prend les obstacle 1 par 1 
+            Obstacle ajouterObs = m_ListeObstacle.get(j);
+            
+            //Prend l'image de l'obstacle
+            imgObs = ajouterObs.getImageObs();
+            
+            //Prend la coordonnée de l'obstacle
+            coordObstacle = ajouterObs.getCoordonneeObs();
+            
+            //Desine l'obstacle
+            gc.drawImage(imgObs, coordObstacle.x, coordObstacle.y);
+        }
+        
+        for(int x=0;x<m_ListeObjectifs.size();x++)
+        {
+            //Prend les obstacle 1 par 1 
+            Objectif ajouterObj = m_ListeObjectifs.get(x);
+            
+            //Prend l'image de l'obstacle
+            imgObj = ajouterObj.getImage();
+            
+            //Prend la coordonnée de l'obstacle
+            coordObjectif = ajouterObj.getCoordonneesObj();
+            
+            //Desine l'obstacle
+            gc.drawImage(imgObj, coordObjectif.x, coordObjectif.y);
+        }
     }
     
     public List<Joueur> getListeJoueur(){
