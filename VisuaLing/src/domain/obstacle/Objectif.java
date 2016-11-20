@@ -27,5 +27,9 @@ public abstract class Objectif{
         m_position = p_point;
     }
     
+    public boolean estMemeCoord(Point2D.Float p_coordObjectif){
+        return (m_position.equals(p_coordObjectif));
+    }
+    
     public abstract Image getImage();
 }

@@ -7,8 +7,11 @@ package domain;
 
 import domain.coordoneeZoom.Coordonee;
 import domain.joueur.Joueur;
+import domain.obstacle.Balle;
+import domain.obstacle.Ballon;
 import domain.obstacle.Objectif;
 import domain.obstacle.Obstacle;
+import domain.obstacle.Rondelle;
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -39,12 +42,10 @@ import javafx.scene.paint.Color;
 
 public class SurfaceJeu {
     
-    private Sport m_Sport;
     private Coordonee m_Coordonee;
     private List<Joueur> m_ListeJoueur;
     private List<Obstacle> m_ListeObstacle;
     private List<Objectif> m_ListeObjectifs;
-    private String m_nomSport;
     private Image m_imgFond;
     private boolean m_Etat;
     private int m_Temps;
@@ -73,16 +74,6 @@ public class SurfaceJeu {
         }
     }
     
-    public void addObstacle(Point2D.Float p_coordObstacle, Image p_image){
-        boolean ajouterObstacle = false;
-        
-        if(obstacleEstPresent(p_coordObstacle) == false){
-            m_ListeObstacle.add(new Obstacle(p_image, p_coordObstacle));
-            ajouterObstacle = true;
-            m_Etat = true;
-        }
-    }
-    
     public boolean joueurEstPresent(Point2D.Float p_coordJoueur)
     {
         return obtenirJoueur(p_coordJoueur) != null;
@@ -107,6 +98,16 @@ public class SurfaceJeu {
         return joueurTrouver;
     }
     
+    public void addObstacle(Point2D.Float p_coordObstacle, Image p_image){
+        boolean ajouterObstacle = false;
+        
+        if(obstacleEstPresent(p_coordObstacle) == false){
+            m_ListeObstacle.add(new Obstacle(p_image, p_coordObstacle));
+            ajouterObstacle = true;
+            m_Etat = true;
+        }
+    }
+    
     public boolean obstacleEstPresent(Point2D.Float p_obstacle){
         return obtenirObstacle(p_obstacle) != null;
     }
@@ -128,6 +129,59 @@ public class SurfaceJeu {
             compteurObstacle++;
         }
         return obstacleTrouver;
+    }
+    
+    public void addRondelle(Point2D.Float p_coordObstacle){
+        boolean ajouterRondelle = false;
+        
+        if(objectifEstPresent(p_coordObstacle) == false){
+            m_ListeObjectifs.add(new Rondelle(p_coordObstacle));
+            ajouterRondelle = true;
+            m_Etat = true;
+        }
+    }
+    
+    public void addBalle(Point2D.Float p_coordObstacle){
+        boolean ajouterBalle = false;
+        
+        if(objectifEstPresent(p_coordObstacle) == false){
+            m_ListeObjectifs.add(new Balle(p_coordObstacle));
+            ajouterBalle = true;
+            m_Etat = true;
+        }
+    }
+    
+    public void addBallon(Point2D.Float p_coordObstacle){
+        boolean ajouterBallon = false;
+        
+        if(objectifEstPresent(p_coordObstacle) == false){
+            m_ListeObjectifs.add(new Ballon(p_coordObstacle));
+            ajouterBallon = true;
+            m_Etat = true;
+        }
+    }
+        
+    public boolean objectifEstPresent(Point2D.Float p_coordObjectif){
+            return obtenirObjectif(p_coordObjectif) != null;
+    }
+    
+    public Objectif obtenirObjectif (Point2D.Float p_coordObstacle)
+    {
+        Objectif objectifTrouver = null;
+        int compteurObstacle = 0;
+        Objectif objectifPresent;
+        
+        while(compteurObstacle < m_ListeObjectifs.size() && objectifTrouver == null)
+        {
+            objectifPresent = m_ListeObjectifs.get(compteurObstacle);
+            
+            if(objectifPresent.estMemeCoord(p_coordObstacle))
+            {
+                objectifTrouver = objectifPresent;
+            }
+            compteurObstacle++;
+        }
+        return objectifTrouver;
     }
     
     public boolean estVide(){
