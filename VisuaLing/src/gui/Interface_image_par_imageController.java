@@ -38,6 +38,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -50,6 +51,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView ;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox ;  
@@ -92,12 +94,13 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private StackPane stackSurface ; 
     //@FXML private AnchorPane anchor_pane ;
     @FXML private Button btnnouveauSportAction;
-    @FXML private VBox boiteverticale ; 
+    @FXML private AnchorPane boiteverticale ; 
     @FXML private HBox boiteHorizontaleBouton ; 
     @FXML private Button boutonTransfert ;  
     @FXML private Separator separateur1 ;
     @FXML private Separator separateur5 ;
     @FXML private Button boutonAvancer ;
+    @FXML private Label testDimensionX;
     //@FXML private 
      //instance du controller de Larman
      VisuaLigueController m_controller = new VisuaLigueController();
@@ -111,10 +114,15 @@ public class Interface_image_par_imageController implements Initializable {
     separateur5.prefWidthProperty().bind(boutonTransfert.widthProperty());
     separateur5.prefWidthProperty().bind(boiteHorizontaleBouton.widthProperty());
     stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
+    stackSurface.toBack();
+    stackSurface.setAlignment(Pos.CENTER); 
    
     }
     
-   
+   public void getX(String dimensionX){
+     testDimensionX.setText(dimensionX);  
+     
+   }
     public void nouveauSportAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
@@ -340,7 +348,12 @@ public class Interface_image_par_imageController implements Initializable {
           // on va remplacer la grandeur par les parametres entré par l'utilisateur.
           //je suis pas certain si je peux mettre ca ici ou il faut que ce soit dans le controleur de larman. 
           // et je sais pas trop comment limité au centième...ca reste a voir
-        String msg1 = "X : " + event.getX() + " Y : "  + event.getY();
+        Double dimensionX = event.getX() ;
+        
+        double dpr1; 
+        dpr1 = Double.valueOf(testDimensionX.getText());
+        
+        String msg1 = "X : " +  dimensionX/dpr1 + " Y : "  + event.getY();
         labelcoordonneeI.setText(msg1);
        
         }
