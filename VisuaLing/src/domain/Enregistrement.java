@@ -10,8 +10,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import javafx.util.Pair;
 
 /**
@@ -19,17 +23,21 @@ import javafx.util.Pair;
  * @author louis
  */
 public class Enregistrement {
-    private List<Pair<Date,String>> m_listeSerialize;
+    private List<String> m_listeSerialize;
+    int m_version;
     
     public Enregistrement(){
+       this.m_listeSerialize = new ArrayList();
+       this.m_version = 0;
     }
     
     public void serialize(){
         Class controller = VisuaLigueController.class.getClass();
         ObjectOutputStream oos = null;
+        m_version++;
         try {
-            
-            final FileOutputStream fichier = new FileOutputStream("controller.ser");
+            m_listeSerialize.add("serialize" + m_version);
+            final FileOutputStream fichier = new FileOutputStream("serialize" + m_version);
             oos = new ObjectOutputStream(fichier);
             oos.writeObject(controller);
             oos.flush();
@@ -48,10 +56,10 @@ public class Enregistrement {
      }
     }
     
-    public void deSerialize(){    
+    public void deSerialize(String p_version){    
         ObjectInputStream ois = null;
         try {
-            final FileInputStream fichier = new FileInputStream("controller.ser");
+            final FileInputStream fichier = new FileInputStream("p_version.ser");
             ois = new ObjectInputStream(fichier);
             final VisuaLigueController controller = (VisuaLigueController) ois.readObject();
             System.out.println("Controller : charger ");
@@ -69,6 +77,10 @@ public class Enregistrement {
         ex.printStackTrace();
       }
     }
+  }
+    
+  public List<String> getListeEnregistrement(){
+      return m_listeSerialize;
   }
 }
 

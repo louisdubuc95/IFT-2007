@@ -85,5 +85,9 @@ public class Equipe {
         }
         
     }
+    
+    public int getSize(){
+        return list_joueurs.size();
+    }
 
 }

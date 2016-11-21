@@ -29,6 +29,7 @@ public class VisuaLigueController implements java.io.Serializable{
     
     SurfaceJeu m_surfaceJeu; 
     private List<Equipe> list_equipes = new LinkedList<>();
+    private static final long serialVersionUID = 1L;
     
     public void VisuaLigueController() {
         m_surfaceJeu = new SurfaceJeu();
