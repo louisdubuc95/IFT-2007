@@ -74,11 +74,19 @@ public class Interface_creer_sport_IPIController implements Initializable {
               stage.setTitle(txtNomIPI.getText() + " - mode Image par Image");
           }
           
-          stage.setScene(new Scene((VBox) loader.load()));
+          stage.setScene(new Scene((AnchorPane) loader.load()));
           Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
           
           //Appel la classe qui set l'image
+          
           IPIController.setImageInterface(lblCheminImage.getText());
+          //txtDimensionX.getText();
+          IPIController.getX(txtDimensionX.getText());
+         
+          
+          
+          txtDimensionY.getText();
+          
           
           //Show la nouvelle window
           stage.show();
@@ -118,5 +126,15 @@ public class Interface_creer_sport_IPIController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //TODO
     }   
+    
+    public void getTxtDimensionX() {
+        txtDimensionX.getText();
+        
+    }
+    public void getTxtDimensionY() {
+        txtDimensionY.getText();
+        
+    }
+    
     
 }
