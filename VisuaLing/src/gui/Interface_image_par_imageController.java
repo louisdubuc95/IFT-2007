@@ -101,6 +101,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Separator separateur5 ;
     @FXML private Button boutonAvancer ;
     @FXML private Label testDimensionX;
+    @FXML private Label testDimensionY;
     //@FXML private 
      //instance du controller de Larman
      VisuaLigueController m_controller = new VisuaLigueController();
@@ -122,6 +123,9 @@ public class Interface_image_par_imageController implements Initializable {
    public void getX(String dimensionX){
      testDimensionX.setText(dimensionX);  
      
+   }
+   public void getY(String dimensionY){
+    testDimensionY.setText(dimensionY);
    }
     public void nouveauSportAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
@@ -348,12 +352,15 @@ public class Interface_image_par_imageController implements Initializable {
           // on va remplacer la grandeur par les parametres entré par l'utilisateur.
           //je suis pas certain si je peux mettre ca ici ou il faut que ce soit dans le controleur de larman. 
           // et je sais pas trop comment limité au centième...ca reste a voir
-        Double dimensionX = event.getX() ;
+        double dimensionX = event.getX() ;
+        double dimensionY = event.getY(); 
         
-        double dpr1; 
-        dpr1 = Double.valueOf(testDimensionX.getText());
+        double doubleDimensionX; 
+        double doubleDimensionY ; 
+        doubleDimensionX = Double.valueOf(testDimensionX.getText());
+        doubleDimensionY = Double.valueOf(testDimensionX.getText());
         
-        String msg1 = "X : " +  dimensionX/dpr1 + " Y : "  + event.getY();
+        String msg1 = "X : " +  dimensionX/doubleDimensionX + " Y : "  + dimensionY/doubleDimensionY;
         labelcoordonneeI.setText(msg1);
        
         }

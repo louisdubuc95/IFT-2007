@@ -82,7 +82,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
           IPIController.setImageInterface(lblCheminImage.getText());
           //txtDimensionX.getText();
           IPIController.getX(txtDimensionX.getText());
-         
+          IPIController.getY(txtDimensionY.getText());
           
           
           txtDimensionY.getText();

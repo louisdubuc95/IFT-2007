@@ -10,7 +10,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane fx:id="boiteverticale" prefHeight="644.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
    <children>
       <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1084.0">
@@ -50,7 +49,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <HBox fx:id="boiteHorizontaleBouton" layoutY="25.0" maxHeight="-Infinity" prefHeight="52.0" spacing="10.0">
+      <HBox fx:id="boiteHorizontaleBouton" layoutY="28.0" maxHeight="-Infinity" prefHeight="35.0" prefWidth="1087.0" spacing="10.0">
          <children>
             <ImageView fitHeight="42.0" fitWidth="461.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -178,14 +177,19 @@
                   <Insets left="20.0" top="5.0" />
                </HBox.margin>
             </Label>
-            <Label fx:id="testDimensionX" text="Label">
+            <Label text="Grandeur du terrain : ">
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets left="50.0" top="5.0" />
                </HBox.margin>
             </Label>
-            <Label fx:id="testDimensionY" text="Label">
+            <Label fx:id="testDimensionX" text="X">
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets left="20.0" top="5.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="testDimensionY" text="Y">
+               <HBox.margin>
+                  <Insets left="20.0" top="5.0" />
                </HBox.margin>
             </Label>
          </children>
