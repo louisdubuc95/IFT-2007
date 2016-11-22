@@ -104,6 +104,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Label testDimensionX;
     @FXML private Label testDimensionY;
     @FXML public static Stage primaryStage;
+    private String m_equipe;
     
     //@FXML private 
     
@@ -122,6 +123,7 @@ public class Interface_image_par_imageController implements Initializable {
     stackSurface.toBack();
     stackSurface.setAlignment(Pos.CENTER); 
     }
+    
     
    public void getX(String dimensionX){
      testDimensionX.setText(dimensionX);  
@@ -237,30 +239,41 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML
     public void ajouterJoueurAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage(StageStyle.DECORATED);
-        FXMLLoader loader ;
-        loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
-        stage.setTitle("Ajout Joueur");
-        stage.setScene(new Scene((AnchorPane) loader.load()));
-        Interface_CreerJoueurController CreerJoueurController = loader.<Interface_CreerJoueurController>getController();
-        
-        if (boutonAjouterJoueur.isSelected()){
-          List<Equipe> listeEquipe = m_controller.getListEquipe();
-          CreerJoueurController.setListeEquipe(listeEquipe);
-          
-          //Fonction qui bloque les window deriere la nouvelle
-          Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
-          stage.initModality(Modality.WINDOW_MODAL);
-          stage.initOwner(currentStage);
-          
-          stage.show();
-          boutonObjectif.setDisable(true);
-          boutonAjouterObstacle.setDisable(true);
+        List<Equipe> listeEquipe = m_controller.getListEquipe();
+        if(!listeEquipe.isEmpty())
+        {
+            Stage stage = new Stage(StageStyle.DECORATED);
+            FXMLLoader loader ;
+            loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
+            stage.setTitle("Ajout Joueur");
+            stage.setScene(new Scene((AnchorPane) loader.load()));
+            Interface_CreerJoueurController CreerJoueurController = loader.<Interface_CreerJoueurController>getController();
+
+            if (boutonAjouterJoueur.isSelected()){
+              CreerJoueurController.setListeEquipe(listeEquipe);
+
+              //Fonction qui bloque les window deriere la nouvelle
+              Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+              stage.initModality(Modality.WINDOW_MODAL);
+              stage.initOwner(currentStage);
+
+              stage.show();
+              boutonObjectif.setDisable(true);
+              boutonAjouterObstacle.setDisable(true);
+            }
+            if (!boutonAjouterJoueur.isSelected()){
+               boutonObjectif.setDisable(false);
+               boutonAjouterObstacle.setDisable(false);
+            } 
         }
-        if (!boutonAjouterJoueur.isSelected()){
-           boutonObjectif.setDisable(false);
-           boutonAjouterObstacle.setDisable(false);
-        }  
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information sur la création de joueur");
+            alert.setContentText("Il faut créer des équipe avant de créer des joueurs");
+            alert.showAndWait();
+        }
         
     }
     
@@ -271,6 +284,11 @@ public class Interface_image_par_imageController implements Initializable {
           stage.setTitle("Ajout obstacle");
           stage.setScene(new Scene((AnchorPane) loader.load()));
          if (boutonAjouterObstacle.isSelected()){
+          //Fonction qui bloque les window deriere la nouvelle
+          Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+          stage.initModality(Modality.WINDOW_MODAL);
+          stage.initOwner(currentStage);
+          
           stage.show();
           boutonObjectif.setDisable(true);
           boutonAjouterJoueur.setDisable(true);
@@ -294,6 +312,10 @@ public class Interface_image_par_imageController implements Initializable {
           stage.setTitle("Ajout objectif");
           stage.setScene(new Scene((AnchorPane) loader.load()));
          if (boutonObjectif.isSelected()){
+          Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+          stage.initModality(Modality.WINDOW_MODAL);
+          stage.initOwner(currentStage);
+          
           stage.show();
           boutonAjouterJoueur.setDisable(true);
           boutonAjouterObstacle.setDisable(true);
@@ -325,8 +347,6 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML 
     public void ajouterJoueurInterface()  {
-        
-        
         canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override public void handle(MouseEvent event){
                    if(boutonAjouterJoueur.isSelected()){
@@ -336,8 +356,12 @@ public class Interface_image_par_imageController implements Initializable {
                    }  
                 }
             
-         });
-        
+         });  
+    }
+    
+    @FXML
+    public void setCouleur(String p_equipe) {
+        m_equipe= p_equipe;
     }
     
     @FXML
