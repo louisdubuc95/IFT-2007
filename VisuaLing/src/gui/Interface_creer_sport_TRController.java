@@ -6,8 +6,10 @@
 package gui;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -57,6 +59,10 @@ public class Interface_creer_sport_TRController implements Initializable {
     private Button boutonAnnulerTR;
     @FXML
     private TextField txtNomSportsTR;
+    
+    @FXML
+    private TextField txtNbEquipe;
+    
     @FXML
     private TextField txtDimensionX;
     @FXML
@@ -94,6 +100,25 @@ public class Interface_creer_sport_TRController implements Initializable {
           //Ferme le window actuel
           stage = (Stage) boutonInterfaceTempsReel.getScene().getWindow();
           stage.close();
+         
+          
+          
+            //Sauvegarde sport dans fichier .txt
+            try
+            {
+                    // Create file 
+                    File file = new File("src/savedSports/TempsReel/"+txtNomSportsTR.getText()+".txt");
+                    FileWriter fstream = new FileWriter(file);
+                    BufferedWriter out = new BufferedWriter(fstream);
+                    out.write(txtNomSportsTR.getText()+","+txtNbEquipe.getText()+","+txtDimensionX.getText()+","+
+                            txtDimensionY.getText()+","+lblCheminImage.getText());
+                    //Close the output stream
+                    out.close();
+                }
+
+            catch (Exception e){//Catch exception if any
+                    System.err.println("Impossible de sauvegarder le sport: " + e.getMessage());
+                    }
     }
     
     //Accèdre au module parcourir image
