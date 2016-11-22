@@ -84,7 +84,7 @@ public class Interface_accueilController implements Initializable {
     private void afficherSauvegardes() 
     {
     
-    /*File folder = new File("C:\\Users\\stlau\\Documents\\NetBeansProjects2\\111129633_equipe18\\VisuaLing\\src\\savedStrategies");
+    File folder = new File("C:\\Users\\stlau\\Documents\\NetBeansProjects2\\111129633_equipe18\\VisuaLing\\src\\savedStrategies");
     File[] listOfFiles = folder.listFiles();
     VBox content = new VBox();
     
@@ -109,7 +109,7 @@ public class Interface_accueilController implements Initializable {
         sp.setContent(content); 
       } 
 
-    }*/
+    }
     } 
 }
     
