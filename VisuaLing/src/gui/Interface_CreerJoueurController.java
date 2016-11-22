@@ -79,22 +79,10 @@ public class Interface_CreerJoueurController implements Initializable {
     
     @FXML
     public void boutonAccepterAction(ActionEvent event) throws IOException {
-        String equipe = cbEquipe.getSelectionModel().getSelectedItem().toString();
-        if(equipe.isEmpty())
-        {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setHeaderText("Information sur la création de joueur");
-            alert.setContentText("Le joueur n'a pas d'équipe assigner ");
-;
-            alert.showAndWait();
-        }
-        else
-        {
-            parentController.setCouleur(equipe);
+            String equipe = cbEquipe.getSelectionModel().getSelectedItem().toString();
+            parentController.setEquipe(equipe);
             Stage window = (Stage) boutonAccepter.getScene().getWindow();
             window.close();
-        }
     }
     
     @FXML public void setListeEquipe(List<Equipe> p_listeEquipe) throws UnsupportedEncodingException{
@@ -104,6 +92,7 @@ public class Interface_CreerJoueurController implements Initializable {
             Equipe equipe = iterateur.next();
             String nomEquipe = equipe.getNom();
             cbEquipe.getItems().addAll(nomEquipe);
+            cbEquipe.getSelectionModel().selectLast();
         } 
     }
 }

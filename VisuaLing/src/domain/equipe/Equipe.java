@@ -89,5 +89,8 @@ public class Equipe {
     public int getSize(){
         return list_joueurs.size();
     }
-
+    
+    public boolean estMemeNom(String p_nom){
+        return (nom.equals(p_nom));
+    }
 }

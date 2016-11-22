@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -347,20 +348,29 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML 
     public void ajouterJoueurInterface()  {
-        canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override public void handle(MouseEvent event){
-                   if(boutonAjouterJoueur.isSelected()){
-                    GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                    gc.setFill(color);
-                    gc.fillOval(event.getX(),event.getY(),20,20);
-                   }  
-                }
-            
-         });  
+//        List<Equipe> listeEquipe = m_controller.getListEquipe();
+//        canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+//            @Override public void handle(MouseEvent event){
+//                if(boutonAjouterJoueur.isSelected()){
+//                    Iterator<Equipe> iterateur = listeEquipe.iterator();
+//                    while(iterateur.hasNext())
+//                    {
+//                        Equipe equipe = iterateur.next();
+//                        if(equipe.estMemeNom(m_equipe)){
+//                            Color couleurEquipe = equipe.getCouleur();
+//                            GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+//                            gc.setFill(couleurEquipe);
+//                            gc.fillOval(event.getX(),event.getY(),20,20);
+//                        }
+//                    } 
+//                   }  
+//                }
+//            
+//         });  
     }
     
-    @FXML
-    public void setCouleur(String p_equipe) {
+    //@FXML
+    public void setEquipe(String p_equipe) {
         m_equipe= p_equipe;
     }
     
