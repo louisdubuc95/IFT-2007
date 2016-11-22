@@ -1,0 +1,1 @@
+SoccerTR,2,120,90,C:\Users\stlau\Documents\NetBeansProjects\111129633_equipe18\VisuaLing\src\Photo\terrain_soccer.png

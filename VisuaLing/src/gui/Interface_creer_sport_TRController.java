@@ -61,6 +61,9 @@ public class Interface_creer_sport_TRController implements Initializable {
     private TextField txtNomSportsTR;
     
     @FXML
+    private javafx.scene.control.Button boutonChargerSportTR;
+    
+    @FXML
     private TextField txtNbEquipe;
     
     @FXML
@@ -143,6 +146,50 @@ public class Interface_creer_sport_TRController implements Initializable {
         Stage window = (Stage) boutonAnnulerTR.getScene().getWindow();
         window.setScene(Interface_choix_mode_scene);
         window.show();
+    }
+    
+    @FXML
+    private void bouton_Charger (ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
+
+            for(ToggleButton TB: listTB)
+            {
+                if(TB.isSelected())
+                {
+                    String s = TB.getText();
+                    String[] partiesPath = s.split("\n");
+                    String pathFichier = partiesPath[0];
+                    pathFichier = pathFichier.replaceAll("\tNom du fichier  :  ", "");
+                    pathFichier = "src/savedSports/TempsReel/"+pathFichier;
+                    File file = new File(pathFichier);
+                    Stage stage = new Stage(StageStyle.DECORATED);
+
+                    stage.setTitle(file.getName());
+
+                    stage.setScene(new Scene((AnchorPane) loader.load()));
+                    Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
+
+                    //Appel la classe qui set l'image
+                    
+                    BufferedReader Buff = new BufferedReader(new FileReader(file));
+                    String objet = Buff.readLine();
+                    String[] partiesObjet = objet.split(",");
+                    String image = partiesObjet[4];
+                    String X = partiesObjet[2];
+                    String Y = partiesObjet[3];
+                    IPIController.setImageInterface(image);
+                    IPIController.getX(X);
+                    IPIController.getY(Y);
+
+
+                    //Show la nouvelle window
+                    stage.show();
+
+                    //Ferme le window actuel
+                    stage = (Stage) boutonChargerSportTR.getScene().getWindow();
+                    stage.close();
+                }
+            }     
     }
     
     
