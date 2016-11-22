@@ -5,8 +5,6 @@
  */
 package gui;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,8 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +61,10 @@ public class Interface_creer_sport_IPIController implements Initializable {
     
     @FXML //  fx:id="boutonParcourirIPI"
     private TextField txtNomIPI;
+    
+    @FXML
+    private TextField txtNbEquipe;
+    
     @FXML
     private Label lblCheminImage;
     @FXML
@@ -105,13 +106,32 @@ public class Interface_creer_sport_IPIController implements Initializable {
           
           txtDimensionY.getText();
           
-          
           //Show la nouvelle window
           stage.show();
           
           //Ferme le window actuel
           stage = (Stage) boutonCreerSportsIPI.getScene().getWindow();
           stage.close();
+          
+          
+          //Sauvegarde sport dans fichier .txt
+        try
+        {
+                // Create file 
+                File file = new File("src/SavedSports/ImageParImage/"+txtNomIPI.getText()+".txt");
+                FileWriter fstream = new FileWriter(file);
+                BufferedWriter out = new BufferedWriter(fstream);
+                out.write(txtNomIPI.getText()+","+txtNbEquipe.getText()+","+txtDimensionX.getText()+","+
+                        txtDimensionY.getText()+","+lblCheminImage.getText());
+                //Close the output stream
+                out.close();
+            }
+        
+        catch (Exception e){//Catch exception if any
+                System.err.println("Impossible de sauvegarder le sport: " + e.getMessage());
+                }
+          
+          
       }
     
     //Accèdre au module parcourir image
