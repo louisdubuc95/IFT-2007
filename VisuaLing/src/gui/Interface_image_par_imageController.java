@@ -7,7 +7,9 @@ package gui;
 
 import controller.VisuaLigueController;
 import domain.equipe.Equipe;
+import java.awt.Point;
 import java.awt.event.WindowEvent;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -173,12 +175,12 @@ public class Interface_image_par_imageController implements Initializable {
                     String imagepath = imageFile.toURI().toURL().toString();
                     Image image = new Image(imagepath);
                     imgsurface.setImage(image);
-                    //m_controller.setImageSurface(imagePath);
+                    m_controller.setImageSurface(imagePath);
                 }
             }
             else
             {
-                //m_controller.setImageSurface("@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg");
+                m_controller.setImageSurface("src/Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg");
             }
         } catch (MalformedURLException ex) {
             Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -364,6 +366,12 @@ public class Interface_image_par_imageController implements Initializable {
                             GraphicsContext gc = canevasInterface.getGraphicsContext2D();
                             gc.setFill(couleurEquipe);
                             gc.fillOval(event.getX(),event.getY(),20,20);
+                            
+                            float x = (float) event.getX();
+                            float y = (float) event.getY();
+                            
+                            Point2D.Float p = new Point2D.Float(x,y);
+                            m_controller.addJoueur(p, color);
                         }
                     } 
                    }  

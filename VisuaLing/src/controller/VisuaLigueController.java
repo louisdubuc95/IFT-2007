@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import domain.equipe.Equipe;
 import domain.joueur.Joueur;
+import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.LinkedList;
         
@@ -30,7 +31,8 @@ public class VisuaLigueController implements java.io.Serializable{
     SurfaceJeu m_surfaceJeu = new SurfaceJeu();
     private static final long serialVersionUID = 1L;
     
-    public void VisuaLigueController() {
+    public void VisuaLigueController() 
+    {
         m_surfaceJeu = new SurfaceJeu();
     }
     
@@ -39,12 +41,18 @@ public class VisuaLigueController implements java.io.Serializable{
         m_surfaceJeu.setImageSurface(p_pathImage);
     }
     
-    public List<Equipe> getListEquipe() {
+    public List<Equipe> getListEquipe() 
+    {
         return m_surfaceJeu.getListeEquipe();
     }
     
     public void addEquipe(String nom, Color couleur) throws Exception
     {
         m_surfaceJeu.addEquipe(nom, couleur);
+    }
+    
+    public void addJoueur(Point2D.Float p_coordJoueur, Color p_colorChandail)
+    {
+        m_surfaceJeu.addJoueur(p_coordJoueur, p_colorChandail);
     }
 }
