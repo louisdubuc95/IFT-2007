@@ -11,10 +11,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -62,7 +65,9 @@ public class Interface_creer_sport_TRController implements Initializable {
     @FXML
     private Label lblCheminImage;
     @FXML
-    private ScrollPane sp;
+    private VBox content;
+    @FXML
+    private List<ToggleButton> listTB = new ArrayList<ToggleButton>();
     
     //Accéder a l'interface pour créer une séquence en temps réel
     public void bouton_InterfaceTempsReelAction (ActionEvent event)throws IOException {
@@ -119,55 +124,81 @@ public class Interface_creer_sport_TRController implements Initializable {
     @FXML
     private void afficherSauvegardes()
     {
-    File folder = new File("src/savedSports/ImageParImage");
+    File folder = new File("src/savedSports/TempsReel");
     File[] listOfFiles = folder.listFiles();
-    VBox content = new VBox();
     
    
     for (File file : listOfFiles) {
       String extension = ".txt";
       //if (file.getAbsolutePath().endsWith(extension)) {
-      if (file.isFile()) {
-          try {
-              BufferedReader Buff = new BufferedReader(new FileReader(file));
-              String text = Buff.readLine();
-              String[] parts = text.split(",");
-              String nom = parts[0];
-              String path = parts[4];
-              Image imageSport = new Image("file:"+path);
-              ImageView IV = new ImageView();
-              IV.setImage(imageSport);
-              IV.setFitHeight(80.0);
-              IV.setFitWidth(100.0);
+        if (file.isFile()) {
+            try {
+                BufferedReader Buff = new BufferedReader(new FileReader(file));
+                String text = Buff.readLine();
+                String[] parts = text.split(",");
+                String nom = parts[0];
+                String path = parts[4];
+                Image imageSport = new Image("file:"+path);
+                ImageView IV = new ImageView();
+                IV.setImage(imageSport);
+                IV.setFitHeight(80.0);
+                IV.setFitWidth(100.0);
 
 
 
-              ToggleButton TB = new ToggleButton(file.getName());
+                ToggleButton TB = new ToggleButton(file.getName());
 
-              TB.setContentDisplay(ContentDisplay.RIGHT);
-              
-              TB.setMinHeight(100);
-              TB.setMinWidth(625);
-              SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/DD HH:mm:ss");
-              TB.setText("\tNom du fichier  :  "+ file.getName() + "\n" + "\tNom du sport : " + nom + "\n" + "\tDerniere modification  :  "
-                      +sdf.format(file.lastModified())
-                      + "\n" + "\tTaille  :  " + file.length() + " octets");
-              Insets insets = new Insets(0,200,0,0);
-              TB.setPadding(insets);
-              TB.setGraphic(IV);
-              TB.setGraphicTextGap(200);
-              
-              content.setPrefHeight(content.getPrefHeight() + TB.getPrefHeight());
-              content.getChildren().add(TB);
-              sp.setContent(content);
-          }
-          catch (IOException ex) {
-              Logger.getLogger(Interface_creer_sport_IPIController.class.getName()).log(Level.SEVERE, null, ex);
-          }
-              
+                listTB.add(TB);
+
+                TB.setContentDisplay(ContentDisplay.RIGHT);
+                TB.setOnAction(updateButtonHandler);
+
+                TB.setMinHeight(100);
+                TB.setMinWidth(625);
+                SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/DD HH:mm:ss");
+                TB.setText("\tNom du fichier  :  "+ file.getName() + "\n" + "\tNom du sport : " + nom + "\n" + "\tDerniere modification  :  "
+                        +sdf.format(file.lastModified())
+                        + "\n" + "\tTaille  :  " + file.length() + " octets");
+                Insets insets = new Insets(0,200,0,0);
+                TB.setPadding(insets);
+                TB.setGraphic(IV);
+                TB.setGraphicTextGap(200);
+
+                content.setPrefHeight(content.getPrefHeight() + TB.getPrefHeight());
+                content.getChildren().add(TB);
+            }
+            catch (IOException ex) {
+                Logger.getLogger(Interface_creer_sport_IPIController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
       }
+    
     }
-    }
+    
+    
+    
+    EventHandler<ActionEvent> updateButtonHandler = new EventHandler<ActionEvent>() 
+    {
+        @Override
+        public void handle(ActionEvent event) {
+            ToggleButton source = (ToggleButton)event.getSource();
+            if(!source.isSelected())
+            {
+                for (ToggleButton button : listTB) 
+                {
+                    button.setDisable(false);
+                }
+            }
+            else{
+                for (ToggleButton button : listTB) 
+                {
+                 button.setDisable(!button.isSelected());
+                }
+            }
+
+        }
+    };
     
     
 
