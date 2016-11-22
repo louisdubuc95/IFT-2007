@@ -151,8 +151,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
 
         for (File file : listOfFiles) {
           String extension = ".txt";
-          //if (file.getAbsolutePath().endsWith(extension)) {
-          if (file.isFile()) {
+          if (file.getAbsolutePath().endsWith(extension)) {
               try {
                   BufferedReader Buff = new BufferedReader(new FileReader(file));
                   String text = Buff.readLine();
@@ -163,14 +162,10 @@ public class Interface_creer_sport_IPIController implements Initializable {
                   ImageView IV = new ImageView();
                   IV.setImage(imageSport);
                   IV.setFitHeight(80.0);
-                  IV.setFitWidth(100.0);
-
-
+                  IV.setFitWidth(125.0);
 
                   ToggleButton TB = new ToggleButton(file.getName());
-                  listTB.add(TB);
-
-                  TB.setContentDisplay(ContentDisplay.RIGHT);
+                  
                   TB.setOnAction(updateButtonHandler);
 
                   TB.setMinHeight(100);
@@ -179,10 +174,11 @@ public class Interface_creer_sport_IPIController implements Initializable {
                   TB.setText("\tNom du fichier  :  "+ file.getName() + "\n" + "\tNom du sport : " + nom + "\n" + "\tDerniere modification  :  "
                           +sdf.format(file.lastModified())
                           + "\n" + "\tTaille  :  " + file.length() + " octets");
-                  Insets insets = new Insets(0,200,0,0);
+                  Insets insets = new Insets(0,0,0,75);
                   TB.setPadding(insets);
                   TB.setGraphic(IV);
-                  TB.setGraphicTextGap(200);
+                  TB.setGraphicTextGap(-550);
+                  listTB.add(TB);
 
                   content.setPrefHeight(content.getPrefHeight() + TB.getPrefHeight());
                   content.getChildren().add(TB);
