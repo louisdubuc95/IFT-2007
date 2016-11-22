@@ -5,6 +5,7 @@
  */
 package gui;
 
+import com.sun.java.swing.plaf.windows.resources.windows;
 import domain.equipe.Equipe;
 import java.awt.Point;
 import java.io.IOException;
@@ -36,6 +37,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javax.xml.bind.DatatypeConverter;
+import gui.Interface_image_par_imageController;
 
 
 
@@ -62,7 +64,7 @@ public class Interface_CreerJoueurController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL location, ResourceBundle resources) {
         //TODO
     }
     
@@ -73,19 +75,32 @@ public class Interface_CreerJoueurController implements Initializable {
     @FXML
     public void boutonAnnulerAction(ActionEvent event) {
           Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
-          stage.close();
-          //Interface_image_par_imageController.boutonObjectif.setDisable(false);         
+          stage.close();        
     } 
     
     @FXML
     public void boutonAccepterAction(ActionEvent event) throws IOException {
             String equipe = cbEquipe.getSelectionModel().getSelectedItem().toString();
-            parentController.setEquipe(equipe);
             Stage window = (Stage) boutonAccepter.getScene().getWindow();
-            window.close();
+            try
+            {
+                parentController.setEquipe(equipe);
+                window.close();
+            }
+        catch(Exception e)
+        {
+            String message = e.getMessage();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+      
     }
     
-    @FXML public void setListeEquipe(List<Equipe> p_listeEquipe) throws UnsupportedEncodingException{
+    @FXML 
+    public void setListeEquipe(List<Equipe> p_listeEquipe) throws UnsupportedEncodingException{
         Iterator<Equipe> iterateur = p_listeEquipe.iterator();
         while(iterateur.hasNext())
         {

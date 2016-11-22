@@ -246,9 +246,12 @@ public class Interface_image_par_imageController implements Initializable {
             Stage stage = new Stage(StageStyle.DECORATED);
             FXMLLoader loader ;
             loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
+            Parent parent = (Parent) loader.load();
+            Scene scene = new Scene(parent);
             stage.setTitle("Ajout Joueur");
-            stage.setScene(new Scene((AnchorPane) loader.load()));
+            stage.setScene(scene);
             Interface_CreerJoueurController CreerJoueurController = loader.<Interface_CreerJoueurController>getController();
+            CreerJoueurController.initialize(this);
 
             if (boutonAjouterJoueur.isSelected()){
               CreerJoueurController.setListeEquipe(listeEquipe);
@@ -348,25 +351,25 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML 
     public void ajouterJoueurInterface()  {
-//        List<Equipe> listeEquipe = m_controller.getListEquipe();
-//        canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            @Override public void handle(MouseEvent event){
-//                if(boutonAjouterJoueur.isSelected()){
-//                    Iterator<Equipe> iterateur = listeEquipe.iterator();
-//                    while(iterateur.hasNext())
-//                    {
-//                        Equipe equipe = iterateur.next();
-//                        if(equipe.estMemeNom(m_equipe)){
-//                            Color couleurEquipe = equipe.getCouleur();
-//                            GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-//                            gc.setFill(couleurEquipe);
-//                            gc.fillOval(event.getX(),event.getY(),20,20);
-//                        }
-//                    } 
-//                   }  
-//                }
-//            
-//         });  
+        List<Equipe> listeEquipe = m_controller.getListEquipe();
+        canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override public void handle(MouseEvent event){
+                if(boutonAjouterJoueur.isSelected()){
+                    Iterator<Equipe> iterateur = listeEquipe.iterator();
+                    while(iterateur.hasNext())
+                    {
+                        Equipe equipe = iterateur.next();
+                        if(equipe.estMemeNom(m_equipe)){
+                            Color couleurEquipe = equipe.getCouleur();
+                            GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                            gc.setFill(couleurEquipe);
+                            gc.fillOval(event.getX(),event.getY(),20,20);
+                        }
+                    } 
+                   }  
+                }
+            
+         });  
     }
     
     //@FXML
