@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" prefHeight="410.0" prefWidth="696.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_CreerJoueurController">
+<AnchorPane fx:id="anchorPane" blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" prefHeight="410.0" prefWidth="696.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_CreerJoueurController">
       <children>
             <Label layoutX="31.0" layoutY="21.0" text="Créer un joueur">
                <font>
@@ -31,13 +31,13 @@
                               </ImageView>
                      </children>
                   </AnchorPane>
-                  <ComboBox layoutX="390.0" layoutY="174.0" prefHeight="27.0" prefWidth="176.0" />
+                  <ComboBox fx:id="cbEquipe" layoutX="390.0" layoutY="174.0" prefHeight="27.0" prefWidth="176.0" />
                   <Label layoutX="272.0" layoutY="145.0" prefHeight="17.0" prefWidth="104.0" text="(sur 360 degres)" />
                   <Label layoutX="324.0" layoutY="179.0" text="Équipe :" />
                   <TextField layoutX="390.0" layoutY="87.0" prefHeight="25.0" prefWidth="176.0" />
                   <Label layoutX="300.0" layoutY="132.0" text="Orientation :" />
                         <Button fx:id="boutonAnnuler" layoutX="390.0" layoutY="228.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefHeight="25.0" prefWidth="76.0" text="Annuler" />
-                  <Button layoutX="295.0" layoutY="228.0" mnemonicParsing="false" onAction="#boutonAccepterAction" prefHeight="25.0" prefWidth="76.0" text="Accepter" />
+                  <Button fx:id="boutonAccepter" layoutX="295.0" layoutY="228.0" mnemonicParsing="false" onAction="#boutonAccepterAction" prefHeight="25.0" prefWidth="76.0" text="Accepter" />
                   <TextField layoutX="390.0" layoutY="44.0" prefHeight="25.0" prefWidth="176.0" />
                   <TextField layoutX="390.0" layoutY="132.0" prefHeight="25.0" prefWidth="176.0" />
                   <Label layoutX="257.0" layoutY="92.0" text="Position du joueur:" />

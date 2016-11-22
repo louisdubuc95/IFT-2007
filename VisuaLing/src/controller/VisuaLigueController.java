@@ -27,8 +27,7 @@ import java.util.LinkedList;
  */
 public class VisuaLigueController implements java.io.Serializable{
     
-    SurfaceJeu m_surfaceJeu; 
-    private List<Equipe> list_equipes = new LinkedList<>();
+    SurfaceJeu m_surfaceJeu = new SurfaceJeu();
     private static final long serialVersionUID = 1L;
     
     public void VisuaLigueController() {
@@ -40,29 +39,12 @@ public class VisuaLigueController implements java.io.Serializable{
         m_surfaceJeu.setImageSurface(p_pathImage);
     }
     
-    public List<Equipe> getList_equipes() {
-        return list_equipes;
+    public List<Equipe> getListEquipe() {
+        return m_surfaceJeu.getListeEquipe();
     }
     
     public void addEquipe(String nom, Color couleur) throws Exception
     {
-        Iterator<Equipe> iterateur = list_equipes.iterator();
-        while(iterateur.hasNext())
-        {
-            Equipe equipe = iterateur.next();
-            
-            if (equipe.getNom().equals(nom) && 
-                    equipe.getCouleur().getBlue() == couleur.getBlue() &&
-                    equipe.getCouleur().getGreen() == couleur.getGreen() &&
-                    equipe.getCouleur().getRed() == couleur.getRed() &&
-                    equipe.getCouleur().getOpacity() == couleur.getOpacity())
-            {
-                throw new Exception("La combinaison nom-couleur a déjà été prise pour une autre équipe."
-                        + " Veuillez choisir un autre nom ou une autre couleur.");
-            }
-        }
-        
-        Equipe nouv_equipe = new Equipe(nom, couleur);
-        list_equipes.add(nouv_equipe);
+        m_surfaceJeu.addEquipe(nom, couleur);
     }
 }

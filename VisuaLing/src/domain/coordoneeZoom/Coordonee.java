@@ -10,5 +10,9 @@ package domain.coordoneeZoom;
  * @author louis
  */
 public class Coordonee {
+    public Coordonee()
+    {
+
+    }
     
 }

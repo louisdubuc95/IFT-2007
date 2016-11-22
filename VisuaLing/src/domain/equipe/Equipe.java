@@ -22,7 +22,7 @@ public class Equipe {
     private int id;
     private String nom;
     private Color couleur;
-    private List<Joueur> list_joueurs = new ArrayList<>();
+    private List<Joueur> list_joueurs;
     
     public Equipe(String nom, Color couleur)
     {

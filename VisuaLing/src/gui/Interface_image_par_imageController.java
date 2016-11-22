@@ -6,11 +6,13 @@
 package gui;
 
 import controller.VisuaLigueController;
+import domain.equipe.Equipe;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,7 +94,6 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private ToggleGroup group ;
     private double x0, y0;
     @FXML private StackPane stackSurface ; 
-    //@FXML private AnchorPane anchor_pane ;
     @FXML private Button btnnouveauSportAction;
     @FXML private AnchorPane boiteverticale ; 
     @FXML private HBox boiteHorizontaleBouton ; 
@@ -102,7 +103,10 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonAvancer ;
     @FXML private Label testDimensionX;
     @FXML private Label testDimensionY;
+    @FXML public static Stage primaryStage;
+    
     //@FXML private 
+    
      //instance du controller de Larman
      VisuaLigueController m_controller = new VisuaLigueController();
     
@@ -117,7 +121,6 @@ public class Interface_image_par_imageController implements Initializable {
     stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
     stackSurface.toBack();
     stackSurface.setAlignment(Pos.CENTER); 
-   
     }
     
    public void getX(String dimensionX){
@@ -239,7 +242,17 @@ public class Interface_image_par_imageController implements Initializable {
         loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
         stage.setTitle("Ajout Joueur");
         stage.setScene(new Scene((AnchorPane) loader.load()));
+        Interface_CreerJoueurController CreerJoueurController = loader.<Interface_CreerJoueurController>getController();
+        
         if (boutonAjouterJoueur.isSelected()){
+          List<Equipe> listeEquipe = m_controller.getListEquipe();
+          CreerJoueurController.setListeEquipe(listeEquipe);
+          
+          //Fonction qui bloque les window deriere la nouvelle
+          Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+          stage.initModality(Modality.WINDOW_MODAL);
+          stage.initOwner(currentStage);
+          
           stage.show();
           boutonObjectif.setDisable(true);
           boutonAjouterObstacle.setDisable(true);
@@ -247,7 +260,6 @@ public class Interface_image_par_imageController implements Initializable {
         if (!boutonAjouterJoueur.isSelected()){
            boutonObjectif.setDisable(false);
            boutonAjouterObstacle.setDisable(false);
-           stage.close();
         }  
         
     }

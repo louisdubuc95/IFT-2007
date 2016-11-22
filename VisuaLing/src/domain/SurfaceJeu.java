@@ -6,6 +6,8 @@
 package domain;
 
 import domain.coordoneeZoom.Coordonee;
+import domain.coordoneeZoom.Zoom;
+import domain.equipe.Equipe;
 import domain.joueur.Joueur;
 import domain.obstacle.Balle;
 import domain.obstacle.Ballon;
@@ -23,6 +25,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,24 +47,30 @@ import javafx.scene.paint.Color;
 public class SurfaceJeu {
     
     private Coordonee m_Coordonee;
+    private Zoom m_zoom;
     private List<Joueur> m_ListeJoueur;
     private List<Obstacle> m_ListeObstacle;
     private List<Objectif> m_ListeObjectifs;
+    private List<Equipe> m_ListeEquipes;
     private Image m_imgFond;
     private boolean m_Etat;
     private int m_Temps;
+    
     private Joueur m_joueur;
+    private Obstacle m_obstacle;
+    private Objectif m_objectif;
+    private Equipe m_equipe;
+    
     
     public SurfaceJeu()
     {
-        this.m_ListeJoueur = new ArrayList();
-        this.m_ListeObstacle = new ArrayList();
-        this.m_ListeObjectifs = new ArrayList();
-        
-        this.m_joueur=new Joueur(new Point2D.Float(50.0f,50.0f),Color.BLACK);
-        
-        this.m_Etat = false;
-        this.m_Temps = 0;
+    this.m_ListeJoueur = new ArrayList();
+    this.m_ListeObstacle = new ArrayList();
+    this.m_ListeObjectifs = new ArrayList();
+    this.m_ListeEquipes = new ArrayList();
+
+    this.m_Etat = false;
+    this.m_Temps = 0;
     }
     
     public void addJoueur(Point2D.Float p_coordJoueur, Color p_colorChandail) {
@@ -184,6 +194,27 @@ public class SurfaceJeu {
         return objectifTrouver;
     }
     
+    public void addEquipe(String nom, Color couleur) throws Exception
+    {
+        Iterator<Equipe> iterateur = m_ListeEquipes.iterator();
+        while(iterateur.hasNext())
+        {
+            Equipe equipe = iterateur.next();
+            
+            if (equipe.getNom().equals(nom) && 
+                    equipe.getCouleur().getBlue() == couleur.getBlue() &&
+                    equipe.getCouleur().getGreen() == couleur.getGreen() &&
+                    equipe.getCouleur().getRed() == couleur.getRed() &&
+                    equipe.getCouleur().getOpacity() == couleur.getOpacity())
+            {
+                throw new Exception("La combinaison nom-couleur a déjà été prise pour une autre équipe."
+                        + " Veuillez choisir un autre nom ou une autre couleur.");
+            }
+        }
+        m_ListeEquipes.add(new Equipe(nom,couleur));
+    }
+
+    
     public boolean estVide(){
         return m_Etat;
     }
@@ -267,5 +298,9 @@ public class SurfaceJeu {
     
     public List<Objectif> getListeObjectif(){
         return m_ListeObjectifs;
+    }
+    
+    public List<Equipe> getListeEquipe(){
+        return m_ListeEquipes;
     }
 }
