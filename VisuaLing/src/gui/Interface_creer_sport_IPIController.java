@@ -201,7 +201,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
                     stage.show();
 
                     //Ferme le window actuel
-                    stage = (Stage) boutonChargerSportIPI.getScene().getWindow();
+                    stage = (Stage) boutonCreerSportsIPI.getScene().getWindow();
                     stage.close();
                 }
             }     

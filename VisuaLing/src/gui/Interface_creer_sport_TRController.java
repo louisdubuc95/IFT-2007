@@ -186,7 +186,7 @@ public class Interface_creer_sport_TRController implements Initializable {
                     stage.show();
 
                     //Ferme le window actuel
-                    stage = (Stage) boutonChargerSportTR.getScene().getWindow();
+                    stage = (Stage) boutonInterfaceTempsReel.getScene().getWindow();
                     stage.close();
                 }
             }     
