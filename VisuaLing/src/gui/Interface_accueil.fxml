@@ -37,11 +37,10 @@
             <Image url="@../Photo/605735054.jpg" />
          </image>
       </ImageView>
-      <ScrollPane fx:id="sp" layoutX="363.0" layoutY="168.0" prefHeight="446.0" prefWidth="641.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="448.0" prefWidth="625.0" />
-        </content>
-      </ScrollPane>
+      <ScrollPane layoutX="363.0" layoutY="168.0" prefHeight="446.0" prefWidth="641.0">
+         <content>
+            <VBox fx:id="content" prefHeight="453.0" prefWidth="643.0" />
+         </content></ScrollPane>
       <Label layoutX="368.0" layoutY="138.0" prefHeight="26.0" prefWidth="105.0" text="Jeu sauvegardés">
          <font>
             <Font name="Calibri Light" size="12.0" />

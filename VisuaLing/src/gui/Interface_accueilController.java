@@ -13,7 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.File;
@@ -23,6 +23,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.ToggleButton;
 import java.text.SimpleDateFormat;
 import javafx.scene.text.TextAlignment;
+import java.util.*;
+import java.awt.event.*;
+import javafx.event.EventHandler;
+import javafx.scene.control.ButtonBase;
 /**
  * FXML Controller class
  *
@@ -37,7 +41,11 @@ public class Interface_accueilController implements Initializable {
     @FXML
     private Button boutonQuitter;
     @FXML
-    private ScrollPane sp;
+    private List<ToggleButton> listTB = new ArrayList<ToggleButton>();
+    
+    @FXML
+    private VBox content;
+
 
     
 
@@ -47,6 +55,8 @@ public class Interface_accueilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         afficherSauvegardes();
+        
+        
     }    
     
     //test commentaire
@@ -78,24 +88,24 @@ public class Interface_accueilController implements Initializable {
     
     
     //Afficher strategies sauvegardee
-    
-    
     @FXML
     private void afficherSauvegardes() 
     {
     
     File folder = new File("src/savedStrategies");
     File[] listOfFiles = folder.listFiles();
-    VBox content = new VBox();
     
-   
     for (File file : listOfFiles) {
       String extension = ".ser";
       //if (file.getAbsolutePath().endsWith(extension)) {
       if (file.isFile()) {
         ToggleButton TB = new ToggleButton("Label " + file.getName());
+        listTB.add(TB);
         TB.setMinHeight(100);
         TB.setMinWidth(625);
+        TB.setOnAction(updateButtonHandler);
+        
+        
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/DD HH:mm:ss");
         TB.setText("Nom du fichier  :  "+ file.getName() + "\n" + "Derniere modification  :  " 
                 +sdf.format(file.lastModified())
@@ -106,11 +116,38 @@ public class Interface_accueilController implements Initializable {
                
         content.setPrefHeight(content.getPrefHeight() + TB.getPrefHeight());
         content.getChildren().add(TB);
-        sp.setContent(content); 
-      } 
+        
+      }
+
 
     }
-    } 
+    }
+    
+    
+    EventHandler<ActionEvent> updateButtonHandler = new EventHandler<ActionEvent>() 
+    {
+        @Override
+        public void handle(ActionEvent event) {
+            ToggleButton source = (ToggleButton)event.getSource();
+            if(!source.isSelected())
+            {
+                for (ToggleButton button : listTB) 
+                {
+                    button.setDisable(false);
+                }
+            }
+            else{
+                for (ToggleButton button : listTB) 
+                {
+                 button.setDisable(!button.isSelected());
+                }
+            }
+
+        }
+    };
+
+   
+   
 }
     
     
