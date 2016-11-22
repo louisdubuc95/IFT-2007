@@ -166,7 +166,7 @@ public class Interface_image_par_imageController implements Initializable {
 
                     String imagepath = imageFile.toURI().toURL().toString();
                     Image image = new Image(imagepath);
-                    imgSurface.setImage(image);
+                    imgsurface.setImage(image);
                     //m_controller.setImageSurface(imagePath);
                 }
             }
