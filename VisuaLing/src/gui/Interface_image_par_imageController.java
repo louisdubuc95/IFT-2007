@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -112,6 +113,8 @@ public class Interface_image_par_imageController implements Initializable {
     private double m_x;
     private double m_y;
     
+    @FXML public List<String> listeRoles;
+    
     //@FXML private 
     
      //instance du controller de Larman
@@ -128,6 +131,7 @@ public class Interface_image_par_imageController implements Initializable {
     stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
     stackSurface.toBack();
     stackSurface.setAlignment(Pos.CENTER); 
+    listeRoles = new ArrayList<>();
     }
     
     

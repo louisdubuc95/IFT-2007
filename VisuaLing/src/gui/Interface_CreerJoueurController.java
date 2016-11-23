@@ -38,6 +38,8 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javax.xml.bind.DatatypeConverter;
 import gui.Interface_image_par_imageController;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 
 
 
@@ -51,6 +53,7 @@ public class Interface_CreerJoueurController implements Initializable {
     @FXML private Button boutonAnnuler;
     @FXML private Button boutonAccepter;
     @FXML private ComboBox cbEquipe;
+    @FXML private ComboBox rolePreceCrees;
     @FXML private AnchorPane anchorPane;
     @FXML private TextField txtRole;
     @FXML private TextField txtPosition;
@@ -63,10 +66,7 @@ public class Interface_CreerJoueurController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //TODO
-    }
+
     
     public void initialize(Interface_image_par_imageController controller) {
         parentController = controller;
@@ -82,7 +82,7 @@ public class Interface_CreerJoueurController implements Initializable {
     public void boutonAccepterAction(ActionEvent event) throws IOException {
             String equipe = cbEquipe.getSelectionModel().getSelectedItem().toString();
             Stage window = (Stage) boutonAccepter.getScene().getWindow();
-            try
+        try
             {
                 parentController.setEquipe(equipe);
                 window.close();
@@ -96,7 +96,33 @@ public class Interface_CreerJoueurController implements Initializable {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+        
+        //Ajouter role dans rolePrecedementsCrees
+        
+        
+        
+        String role = txtRole.getText();
+        boolean present = false;
+        
+        for (String item : parentController.listeRoles) {
+            if(item.equals(role))
+            {
+                present = true;
+            }           
+        }
+        if(false == present)
+        {        
+            parentController.listeRoles.add(role);
+
+        }
       
+    }
+    
+    @FXML
+    public void setTextinField(ActionEvent e)
+    {
+        String roleSelect = rolePreceCrees.getSelectionModel().getSelectedItem().toString();
+        txtRole.setText(roleSelect);
     }
     
     @FXML 
@@ -109,5 +135,16 @@ public class Interface_CreerJoueurController implements Initializable {
             cbEquipe.getItems().addAll(nomEquipe);
             cbEquipe.getSelectionModel().selectLast();
         } 
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if(parentController.listeRoles.isEmpty())
+        {
+        } 
+        else {
+            ObservableList<String> listeRoles = FXCollections.observableList(parentController.listeRoles);
+            rolePreceCrees.getItems().addAll(listeRoles);
+        }
+
     }
 }
