@@ -56,6 +56,11 @@ public class SurfaceJeu {
     private boolean m_Etat;
     private int m_Temps;
     
+    Rectangle.Float m_calculTaille;
+    int m_largeurPx;
+    int m_hauteurPx;
+    float m_distanceEntrePts;
+    
     private Joueur m_joueur;
     private Obstacle m_obstacle;
     private Objectif m_objectif;
@@ -68,6 +73,11 @@ public class SurfaceJeu {
     this.m_ListeObstacle = new ArrayList();
     this.m_ListeObjectifs = new ArrayList();
     this.m_ListeEquipes = new ArrayList();
+    
+    this.m_calculTaille = new Rectangle.Float(0, 0, 1084, 537);
+    this.m_largeurPx=560;
+    this.m_hauteurPx=360;
+    this.m_distanceEntrePts = 20;
 
     this.m_Etat = false;
     this.m_Temps = 0;
@@ -227,9 +237,8 @@ public class SurfaceJeu {
         } catch (IOException ex) {
             Logger.getLogger(SurfaceJeu.class.getName()).log(Level.SEVERE, null, ex);
         }
-         //Retirer commentaire lorsque la classe Coordonnee sera implementer
-        //if(img!=null)
-            //m_imgFond= img.getScaledInstance(m_Coordonee.getLargeurInterfaceX,m_Coordonee.getHauteurInterfaceY(), Image.SCALE_SMOOTH);   
+//        if(img!=null)
+//            m_imgFond= img.getScaledInstance(m_largeurPx, m_hauteurPx, );      
     }
     
      public void Dessiner(Canvas p_graphics)
@@ -287,6 +296,19 @@ public class SurfaceJeu {
             gc.drawImage(imgObj, coordObjectif.x, coordObjectif.y);
         }
     }
+     
+//    private Point2D.Float ChangerCoord(Point2D p_Coord){
+//        Point2D.Float modif = new Point2D.Float();
+//  
+//        modif.x = (float) ((p_Coord.getX() * m_calculTaille.width) / m_largeurPx + m_calculTaille.x);
+//        modif.y = (float) ((p_Coord.getY() * m_calculTaille.height) / m_hauteurPx + m_calculTaille.y);
+//        
+//        //arrondir
+//        modif.x = ((int)(p_Coord.getX() / m_distanceEntrePts + 0.5)) * m_distanceEntrePts; 
+//        modif.y = ((int)(p_Coord.getY() / m_distanceEntrePts + 0.5)) * m_distanceEntrePts;
+//        
+//        return modif;
+//    }
     
     public List<Joueur> getListeJoueur(){
         return m_ListeJoueur;

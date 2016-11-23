@@ -108,6 +108,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Label testDimensionY;
     @FXML public static Stage primaryStage;
     private String m_equipe;
+    private int m_nbEquipeMax;
     
     //@FXML private 
     
@@ -188,7 +189,7 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
     public void setNombreEquipeInterface(int nombreEquipe){
-        //TODO
+        m_nbEquipeMax = nombreEquipe;
     }
     
     public void setDimensionTerrain(int X, int Y){
@@ -361,17 +362,64 @@ public class Interface_image_par_imageController implements Initializable {
                     while(iterateur.hasNext())
                     {
                         Equipe equipe = iterateur.next();
-                        if(equipe.estMemeNom(m_equipe)){
-                            Color couleurEquipe = equipe.getCouleur();
-                            GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                            gc.setFill(couleurEquipe);
-                            gc.fillOval(event.getX(),event.getY(),20,20);
-                            
+                        if(cbJoueurMax.isSelected())
+                        {
+                            if(!txtJoueurMax.getText().matches("^[1-9][0-9]*$"))
+                            {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Information");
+                                alert.setHeaderText("Information sur la création de joueur!");
+                                alert.setContentText("Le nombre de joueur maximum par équipe doit être un nombre entier (qui ne commence pas par 0)!");
+                                alert.showAndWait();
+                            }
+                            else
+                            {
+                                int i = Integer.parseInt(txtJoueurMax.getText());
+                                if(equipe.getList_joueurs().size() <= i )
+                                {
+                                    float x = (float) event.getX();
+                                    float y = (float) event.getY();
+
+                                    Point2D.Float p = new Point2D.Float(x,y);
+
+                                    if(equipe.estMemeNom(m_equipe)){
+                                        if(!m_controller.joueurEstPresent(p))
+                                        {
+                                            Color couleurEquipe = equipe.getCouleur();
+                                            GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                                            gc.setFill(couleurEquipe);
+                                            gc.fillOval(event.getX(),event.getY(),20,20);
+                                            m_controller.addJoueur(p, color);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Information");
+                                    alert.setHeaderText("Information sur la création de joueur!");
+                                    alert.setContentText("Le nombre de joueur est égale ou suppérieur à la limite configurer!");
+                                    alert.showAndWait();
+                                }
+                            }
+                        }
+                        else
+                        {
                             float x = (float) event.getX();
                             float y = (float) event.getY();
-                            
+
                             Point2D.Float p = new Point2D.Float(x,y);
-                            m_controller.addJoueur(p, color);
+                            
+                            if(equipe.estMemeNom(m_equipe)){
+                                if(!m_controller.joueurEstPresent(p))
+                                {
+                                    Color couleurEquipe = equipe.getCouleur();
+                                    GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                                    gc.setFill(couleurEquipe);
+                                    gc.fillOval(event.getX(),event.getY(),20,20);
+                                    m_controller.addJoueur(p, color);
+                                }
+                            }
                         }
                     } 
                    }  
@@ -501,16 +549,27 @@ public class Interface_image_par_imageController implements Initializable {
    
    @FXML
     public void ajouterEquipeAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_creerEquipe.fxml"));
-        Parent parent = (Parent) fxmlLoader.load();
-        
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        
-        Interface_creerEquipeController controller = fxmlLoader.<Interface_creerEquipeController>getController();
-        controller.initialize(this);
-        stage.show();
+        if(m_controller.getListEquipe().size() == m_nbEquipeMax)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information sur la création des équipes");
+            alert.setContentText("Vous avez atteint la limite du nombre d'équipe");
+            alert.showAndWait();
+        }
+        else
+        {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_creerEquipe.fxml"));
+            Parent parent = (Parent) fxmlLoader.load();
+
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+
+            Interface_creerEquipeController controller = fxmlLoader.<Interface_creerEquipeController>getController();
+            controller.initialize(this);
+            stage.show();
+        }
     }
 
 

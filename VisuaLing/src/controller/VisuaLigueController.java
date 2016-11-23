@@ -55,4 +55,8 @@ public class VisuaLigueController implements java.io.Serializable{
     {
         m_surfaceJeu.addJoueur(p_coordJoueur, p_colorChandail);
     }
+    
+    public boolean joueurEstPresent(Point2D.Float p_joueur){
+        return m_surfaceJeu.joueurEstPresent(p_joueur);
+    }
 }
