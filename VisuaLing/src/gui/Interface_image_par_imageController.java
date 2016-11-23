@@ -109,6 +109,8 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML public static Stage primaryStage;
     private String m_equipe;
     private int m_nbEquipeMax;
+    private double m_x;
+    private double m_y;
     
     //@FXML private 
     
@@ -130,11 +132,13 @@ public class Interface_image_par_imageController implements Initializable {
     
     
    public void getX(String dimensionX){
-     testDimensionX.setText(dimensionX);  
+     testDimensionX.setText(dimensionX); 
+     m_x = Double.parseDouble(dimensionX);
      
    }
    public void getY(String dimensionY){
     testDimensionY.setText(dimensionY);
+    m_y = Double.parseDouble(dimensionY);
    }
     public void nouveauSportAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
@@ -192,25 +196,29 @@ public class Interface_image_par_imageController implements Initializable {
         m_nbEquipeMax = nombreEquipe;
     }
     
-    public void setDimensionTerrain(int X, int Y){
-        //TODO
-    }
-    
-        //Accèdre au module parcourir image
+    //Accèdre au module parcourir image
     @FXML
-      public void bouton_ChangerSports (ActionEvent event)throws IOException {
-        Stage window = (Stage) menuBarSport.getScene().getWindow();
-           FileChooser fileChooser = new FileChooser();
-           fileChooser.setTitle("Choisir une image");
-           fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Fichier image", "*.png", "*.jpg"));
-           
-           File selectedFile = fileChooser.showOpenDialog(window);
-           if (selectedFile != null) {
-               String path = selectedFile.getPath();
-               imagePath = path;
-               setImageInterface(path);
-           }
-      }
+    public void bouton_ChangerSports (ActionEvent event)throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_ModifierSports.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+
+        Interface_ModifierSportsController controller = fxmlLoader.<Interface_ModifierSportsController>getController();
+        Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+        String title = currentStage.getTitle();
+        title = title.replaceAll(" - mode Image par Image", "");
+        controller.setTitle(title);
+        controller.setNombreEquipe(m_nbEquipeMax);
+        controller.setX(m_x);
+        controller.setY(m_y);
+        controller.setImagePath(imagePath);
+        controller.initialize(this);
+        stage.show();
+
+    }
       
     @FXML
     public void bouton_changerMode (ActionEvent event)throws IOException {
@@ -570,6 +578,13 @@ public class Interface_image_par_imageController implements Initializable {
             controller.initialize(this);
             stage.show();
         }
+    }
+    
+    @FXML
+    public void setTitle(String p_title)
+    {
+        Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+        currentStage.setTitle(p_title);
     }
 
 

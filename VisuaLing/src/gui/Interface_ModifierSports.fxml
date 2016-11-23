@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="289.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_ModifierSportsController">
+   <children>
+      <Label layoutX="48.0" layoutY="14.0" prefHeight="70.0" prefWidth="514.0" text="Paramètres de sports">
+         <font>
+            <Font name="Calibri Light" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="93.0" text="Nom sport:" />
+      <Label layoutX="44.0" layoutY="134.0" text="Nombre d'équipe:" />
+      <Label layoutX="44.0" layoutY="169.0" text="Dimensions:" />
+      <Label layoutX="44.0" layoutY="207.0" text="Image surface:" />
+      <Label fx:id="lblCheminImage" layoutX="140.0" layoutY="207.0" prefHeight="17.0" prefWidth="230.0" text="src/Photo/^28C212DFD9632524D061D9D53482CD908188A15004C1096E60^pimgpsh_mobile_save_distr.jpg" />
+      <TextField fx:id="txtNomIPI" layoutX="109.0" layoutY="89.0" prefHeight="25.0" prefWidth="346.0" promptText="Veuillez entrer le nom du sport" />
+      <TextField fx:id="txtNbEquipe" layoutX="148.0" layoutY="130.0" prefHeight="25.0" prefWidth="77.0" />
+      <Label layoutX="151.0" layoutY="169.0" text="X:" />
+      <Label layoutX="322.0" layoutY="169.0" text="Y:" />
+      <TextField fx:id="txtDimensionX" layoutX="173.0" layoutY="165.0" prefHeight="25.0" prefWidth="43.0" />
+      <TextField fx:id="txtDimensionY" layoutX="346.0" layoutY="165.0" prefHeight="25.0" prefWidth="43.0" />
+      <Label layoutX="223.0" layoutY="169.0" text="m" />
+      <Label layoutX="396.0" layoutY="169.0" text="m" />
+      <Button fx:id="btnModifier" layoutX="57.0" layoutY="242.0" mnemonicParsing="false" onAction="#bouton_ModifierAction" prefHeight="25.0" prefWidth="86.0" text="Modifier" />
+      <Button fx:id="btnAnnuler" layoutX="256.0" layoutY="242.0" mnemonicParsing="false" onAction="#bouton_AnnluerAction" prefHeight="25.0" prefWidth="86.0" text="Annuler" />
+      <Button fx:id="btnParcourir" layoutX="402.0" layoutY="203.0" mnemonicParsing="false" onAction="#bouton_parcourirAction" prefHeight="25.0" prefWidth="86.0" text="Parcourir" />
+   </children>
+</AnchorPane>
