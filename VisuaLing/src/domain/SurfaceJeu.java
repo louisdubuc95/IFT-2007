@@ -22,7 +22,9 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -231,14 +233,14 @@ public class SurfaceJeu {
     
     public void setImageSurface(String p_pathImage)
     {   
-        BufferedImage img = null;
         try {
-            img = ImageIO.read(getClass().getResource(p_pathImage));
-        } catch (IOException ex) {
+            File imageFile = new File(p_pathImage);
+            String imagepath = imageFile.toURI().toURL().toString();
+            Image image = new Image(imagepath);
+            m_imgFond = image;
+        } catch (MalformedURLException ex) {
             Logger.getLogger(SurfaceJeu.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        if(img!=null)
-//            m_imgFond= img.getScaledInstance(m_largeurPx, m_hauteurPx, );      
     }
     
      public void Dessiner(Canvas p_graphics)

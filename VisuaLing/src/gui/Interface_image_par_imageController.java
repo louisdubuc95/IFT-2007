@@ -172,7 +172,7 @@ public class Interface_image_par_imageController implements Initializable {
         imagePath = imageSurface;
         
         try {
-            if(!imageSurface.equals("chemin"))
+            if(!imageSurface.equals("src/Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg"))
             {
                 File imageFile = new File(imageSurface);
                 if (imageFile.exists()) {
@@ -180,12 +180,13 @@ public class Interface_image_par_imageController implements Initializable {
                     String imagepath = imageFile.toURI().toURL().toString();
                     Image image = new Image(imagepath);
                     imgsurface.setImage(image);
-                    //m_controller.setImageSurface(imagePath);
+                    m_controller.setImageSurface(imagePath);
+                    System.out.println("TEST");
                 }
             }
             else
             {
-                //m_controller.setImageSurface("src/Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg");
+                m_controller.setImageSurface("src/Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg");
             }
         } catch (MalformedURLException ex) {
             Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -382,8 +383,7 @@ public class Interface_image_par_imageController implements Initializable {
                             }
                             else
                             {
-                                int i = Integer.parseInt(txtJoueurMax.getText());
-                                if(equipe.getList_joueurs().size() <= i )
+                                if(equipe.getList_joueurs().size() <= Integer.parseInt(txtJoueurMax.getText()) )
                                 {
                                     float x = (float) event.getX();
                                     float y = (float) event.getY();
