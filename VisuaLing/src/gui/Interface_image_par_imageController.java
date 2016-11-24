@@ -179,7 +179,6 @@ public class Interface_image_par_imageController implements Initializable {
             {
                 File imageFile = new File(imageSurface);
                 if (imageFile.exists()) {
-
                     String imagepath = imageFile.toURI().toURL().toString();
                     Image image = new Image(imagepath);
                     imgsurface.setImage(image);
@@ -433,7 +432,7 @@ public class Interface_image_par_imageController implements Initializable {
                                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                         alert.setTitle("Information");
                                         alert.setHeaderText("Information sur la création de joueur!");
-                                        alert.setContentText("Le nombre de joueur est égale ou suppérieur à la limite configurer!");
+                                        alert.setContentText("Le nombre de joueur dans cet équipe est égale ou suppérieur à la limite configurer!");
                                         alert.showAndWait();
                                     }
                                 }

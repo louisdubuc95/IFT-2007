@@ -5,6 +5,8 @@
  */
 package gui;
 
+import controller.VisuaLigueController;
+import domain.Enregistrement;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,6 +24,8 @@ public class Interface_SauvegardeController implements Initializable {
     @FXML Button boutonAnnuler;
     @FXML Button boutonSauvegarder;
     @FXML Button boutonExporter;
+    
+    private Enregistrement m_Enregistrement = new Enregistrement();
     /**
      * Initializes the controller class.
      */
@@ -38,8 +42,15 @@ public class Interface_SauvegardeController implements Initializable {
     
     @FXML
     public void boutonExporterAction(ActionEvent event) {
-          Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
-          stage.close();
-    } 
+        Stage stage = (Stage) boutonExporter.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML
+    public void boutonEnregistrerAction(ActionEvent even){
+        m_Enregistrement.serialize();
+        Stage stage = (Stage) boutonSauvegarder.getScene().getWindow();
+        stage.close();
+    }
     
 }
