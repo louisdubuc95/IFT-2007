@@ -37,6 +37,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 /**
  * FXML Controller class
@@ -110,7 +111,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
             alert.showAndWait();
           }
           else
-              if(!txtDimensionX.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$") && !txtDimensionY.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$") )
+              if(!txtDimensionX.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$"))
               {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
@@ -118,41 +119,49 @@ public class Interface_creer_sport_IPIController implements Initializable {
                 alert.setContentText("Les dimensions doivent être des nombre décimaux (4 décimal après la virgule maximum)!");
                 alert.showAndWait();
               }
-                else
-                {
-                    //Appel la classe qui set l'image
-                    IPIController.setImageInterface(lblCheminImage.getText());
-                    
-                    int i = Integer.parseInt(txtNbEquipe.getText());
-                    IPIController.setNombreEquipeInterface(i);
-                    
-                    IPIController.getX(txtDimensionX.getText());
-                    IPIController.getY(txtDimensionY.getText());
-
-                    //Sauvegarde sport dans fichier .txt
-                    try
+              else
+                if(!txtDimensionY.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$")){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Information sur la création du sports");
+                    alert.setContentText("Les dimensions doivent être des nombre décimaux (4 décimal après la virgule maximum)!");
+                    alert.showAndWait();
+                }
+                    else
                     {
-                        // Create file 
-                        File file = new File("src/SavedSports/ImageParImage/"+txtNomIPI.getText()+".txt");
-                        FileWriter fstream = new FileWriter(file);
-                        BufferedWriter out = new BufferedWriter(fstream);
-                        out.write(txtNomIPI.getText()+","+txtNbEquipe.getText()+","+txtDimensionX.getText()+","+
-                                txtDimensionY.getText()+","+lblCheminImage.getText());
-                        //Close the output stream
-                        out.close();
-                    }
+                        //Appel la classe qui set l'image
+                        IPIController.setImageInterface(lblCheminImage.getText());
 
-                    catch (Exception e){//Catch exception if any
-                        System.err.println("Impossible de sauvegarder le sport: " + e.getMessage());
+                        int i = Integer.parseInt(txtNbEquipe.getText());
+                        IPIController.setNombreEquipeInterface(i);
+
+                        IPIController.getX(txtDimensionX.getText());
+                        IPIController.getY(txtDimensionY.getText());
+
+                        //Sauvegarde sport dans fichier .txt
+                        try
+                        {
+                            // Create file 
+                            File file = new File("src/SavedSports/ImageParImage/"+txtNomIPI.getText()+".txt");
+                            FileWriter fstream = new FileWriter(file);
+                            BufferedWriter out = new BufferedWriter(fstream);
+                            out.write(txtNomIPI.getText()+","+txtNbEquipe.getText()+","+txtDimensionX.getText()+","+
+                                    txtDimensionY.getText()+","+lblCheminImage.getText());
+                            //Close the output stream
+                            out.close();
                         }
 
-                    //Show la nouvelle window
-                    stage.show();
+                        catch (Exception e){//Catch exception if any
+                            System.err.println("Impossible de sauvegarder le sport: " + e.getMessage());
+                            }
 
-                    //Ferme le window actuel
-                    stage = (Stage) boutonCreerSportsIPI.getScene().getWindow();
-                    stage.close();
-                }
+                        //Show la nouvelle window
+                        stage.show();
+
+                        //Ferme le window actuel
+                        stage = (Stage) boutonCreerSportsIPI.getScene().getWindow();
+                        stage.close();
+                    }
       }
     
     //Accèdre au module parcourir image
