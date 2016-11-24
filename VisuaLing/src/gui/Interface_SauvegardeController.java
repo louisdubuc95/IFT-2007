@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -24,14 +25,20 @@ public class Interface_SauvegardeController implements Initializable {
     @FXML Button boutonAnnuler;
     @FXML Button boutonSauvegarder;
     @FXML Button boutonExporter;
+    @FXML Button boutonCharger;
+    @FXML TextField txtNomSauvegarde;
     
-    private Enregistrement m_Enregistrement = new Enregistrement();
+    private Interface_image_par_imageController m_parentController;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }
+
+    public void initialize(Interface_image_par_imageController p_controller) {
+       m_parentController = p_controller;
     }
     
     @FXML
@@ -48,9 +55,8 @@ public class Interface_SauvegardeController implements Initializable {
     
     @FXML
     public void boutonEnregistrerAction(ActionEvent even){
-        m_Enregistrement.serialize();
+        m_parentController.m_enregistrement.serialize(txtNomSauvegarde.getText());
         Stage stage = (Stage) boutonSauvegarder.getScene().getWindow();
         stage.close();
     }
-    
 }

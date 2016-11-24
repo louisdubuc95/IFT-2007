@@ -6,6 +6,7 @@
 package gui;
 
 import controller.VisuaLigueController;
+import domain.Enregistrement;
 import domain.equipe.Equipe;
 import domain.joueur.Joueur;
 import java.awt.Point;
@@ -123,6 +124,7 @@ public class Interface_image_par_imageController implements Initializable {
     
      //instance du controller de Larman
     public VisuaLigueController m_controller = new VisuaLigueController();
+    public Enregistrement m_enregistrement = new Enregistrement();
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -384,13 +386,17 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML
     private void sauvegarderAction(ActionEvent event) throws IOException {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_Sauvegarde.fxml"));
-          Stage stage = new Stage(StageStyle.DECORATED);
-          stage.setTitle("Sauvegarder");
-          stage.setScene(new Scene((AnchorPane) loader.load()));
-          
-          //Show la nouvelle window
-          stage.show();
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_Sauvegarde.fxml"));
+            Parent parent = (Parent) fxmlLoader.load();
+
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+            stage.setTitle("Sauvegarde");
+
+            Interface_SauvegardeController controllerSauvegarde = fxmlLoader.<Interface_SauvegardeController>getController();
+            controllerSauvegarde.initialize(this);
+            stage.show();
     }
     
     @FXML 
