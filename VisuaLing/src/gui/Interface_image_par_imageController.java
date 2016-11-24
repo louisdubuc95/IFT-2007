@@ -109,6 +109,9 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Label testDimensionY;
     @FXML public static Stage primaryStage;
     private String m_equipe;
+    private String m_role;
+    private String m_position;
+    private float m_orientation;
     private int m_nbEquipeMax;
     private double m_x;
     private double m_y;
@@ -260,39 +263,40 @@ public class Interface_image_par_imageController implements Initializable {
         List<Equipe> listeEquipe = m_controller.getListEquipe();
         if(!listeEquipe.isEmpty())
         {
-            Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
-            Parent parent = (Parent) fxmlLoader.load();
-
+            List<String> ListeRoles = m_controller.getListeRole();
+            List<String> ListePositions = m_controller.getListePosition();
+            Stage stage = new Stage(StageStyle.DECORATED);
+            FXMLLoader loader ;
+            loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
+            Parent parent = (Parent) loader.load();
             Scene scene = new Scene(parent);
+            stage.setTitle("Ajout Joueur");
             stage.setScene(scene);
+            Interface_CreerJoueurController CreerJoueurController = loader.<Interface_CreerJoueurController>getController();
+            CreerJoueurController.initialize(this);
 
-            Interface_CreerJoueurController controller = fxmlLoader.<Interface_CreerJoueurController>getController();
-            controller.initialize(this);
-            stage.show();
+            if (boutonAjouterJoueur.isSelected()){
+              CreerJoueurController.setListeEquipe(listeEquipe);
+              CreerJoueurController.setListRole(ListeRoles);
+              CreerJoueurController.setListPosition(ListePositions);
 
-//            if (boutonAjouterJoueur.isSelected()){
-//              //CreerJoueurController.setListeEquipe(listeEquipe);
-//              //CreerJoueurController.setListRole(listeRoles);
-//
-//              //Fonction qui bloque les window deriere la nouvelle
-//              Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
-//              stage.initModality(Modality.WINDOW_MODAL);
-//              stage.initOwner(currentStage);
-//
-//              stage.show();
-//              boutonObjectif.setDisable(true);
-//              boutonAjouterObstacle.setDisable(true);
-//              
-//            }
-//            if (!boutonAjouterJoueur.isSelected()){
-//               boutonObjectif.setDisable(false);
-//               boutonAjouterObstacle.setDisable(false);
-//            } 
+              //Fonction qui bloque les window deriere la nouvelle
+              Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+              stage.initModality(Modality.WINDOW_MODAL);
+              stage.initOwner(currentStage);
+
+              stage.show();
+              boutonObjectif.setDisable(true);
+              boutonAjouterObstacle.setDisable(true);
+              
+            }
+            if (!boutonAjouterJoueur.isSelected()){
+               boutonObjectif.setDisable(false);
+               boutonAjouterObstacle.setDisable(false);
+            } 
         }
         else
         {
-            
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText("Information sur la création de joueur");
@@ -426,7 +430,7 @@ public class Interface_image_par_imageController implements Initializable {
                                                 GraphicsContext gc = canevasInterface.getGraphicsContext2D();
                                                 gc.setFill(couleurEquipe);
                                                 gc.fillOval(event.getX(),event.getY(),20,20);
-                                                m_controller.addJoueur(p, color);
+                                                m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
                                             }
                                     }
                                     else
@@ -454,7 +458,7 @@ public class Interface_image_par_imageController implements Initializable {
                                     GraphicsContext gc = canevasInterface.getGraphicsContext2D();
                                     gc.setFill(couleurEquipe);
                                     gc.fillOval(event.getX(),event.getY(),20,20);
-                                    m_controller.addJoueur(p, color);
+                                    m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
                                 }
                             }
                         }
@@ -468,6 +472,18 @@ public class Interface_image_par_imageController implements Initializable {
     //@FXML
     public void setEquipe(String p_equipe) {
         m_equipe= p_equipe;
+    }
+    
+    public void setRole(String p_role) {
+        m_role= p_role;
+    }
+    
+    public void setPosition(String p_position) {
+        m_position = p_position;
+    }
+    
+    public void setOrientation(float p_orientation) {
+        m_orientation = p_orientation;
     }
     
     @FXML

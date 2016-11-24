@@ -91,9 +91,7 @@ public class Interface_CreerJoueurController implements Initializable {
     public void initialize(Interface_image_par_imageController controller) {
         parentController = controller;
         m_controller = parentController.m_controller;
-        setListRole();
-        setListPosition();
-        setListeEquipe();
+        txtOrientation.setText("0");
     }
     
     @FXML
@@ -103,46 +101,51 @@ public class Interface_CreerJoueurController implements Initializable {
     } 
 
     @FXML
-    public void setListRole()
+    public void setListRole(List<String> p_listeRole)
     {
-        listeRoles = parentController.m_controller.getListeRole();
+        listeRoles = p_listeRole;
         if(!(listeRoles.isEmpty()))
         {
             ObservableList<String> OlisteRoles = FXCollections.observableList(listeRoles);
             cbRole.getItems().addAll(OlisteRoles);
-        } 
+            cbRole.getSelectionModel().selectFirst();
+        }
     }
     
     @FXML
-    public void setListPosition()
+    public void setListPosition(List<String> p_listePosition)
     {
-        listePositions = parentController.m_controller.getListePosition();
+        listePositions = p_listePosition;
         if(!(listePositions.isEmpty()))
         {
             ObservableList<String> OlisteRoles = FXCollections.observableList(listePositions);
             cbPosition.getItems().addAll(OlisteRoles);
+            cbPosition.getSelectionModel().selectFirst();
         } 
     }
     
     @FXML 
-    public void setListeEquipe() {
-        Iterator<Equipe> iterateur = listeEquipe.iterator();
+    public void setListeEquipe(List<Equipe> p_listeEquipe) throws UnsupportedEncodingException {
+        Iterator<Equipe> iterateur = p_listeEquipe.iterator();
         while(iterateur.hasNext())
         {
             Equipe equipe = iterateur.next();
             String nomEquipe = equipe.getNom();
             cbEquipe.getItems().add(nomEquipe);
-        } 
+        }
+        cbEquipe.getSelectionModel().selectFirst();
     }
     
     public void addRoleComboBox(String role)
     {
         cbRole.getItems().add(role);
+        cbRole.getSelectionModel().selectFirst();
     }
     
     public void addPositionComboBox(String position)
     {
         cbPosition.getItems().add(position);
+        cbPosition.getSelectionModel().selectFirst();
     }
     
     @FXML
@@ -174,53 +177,56 @@ public class Interface_CreerJoueurController implements Initializable {
     }
     
     @FXML
-    public void setTextinField(ActionEvent e)
-    {
-//        if(!rolePreceCrees.getValue().equals(""));
-//        {
-//            String roleSelect = rolePreceCrees.getSelectionModel().getSelectedItem().toString();
-//            txtRole.setText(roleSelect);
-//        }
-    }
-    
-    
-    
-//    @FXML 
-//    public void setListeEquipe(List<Equipe> p_listeEquipe) throws UnsupportedEncodingException{
-//        Iterator<Equipe> iterateur = p_listeEquipe.iterator();
-//        while(iterateur.hasNext())
-//        {
-//            Equipe equipe = iterateur.next();
-//            String nomEquipe = equipe.getNom();
-//            cbEquipe.getItems().addAll(nomEquipe);
-//            cbEquipe.getSelectionModel().selectLast();
-//        } 
-//    }
-    
-    @FXML
     public void btnEnregistrerAction(ActionEvent event) throws IOException {
-//        String equipe = cbEquipe.getSelectionModel().getSelectedItem().toString();
-//        Stage window = (Stage) btnEnregistrer.getScene().getWindow();
-//        try
-//        {
-//            parentController.setEquipe(equipe);
-//            //Ajouter role dans rolePrecedementsCrees
-//            String role = txtRole.getText();
-//            parentController.addRoleToList(role);
-//            window.close();
-//        }
-//        catch(Exception e)
-//        {
-//            String message = e.getMessage();
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Erreur");
-//            alert.setHeaderText(null);
-//            alert.setContentText(e.getMessage());
-//            alert.showAndWait();
-//        }
-//        
-
+        String role = cbRole.getSelectionModel().getSelectedItem().toString();
+        String position = cbPosition.getSelectionModel().getSelectedItem().toString();
+        String equipe = cbEquipe.getSelectionModel().getSelectedItem().toString();
+        String orientation = txtOrientation.getText();
+        float orientation_float = orientation_conversion(orientation);
+        if (orientation_float != -1000)
+        {
+            Stage window = (Stage) btnEnregistrer.getScene().getWindow();
+            try
+            {
+                parentController.setEquipe(equipe);
+                parentController.setRole(role);
+                parentController.setPosition(position);
+                parentController.setOrientation(orientation_float);
+                window.close();
+            }
+            catch(Exception e)
+            {
+                String message = e.getMessage();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        }
     }
+    
+    public float orientation_conversion(String orientation)
+    {
+        try {
+            float orientation_float = Float.parseFloat(orientation);
+            if (orientation_float < 0 || orientation_float > 360)
+                throw new Exception();
+            return orientation_float;
+        }
+        catch(Exception e)
+        {
+            String message = e.getMessage();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Vous devez entrer une orientation comprise entre 0 et 360");
+            alert.showAndWait();
+        }
+        
+        return -1000;
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {    
 
