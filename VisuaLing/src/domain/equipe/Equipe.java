@@ -30,6 +30,7 @@ public class Equipe {
         id = nbEquipes;
         this.nom = nom;
         this.couleur = couleur;
+        list_joueurs = new ArrayList();
     }
     
     // Getters

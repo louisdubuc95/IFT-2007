@@ -28,6 +28,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -85,42 +86,76 @@ public class Interface_creer_sport_TRController implements Initializable {
           Stage stage = new Stage(StageStyle.DECORATED);
           if(txtNomSportsTR.getText().trim().isEmpty())
           {
-              stage.setTitle("Sans nom - mode Temps Reel");
+              stage.setTitle("Sans nom - mode Image par Image");
           }
           else
           {
-              stage.setTitle(txtNomSportsTR.getText() + " - mode Temps Reel");
+              stage.setTitle(txtNomSportsTR.getText() + " - mode Image par Image");
           }
+          
           stage.setScene(new Scene((AnchorPane) loader.load()));
-          Interface_temps_reelController TRcontrolleur = loader.<Interface_temps_reelController>getController();
-          
-          //Appel la classe qui set l'image
-          TRcontrolleur.setImageInterface(lblCheminImage.getText());
-          
-          //Show la nouvelle window
-          stage.show();
-          
-          //Ferme le window actuel
-          stage = (Stage) boutonInterfaceTempsReel.getScene().getWindow();
-          stage.close();
+          Interface_temps_reelController TRController = loader.<Interface_temps_reelController>getController();
          
           
-          
-            //Sauvegarde sport dans fichier .txt
-            try
-            {
-                    // Create file 
-                    File file = new File("src/savedSports/TempsReel/"+txtNomSportsTR.getText()+".txt");
-                    FileWriter fstream = new FileWriter(file);
-                    BufferedWriter out = new BufferedWriter(fstream);
-                    out.write(txtNomSportsTR.getText()+","+txtNbEquipe.getText()+","+txtDimensionX.getText()+","+
-                            txtDimensionY.getText()+","+lblCheminImage.getText());
-                    //Close the output stream
-                    out.close();
+          if(!txtNbEquipe.getText().matches("^[1-9][0-9]*$"))
+          {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information sur la création du sports");
+            alert.setContentText("Le nombre d'équipe doit être un nombre entier et ne peut commencer par 0!");
+            alert.showAndWait();
+          }
+          else
+              if(!txtDimensionX.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$"))
+              {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Information sur la création du sports");
+                alert.setContentText("Les dimensions doivent être des nombre décimaux (4 décimal après la virgule maximum)!");
+                alert.showAndWait();
+              }
+              else
+                if(!txtDimensionY.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$")){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Information sur la création du sports");
+                    alert.setContentText("Les dimensions doivent être des nombre décimaux (4 décimal après la virgule maximum)!");
+                    alert.showAndWait();
                 }
+                    else
+                    {
+                        //Appel la classe qui set l'image
+                        TRController.setImageInterface(lblCheminImage.getText());
 
-            catch (Exception e){//Catch exception if any
-                    System.err.println("Impossible de sauvegarder le sport: " + e.getMessage());
+                        int i = Integer.parseInt(txtNbEquipe.getText());
+                        TRController.setNombreEquipeInterface(i);
+
+                        TRController.getX(txtDimensionX.getText());
+                        TRController.getY(txtDimensionY.getText());
+
+                        //Sauvegarde sport dans fichier .txt
+                        try
+                        {
+                            // Create file 
+                            File file = new File("src/SavedSports/ImageParImage/"+txtNomSportsTR.getText()+".txt");
+                            FileWriter fstream = new FileWriter(file);
+                            BufferedWriter out = new BufferedWriter(fstream);
+                            out.write(txtNomSportsTR.getText()+","+txtNbEquipe.getText()+","+txtDimensionX.getText()+","+
+                                    txtDimensionY.getText()+","+lblCheminImage.getText());
+                            //Close the output stream
+                            out.close();
+                        }
+
+                        catch (Exception e){//Catch exception if any
+                            System.err.println("Impossible de sauvegarder le sport: " + e.getMessage());
+                            }
+
+                        //Show la nouvelle window
+                        stage.show();
+
+                        //Ferme le window actuel
+                        stage = (Stage) boutonChargerSportTR.getScene().getWindow();
+                        stage.close();
                     }
     }
     
@@ -272,4 +307,12 @@ public class Interface_creer_sport_TRController implements Initializable {
         afficherSauvegardes();
     }    
     
+    public void getTxtDimensionX() {
+        txtDimensionX.getText();
+        
+    }
+    public void getTxtDimensionY() {
+        txtDimensionY.getText();
+        
+    }
 }

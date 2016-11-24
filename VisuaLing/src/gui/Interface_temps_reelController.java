@@ -74,13 +74,34 @@ public class Interface_temps_reelController implements Initializable {
     
     @FXML private Color color;
     
+    private int m_nbEquipeMax;
+    private double m_x;
+    private double m_y;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-    }    
+    }  
+    
+    @FXML
+    public void getX(String dimensionX){
+        //testDimensionX.setText(dimensionX); 
+        m_x = Double.parseDouble(dimensionX); 
+    }
+    
+    @FXML
+    public void getY(String dimensionY){
+        //testDimensionY.setText(dimensionY);
+        m_y = Double.parseDouble(dimensionY);
+    }
+    
+    @FXML
+    public void setNombreEquipeInterface(int nombreEquipe){
+        m_nbEquipeMax = nombreEquipe;
+    }
     
     @FXML
     public void setImageInterface(String imageSurface) {
