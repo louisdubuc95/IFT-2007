@@ -213,6 +213,8 @@ public class Interface_image_par_imageController implements Initializable {
 
         Interface_ModifierSportsController controller = fxmlLoader.<Interface_ModifierSportsController>getController();
         Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(currentStage);
         String title = currentStage.getTitle();
         title = title.replaceAll(" - mode Image par Image", "");
         controller.setTitle(title);
@@ -387,31 +389,32 @@ public class Interface_image_par_imageController implements Initializable {
                             }
                             else
                             {
-                                if(equipe.getList_joueurs().size() <= Integer.parseInt(txtJoueurMax.getText()) )
-                                {
-                                    float x = (float) event.getX();
-                                    float y = (float) event.getY();
+                                if(equipe.estMemeNom(m_equipe)){
+                                    if(equipe.getList_joueurs().size() <= Integer.parseInt(txtJoueurMax.getText()) )
+                                    {
+                                        float x = (float) event.getX();
+                                        float y = (float) event.getY();
 
-                                    Point2D.Float p = new Point2D.Float(x,y);
+                                        Point2D.Float p = new Point2D.Float(x,y);
 
-                                    if(equipe.estMemeNom(m_equipe)){
-                                        if(!m_controller.joueurEstPresent(p))
-                                        {
-                                            Color couleurEquipe = equipe.getCouleur();
-                                            GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                                            gc.setFill(couleurEquipe);
-                                            gc.fillOval(event.getX(),event.getY(),20,20);
-                                            m_controller.addJoueur(p, color);
-                                        }
+                                    
+                                            if(!m_controller.joueurEstPresent(p))
+                                            {
+                                                Color couleurEquipe = equipe.getCouleur();
+                                                GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                                                gc.setFill(couleurEquipe);
+                                                gc.fillOval(event.getX(),event.getY(),20,20);
+                                                m_controller.addJoueur(p, color);
+                                            }
                                     }
-                                }
-                                else
-                                {
-                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                    alert.setTitle("Information");
-                                    alert.setHeaderText("Information sur la création de joueur!");
-                                    alert.setContentText("Le nombre de joueur est égale ou suppérieur à la limite configurer!");
-                                    alert.showAndWait();
+                                    else
+                                    {
+                                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                        alert.setTitle("Information");
+                                        alert.setHeaderText("Information sur la création de joueur!");
+                                        alert.setContentText("Le nombre de joueur est égale ou suppérieur à la limite configurer!");
+                                        alert.showAndWait();
+                                    }
                                 }
                             }
                         }
