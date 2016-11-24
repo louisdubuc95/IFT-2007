@@ -7,6 +7,7 @@ package gui;
 
 import controller.VisuaLigueController;
 import domain.equipe.Equipe;
+import domain.joueur.Joueur;
 import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
@@ -430,6 +431,9 @@ public class Interface_image_par_imageController implements Initializable {
                                                 gc.setFill(couleurEquipe);
                                                 gc.fillOval(event.getX(),event.getY(),20,20);
                                                 m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
+                                                List<Joueur> liste_joueurs = m_controller.getListJoueurs();
+                                                Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
+                                                dernierJoueur.getEquipe().addJoueur(dernierJoueur);
                                             }
                                     }
                                     else
@@ -458,6 +462,10 @@ public class Interface_image_par_imageController implements Initializable {
                                     gc.setFill(couleurEquipe);
                                     gc.fillOval(event.getX(),event.getY(),20,20);
                                     m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
+                                    List<Joueur> liste_joueurs = m_controller.getListJoueurs();
+                                    Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
+                                    Equipe equipe_joueur = dernierJoueur.getEquipe();
+                                    equipe_joueur.addJoueur(dernierJoueur);
                                 }
                             }
                         }

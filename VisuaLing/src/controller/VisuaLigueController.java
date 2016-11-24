@@ -79,4 +79,9 @@ public class VisuaLigueController implements java.io.Serializable{
     {
         return m_surfaceJeu.getListePosition();
     }
+    
+    public List<Joueur> getListJoueurs()
+    {
+        return m_surfaceJeu.getListeJoueur();
+    }
 }
