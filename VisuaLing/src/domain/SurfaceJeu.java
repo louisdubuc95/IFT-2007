@@ -54,6 +54,8 @@ public class SurfaceJeu {
     private List<Obstacle> m_ListeObstacle;
     private List<Objectif> m_ListeObjectifs;
     private List<Equipe> m_ListeEquipes;
+    private List<String> m_ListeRole;
+    private List<String> m_ListePosition;
     private Image m_imgFond;
     private boolean m_Etat;
     private int m_Temps;
@@ -66,7 +68,7 @@ public class SurfaceJeu {
     private Joueur m_joueur;
     private Obstacle m_obstacle;
     private Objectif m_objectif;
-    private Equipe m_equipe;
+    //private Equipe m_equipe;
     
     
     public SurfaceJeu()
@@ -225,7 +227,40 @@ public class SurfaceJeu {
         }
         m_ListeEquipes.add(new Equipe(nom,couleur));
     }
-
+    
+    public void addRole(String role) throws Exception
+    {
+        if (m_ListeRole.contains(role))
+        {
+            throw new Exception("Ce rôle existe déjà");
+        }
+        else
+        {
+            m_ListeRole.add(role);
+        }
+    }
+    
+    public List<String> getListeRole()
+    {
+        return m_ListeRole;
+    }
+    
+    public void addPosition(String position) throws Exception
+    {
+        if (m_ListeRole.contains(position))
+        {
+            throw new Exception("Cette position existe déjà");
+        }
+        else
+        {
+            m_ListeRole.add(position);
+        }
+    }
+    
+    public List<String> getListePosition()
+    {
+        return m_ListePosition;
+    }
     
     public boolean estVide(){
         return m_Etat;

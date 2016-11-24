@@ -11,16 +11,16 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" prefHeight="455.0" prefWidth="761.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_CreerJoueurController">
+<AnchorPane fx:id="anchorPane" blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" prefHeight="446.0" prefWidth="751.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_CreerJoueurController">
       <children>
             <Label layoutX="31.0" layoutY="21.0" text="Créer un joueur">
                <font>
                   <Font name="Calibri Light" size="48.0" />
                </font>
             </Label>
-            <SplitPane layoutX="31.0" layoutY="92.0" prefHeight="324.0" prefWidth="701.0">
+            <SplitPane layoutX="31.0" layoutY="92.0" prefHeight="324.0" prefWidth="623.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="295.0" prefWidth="676.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="581.0">
                      <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -31,19 +31,18 @@
                               </ImageView>
                      </children>
                   </AnchorPane>
-                  <ComboBox fx:id="cbEquipe" layoutX="490.0" layoutY="211.0" prefHeight="27.0" prefWidth="176.0" />
-                  <Label layoutX="335.0" layoutY="175.0" prefHeight="17.0" prefWidth="93.0" text="(sur 360 degres)" />
-                  <Label layoutX="360.0" layoutY="216.0" text="Équipe :" />
-                  <TextField fx:id="txtPosition" layoutX="490.0" layoutY="108.0" prefHeight="25.0" prefWidth="176.0" />
-                  <Label layoutX="348.0" layoutY="153.0" text="Orientation :" />
-                        <Button fx:id="boutonAnnuler" layoutX="590.0" layoutY="283.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefHeight="25.0" prefWidth="76.0" text="Annuler" />
-                  <Button fx:id="boutonAccepter" layoutX="490.0" layoutY="283.0" mnemonicParsing="false" onAction="#boutonAccepterAction" prefHeight="25.0" prefWidth="76.0" text="Accepter" />
-                  <TextField fx:id="txtRole" layoutX="490.0" layoutY="15.0" prefHeight="25.0" prefWidth="176.0" />
-                  <TextField fx:id="txtOrientation" layoutX="490.0" layoutY="158.0" prefHeight="25.0" prefWidth="176.0" />
-                  <Label layoutX="332.0" layoutY="112.0" text="Position du joueur:" />
-                  <Label layoutX="340.0" layoutY="19.0" text="Role du joueur: " />
-                  <Label layoutX="302.0" layoutY="63.0" text="Rôles précédemments ajoutés:" />
-                  <ComboBox fx:id="rolePreceCrees" layoutX="490.0" layoutY="59.0" onAction="#setTextinField" prefHeight="25.0" prefWidth="176.0" />
+                  <ComboBox fx:id="cbEquipe" layoutX="367.0" layoutY="181.0" prefHeight="27.0" prefWidth="176.0" />
+                  <Label layoutX="292.0" layoutY="186.0" text="Équipe :" />
+                  <Label layoutX="248.0" layoutY="141.0" text="Orientation (°) :" />
+                        <Button fx:id="btnAnnuler" layoutX="399.0" layoutY="270.0" mnemonicParsing="false" onAction="#btnAnnulerAction" prefHeight="25.0" prefWidth="76.0" text="Annuler" />
+                  <Button fx:id="btnEnregistrer" layoutX="278.0" layoutY="270.0" mnemonicParsing="false" onAction="#btnEnregistrerAction" prefHeight="27.0" prefWidth="96.0" text="Enregistrer" />
+                  <TextField fx:id="txtOrientation" layoutX="367.0" layoutY="136.0" prefHeight="27.0" prefWidth="70.0" />
+                  <Label layoutX="286.0" layoutY="93.0" text="Position :" />
+                  <Label layoutX="308.0" layoutY="51.0" text="Rôle :" />
+                  <ComboBox fx:id="cbRole" layoutX="367.0" layoutY="47.0" onAction="#setTextinField" prefHeight="25.0" prefWidth="176.0" />
+                  <ComboBox fx:id="cbPosition" layoutX="367.0" layoutY="88.0" prefHeight="27.0" prefWidth="176.0" />
+                  <Button fx:id="btnAddRole" layoutX="554.0" layoutY="46.0" mnemonicParsing="false" onAction="#btnAddRoleAction" text="+" />
+                  <Button fx:id="btnAddPosition" layoutX="554.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnAddPositionAction" text="+" />
                      </children>
                   </AnchorPane>
               </items>
