@@ -38,6 +38,10 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javax.xml.bind.DatatypeConverter;
 import gui.Interface_image_par_imageController;
+import java.awt.event.ItemEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
@@ -60,6 +64,8 @@ public class Interface_CreerJoueurController implements Initializable {
     @FXML private TextField txtOrientation;
     
     @FXML private Point t ; 
+    
+    @FXML public List<String> listeRoles = new ArrayList<>();
     
     private Interface_image_par_imageController parentController;
     
@@ -85,6 +91,9 @@ public class Interface_CreerJoueurController implements Initializable {
         try
             {
                 parentController.setEquipe(equipe);
+              //Ajouter role dans rolePrecedementsCrees
+                String role = txtRole.getText();
+                parentController.addRoleToList(role);
                 window.close();
             }
         catch(Exception e)
@@ -97,33 +106,37 @@ public class Interface_CreerJoueurController implements Initializable {
             alert.showAndWait();
         }
         
-        //Ajouter role dans rolePrecedementsCrees
-        
-        
-        
-        String role = txtRole.getText();
-        boolean present = false;
-        
-        for (String item : parentController.listeRoles) {
-            if(item.equals(role))
-            {
-                present = true;
-            }           
-        }
-        if(false == present)
-        {        
-            parentController.listeRoles.add(role);
-
-        }
-      
     }
+    
+
+    @FXML
+    public void setListRole(List<String> p_listeRole)
+    {
+        listeRoles= p_listeRole;
+        if(listeRoles.isEmpty())
+        {
+        } 
+        else {
+            ObservableList<String> OlisteRoles = FXCollections.observableList(listeRoles);
+            rolePreceCrees.getItems().addAll(OlisteRoles);
+        }
+
+    }
+    
+    
+      
     
     @FXML
     public void setTextinField(ActionEvent e)
     {
-        String roleSelect = rolePreceCrees.getSelectionModel().getSelectedItem().toString();
-        txtRole.setText(roleSelect);
+        if(!rolePreceCrees.getValue().equals(""));
+        {
+            String roleSelect = rolePreceCrees.getSelectionModel().getSelectedItem().toString();
+            txtRole.setText(roleSelect);
+        }
     }
+    
+    
     
     @FXML 
     public void setListeEquipe(List<Equipe> p_listeEquipe) throws UnsupportedEncodingException{
@@ -137,14 +150,7 @@ public class Interface_CreerJoueurController implements Initializable {
         } 
     }
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        if(parentController.listeRoles.isEmpty())
-        {
-        } 
-        else {
-            ObservableList<String> listeRoles = FXCollections.observableList(parentController.listeRoles);
-            rolePreceCrees.getItems().addAll(listeRoles);
-        }
+    public void initialize(URL location, ResourceBundle resources) {    
 
     }
 }

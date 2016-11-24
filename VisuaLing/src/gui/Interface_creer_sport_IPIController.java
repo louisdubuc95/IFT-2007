@@ -216,12 +216,19 @@ public class Interface_creer_sport_IPIController implements Initializable {
                     BufferedReader Buff = new BufferedReader(new FileReader(file));
                     String objet = Buff.readLine();
                     String[] partiesObjet = objet.split(",");
-                    String image = partiesObjet[4];
+                    String nom = partiesObjet[0];
+                    String nbEquipe = partiesObjet[1];
                     String X = partiesObjet[2];
                     String Y = partiesObjet[3];
-                    IPIController.setImageInterface(image);
+                    String cheminImage = partiesObjet[4];
+
+                    IPIController.setImageInterface(cheminImage);
+                    IPIController.setNombreEquipeInterface(Integer.parseInt(nbEquipe));
                     IPIController.getX(X);
                     IPIController.getY(Y);
+                    
+                    
+                    
 
 
                     //Show la nouvelle window

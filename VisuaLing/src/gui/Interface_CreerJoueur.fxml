@@ -37,13 +37,13 @@
                   <TextField fx:id="txtPosition" layoutX="490.0" layoutY="108.0" prefHeight="25.0" prefWidth="176.0" />
                   <Label layoutX="348.0" layoutY="153.0" text="Orientation :" />
                         <Button fx:id="boutonAnnuler" layoutX="590.0" layoutY="283.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefHeight="25.0" prefWidth="76.0" text="Annuler" />
-                  <Button fx:id="boutonAccepter" layoutX="472.0" layoutY="283.0" mnemonicParsing="false" onAction="#boutonAccepterAction" prefHeight="25.0" prefWidth="76.0" text="Accepter" />
+                  <Button fx:id="boutonAccepter" layoutX="490.0" layoutY="283.0" mnemonicParsing="false" onAction="#boutonAccepterAction" prefHeight="25.0" prefWidth="76.0" text="Accepter" />
                   <TextField fx:id="txtRole" layoutX="490.0" layoutY="15.0" prefHeight="25.0" prefWidth="176.0" />
                   <TextField fx:id="txtOrientation" layoutX="490.0" layoutY="158.0" prefHeight="25.0" prefWidth="176.0" />
                   <Label layoutX="332.0" layoutY="112.0" text="Position du joueur:" />
                   <Label layoutX="340.0" layoutY="19.0" text="Role du joueur: " />
                   <Label layoutX="302.0" layoutY="63.0" text="Rôles précédemments ajoutés:" />
-                  <ComboBox fx:id="rolePreceCrees" layoutX="490.0" layoutY="59.0" prefHeight="25.0" prefWidth="176.0" />
+                  <ComboBox fx:id="rolePreceCrees" layoutX="490.0" layoutY="59.0" onAction="#setTextinField" prefHeight="25.0" prefWidth="176.0" />
                      </children>
                   </AnchorPane>
               </items>

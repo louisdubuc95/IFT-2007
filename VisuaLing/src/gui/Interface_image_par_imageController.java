@@ -113,7 +113,7 @@ public class Interface_image_par_imageController implements Initializable {
     private double m_x;
     private double m_y;
     
-    @FXML public List<String> listeRoles;
+    @FXML public List<String> listeRoles = new ArrayList<>();
     
     //@FXML private 
     
@@ -131,7 +131,6 @@ public class Interface_image_par_imageController implements Initializable {
     stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
     stackSurface.toBack();
     stackSurface.setAlignment(Pos.CENTER); 
-    listeRoles = new ArrayList<>();
     }
     
     
@@ -273,6 +272,7 @@ public class Interface_image_par_imageController implements Initializable {
 
             if (boutonAjouterJoueur.isSelected()){
               CreerJoueurController.setListeEquipe(listeEquipe);
+              CreerJoueurController.setListRole(listeRoles);
 
               //Fonction qui bloque les window deriere la nouvelle
               Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
@@ -282,6 +282,7 @@ public class Interface_image_par_imageController implements Initializable {
               stage.show();
               boutonObjectif.setDisable(true);
               boutonAjouterObstacle.setDisable(true);
+              
             }
             if (!boutonAjouterJoueur.isSelected()){
                boutonObjectif.setDisable(false);
@@ -290,13 +291,33 @@ public class Interface_image_par_imageController implements Initializable {
         }
         else
         {
+            
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText("Information sur la création de joueur");
             alert.setContentText("Il faut créer des équipe avant de créer des joueurs");
             alert.showAndWait();
+            boutonAjouterJoueur.setSelected(false);
         }
         
+
+        
+    }
+    
+    @FXML
+    public void addRoleToList(String Role)
+    {
+        boolean present = false;
+        for (String item : listeRoles) {
+            if(item.equals(Role))
+            {
+                present = true;
+            }           
+        }
+        if(false == present)
+        {        
+            listeRoles.add(Role);
+        }   
     }
     
     @FXML
