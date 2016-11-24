@@ -31,13 +31,12 @@ public class Enregistrement {
        this.m_version = 0;
     }
     
-    public void serialize(){
+    public void serialize(String p_nomSauvegarde){
         Class controller = VisuaLigueController.class.getClass();
         ObjectOutputStream oos = null;
-        m_version++;
         try {
-            m_listeSerialize.add("serialize" + m_version);
-            final FileOutputStream fichier = new FileOutputStream("serialize" + m_version);
+            m_listeSerialize.add("src/savedStrategies/serialize" + m_version);
+            final FileOutputStream fichier = new FileOutputStream("src/savedStrategies/"+ p_nomSauvegarde);
             oos = new ObjectOutputStream(fichier);
             oos.writeObject(controller);
             oos.flush();
@@ -56,10 +55,10 @@ public class Enregistrement {
      }
     }
     
-    public void deSerialize(String p_version){    
+    public void deSerialize(){    
         ObjectInputStream ois = null;
         try {
-            final FileInputStream fichier = new FileInputStream("p_version.ser");
+            final FileInputStream fichier = new FileInputStream("src/savedStrategies/serialize1");
             ois = new ObjectInputStream(fichier);
             final VisuaLigueController controller = (VisuaLigueController) ois.readObject();
             System.out.println("Controller : charger ");
