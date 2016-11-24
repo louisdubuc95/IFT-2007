@@ -12,20 +12,33 @@ package domain.joueur;
 import javafx.scene.paint.Color;
 import java.awt.Point; 
 import java.awt.geom.Point2D;
+import domain.equipe.Equipe;
 
 
 public class Joueur{
     
+    public static int nb_joueur = 0;
+    
     private int m_idJoueur;
     private String m_roleJoueur;
-    private int m_oriantationJoueur;
+    private String m_positionJoueur;
+    private float m_oriantationJoueur;
     private Color m_couleurChandail ; 
     private Point2D.Float m_point;
     private boolean m_enPossesion;
+    private Equipe m_equipe;
     
-    public Joueur (Point2D.Float p_point, Color p_couleurChandail){
-        this.m_point = p_point;
-        this.m_couleurChandail = p_couleurChandail;
+    
+    public Joueur (Point2D.Float p_point, Color p_couleurChandail, String p_role, String p_position, float p_orientation, Equipe p_equipe){
+        m_point = p_point;
+        m_couleurChandail = p_couleurChandail;
+        m_roleJoueur = p_role;
+        m_positionJoueur = p_position;
+        m_oriantationJoueur = p_orientation;
+        m_enPossesion = false;
+        m_equipe = p_equipe;
+        nb_joueur++;
+        m_idJoueur = nb_joueur;
     }
     
     public boolean estMemeCoord(Point2D.Float p_coordJoueur){
@@ -44,7 +57,7 @@ public class Joueur{
         return m_roleJoueur;
     }
     
-    public int getOrientationJoueur(){
+    public float getOrientationJoueur(){
         return m_oriantationJoueur;
     }
     
@@ -79,5 +92,22 @@ public class Joueur{
     public void setPossession(boolean p_enPossesion){
         m_enPossesion = p_enPossesion;
     }
+
+    public String getPositionJoueur() {
+        return m_positionJoueur;
+    }
+
+    public void setPositionJoueur(String m_positionJoueur) {
+        this.m_positionJoueur = m_positionJoueur;
+    }
+
+    public Equipe getEquipe() {
+        return m_equipe;
+    }
+
+    public void setEquipe(Equipe m_equipe) {
+        this.m_equipe = m_equipe;
+    }
+    
     
 }

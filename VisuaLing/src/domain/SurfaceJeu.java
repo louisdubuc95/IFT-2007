@@ -54,8 +54,8 @@ public class SurfaceJeu {
     private List<Obstacle> m_ListeObstacle;
     private List<Objectif> m_ListeObjectifs;
     private List<Equipe> m_ListeEquipes;
-    private List<String> m_ListeRole;
-    private List<String> m_ListePosition;
+    private List<String> m_ListeRole = new ArrayList<>();
+    private List<String> m_ListePosition = new ArrayList<>();
     private Image m_imgFond;
     private boolean m_Etat;
     private int m_Temps;
@@ -87,12 +87,12 @@ public class SurfaceJeu {
     this.m_Temps = 0;
     }
     
-    public void addJoueur(Point2D.Float p_coordJoueur, Color p_colorChandail) {
+    public void addJoueur(Point2D.Float p_point, Color p_couleurChandail, String p_role, String p_position, float p_orientation, Equipe p_equipe) {
         boolean ajouterJoueur = false;
         
-        if(joueurEstPresent(p_coordJoueur) == false)
+        if(joueurEstPresent(p_point) == false)
         {
-            m_ListeJoueur.add(new Joueur(p_coordJoueur, p_colorChandail));
+            m_ListeJoueur.add(new Joueur(p_point, p_couleurChandail, p_role, p_position, p_orientation, p_equipe));
             ajouterJoueur = true;
             m_Etat = true;
         }
@@ -247,13 +247,13 @@ public class SurfaceJeu {
     
     public void addPosition(String position) throws Exception
     {
-        if (m_ListeRole.contains(position))
+        if (m_ListePosition.contains(position))
         {
             throw new Exception("Cette position existe déjà");
         }
         else
         {
-            m_ListeRole.add(position);
+            m_ListePosition.add(position);
         }
     }
     
