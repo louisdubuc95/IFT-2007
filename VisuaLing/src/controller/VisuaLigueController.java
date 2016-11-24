@@ -59,4 +59,24 @@ public class VisuaLigueController implements java.io.Serializable{
     public boolean joueurEstPresent(Point2D.Float p_joueur){
         return m_surfaceJeu.joueurEstPresent(p_joueur);
     }
+    
+    public void addRole(String role) throws Exception
+    {
+        m_surfaceJeu.addRole(role);
+    }
+    
+    public List<String> getListeRole()
+    {
+        return m_surfaceJeu.getListeRole();
+    }
+    
+    public void addPosition(String position) throws Exception
+    {
+        m_surfaceJeu.addPosition(position);
+    }
+    
+    public List<String> getListePosition()
+    {
+        return m_surfaceJeu.getListePosition();
+    }
 }

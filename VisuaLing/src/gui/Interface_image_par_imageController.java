@@ -118,7 +118,7 @@ public class Interface_image_par_imageController implements Initializable {
     //@FXML private 
     
      //instance du controller de Larman
-     VisuaLigueController m_controller = new VisuaLigueController();
+    public VisuaLigueController m_controller = new VisuaLigueController();
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -258,34 +258,35 @@ public class Interface_image_par_imageController implements Initializable {
         List<Equipe> listeEquipe = m_controller.getListEquipe();
         if(!listeEquipe.isEmpty())
         {
-            Stage stage = new Stage(StageStyle.DECORATED);
-            FXMLLoader loader ;
-            loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
-            Parent parent = (Parent) loader.load();
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
+            Parent parent = (Parent) fxmlLoader.load();
+
             Scene scene = new Scene(parent);
-            stage.setTitle("Ajout Joueur");
             stage.setScene(scene);
-            Interface_CreerJoueurController CreerJoueurController = loader.<Interface_CreerJoueurController>getController();
-            CreerJoueurController.initialize(this);
 
-            if (boutonAjouterJoueur.isSelected()){
-              CreerJoueurController.setListeEquipe(listeEquipe);
-              CreerJoueurController.setListRole(listeRoles);
+            Interface_CreerJoueurController controller = fxmlLoader.<Interface_CreerJoueurController>getController();
+            controller.initialize(this);
+            stage.show();
 
-              //Fonction qui bloque les window deriere la nouvelle
-              Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
-              stage.initModality(Modality.WINDOW_MODAL);
-              stage.initOwner(currentStage);
-
-              stage.show();
-              boutonObjectif.setDisable(true);
-              boutonAjouterObstacle.setDisable(true);
-              
-            }
-            if (!boutonAjouterJoueur.isSelected()){
-               boutonObjectif.setDisable(false);
-               boutonAjouterObstacle.setDisable(false);
-            } 
+//            if (boutonAjouterJoueur.isSelected()){
+//              //CreerJoueurController.setListeEquipe(listeEquipe);
+//              //CreerJoueurController.setListRole(listeRoles);
+//
+//              //Fonction qui bloque les window deriere la nouvelle
+//              Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+//              stage.initModality(Modality.WINDOW_MODAL);
+//              stage.initOwner(currentStage);
+//
+//              stage.show();
+//              boutonObjectif.setDisable(true);
+//              boutonAjouterObstacle.setDisable(true);
+//              
+//            }
+//            if (!boutonAjouterJoueur.isSelected()){
+//               boutonObjectif.setDisable(false);
+//               boutonAjouterObstacle.setDisable(false);
+//            } 
         }
         else
         {

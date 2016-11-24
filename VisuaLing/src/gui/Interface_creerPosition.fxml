@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="201.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_creerPositionController">
+   <children>
+      <Label layoutX="84.0" layoutY="33.0" text="Créer une position">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="92.0" text="Nom de la position :" />
+      <TextField fx:id="txtNom" layoutX="148.0" layoutY="88.0" promptText="Entrer un nom" />
+      <Button fx:id="btnEnregistrer" layoutX="92.0" layoutY="149.0" mnemonicParsing="false" onAction="#btnEnregistrerAction" text="Enregistrer" />
+      <Button fx:id="btnAnnuler" layoutX="199.0" layoutY="149.0" mnemonicParsing="false" onAction="#btnAnnulerAction" text="Annuler" />
+   </children>
+</AnchorPane>
