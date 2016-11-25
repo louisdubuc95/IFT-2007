@@ -185,7 +185,7 @@ public class Interface_creer_sport_TRController implements Initializable {
     
     @FXML
     private void bouton_Charger (ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_temps_reel.fxml"));
 
             for(ToggleButton TB: listTB)
             {
@@ -202,7 +202,7 @@ public class Interface_creer_sport_TRController implements Initializable {
                     stage.setTitle(file.getName());
 
                     stage.setScene(new Scene((AnchorPane) loader.load()));
-                    Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
+                    Interface_temps_reelController TRController = loader.<Interface_temps_reelController>getController();
 
                     //Appel la classe qui set l'image
                     
@@ -212,10 +212,9 @@ public class Interface_creer_sport_TRController implements Initializable {
                     String image = partiesObjet[4];
                     String X = partiesObjet[2];
                     String Y = partiesObjet[3];
-                    IPIController.setImageInterface(image);
-                    IPIController.getX(X);
-                    IPIController.getY(Y);
-
+                    TRController.setImageInterface(image);
+                    TRController.getX(X);
+                    TRController.getY(Y);
 
                     //Show la nouvelle window
                     stage.show();

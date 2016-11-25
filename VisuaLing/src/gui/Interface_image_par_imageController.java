@@ -73,6 +73,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private ImageView imgSurface;
     @FXML private Button boutonQuitter ;
     @FXML private ToggleButton boutonAjouterJoueur; 
+    @FXML private Button boutonAjouterEquipe;
     @FXML private ToggleButton boutonObjectif;
    
     //@FXML private Boolean VerifAjoutJoueur = false;
@@ -103,9 +104,11 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button btnnouveauSportAction;
     @FXML private AnchorPane boiteverticale ; 
     @FXML private HBox boiteHorizontaleBouton ; 
+    @FXML private HBox boiteHorizontaleBouton2 ;
     @FXML private Button boutonTransfert ;  
     @FXML private Separator separateur1 ;
     @FXML private Separator separateur5 ;
+    @FXML private Separator separateur10;
     @FXML private Button boutonAvancer ;
     @FXML private Label testDimensionX;
     @FXML private Label testDimensionY;
@@ -131,9 +134,14 @@ public class Interface_image_par_imageController implements Initializable {
        
     menuBarSport.prefWidthProperty().bind(boiteverticale.widthProperty());
     boiteHorizontaleBouton.prefWidthProperty().bind(boiteverticale.widthProperty());
-    separateur1.prefWidthProperty().bind(boutonAjouterJoueur.widthProperty());
-    separateur5.prefWidthProperty().bind(boutonTransfert.widthProperty());
+    separateur1.prefWidthProperty().bind(boutonAjouterEquipe.widthProperty());
+    separateur5.prefWidthProperty().bind(boutonAvancer.widthProperty());
     separateur5.prefWidthProperty().bind(boiteHorizontaleBouton.widthProperty());
+    
+    /*separateur10.prefWidthProperty().bind(boutonTransfert.prefWidthProperty());
+    separateur10.prefWidthProperty().bind(boiteHorizontaleBouton2.prefWidthProperty());*/
+    
+    
     stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
     stackSurface.toBack();
     stackSurface.setAlignment(Pos.CENTER); 
