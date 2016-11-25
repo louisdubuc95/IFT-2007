@@ -82,12 +82,22 @@ public class Interface_CreerJoueurController implements Initializable {
     private List<Equipe> listeEquipe = new ArrayList<>();
     
     private Interface_image_par_imageController parentController;
+    private Interface_temps_reelController parentControllerTR;
     public VisuaLigueController m_controller;
 
     
     /**
      * Initializes the controller class.
      */
+    
+    //TR
+    public void initializeTR(Interface_temps_reelController controller) {
+        parentControllerTR = controller;
+        m_controller = parentControllerTR.m_controller;
+        txtOrientation.setText("0");
+    }
+    
+    //IPI
     public void initialize(Interface_image_par_imageController controller) {
         parentController = controller;
         m_controller = parentController.m_controller;
@@ -188,11 +198,24 @@ public class Interface_CreerJoueurController implements Initializable {
             Stage window = (Stage) btnEnregistrer.getScene().getWindow();
             try
             {
+                try{
+                    
+                
                 parentController.setEquipe(equipe);
                 parentController.setRole(role);
                 parentController.setPosition(position);
                 parentController.setOrientation(orientation_float);
                 window.close();
+                }
+                catch(NullPointerException e)
+                {
+                parentControllerTR.setEquipe(equipe);
+                parentControllerTR.setRole(role);
+                parentControllerTR.setPosition(position);
+                parentControllerTR.setOrientation(orientation_float);
+                window.close();  
+                }
+                
             }
             catch(Exception e)
             {

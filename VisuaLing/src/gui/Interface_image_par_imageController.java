@@ -157,6 +157,8 @@ public class Interface_image_par_imageController implements Initializable {
     testDimensionY.setText(dimensionY);
     m_y = Double.parseDouble(dimensionY);
    }
+   
+    @FXML
     public void nouveauSportAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
@@ -166,7 +168,7 @@ public class Interface_image_par_imageController implements Initializable {
           stage.show();
     }
     
-    
+    @FXML
     public void ChargerAction(ActionEvent event) throws IOException {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_accueil.fxml"));
       Stage stage = new Stage(StageStyle.DECORATED);
@@ -176,13 +178,14 @@ public class Interface_image_par_imageController implements Initializable {
       stage.show();
     }
     
-      public void OuvrirInfoAction(ActionEvent event) throws IOException {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_InfoBox.fxml"));
-      Stage stage = new Stage(StageStyle.DECORATED);
-      stage.setTitle("Informations");
-      stage.setScene(new Scene((AnchorPane) loader.load()));
-      //Show la nouvelle window
-      stage.show();
+    @FXML
+    public void OuvrirInfoAction(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_InfoBox.fxml"));
+    Stage stage = new Stage(StageStyle.DECORATED);
+    stage.setTitle("Informations");
+    stage.setScene(new Scene((AnchorPane) loader.load()));
+    //Show la nouvelle window
+    stage.show();
     }
 
     public void setImageInterface(String imageSurface) {
@@ -236,7 +239,6 @@ public class Interface_image_par_imageController implements Initializable {
         controller.setImagePath(imagePath);
         controller.initialize(this);
         stage.show();
-
     }
       
     @FXML
@@ -319,7 +321,6 @@ public class Interface_image_par_imageController implements Initializable {
         
     }
     
-    @FXML
     public void addRoleToList(String Role)
     {
         boolean present = false;
@@ -646,7 +647,7 @@ public class Interface_image_par_imageController implements Initializable {
         }
     }
     
-    @FXML
+
     public void setTitle(String p_title)
     {
         Stage currentStage = (Stage) boiteverticale.getScene().getWindow();

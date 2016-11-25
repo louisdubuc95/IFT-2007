@@ -5,11 +5,16 @@
  */
 package gui;
 
+import controller.VisuaLigueController;
+import domain.Enregistrement;
+import domain.equipe.Equipe;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,6 +69,9 @@ public class Interface_temps_reelController implements Initializable {
     
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
+    @FXML private AnchorPane boiteverticale ; 
+    
+    @FXML ImageView imgsurface ;
     
     
     //coordonée
@@ -73,10 +81,18 @@ public class Interface_temps_reelController implements Initializable {
     @FXML private String imagePath;
     
     @FXML private Color color;
-    
+    private String m_equipe;
+    private String m_role;
+    private String m_position;
+    private float m_orientation;
     private int m_nbEquipeMax;
     private double m_x;
     private double m_y;
+    @FXML public List<String> listeRoles = new ArrayList<>();
+    
+    
+    public VisuaLigueController m_controller = new VisuaLigueController();
+    public Enregistrement m_enregistrement = new Enregistrement();
     
     /**
      * Initializes the controller class.
@@ -86,66 +102,41 @@ public class Interface_temps_reelController implements Initializable {
         
     }  
     
-    @FXML
+    public void setTitle(String p_title)
+    {
+        Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+        currentStage.setTitle(p_title);
+    }
+    
+
     public void getX(String dimensionX){
         //testDimensionX.setText(dimensionX); 
         m_x = Double.parseDouble(dimensionX); 
     }
     
-    @FXML
     public void getY(String dimensionY){
         //testDimensionY.setText(dimensionY);
         m_y = Double.parseDouble(dimensionY);
     }
     
     @FXML
-    public void setNombreEquipeInterface(int nombreEquipe){
-        m_nbEquipeMax = nombreEquipe;
-    }
-    
-    @FXML
-    public void setImageInterface(String imageSurface) {
-        imagePath = imageSurface;
-        try {
-        if(!imageSurface.equals("chemin"))
-        {
-            File imageFile = new File(imageSurface);
-            if (imageFile.exists()) {
-                
-                    String imagepath = imageFile.toURI().toURL().toString();
-                    Image image = new Image(imagepath);
-                    imgSurface.setImage(image);
-                    }
-        }
-                } catch (MalformedURLException ex) {
-                    Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-    }
-    
-    @FXML 
-    private void quitterJeu (ActionEvent event){
-        Platform.exit();
-    }
-    
-    @FXML
-    public void ajouterJoueurAction(ActionEvent event) throws IOException {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
+    public void nouveauSportAction(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
-          stage.setTitle("Ajout Joueur");
+          stage.setTitle("Nouveau Sport");
           stage.setScene(new Scene((AnchorPane) loader.load()));
-          
-          if (boutonAjouterJoueur.isSelected()){
+          //Show la nouvelle window
           stage.show();
-          boutonObjectif.setDisable(true);
-          boutonAjouterObstacle.setDisable(true);
-        }
-        if (!boutonAjouterJoueur.isSelected()){
-           boutonObjectif.setDisable(false);
-           boutonAjouterObstacle.setDisable(false);
-           stage.close();
-        }  
-        
+    }
     
+    @FXML
+    public void ChargerAction(ActionEvent event) throws IOException {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_accueil.fxml"));
+      Stage stage = new Stage(StageStyle.DECORATED);
+      stage.setTitle("Charger Jeu");
+      stage.setScene(new Scene((AnchorPane) loader.load()));
+      //Show la nouvelle window
+      stage.show();
     }
     
     @FXML
@@ -158,14 +149,115 @@ public class Interface_temps_reelController implements Initializable {
       stage.show();
     }
     
+
+    public void setNombreEquipeInterface(int nombreEquipe){
+        m_nbEquipeMax = nombreEquipe;
+    }
+    
+
+    public void setImageInterface(String imageSurface) {
+        imagePath = imageSurface;
+        
+        try {
+            if(!imageSurface.equals("src/Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg"))
+            {
+                File imageFile = new File(imageSurface);
+                if (imageFile.exists()) {
+                    String imagepath = imageFile.toURI().toURL().toString();
+                    Image image = new Image(imagepath);
+                    imgsurface.setImage(image);
+                    m_controller.setImageSurface(imagePath);
+                    System.out.println("TEST");
+                }
+            }
+            else
+            {
+                m_controller.setImageSurface("src/Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg");
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Interface_temps_reelController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML 
+    private void quitterJeu (ActionEvent event){
+        Platform.exit();
+    }
+    
     @FXML
-    public void nouveauSportAction(ActionEvent event) throws IOException {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_choix_mode.fxml"));
-          Stage stage = new Stage(StageStyle.DECORATED);
-          stage.setTitle("Nouveau Sport");
-          stage.setScene(new Scene((AnchorPane) loader.load()));
-          //Show la nouvelle window
-          stage.show();
+    public void ajouterJoueurAction(ActionEvent event) throws IOException {
+        List<Equipe> listeEquipe = m_controller.getListEquipe();
+        if(!listeEquipe.isEmpty())
+        {
+            List<String> ListeRoles = m_controller.getListeRole();
+            List<String> ListePositions = m_controller.getListePosition();
+            Stage stage = new Stage(StageStyle.DECORATED);
+            FXMLLoader loader ;
+            loader = new FXMLLoader(getClass().getResource("Interface_CreerJoueur.fxml"));
+            Parent parent = (Parent) loader.load();
+            Scene scene = new Scene(parent);
+            stage.setTitle("Ajout Joueur");
+            stage.setScene(scene);
+            Interface_CreerJoueurController CreerJoueurController = loader.<Interface_CreerJoueurController>getController();
+            CreerJoueurController.initializeTR(this);
+
+            if (boutonAjouterJoueur.isSelected()){
+              CreerJoueurController.setListeEquipe(listeEquipe);
+              CreerJoueurController.setListRole(ListeRoles);
+              CreerJoueurController.setListPosition(ListePositions);
+
+              //Fonction qui bloque les window deriere la nouvelle
+              Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+              stage.initModality(Modality.WINDOW_MODAL);
+              stage.initOwner(currentStage);
+
+              stage.show();
+              boutonObjectif.setDisable(true);
+              boutonAjouterObstacle.setDisable(true);
+              
+            }
+            if (!boutonAjouterJoueur.isSelected()){
+               boutonObjectif.setDisable(false);
+               boutonAjouterObstacle.setDisable(false);
+            } 
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information sur la création de joueur");
+            alert.setContentText("Il faut créer des équipe avant de créer des joueurs");
+            alert.showAndWait();
+            boutonAjouterJoueur.setSelected(false);
+        }
+
+        
+    }
+    
+    //Accèdre au module parcourir image
+    @FXML
+    public void bouton_ChangerSports (ActionEvent event)throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_ModifierSports.fxml"));
+        Parent parent = (Parent) fxmlLoader.load();
+
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+
+        Interface_ModifierSportsController controller = fxmlLoader.<Interface_ModifierSportsController>getController();
+        Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(currentStage);
+        String title = currentStage.getTitle();
+        title = title.replaceAll(" - mode Temps Reel", "");
+        controller.setTitle(title);
+        controller.setNombreEquipe(m_nbEquipeMax);
+        controller.setX(m_x);
+        controller.setY(m_y);
+        controller.setImagePath(imagePath);
+        controller.initializeTR(this);
+        stage.show();
+
     }
     
     @FXML
@@ -212,7 +304,7 @@ public class Interface_temps_reelController implements Initializable {
         }  
     }
     
-      @FXML
+      /*@FXML
       public void bouton_ChangerSports (ActionEvent event)throws IOException {
         Stage window = (Stage) menuBarSport.getScene().getWindow();
            FileChooser fileChooser = new FileChooser();
@@ -225,17 +317,7 @@ public class Interface_temps_reelController implements Initializable {
                imagePath = path;
                setImageInterface(path);
            }
-      }
-      
-      @FXML
-      public void ChargerAction(ActionEvent event) throws IOException {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_accueil.fxml"));
-      Stage stage = new Stage(StageStyle.DECORATED);
-      stage.setTitle("Charger Jeu");
-      stage.setScene(new Scene((AnchorPane) loader.load()));
-      //Show la nouvelle window
-      stage.show();
-    }
+      }*/
       
       @FXML
       public void bouton_changerMode (ActionEvent event)throws IOException {
@@ -286,6 +368,40 @@ public class Interface_temps_reelController implements Initializable {
        
     }
     
+    
+    public void addRoleToList(String Role)
+    {
+        boolean present = false;
+        for (String item : listeRoles) {
+            if(item.equals(Role))
+            {
+                present = true;
+            }           
+        }
+        if(false == present)
+        {        
+            listeRoles.add(Role);
+        }   
+    }
+    
+    
+    
+    public void setEquipe(String p_equipe) {
+        m_equipe= p_equipe;
+    }
+    
+    public void setRole(String p_role) {
+        m_role= p_role;
+    }
+    
+    public void setPosition(String p_position) {
+        m_position = p_position;
+    }
+    
+    public void setOrientation(float p_orientation) {
+        m_orientation = p_orientation;
+    }
+    
     @FXML
     public void cb_maxJoueur (ActionEvent event) throws IOException {
         if(cbJoueurMax.isSelected())
@@ -295,6 +411,31 @@ public class Interface_temps_reelController implements Initializable {
         else
         {
             txtJoueurMax.setDisable(true);
+        }
+    }
+    
+       @FXML
+    public void ajouterEquipeAction(ActionEvent event) throws IOException {
+        if(m_controller.getListEquipe().size() == m_nbEquipeMax)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information sur la création des équipes");
+            alert.setContentText("Vous avez atteint la limite du nombre d'équipe");
+            alert.showAndWait();
+        }
+        else
+        {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Interface_creerEquipe.fxml"));
+            Parent parent = (Parent) fxmlLoader.load();
+
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+
+            Interface_creerEquipeController controller = fxmlLoader.<Interface_creerEquipeController>getController();
+            controller.initializeTR(this);
+            stage.show();
         }
     }
   

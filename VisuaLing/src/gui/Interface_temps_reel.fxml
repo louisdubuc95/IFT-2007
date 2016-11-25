@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.media.*?>
 <?import javafx.scene.effect.*?>
@@ -12,26 +13,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="708.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_temps_reelController">
+<AnchorPane id="AnchorPane" fx:id="boiteverticale" prefHeight="708.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_temps_reelController">
    <children>
-      <Button layoutX="997.0" layoutY="36.0" mnemonicParsing="false" onAction="#sauvegarderAction" prefHeight="50.0" prefWidth="58.0">
-         <tooltip>
-            <Tooltip text="Sauvegarder" />
-         </tooltip>
-         <graphic>
-            <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Photo/export-icon-5.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <MenuBar fx:id="menuBarSport" layoutY="1.0" prefHeight="26.0" prefWidth="1069.0">
         <menus>
           <Menu mnemonicParsing="false" text="Fichier">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Sauvegarder" />
-                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Ouvrir" />
+                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Charger" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#bouton_changerMode" text="Changer mode" />
                   <SeparatorMenuItem mnemonicParsing="false" />
@@ -44,109 +33,212 @@
                   <MenuItem mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Changer sport" />
               </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Modifier">
+          <Menu mnemonicParsing="false" text="Suppression">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#ajouterJoueurAction" text="Nouveau joueur" />
-                  <MenuItem mnemonicParsing="false" onAction="#ajouterObstacleAction" text="Nouvel obstacle" />
-                  <MenuItem mnemonicParsing="false" text="Nouveau objectif" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Supprimer joueur" />
-                  <MenuItem mnemonicParsing="false" text="Supprimer obstacle" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer Joueur" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer Obstacle" />
+                  <MenuItem mnemonicParsing="false" onAction="#ajouterObstacleAction" text="Supprimer Objectif" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" onAction="#OuvrirInfoAction" text="Aide">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#OuvrirInfoAction" text="À propos" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <ImageView fx:id="imgSurface" fitHeight="537.0" fitWidth="1062.0" layoutX="4.0" layoutY="164.0" pickOnBounds="true">
+      <ImageView fx:id="imgsurface" fitHeight="537.0" fitWidth="1062.0" layoutX="4.0" layoutY="164.0" pickOnBounds="true">
          <image>
             <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
          </image>
       </ImageView>
       <Canvas fx:id="canevasInterface" height="537.0" layoutX="8.0" layoutY="164.0" onMouseClicked="#ajouterJoueurInterface" width="1062.0" />
-      <ImageView fitHeight="42.0" fitWidth="461.0" layoutX="14.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Photo/Capture.PNG" />
-         </image>
-      </ImageView>
-      <Label fx:id="labelcoordonnee" layoutX="871.0" layoutY="147.0" text="X: 0    Y:  0" />
-      <Button layoutX="895.0" layoutY="35.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
-         <graphic>
-            <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+      <HBox layoutX="-5.0" layoutY="25.0" prefHeight="50.0" prefWidth="1076.0">
+         <children>
+            <ImageView fitHeight="42.0" fitWidth="461.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Photo/fast-forward-256.png" />
+                  <Image url="@../Photo/Capture.PNG" />
                </image>
+               <HBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </HBox.margin>
             </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Avancer" />
-         </tooltip>
-      </Button>
-      <Button layoutX="825.0" layoutY="35.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="37.0">
-         <graphic>
-            <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Photo/Pause.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="755.0" layoutY="35.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
-         <graphic>
-            <ImageView fitHeight="46.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Photo/375.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="687.0" layoutY="35.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
-         <graphic>
-            <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Photo/9c815f4d.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Reculer" />
-         </tooltip>
-      </Button>
-      <Button layoutX="163.0" layoutY="36.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="111.0" text="Dessiner" />
-      <Button layoutX="79.0" layoutY="35.0" mnemonicParsing="false" onAction="#ChargerAction" prefHeight="17.0" prefWidth="34.0">
-         <graphic>
-            <ImageView fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Photo/load.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Ouvrir" />
-         </tooltip>
-      </Button>
-      <Button layoutX="14.0" layoutY="35.0" mnemonicParsing="false" onAction="#nouveauSportAction" prefHeight="48.0" prefWidth="56.0">
-         <graphic>
-            <ImageView fitHeight="32.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Photo/plainicon.com-42949-256px.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <tooltip>
-            <Tooltip text="Nouveau" />
-         </tooltip>
-      </Button>
-      <TextField layoutX="751.0" layoutY="92.0" prefHeight="25.0" prefWidth="136.0" />
-      <Label layoutX="687.0" layoutY="96.0" prefHeight="17.0" prefWidth="75.0" text="Modifier de" />
-      <Label layoutX="897.0" layoutY="96.0" prefHeight="17.0" prefWidth="55.0" text="secondes" />
-      <ToggleButton fx:id="boutonAjouterJoueur" layoutX="289.0" layoutY="35.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="136.0" text="Ajouter un Joueur" />
-      <ToggleButton fx:id="boutonAjouterObstacle" layoutX="437.0" layoutY="35.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="111.0" text="Obstacle" />
-      <ToggleButton fx:id="boutonObjectif" layoutX="557.0" layoutY="36.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="111.0" text="Objectif" />
-      <CheckBox fx:id="cbJoueurMax" layoutX="274.0" layoutY="117.0" mnemonicParsing="false" onAction="#cb_maxJoueur" text="Nombre de joueur maximum par équipe" />
-      <TextField fx:id="txtJoueurMax" disable="true" layoutX="519.0" layoutY="113.0" prefHeight="25.0" prefWidth="55.0" />
+            <Separator fx:id="separateur1" maxHeight="61.0" minHeight="0.0" minWidth="6.0" orientation="VERTICAL" prefHeight="52.0" visible="false" />
+            <Button mnemonicParsing="false" onAction="#ajouterEquipeAction" prefHeight="49.0" prefWidth="111.0" text="Nouvelle Équipe">
+               <HBox.margin>
+                  <Insets left="10.0" top="1.0" />
+               </HBox.margin>
+            </Button>
+            <ToggleButton fx:id="boutonAjouterJoueur" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="105.0" text="Nouveau Joueur">
+               <HBox.margin>
+                  <Insets left="8.0" top="1.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <ToggleButton fx:id="boutonAjouterObstacle" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="111.0" text="Nouvel Obstacle">
+               <HBox.margin>
+                  <Insets left="8.0" top="1.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <ToggleButton fx:id="boutonObjectif" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="111.0" text="Nouvel Objectif">
+               <HBox.margin>
+                  <Insets left="8.0" top="1.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <Separator fx:id="separateur5" maxHeight="52.0" minHeight="0.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="0.0" visible="false" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Photo/80d3f6f5.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Avancer" />
+               </tooltip>
+               <HBox.margin>
+                  <Insets left="15.0" top="1.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Photo/9c815f4d.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Reculer" />
+               </tooltip>
+               <HBox.margin>
+                  <Insets left="8.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Photo/375.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets left="8.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="37.0">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Photo/Pause.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets left="8.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Photo/fast-forward-256.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Avancer" />
+               </tooltip>
+               <HBox.margin>
+                  <Insets left="8.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <TitledPane animated="false" layoutX="-6.0" layoutY="78.0" prefHeight="78.0" prefWidth="468.0" text="Informations sur la surface de jeu">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="52.0" prefWidth="430.0">
+               <children>
+                  <Label layoutX="6.0" layoutY="1.0" text="Position de la souris:">
+                     <padding>
+                        <Insets top="7.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="6.0" layoutY="26.0" prefHeight="24.0" prefWidth="121.0" text="Grandeur du terrain : ">
+                     <padding>
+                        <Insets top="7.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="testDimensionX" layoutX="127.0" layoutY="26.0" prefHeight="24.0" prefWidth="34.0" text="X">
+                     <padding>
+                        <Insets top="7.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="testDimensionX1" layoutX="161.0" layoutY="26.0" prefHeight="24.0" prefWidth="32.0" text="x">
+                     <padding>
+                        <Insets top="7.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="testDimensionY" layoutX="193.0" layoutY="26.0" prefHeight="24.0" prefWidth="32.0" text="Y">
+                     <padding>
+                        <Insets top="7.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="225.0" layoutY="26.0" prefHeight="24.0" prefWidth="65.0" text="(en mètres)">
+                     <padding>
+                        <Insets top="7.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="labelcoordonnee" layoutX="121.0" layoutY="9.0" text="X: 0    Y:  0" />
+               </children>
+            </AnchorPane>
+         </content>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </TitledPane>
+      <TitledPane animated="false" layoutX="736.0" layoutY="78.0" prefHeight="78.0" prefWidth="238.0" text="Contrainte sur le nombre de joueur">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="0.0">
+               <children>
+                  <CheckBox fx:id="cbJoueurMax" layoutX="7.0" layoutY="2.0" mnemonicParsing="false" onAction="#cb_maxJoueur" text="Nombre de joueur maximum/équipe:" />
+                  <TextField fx:id="txtJoueurMax" disable="true" layoutX="28.0" layoutY="21.0" prefHeight="25.0" prefWidth="197.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <TitledPane animated="false" layoutX="475.0" layoutY="77.0" prefHeight="78.0" prefWidth="241.0" text="Modification du temps du jeu">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="0.0">
+               <children>
+                  <Label layoutX="8.0" layoutY="17.0" prefHeight="17.0" prefWidth="75.0" text="Modifier de" />
+                  <Label layoutX="185.0" layoutY="15.0" prefHeight="17.0" prefWidth="55.0" text="secondes" />
+                  <TextField layoutX="75.0" layoutY="13.0" prefHeight="25.0" prefWidth="105.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <Separator fx:id="separateur10" layoutX="10.0" layoutY="10.0" maxHeight="119.0" minHeight="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="40.0" visible="false" />
+      <TitledPane animated="false" layoutX="985.0" layoutY="78.0" prefHeight="78.0" prefWidth="91.0" text="Exporter">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="89.0">
+               <children>
+                  <Button layoutX="16.0" layoutY="1.0" mnemonicParsing="false" onAction="#sauvegarderAction" prefHeight="50.0" prefWidth="58.0">
+                     <tooltip>
+                        <Tooltip text="Sauvegarder" />
+                     </tooltip>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/export-icon-5.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
    </children>
 </AnchorPane>

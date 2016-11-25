@@ -36,6 +36,7 @@ public class Interface_creerEquipeController implements Initializable {
     private Button btn_annuler;
     
     private Interface_image_par_imageController parentController;
+    private Interface_temps_reelController parentControllerTR;
 
     /**
      * Initializes the controller class.
@@ -47,6 +48,10 @@ public class Interface_creerEquipeController implements Initializable {
     public void initialize(Interface_image_par_imageController controller) {
         parentController = controller;
     }
+    
+    public void initializeTR(Interface_temps_reelController controller) {
+        parentControllerTR = controller;
+    }
 
     @FXML
     private void enregistrer_equipe(ActionEvent event) {
@@ -55,7 +60,14 @@ public class Interface_creerEquipeController implements Initializable {
         Stage window = (Stage) btn_enregistrer.getScene().getWindow();
         try
         {
+            try
+            {
             parentController.m_controller.addEquipe(nom_equipe, couleur_equipe);
+            }
+            catch(NullPointerException e)
+            {
+                parentControllerTR.m_controller.addEquipe(nom_equipe, couleur_equipe);
+            }
             window.close();
         }
         catch(Exception e)

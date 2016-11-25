@@ -54,6 +54,7 @@ public class Interface_ModifierSportsController implements Initializable {
     public Button btnParcourir;
     
     private Interface_image_par_imageController parentController;
+    private Interface_temps_reelController parentControllerTR;
     private String m_nom;
     private int m_nombreEquipe;
     private double m_x;
@@ -65,6 +66,10 @@ public class Interface_ModifierSportsController implements Initializable {
 
     public void initialize(Interface_image_par_imageController controller) {
         parentController = controller;
+    }
+    
+    public void initializeTR(Interface_temps_reelController controller) {
+        parentControllerTR = controller;
     }
     
     public void setTitle(String p_nom){
@@ -96,11 +101,27 @@ public class Interface_ModifierSportsController implements Initializable {
         Stage stage = (Stage) btnModifier.getScene().getWindow();
           if(txtNomIPI.getText().trim().isEmpty())
           {
-              parentController.setTitle("Sans nom - mode Image par Image");
+              try
+              
+              {
+                  parentController.setTitle("Sans nom - mode Image par Image");
+              }
+              catch(NullPointerException e)
+              {
+                  parentControllerTR.setTitle("Sans nom - Temps Reel");
+              }
+              
           }
           else
           {
-              parentController.setTitle(txtNomIPI.getText() + " - mode Image par Image");
+              try
+              {
+                  parentController.setTitle(txtNomIPI.getText() + " - mode Image par Image");
+              }
+                            catch(NullPointerException e)
+              {
+                  parentControllerTR.setTitle("Sans nom - mode Temps Reel");
+              }
           }
           
           if(!txtNbEquipe.getText().matches("^[1-9][0-9]*$"))
@@ -131,6 +152,8 @@ public class Interface_ModifierSportsController implements Initializable {
                   }
                 else
                 {
+                    try
+                    {
                     //Appel la classe qui set l'image
                     parentController.setImageInterface(lblCheminImage.getText());
                     
@@ -139,6 +162,18 @@ public class Interface_ModifierSportsController implements Initializable {
                     
                     parentController.getX(txtDimensionX.getText());
                     parentController.getY(txtDimensionY.getText());
+                    }
+                    catch(NullPointerException e)
+                    {
+                                            //Appel la classe qui set l'image
+                        parentControllerTR.setImageInterface(lblCheminImage.getText());
+
+                        int i = Integer.parseInt(txtNbEquipe.getText());
+                        parentControllerTR.setNombreEquipeInterface(i);
+
+                        parentControllerTR.getX(txtDimensionX.getText());
+                        parentControllerTR.getY(txtDimensionY.getText());
+                    }
 
                     //Show la nouvelle window
                     stage.show();
