@@ -449,7 +449,7 @@ public class Interface_image_par_imageController implements Initializable {
                             else
                             {
                                 if(equipe.estMemeNom(m_equipe)){
-                                    if(equipe.getList_joueurs().size() <= Integer.parseInt(txtJoueurMax.getText()) )
+                                    if(equipe.getList_joueurs().size() < Integer.parseInt(txtJoueurMax.getText()) )
                                     {
                                         float x = (float) event.getX();
                                         float y = (float) event.getY();
