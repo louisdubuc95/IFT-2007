@@ -319,14 +319,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
         afficherSauvegardes();
     }     
     
-    public void getTxtDimensionX() {
-        txtDimensionX.getText();
-        
-    }
-    public void getTxtDimensionY() {
-        txtDimensionY.getText();
-        
-    }
+  
     
     
 }

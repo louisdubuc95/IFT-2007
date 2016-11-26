@@ -46,6 +46,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import javafx.application.Application;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -87,7 +89,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonSauvegarder;
     @FXML private Button boutonChangerSports;
     @FXML MenuBar menuBarSport;
-    @FXML private Canvas canevasInterface;
+    
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
     @FXML private Pane conteneurJoueur;
@@ -139,6 +141,12 @@ public class Interface_image_par_imageController implements Initializable {
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
     
+    private DoubleProperty myScale = new SimpleDoubleProperty(1.0);
+    double sourisPositionX;
+    double sourisPositionY;
+    double transfererPositionX;
+    double transfererPositionY;
+    
     @FXML public List<String> listeRoles = new ArrayList<>();
     
     //@FXML private 
@@ -155,7 +163,8 @@ public class Interface_image_par_imageController implements Initializable {
     separateur1.prefWidthProperty().bind(boutonAjouterEquipe.widthProperty());
     separateur5.prefWidthProperty().bind(boutonAvancer.widthProperty());
     separateur5.prefWidthProperty().bind(boiteHorizontaleBouton.widthProperty());
-    
+    separateur10.prefWidthProperty().bind(boiteHorizontaleBouton2.widthProperty());
+    boiteHorizontaleBouton2.prefWidthProperty().bind(boiteverticale.widthProperty());
     /*separateur10.prefWidthProperty().bind(boutonTransfert.prefWidthProperty());
     separateur10.prefWidthProperty().bind(boiteHorizontaleBouton2.prefWidthProperty());*/
     
@@ -163,6 +172,10 @@ public class Interface_image_par_imageController implements Initializable {
     stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
     stackSurface.toBack();
     stackSurface.setAlignment(Pos.CENTER); 
+    imgsurface.scaleXProperty().bind(myScale);
+    imgsurface.scaleYProperty().bind(myScale);
+    conteneurJoueur.scaleXProperty().bind(myScale);
+    conteneurJoueur.scaleYProperty().bind(myScale);
     }
     
     
@@ -757,75 +770,93 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
    @FXML
+    public void bougerInterface () {
+        
+        conteneurJoueur.setOnMousePressed(new EventHandler<MouseEvent>(){
+        @Override public void handle(MouseEvent event) { 
+            if( event.isSecondaryButtonDown()){    
+            sourisPositionX = event.getSceneX();
+            sourisPositionY = event.getSceneY();
+            transfererPositionX = conteneurJoueur.getTranslateX();
+            transfererPositionY = conteneurJoueur.getTranslateY();
+            transfererPositionX = imgsurface.getTranslateX();
+            transfererPositionY = imgsurface.getTranslateY();
+            }
+        }
+        });
+        conteneurJoueur.setOnMouseDragged(new EventHandler<MouseEvent>(){
+        @Override public void handle(MouseEvent event) { 
+            if(event.isSecondaryButtonDown()){  
+            conteneurJoueur.setTranslateX(transfererPositionX + 
+                    event.getSceneX() - sourisPositionX);
+            conteneurJoueur.setTranslateY(transfererPositionY + 
+                    event.getSceneY() - sourisPositionY);
+            
+            imgsurface.setTranslateX(transfererPositionX + 
+                    event.getSceneX() - sourisPositionX);
+            imgsurface.setTranslateY(transfererPositionY + 
+                    event.getSceneY() -  sourisPositionY);
+            event.consume();
+            }
+        }
+        });  
+    }
+
+   @FXML
     public void zoom (){
     
-      canevasInterface.setOnScroll(new EventHandler<ScrollEvent>() {
+     conteneurJoueur.setOnScroll(new EventHandler<ScrollEvent>() {
       @Override public void handle(ScrollEvent event) { 
-      double zoomFactor = 1.05;
-       double deltaY = event.getDeltaY();
-       //double deltaX = event.getDeltaX();
-       if (deltaY < 0) {
-                    zoomFactor = 2 - zoomFactor;
-                }   
-       
-       //stackSurface.setScaleX(stackSurface.getScaleY () * zoomFactor);
-      // stackSurface.setScaleY(stackSurface.getScaleY() * zoomFactor);
-       
-       
-     
-       canevasInterface.setScaleX(canevasInterface.getScaleX () * zoomFactor);
-       canevasInterface.setScaleY(canevasInterface.getScaleY() * zoomFactor);
-       imgsurface.setScaleX(canevasInterface.getScaleX () * zoomFactor);
-       imgsurface.setScaleY(canevasInterface.getScaleY() * zoomFactor);
-       event.consume();
-       System.out.println("sup");
-      
-    }   
-               });
-    }
-    /*canevasInterface.setOnScroll(new EventHandler<ScrollEvent>() {
-      @Override public void handle(ScrollEvent event) {
-       double zoomFactor = 1.05;
-       double deltaY = event.getDeltaY();
-       //double deltaX = event.getDeltaX();
-       if (deltaY < 0) {
-                    zoomFactor = 2 - zoomFactor;
-                }   
-       canevasInterface.setScaleX(canevasInterface.getScaleX () * zoomFactor);
-       canevasInterface.setScaleY(canevasInterface.getScaleY() * zoomFactor);
-            }
-    });
-      imgsurface.setOnScroll(new EventHandler<ScrollEvent>() {
-      @Override public void handle(ScrollEvent event) {
-       double zoomFactor = 1.05;
-       double deltaY = event.getDeltaY();
-      
-       //double deltaX = event.getDeltaX();
-       if (deltaY < 0) {
-                    zoomFactor = 2 - zoomFactor;
-                }
+            double delta = 1.2;
+            double scale = myScale.get(); 
+            double oldScale = scale;
+            //Nous avons seulement besoins de travailler avec la valeur deltaY
+            if (event.getDeltaY() < 0)
+                scale /= delta;
             
-       imgsurface.setScaleX(imgsurface.getScaleX () * zoomFactor);
-       imgsurface.setScaleY(imgsurface.getScaleY() * zoomFactor);
-       event.consume();
-  System.out.println("sup");
-    }
-        });
-    
-    }  */
-
+            else scale *= delta;
             
-    //Lamnbda expression "->" c'est la même chose que la fonction coordonee_interface. C'est juste plus rapide codé comme ça 
-    //lorsque l'utilisateur sort la souris de l'interface de jeu, remet le conteur a zero. 
+            double reposition = (scale / oldScale)-1;
+            
+            
+            
+            double dimensionImagex = (event.getSceneX() - 
+                    (imgsurface.getBoundsInParent().getWidth()/2 + 
+                    imgsurface.getBoundsInParent().getMinX()));
+            
+            double dimensionImagey = (event.getSceneY() - 
+                    (imgsurface.getBoundsInParent().getHeight()/2 + 
+                    imgsurface.getBoundsInParent().getMinY()));
+            
+            imgsurface.setTranslateX(imgsurface.getTranslateX()-
+                    (reposition*dimensionImagex));
+            imgsurface.setTranslateY(imgsurface.getTranslateY()-
+                    (reposition*dimensionImagey));
+            
+            myScale.set(scale);
+            
+            double dimensionPanex = (event.getSceneX() - 
+                    (conteneurJoueur.getBoundsInParent().getWidth()/2 + 
+                    conteneurJoueur.getBoundsInParent().getMinX()));
+            double dimensionPaney= (event.getSceneY() - 
+                    (conteneurJoueur.getBoundsInParent().getHeight()/2 + 
+                    conteneurJoueur.getBoundsInParent().getMinY()));
+            
+            conteneurJoueur.setTranslateX(conteneurJoueur.getTranslateX()-
+                    (reposition*dimensionPanex));
+            conteneurJoueur.setTranslateY(conteneurJoueur.getTranslateY()-
+                    (reposition*dimensionPaney)); 
+           
+            event.consume();
    
-    /**
-     *
-     */
-    
-    
+    }   
+               }); 
+ 
+    }
+   
    @FXML
    public void sortieInterfaceI () {
-      canevasInterface.setOnMouseExited((MouseEvent) -> {
+      conteneurJoueur.setOnMouseExited((MouseEvent) -> {
           String msg = "X : 0"+", Y : 0";
           labelcoordonneeI.setText(msg);
       });

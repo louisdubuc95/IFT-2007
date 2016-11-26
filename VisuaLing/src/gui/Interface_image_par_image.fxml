@@ -155,18 +155,18 @@
       </HBox>
       <StackPane fx:id="stackSurface" layoutY="177.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-position: 100;">
          <children>
-            <ImageView fx:id="imgsurface" fitHeight="537.0" fitWidth="1083.0" onScroll="#zoom" pickOnBounds="true">
+            <Canvas fx:id="canevasInterface" height="537.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" onScroll="#zoom" width="1083.0" />
+            <ImageView fx:id="imgsurface" fitHeight="537.0" fitWidth="1083.0" onMouseDragged="#bougerInterface" onMousePressed="#bougerInterface" onScroll="#zoom" pickOnBounds="true">
                <image>
                   <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
                </image>
             </ImageView>
-            <Canvas fx:id="canevasInterface" height="537.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" onScroll="#zoom" width="1083.0" />
-            <Pane fx:id="conteneurJoueur" onMouseClicked="#ajouterJoueurInterface" onMouseMoved="#coordonnee_interfaceI" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="conteneurJoueur" onMouseClicked="#ajouterJoueurInterface" onMouseDragged="#bougerInterface" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" onMousePressed="#bougerInterface" onScroll="#zoom" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </StackPane>
       <HBox fx:id="boiteHorizontaleBouton2" layoutY="82.0" prefHeight="90.0" prefWidth="1084.0">
          <children>
-            <TitledPane animated="false" prefHeight="90.0" prefWidth="491.0" text="Informations sur la surface de jeu">
+            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="491.0" text="Informations sur la surface de jeu">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="346.0">
                      <children>

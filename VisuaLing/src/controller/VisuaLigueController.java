@@ -84,4 +84,25 @@ public class VisuaLigueController implements java.io.Serializable{
     {
         return m_surfaceJeu.getListeJoueur();
     }
+    
+    
+    public void  setDimensionX(Double p_dimensionX){
+        
+        m_surfaceJeu.setDimensionX(p_dimensionX);
+    }
+    public void  setDimensionY(Double p_dimensionY){
+        
+        m_surfaceJeu.setDimensionY(p_dimensionY);
+    }
+    
+    public double getDimensionX() {
+        
+        return m_surfaceJeu.getDimensionX();
+    }   
+
+
+    public double getDimensionY(){
+        
+    return m_surfaceJeu.getDimensionY();
+    }
 }

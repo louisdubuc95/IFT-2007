@@ -77,7 +77,7 @@ public class SurfaceJeu {
     this.m_ListeObstacle = new ArrayList();
     this.m_ListeObjectifs = new ArrayList();
     this.m_ListeEquipes = new ArrayList();
-    
+    this.m_Coordonee = new Coordonee ();
     this.m_calculTaille = new Rectangle.Float(0, 0, 1084, 537);
     this.m_largeurPx=560;
     this.m_hauteurPx=360;
@@ -361,5 +361,20 @@ public class SurfaceJeu {
     
     public List<Equipe> getListeEquipe(){
         return m_ListeEquipes;
+    }
+    public void  setDimensionX(Double p_dimensionX){
+        m_Coordonee.setDimensionX(p_dimensionX);
+    }
+    public void  setDimensionY(Double p_dimensionY){
+        m_Coordonee.setDimensionY(p_dimensionY);
+    }
+    
+    public double getDimensionX() {
+        return m_Coordonee.getDimensionX();
+    }   
+
+
+    public double getDimensionY(){
+        return m_Coordonee.getDimensionY();
     }
 }
