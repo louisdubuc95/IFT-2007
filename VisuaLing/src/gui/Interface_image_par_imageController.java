@@ -881,6 +881,27 @@ public class Interface_image_par_imageController implements Initializable {
     public void setController (VisuaLigueController p_controller){
         m_controller = p_controller;
     }
+    
+    public void setJoueur()
+    {
+        List<Joueur> joueur = m_controller.getListJoueurs();
+        
+        Iterator<Joueur> iterateur = joueur.iterator();
+        
+        while(iterateur.hasNext())
+        {
+            Joueur joueurAjouter = iterateur.next();
+            
+            //Convertie couleur AWT(domaine) à FX pour l'interface
+            java.awt.Color couleurAWTEquipe = joueurAjouter.getCouleurChandail();
+            Color colorJoueur = javafx.scene.paint.Color.rgb(couleurAWTEquipe.getRed(), couleurAWTEquipe.getGreen(), couleurAWTEquipe.getBlue(), couleurAWTEquipe.getAlpha()/255.0);
+            
+            Circle cercle2 = new Circle(15, colorJoueur);
+            cercle2.setCenterX(joueurAjouter.getCoordonneesJoueur().x);
+            cercle2.setCenterY(joueurAjouter.getCoordonneesJoueur().y);
+            conteneurJoueur.getChildren().add(cercle2);
+        }
+    }
 
 
 }  

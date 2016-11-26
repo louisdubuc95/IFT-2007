@@ -99,6 +99,7 @@ public class Interface_accueilController implements Initializable {
                         VisuaLigueController controller = IPIController.m_enregistrement.deSerialize(pathFichier);
                         IPIController.setController(controller);
                         IPIController.setImageInterface(controller.getImageSurface());
+                        IPIController.setJoueur();
                     
                         //Show la nouvelle window
                         stage.show();
