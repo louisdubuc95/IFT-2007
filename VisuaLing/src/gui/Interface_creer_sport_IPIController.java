@@ -100,6 +100,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
           }
           
           stage.setScene(new Scene((AnchorPane) loader.load()));
+          stage.setMaximized(true);
           Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
          
           
@@ -215,6 +216,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
                     stage.setTitle(file.getName());
 
                     stage.setScene(new Scene((AnchorPane) loader.load()));
+                    stage.setMaximized(true);
                     Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
 
                     //Appel la classe qui set l'image

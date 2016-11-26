@@ -454,10 +454,9 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML 
     public void ajouterJoueurInterface()  {
         List<Equipe> listeEquipe = m_controller.getListEquipe();
-        conteneurJoueur.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override public void handle(MouseEvent event){
-                if(event.getClickCount()==2)
-                {
+        conteneurJoueur.setOnMouseClicked((MouseEvent event) -> {
+            if(event.getClickCount()==2)
+            {
                 
                 if(boutonAjouterJoueur.isSelected()){
                     
@@ -484,34 +483,34 @@ public class Interface_image_par_imageController implements Initializable {
                                         float y = (float) event.getY();
 
                                         Point2D.Float p = new Point2D.Float(x,y);
-
-                                    
-                                            if(!m_controller.joueurEstPresent(p))
-                                            {
-                                                Color couleurEquipe = equipe.getCouleur();
-                                                /*GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                                    
-                                                gc.setFill(couleurEquipe);
-                                                gc.fillOval(event.getX(),event.getY(),20,20);*/
-                                                
-                                                //Create Circles
-                                                Circle cercle = new Circle(15, couleurEquipe);
-                                                cercle.setCenterX(event.getX());
-                                                cercle.setCenterY(event.getY());
-                                                cercle.setCursor(Cursor.HAND);
-                                                cercle.setOnMousePressed(circleOnMousePressedEventHandler);
-                                                cercle.setOnMouseDragged(circleOnMouseDraggedEventHandler);
-                                                cercle.setOnMouseEntered(circleOnMouseEnteredEventHandler);
-                                                cercle.setOnMouseReleased(circleOnMouseReleasedEventHandler);
-                                                cercle.setOnMouseClicked(circleOnRightMouseClickEventHandler);
-                                                
-                                                conteneurJoueur.getChildren().add(cercle);
-
-                                                m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
-                                                List<Joueur> liste_joueurs = m_controller.getListJoueurs();
-                                                Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
-                                                dernierJoueur.getEquipe().addJoueur(dernierJoueur);
-                                            }
+                                        
+                                        
+                                        if(!m_controller.joueurEstPresent(p))
+                                        {
+                                            Color couleurEquipe = equipe.getCouleur();
+                                            /*GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                                            
+                                            gc.setFill(couleurEquipe);
+                                            gc.fillOval(event.getX(),event.getY(),20,20);*/
+                                            
+                                            //Create Circles
+                                            Circle cercle = new Circle(15, couleurEquipe);
+                                            cercle.setLayoutX(event.getX());
+                                            cercle.setLayoutY(event.getY());
+                                            cercle.setCursor(Cursor.HAND);
+                                            cercle.setOnMousePressed(circleOnMousePressedEventHandler);
+                                            cercle.setOnMouseDragged(circleOnMouseDraggedEventHandler);
+                                            cercle.setOnMouseEntered(circleOnMouseEnteredEventHandler);
+                                            cercle.setOnMouseReleased(circleOnMouseReleasedEventHandler);
+                                            cercle.setOnMouseClicked(circleOnRightMouseClickEventHandler);
+                                            
+                                            conteneurJoueur.getChildren().add(cercle);
+                                            
+                                            m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
+                                            List<Joueur> liste_joueurs = m_controller.getListJoueurs();
+                                            Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
+                                            dernierJoueur.getEquipe().addJoueur(dernierJoueur);
+                                        }
                                     }
                                     else
                                     {
@@ -537,8 +536,8 @@ public class Interface_image_par_imageController implements Initializable {
                                 {
                                     Color couleurEquipe = equipe.getCouleur();
                                     Circle cercle = new Circle(15, couleurEquipe);
-                                    cercle.setCenterX(event.getX());
-                                    cercle.setCenterY(event.getY());
+                                    cercle.setLayoutX(event.getX());
+                                    cercle.setLayoutY(event.getY());
                                     cercle.setCursor(Cursor.HAND);
                                     cercle.setOnMousePressed(circleOnMousePressedEventHandler);
                                     cercle.setOnMouseDragged(circleOnMouseDraggedEventHandler);
@@ -559,12 +558,10 @@ public class Interface_image_par_imageController implements Initializable {
                                 }
                             }
                         }
-                    } 
-                   }  
+                    }  
                 }
             }
-            
-         });  
+        });  
     }
     
 
@@ -585,16 +582,16 @@ public class Interface_image_par_imageController implements Initializable {
                 for(Joueur j : e.getList_joueurs())
                 {   float xJoueur=j.getCoordonneesJoueur().x;
                     float yJoueur=j.getCoordonneesJoueur().y;
-                    float xCercle =(float)cercle.getCenterX();
-                    float yCercle=(float)cercle.getCenterY();
+                    float xCercle =(float)cercle.getLayoutX();
+                    float yCercle=(float)cercle.getLayoutY();
                     if((xJoueur == xCercle) && (yJoueur == yCercle))
                     {
                         joueurCourant=j;
                         cercleCourant= cercle;
                         System.out.println(j.getCoordonneesJoueur().x);
                         System.out.println(j.getCoordonneesJoueur().y);
-                        System.out.println(cercleCourant.getCenterX());
-                        System.out.println(cercleCourant.getCenterY());
+                        System.out.println(cercleCourant.getLayoutX());
+                        System.out.println(cercleCourant.getLayoutY());
                         System.out.println("--------------------------------------------------------");
                         
 
@@ -609,8 +606,8 @@ public class Interface_image_par_imageController implements Initializable {
             {
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
-            orgTranslateX = ((Circle)(t.getSource())).getTranslateX();
-            orgTranslateY = ((Circle)(t.getSource())).getTranslateY();
+            orgTranslateX = ((Circle)(t.getSource())).getLayoutX();
+            orgTranslateY = ((Circle)(t.getSource())).getLayoutY();
             }
             
     };
@@ -627,13 +624,9 @@ public class Interface_image_par_imageController implements Initializable {
                 double offsetY = t.getSceneY() - orgSceneY;
                 double newTranslateX = orgTranslateX + offsetX;
                 double newTranslateY = orgTranslateY + offsetY;
-                ((Circle)(t.getSource())).setTranslateX(newTranslateX);
-                ((Circle)(t.getSource())).setTranslateY(newTranslateY);
+                ((Circle)(t.getSource())).setLayoutX(newTranslateX);
+                ((Circle)(t.getSource())).setLayoutY(newTranslateY);
             }
-
-            
-            
-
         }
     };
     
@@ -649,14 +642,11 @@ public class Interface_image_par_imageController implements Initializable {
             
             cercleCourant.setCenterX(t.getX());
             cercleCourant.setCenterY(t.getY());
-            float xCercle =(float)cercleCourant.getCenterX();
-            float yCercle=(float)cercleCourant.getCenterY();
+            float xCercle =(float)cercleCourant.getLayoutX();
+            float yCercle=(float)cercleCourant.getLayoutY();
             Point2D.Float point = new Point2D.Float(xCercle,yCercle);
             joueurCourant.setCoordonneesJoueur(point);
             //conteneurJoueur.getChildren().clear();
-
-            
-            
             /*for(Equipe e : listeEquipe)
             {
                 
@@ -704,9 +694,7 @@ public class Interface_image_par_imageController implements Initializable {
                 }
                 
                 conteneurJoueur.getChildren().remove(cercle);
-                
-                
-                 
+
                 }
             
     };
@@ -892,6 +880,5 @@ public class Interface_image_par_imageController implements Initializable {
     }
 
 
-}    
-
+}  
 

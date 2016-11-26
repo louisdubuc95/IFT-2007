@@ -26,7 +26,6 @@ public class Coordonee {
     public Coordonee (){
        m_dimensionX = 0.0 ;
        m_dimensionY = 0.0 ;
-        System.out.println("FUCK YOU"); 
     }
 
     public Coordonee(Double p_dimensionX, Double p_dimensionY){
