@@ -52,7 +52,7 @@ public class SurfaceJeu implements Serializable{
     private List<Equipe> m_ListeEquipes;
     private List<String> m_ListeRole = new ArrayList<>();
     private List<String> m_ListePosition = new ArrayList<>();
-    private transient Image m_imgFond;
+    private String m_imgFond;
     private boolean m_Etat;
     private int m_Temps;
     private int m_nombreEquipe;
@@ -265,13 +265,7 @@ public class SurfaceJeu implements Serializable{
     
    public void setImageSurface(String p_pathImage) throws IOException
     {   
-        try {
-            File imageFile = new File(p_pathImage);
-            java.awt.Image image = ImageIO.read(imageFile);
-            m_imgFond = image;
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(SurfaceJeu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        m_imgFond = p_pathImage;
     }
     
 //     public void Dessiner(Canvas p_graphics)
@@ -368,7 +362,8 @@ public class SurfaceJeu implements Serializable{
     public int getNombreEquipe(){
         return m_nombreEquipe;
     }
-    
-    
-   
+
+    public String getImageSurface() {
+        return m_imgFond;
+    }
 }

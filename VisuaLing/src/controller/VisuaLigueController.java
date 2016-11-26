@@ -118,4 +118,8 @@ public class VisuaLigueController implements java.io.Serializable{
         return m_surfaceJeu.getNombreEquipe();
     }
     
+    public String getImageSurface(){
+        return m_surfaceJeu.getImageSurface();
+    }
+    
 }

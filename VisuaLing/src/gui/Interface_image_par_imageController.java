@@ -232,7 +232,6 @@ public class Interface_image_par_imageController implements Initializable {
                     Image image = new Image(imagepath);
                     imgsurface.setImage(image);
                     m_controller.setImageSurface(imagePath);
-                    System.out.println("TEST");
                 }
             }
             else
