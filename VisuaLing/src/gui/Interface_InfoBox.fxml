@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" prefHeight="322.0" prefWidth="481.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_CreerJoueurController">
+<AnchorPane blendMode="SRC_ATOP" maxHeight="-1.0" maxWidth="-1.0" prefHeight="357.0" prefWidth="572.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_CreerJoueurController">
       <children>
             <Label layoutX="31.0" layoutY="37.0" text="Informations">
                <font>
@@ -19,15 +19,15 @@
                </font>
             </Label>
       <Box />
-      <ScrollPane layoutX="31.0" layoutY="92.0" prefHeight="199.0" prefWidth="409.0">
+      <ScrollPane layoutX="31.0" layoutY="107.0" prefHeight="238.0" prefWidth="509.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="408.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="261.0" prefWidth="514.0">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="157.0" prefWidth="375.0" text="Informations à venir !">
+                  <TextArea prefHeight="238.0" prefWidth="524.0" text="&#10;Pour pouvoir ajouter des joueurs sur la surface, vous devez &#10;préalablement :&#10;                 - créer une équipe en appuyant sur le bouton ajouter une équipe.&#10;                 - créer un joueur en appuyant sur le bouton ajouter un joueur. Lorsque&#10;                    les paramètres de votre joueur ont été enregistrés, vous n'avez qu'à uti-&#10;                    liser le double clic sur la surface de jeu pour ajouter un, ou plusieurs &#10;                    joueurs.&#10;&#10; &#10;&#10;">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Calibri Light" size="14.0" />
                      </font>
-                  </Label>
+                  </TextArea>
                </children>
             </AnchorPane>
         </content>

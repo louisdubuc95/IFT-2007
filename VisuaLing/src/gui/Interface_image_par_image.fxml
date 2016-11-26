@@ -160,7 +160,8 @@
                   <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
                </image>
             </ImageView>
-            <Canvas fx:id="canevasInterface" height="537.0" onMouseClicked="#ajouterJoueurInterface" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" onScroll="#zoom" width="1083.0" />
+            <Canvas fx:id="canevasInterface" height="537.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" onScroll="#zoom" width="1083.0" />
+            <Pane fx:id="conteneurJoueur" onMouseClicked="#ajouterJoueurInterface" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </StackPane>
       <HBox fx:id="boiteHorizontaleBouton2" layoutY="82.0" prefHeight="90.0" prefWidth="1084.0">

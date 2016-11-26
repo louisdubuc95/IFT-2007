@@ -47,6 +47,7 @@ import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -59,10 +60,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView ;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox ;  
+
 /**
  * FXML Controller class
  *
@@ -75,6 +78,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private ToggleButton boutonAjouterJoueur; 
     @FXML private Button boutonAjouterEquipe;
     @FXML private ToggleButton boutonObjectif;
+    Group root = new Group();
    
     //@FXML private Boolean VerifAjoutJoueur = false;
 
@@ -84,13 +88,20 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonChangerSports;
     @FXML MenuBar menuBarSport;
     @FXML private Canvas canevasInterface;
-   
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
-    
-    
-    
+    @FXML private Pane conteneurJoueur;
+
     @FXML ImageView imgsurface ;
+    
+    
+    
+    private Joueur joueurCourant;
+    private Color couleurCourante;
+    
+    
+    
+    
     //coordonée
     @FXML private Label labelcoordonneeI;
     @FXML private Label  coordoneeI ;
@@ -98,9 +109,9 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private String imagePath;
     @FXML private Color color;
     
-    @FXML private ToggleGroup group ;
+    
     private double x0, y0;
-    @FXML private StackPane stackSurface ; 
+    @FXML private StackPane stackSurface ;
     @FXML private Button btnnouveauSportAction;
     @FXML private AnchorPane boiteverticale ; 
     @FXML private HBox boiteHorizontaleBouton ; 
@@ -121,11 +132,14 @@ public class Interface_image_par_imageController implements Initializable {
     private double m_x;
     private double m_y;
     
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
+    
     @FXML public List<String> listeRoles = new ArrayList<>();
     
     //@FXML private 
     
-     //instance du controller de Larman
+    //instance du controller de Larman
     public VisuaLigueController m_controller = new VisuaLigueController();
     public Enregistrement m_enregistrement = new Enregistrement();
     
@@ -411,9 +425,13 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML 
     public void ajouterJoueurInterface()  {
         List<Equipe> listeEquipe = m_controller.getListEquipe();
-        canevasInterface.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        conteneurJoueur.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override public void handle(MouseEvent event){
+                if(event.getClickCount()==2)
+                {
+                
                 if(boutonAjouterJoueur.isSelected()){
+                    
                     Iterator<Equipe> iterateur = listeEquipe.iterator();
                     while(iterateur.hasNext())
                     {
@@ -442,9 +460,24 @@ public class Interface_image_par_imageController implements Initializable {
                                             if(!m_controller.joueurEstPresent(p))
                                             {
                                                 Color couleurEquipe = equipe.getCouleur();
-                                                GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                                                /*GraphicsContext gc = canevasInterface.getGraphicsContext2D();
+                                    
                                                 gc.setFill(couleurEquipe);
-                                                gc.fillOval(event.getX(),event.getY(),20,20);
+                                                gc.fillOval(event.getX(),event.getY(),20,20);*/
+                                                
+                                                //Create Circles
+                                                Circle cercle = new Circle(15, couleurEquipe);
+                                                cercle.setCenterX(event.getX());
+                                                cercle.setCenterY(event.getY());
+                                                cercle.setCursor(Cursor.HAND);
+                                                cercle.setOnMousePressed(circleOnMousePressedEventHandler);
+                                                cercle.setOnMouseDragged(circleOnMouseDraggedEventHandler);
+                                                cercle.setOnMouseEntered(circleOnMouseEnteredEventHandler);
+                                                cercle.setOnMouseReleased(circleOnMouseReleasedEventHandler);
+                                                cercle.setOnMouseClicked(circleOnRightMouseClickEventHandler);
+                                                
+                                                conteneurJoueur.getChildren().add(cercle);
+
                                                 m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
                                                 List<Joueur> liste_joueurs = m_controller.getListJoueurs();
                                                 Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
@@ -470,12 +503,25 @@ public class Interface_image_par_imageController implements Initializable {
                             Point2D.Float p = new Point2D.Float(x,y);
                             
                             if(equipe.estMemeNom(m_equipe)){
+                                
                                 if(!m_controller.joueurEstPresent(p))
                                 {
                                     Color couleurEquipe = equipe.getCouleur();
+                                    Circle cercle = new Circle(15, couleurEquipe);
+                                    cercle.setCenterX(event.getX());
+                                    cercle.setCenterY(event.getY());
+                                    cercle.setCursor(Cursor.HAND);
+                                    cercle.setOnMousePressed(circleOnMousePressedEventHandler);
+                                    cercle.setOnMouseDragged(circleOnMouseDraggedEventHandler);
+                                    cercle.setOnMouseEntered(circleOnMouseEnteredEventHandler);
+                                    cercle.setOnMouseReleased(circleOnMouseReleasedEventHandler);
+                                    cercle.setOnMouseClicked(circleOnRightMouseClickEventHandler);
+
+                                    conteneurJoueur.getChildren().add(cercle);
+                                    /*
                                     GraphicsContext gc = canevasInterface.getGraphicsContext2D();
                                     gc.setFill(couleurEquipe);
-                                    gc.fillOval(event.getX(),event.getY(),20,20);
+                                    gc.fillOval(event.getX(),event.getY(),20,20);*/
                                     m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
                                     List<Joueur> liste_joueurs = m_controller.getListJoueurs();
                                     Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
@@ -487,9 +533,135 @@ public class Interface_image_par_imageController implements Initializable {
                     } 
                    }  
                 }
+            }
             
          });  
     }
+    
+
+    
+/////////////////////////////////////////////////////////////////
+
+    
+    EventHandler<MouseEvent> circleOnMouseEnteredEventHandler = 
+        (MouseEvent t) -> {
+
+            List<Equipe> listeEquipe = m_controller.getListEquipe();
+            Circle cercle = (Circle)t.getSource();
+            couleurCourante = (Color)cercle.getFill();
+            
+            for(Equipe e : listeEquipe)
+            {
+                
+                for(Joueur j : e.getList_joueurs())
+                {   float xJoueur=j.getCoordonneesJoueur().x;
+                    float yJoueur=j.getCoordonneesJoueur().y;
+                    float xCercle =(float)cercle.getCenterX();
+                    float yCercle=(float)cercle.getCenterY();
+                    if((xJoueur == xCercle) && (yJoueur == yCercle))
+                    {
+                        joueurCourant=j;
+                        /*System.out.println(j.getCoordonneesJoueur().x);
+                        System.out.println(j.getCoordonneesJoueur().y);
+                        System.out.println(cercle.getCenterX());
+                        System.out.println(cercle.getCenterY());*/
+                    }
+                }
+            }
+    };
+/////////////////////////////////////////////////////////////////
+    EventHandler<MouseEvent> circleOnMousePressedEventHandler = 
+        (MouseEvent t) -> {
+            if(t.getButton()==MouseButton.SECONDARY)
+            {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            orgTranslateX = ((Circle)(t.getSource())).getTranslateX();
+            orgTranslateY = ((Circle)(t.getSource())).getTranslateY();
+            }
+            
+    };
+    
+/////////////////////////////////////////////////////////////////
+    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = 
+        new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton()==MouseButton.SECONDARY)
+            {
+                double offsetX = t.getSceneX() - orgSceneX;
+                double offsetY = t.getSceneY() - orgSceneY;
+                double newTranslateX = orgTranslateX + offsetX;
+                double newTranslateY = orgTranslateY + offsetY;
+                ((Circle)(t.getSource())).setTranslateX(newTranslateX);
+                ((Circle)(t.getSource())).setTranslateY(newTranslateY);
+            }
+
+            
+            
+
+        }
+    };
+    
+/////////////////////////////////////////////////////////////////////
+        EventHandler<MouseEvent> circleOnMouseReleasedEventHandler = 
+        new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton()==MouseButton.PRIMARY)
+            {
+            Circle cercle = (Circle)t.getSource();
+            cercle.setCenterX(t.getX());
+            cercle.setCenterY(t.getY());
+            float xCercle =(float)cercle.getCenterX();
+            float yCercle=(float)cercle.getCenterY();
+            Point2D.Float point = new Point2D.Float(xCercle,yCercle);
+            joueurCourant.setCoordonneesJoueur(point);
+            }
+    };
+   };
+        
+        
+        EventHandler<MouseEvent> circleOnRightMouseClickEventHandler = 
+        new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton()==MouseButton.SECONDARY)
+            {
+                Circle cercle = (Circle)t.getSource();
+                List<Equipe> listeEquipe = m_controller.getListEquipe();
+                List<Joueur> listeJoueur = m_controller.getListJoueurs();
+                couleurCourante = (Color)cercle.getFill();
+                for(Equipe e : listeEquipe)
+                {
+                    System.out.println(e.getSize());
+                    for(Joueur j : e.getList_joueurs())
+                    {   float xJoueur=j.getCoordonneesJoueur().x;
+                        float yJoueur=j.getCoordonneesJoueur().y;
+                        float xCercle =(float)cercle.getCenterX();
+                        float yCercle=(float)cercle.getCenterY();
+                        if((xJoueur == xCercle) && (yJoueur == yCercle))
+                        {
+                            e.getList_joueurs().remove(j);
+                            System.out.println(e.getSize());
+                            listeJoueur.remove(j);
+                            break;
+                        }
+                    }
+                }
+                
+                conteneurJoueur.getChildren().remove(cercle);
+                
+                
+                 
+                }
+            
+    };
+   };
+            
     
     //@FXML
     public void setEquipe(String p_equipe) {
