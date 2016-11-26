@@ -155,7 +155,7 @@ public class Interface_temps_reelController implements Initializable {
     }
     
 
-    public void setImageInterface(String imageSurface) {
+    public void setImageInterface(String imageSurface) throws IOException {
         imagePath = imageSurface;
         
         try {

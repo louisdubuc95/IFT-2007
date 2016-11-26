@@ -5,11 +5,13 @@
  */
 package domain;
 
+import java.io.Serializable;
+
 /**
  *
  * @author louis
  */
-public class TempsReel {
+public class TempsReel implements Serializable{
     
     private String nomMode;
 }

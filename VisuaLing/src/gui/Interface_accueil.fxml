@@ -46,7 +46,7 @@
             <Font name="Calibri Light" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="945.0" layoutY="139.0" mnemonicParsing="false" text="Charger" />
+      <Button fx:id="boutonCharger" layoutX="945.0" layoutY="139.0" mnemonicParsing="false" onAction="#boutonChargerAction" text="Charger" />
       <ImageView fitHeight="124.0" fitWidth="406.0" layoutX="14.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/Capture.PNG" />

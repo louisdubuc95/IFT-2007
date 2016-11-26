@@ -5,18 +5,21 @@
  */
 package domain.obstacle;
 
+import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author louis
  */
-public class Balle extends Objectif {
+public class Balle extends Objectif implements Serializable{
     private Image m_image;
     String imagepath = "/Photo/balle.png";
     File imageFile;
@@ -26,11 +29,10 @@ public class Balle extends Objectif {
         
         imageFile = new File(imagepath);
         try {
-            imagepath = imageFile.toURI().toURL().toString();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Ballon.class.getName()).log(Level.SEVERE, null, ex);
+            m_image = ImageIO.read(imageFile);
+        }   catch (IOException ex) {
+            Logger.getLogger(Balle.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.m_image = new Image(imagepath);
     }
     
     @Override

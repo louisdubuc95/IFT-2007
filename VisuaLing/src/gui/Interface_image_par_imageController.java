@@ -220,7 +220,7 @@ public class Interface_image_par_imageController implements Initializable {
     stage.show();
     }
 
-    public void setImageInterface(String imageSurface) {
+    public void setImageInterface(String imageSurface) throws IOException {
         imagePath = imageSurface;
         
         try {
@@ -246,6 +246,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     public void setNombreEquipeInterface(int nombreEquipe){
         m_nbEquipeMax = nombreEquipe;
+        m_controller.setNombreEquipe(nombreEquipe);
     }
     
     //Accèdre au module parcourir image
@@ -265,9 +266,9 @@ public class Interface_image_par_imageController implements Initializable {
         String title = currentStage.getTitle();
         title = title.replaceAll(" - mode Image par Image", "");
         controller.setTitle(title);
-        controller.setNombreEquipe(m_nbEquipeMax);
-        controller.setX(m_x);
-        controller.setY(m_y);
+        controller.setNombreEquipe(m_controller.getNombreEquipe());
+        controller.setX(m_controller.getDimensionX());
+        controller.setY(m_controller.getDimensionY());
         controller.setImagePath(imagePath);
         controller.initialize(this);
         stage.show();
@@ -487,11 +488,8 @@ public class Interface_image_par_imageController implements Initializable {
                                         
                                         if(!m_controller.joueurEstPresent(p))
                                         {
-                                            Color couleurEquipe = equipe.getCouleur();
-                                            /*GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                                            
-                                            gc.setFill(couleurEquipe);
-                                            gc.fillOval(event.getX(),event.getY(),20,20);*/
+                                            java.awt.Color couleurAWTEquipe = equipe.getCouleur();
+                                            Color couleurEquipe = javafx.scene.paint.Color.rgb(couleurAWTEquipe.getRed(), couleurAWTEquipe.getGreen(), couleurAWTEquipe.getBlue(), couleurAWTEquipe.getAlpha()/255.0);
                                             
                                             //Create Circles
                                             Circle cercle = new Circle(15, couleurEquipe);
@@ -506,7 +504,7 @@ public class Interface_image_par_imageController implements Initializable {
                                             
                                             conteneurJoueur.getChildren().add(cercle);
                                             
-                                            m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
+                                            m_controller.addJoueur(p, couleurAWTEquipe, m_role, m_position, m_orientation, equipe);
                                             List<Joueur> liste_joueurs = m_controller.getListJoueurs();
                                             Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
                                             dernierJoueur.getEquipe().addJoueur(dernierJoueur);
@@ -534,7 +532,9 @@ public class Interface_image_par_imageController implements Initializable {
                                 
                                 if(!m_controller.joueurEstPresent(p))
                                 {
-                                    Color couleurEquipe = equipe.getCouleur();
+                                    java.awt.Color couleurAWTEquipe = equipe.getCouleur();
+                                    Color couleurEquipe = javafx.scene.paint.Color.rgb(couleurAWTEquipe.getRed(), couleurAWTEquipe.getGreen(), couleurAWTEquipe.getBlue(), couleurAWTEquipe.getAlpha()/255.0);
+
                                     Circle cercle = new Circle(15, couleurEquipe);
                                     cercle.setLayoutX(event.getX());
                                     cercle.setLayoutY(event.getY());
@@ -550,7 +550,7 @@ public class Interface_image_par_imageController implements Initializable {
                                     GraphicsContext gc = canevasInterface.getGraphicsContext2D();
                                     gc.setFill(couleurEquipe);
                                     gc.fillOval(event.getX(),event.getY(),20,20);*/
-                                    m_controller.addJoueur(p, couleurEquipe, m_role, m_position, m_orientation, equipe);
+                                    m_controller.addJoueur(p, couleurAWTEquipe, m_role, m_position, m_orientation, equipe);
                                     List<Joueur> liste_joueurs = m_controller.getListJoueurs();
                                     Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
                                     Equipe equipe_joueur = dernierJoueur.getEquipe();
@@ -877,6 +877,10 @@ public class Interface_image_par_imageController implements Initializable {
     {
         Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
         currentStage.setTitle(p_title);
+    }
+
+    public void setController (VisuaLigueController p_controller){
+        m_controller = p_controller;
     }
 
 

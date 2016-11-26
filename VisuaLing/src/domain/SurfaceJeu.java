@@ -6,7 +6,6 @@
 package domain;
 
 import domain.coordoneeZoom.Coordonee;
-import domain.coordoneeZoom.Zoom;
 import domain.equipe.Equipe;
 import domain.joueur.Joueur;
 import domain.obstacle.Balle;
@@ -15,8 +14,10 @@ import domain.obstacle.Objectif;
 import domain.obstacle.Obstacle;
 import domain.obstacle.Rondelle;
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
@@ -24,6 +25,7 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -32,13 +34,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.shape.Circle;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javafx.scene.paint.Color;
 
 
 /**
@@ -46,19 +43,19 @@ import javafx.scene.paint.Color;
  * @author louis
  */
 
-public class SurfaceJeu {
+public class SurfaceJeu implements Serializable{
     
     private Coordonee m_Coordonee;
-    private Zoom m_zoom;
     private List<Joueur> m_ListeJoueur;
     private List<Obstacle> m_ListeObstacle;
     private List<Objectif> m_ListeObjectifs;
     private List<Equipe> m_ListeEquipes;
     private List<String> m_ListeRole = new ArrayList<>();
     private List<String> m_ListePosition = new ArrayList<>();
-    private Image m_imgFond;
+    private transient Image m_imgFond;
     private boolean m_Etat;
     private int m_Temps;
+    private int m_nombreEquipe;
     
     Rectangle.Float m_calculTaille;
     int m_largeurPx;
@@ -78,10 +75,7 @@ public class SurfaceJeu {
     this.m_ListeObjectifs = new ArrayList();
     this.m_ListeEquipes = new ArrayList();
     this.m_Coordonee = new Coordonee ();
-    this.m_calculTaille = new Rectangle.Float(0, 0, 1084, 537);
-    this.m_largeurPx=560;
-    this.m_hauteurPx=360;
-    this.m_distanceEntrePts = 20;
+    this.m_nombreEquipe = 0;
 
     this.m_Etat = false;
     this.m_Temps = 0;
@@ -215,22 +209,21 @@ public class SurfaceJeu {
         {
             Equipe equipe = iterateur.next();
             
-            if (equipe.getNom().equals(nom) && 
-                    equipe.getCouleur().getBlue() == couleur.getBlue() &&
-                    equipe.getCouleur().getGreen() == couleur.getGreen() &&
-                    equipe.getCouleur().getRed() == couleur.getRed() &&
-                    equipe.getCouleur().getOpacity() == couleur.getOpacity())
+            if (equipe.getNom().equals(nom) 
+////                    && 
+//                    equipe.getCouleur().getBlue() == couleur.getBlue() &&
+//                    equipe.getCouleur().getGreen() == couleur.getGreen() &&
+//                    equipe.getCouleur().getRed() == couleur.getRed() &&
+//                    equipe.getCouleur().getOpacity() == couleur.getOpacity()
+                    )
             {
-                throw new Exception("La combinaison nom-couleur a déjà été prise pour une autre équipe."
-                        + " Veuillez choisir un autre nom ou une autre couleur.");
+                throw new Exception("Le nom d'équipe est déjà choisi!"
+                        + " Veuillez choisir un autre nom d'équipe");
             }
         }
         m_ListeEquipes.add(new Equipe(nom,couleur));
     }
-     public void addCoordonee (Double p_dimensionX, Double p_dimensionY){
-         
-       
-    }
+    
     
     public void addRole(String role) throws Exception
     {
@@ -270,87 +263,73 @@ public class SurfaceJeu {
         return m_Etat;
     }
     
-    public void setImageSurface(String p_pathImage)
+   public void setImageSurface(String p_pathImage) throws IOException
     {   
         try {
             File imageFile = new File(p_pathImage);
-            String imagepath = imageFile.toURI().toURL().toString();
-            Image image = new Image(imagepath);
+            java.awt.Image image = ImageIO.read(imageFile);
             m_imgFond = image;
         } catch (MalformedURLException ex) {
             Logger.getLogger(SurfaceJeu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-     public void Dessiner(Canvas p_graphics)
-    {
-        Point2D.Float coordJoueur;
-        Point2D.Float coordObstacle;
-        Point2D.Float coordObjectif;
-        Image imgObs;
-        Image imgObj;
-        GraphicsContext gc = p_graphics.getGraphicsContext2D();
-        
-        for(int i=0;i < m_ListeJoueur.size();i++)
-        {
-            //Prend les joueurs de la liste 1 par 1
-            Joueur ajouterJoueur = m_ListeJoueur.get(i);    
-            
-            //Prend la couleur de joueur
-            Color couleurChandail = ajouterJoueur.getCouleurChandail();
-            
-            //Prend les coordonnée du joueur
-            coordJoueur = ajouterJoueur.getCoordonneesJoueur();
-                    
-            //Dessine le joueur
-            gc.setFill(couleurChandail);
-            gc.fillOval(coordJoueur.x,coordJoueur.y, 20,20);
-        }
-        
-        for(int j=0;j<m_ListeObstacle.size();j++)
-        {
-            //Prend les obstacle 1 par 1 
-            Obstacle ajouterObs = m_ListeObstacle.get(j);
-            
-            //Prend l'image de l'obstacle
-            imgObs = ajouterObs.getImageObs();
-            
-            //Prend la coordonnée de l'obstacle
-            coordObstacle = ajouterObs.getCoordonneeObs();
-            
-            //Desine l'obstacle
-            gc.drawImage(imgObs, coordObstacle.x, coordObstacle.y);
-        }
-        
-        for(int x=0;x<m_ListeObjectifs.size();x++)
-        {
-            //Prend les obstacle 1 par 1 
-            Objectif ajouterObj = m_ListeObjectifs.get(x);
-            
-            //Prend l'image de l'obstacle
-            imgObj = ajouterObj.getImage();
-            
-            //Prend la coordonnée de l'obstacle
-            coordObjectif = ajouterObj.getCoordonneesObj();
-            
-            //Desine l'obstacle
-            gc.drawImage(imgObj, coordObjectif.x, coordObjectif.y);
-        }
-    }
-     
-//    private Point2D.Float ChangerCoord(Point2D p_Coord){
-//        Point2D.Float modif = new Point2D.Float();
-//  
-//        modif.x = (float) ((p_Coord.getX() * m_calculTaille.width) / m_largeurPx + m_calculTaille.x);
-//        modif.y = (float) ((p_Coord.getY() * m_calculTaille.height) / m_hauteurPx + m_calculTaille.y);
+//     public void Dessiner(Canvas p_graphics)
+//    {
+//        Point2D.Float coordJoueur;
+//        Point2D.Float coordObstacle;
+//        Point2D.Float coordObjectif;
+//        Image imgObs;
+//        Image imgObj;
+//        GraphicsContext gc = p_graphics.getGraphicsContext2D();
 //        
-//        //arrondir
-//        modif.x = ((int)(p_Coord.getX() / m_distanceEntrePts + 0.5)) * m_distanceEntrePts; 
-//        modif.y = ((int)(p_Coord.getY() / m_distanceEntrePts + 0.5)) * m_distanceEntrePts;
+//        for(int i=0;i < m_ListeJoueur.size();i++)
+//        {
+//            //Prend les joueurs de la liste 1 par 1
+//            Joueur ajouterJoueur = m_ListeJoueur.get(i);    
+//            
+//            //Prend la couleur de joueur
+//            Color couleurChandail = ajouterJoueur.getCouleurChandail();
+//            
+//            //Prend les coordonnée du joueur
+//            coordJoueur = ajouterJoueur.getCoordonneesJoueur();
+//                    
+//            //Dessine le joueur
+//            gc.setFill(couleurChandail);
+//            gc.fillOval(coordJoueur.x,coordJoueur.y, 20,20);
+//        }
 //        
-//        return modif;
+//        for(int j=0;j<m_ListeObstacle.size();j++)
+//        {
+//            //Prend les obstacle 1 par 1 
+//            Obstacle ajouterObs = m_ListeObstacle.get(j);
+//            
+//            //Prend l'image de l'obstacle
+//            imgObs = ajouterObs.getImageObs();
+//            
+//            //Prend la coordonnée de l'obstacle
+//            coordObstacle = ajouterObs.getCoordonneeObs();
+//            
+//            //Desine l'obstacle
+//            gc.drawImage(imgObs, coordObstacle.x, coordObstacle.y);
+//        }
+//        
+//        for(int x=0;x<m_ListeObjectifs.size();x++)
+//        {
+//            //Prend les obstacle 1 par 1 
+//            Objectif ajouterObj = m_ListeObjectifs.get(x);
+//            
+//            //Prend l'image de l'obstacle
+//            imgObj = ajouterObj.getImage();
+//            
+//            //Prend la coordonnée de l'obstacle
+//            coordObjectif = ajouterObj.getCoordonneesObj();
+//            
+//            //Desine l'obstacle
+//            gc.drawImage(imgObj, coordObjectif.x, coordObjectif.y);
+//        }
 //    }
-    
+
     public List<Joueur> getListeJoueur(){
         return m_ListeJoueur;
     }
@@ -373,6 +352,10 @@ public class SurfaceJeu {
         m_Coordonee.setDimensionY(p_dimensionY);
     }
     
+    public void setNombreEquipe(int p_nombreEquipe){
+        m_nombreEquipe = p_nombreEquipe;
+    }
+    
     public double getDimensionX() {
         return m_Coordonee.getDimensionX();
     }   
@@ -381,6 +364,11 @@ public class SurfaceJeu {
     public double getDimensionY(){
         return m_Coordonee.getDimensionY();
     }
+    
+    public int getNombreEquipe(){
+        return m_nombreEquipe;
+    }
+    
     
    
 }

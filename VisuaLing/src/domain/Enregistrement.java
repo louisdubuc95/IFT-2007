@@ -31,16 +31,14 @@ public class Enregistrement {
        this.m_version = 0;
     }
     
-    public void serialize(String p_nomSauvegarde){
-        Class controller = VisuaLigueController.class.getClass();
+    public void serialize(String p_nomSauvegarde, VisuaLigueController p_controller){
         ObjectOutputStream oos = null;
         try {
-            m_listeSerialize.add("src/savedStrategies/serialize" + m_version);
-            final FileOutputStream fichier = new FileOutputStream("src/savedStrategies/"+ p_nomSauvegarde);
+            final FileOutputStream fichier = new FileOutputStream("src/savedStrategies/"+ p_nomSauvegarde+".IPI");
             oos = new ObjectOutputStream(fichier);
-            oos.writeObject(controller);
+            oos.writeObject(p_controller);
             oos.flush();
-        } 
+            } 
         catch (final java.io.IOException e) {
             e.printStackTrace();
     } finally {
@@ -55,12 +53,13 @@ public class Enregistrement {
      }
     }
     
-    public void deSerialize(){    
+    public VisuaLigueController deSerialize(String p_nomSauvegarde){
+        VisuaLigueController controller = null;
         ObjectInputStream ois = null;
         try {
-            final FileInputStream fichier = new FileInputStream("src/savedStrategies/serialize1");
+            final FileInputStream fichier = new FileInputStream(p_nomSauvegarde);
             ois = new ObjectInputStream(fichier);
-            final VisuaLigueController controller = (VisuaLigueController) ois.readObject();
+            controller = (VisuaLigueController) ois.readObject();
             System.out.println("Controller : charger ");
         } 
         catch (final java.io.IOException e) {
@@ -76,6 +75,7 @@ public class Enregistrement {
         ex.printStackTrace();
       }
     }
+    return controller;
   }
     
   public List<String> getListeEnregistrement(){

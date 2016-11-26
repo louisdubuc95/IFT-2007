@@ -10,13 +10,14 @@ package domain.equipe;
  * @author antoinehudon
  */
 
-import javafx.scene.paint.Color;
 import java.util.List;
 import domain.joueur.Joueur;
+import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Equipe {
+public class Equipe implements Serializable{
     public static int nbEquipes = 0;
             
     private int id;

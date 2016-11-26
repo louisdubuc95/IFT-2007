@@ -7,11 +7,13 @@ package gui;
 
 import controller.VisuaLigueController;
 import domain.Enregistrement;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -55,8 +57,29 @@ public class Interface_SauvegardeController implements Initializable {
     
     @FXML
     public void boutonEnregistrerAction(ActionEvent even){
-        m_parentController.m_enregistrement.serialize(txtNomSauvegarde.getText());
-        Stage stage = (Stage) boutonSauvegarder.getScene().getWindow();
-        stage.close();
+        String validateDot = txtNomSauvegarde.getText();
+        if(validateDot.isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information sur la sauvegarde");
+            alert.setContentText("Le fichier de sauvegarde doit avoir un nom!!");
+            alert.showAndWait();
+        }
+        else
+        {
+            if(validateDot.contains("."))
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Information sur la sauvegarde");
+                alert.setContentText("Le nom de la sauvegarde ne peut contenir de POINT");
+                alert.showAndWait();
+            }
+
+            m_parentController.m_enregistrement.serialize(validateDot, m_parentController.m_controller.getController());
+            Stage stage = (Stage) boutonSauvegarder.getScene().getWindow();
+            stage.close();    
+        }
     }
 }

@@ -6,12 +6,13 @@
 package domain;
 
 import domain.SurfaceJeu;
+import java.io.Serializable;
 
 /**
  *
  * @author louis
  */
-public class ImageParImage {
+public class ImageParImage implements Serializable{
     
     private String m_nomMode;
 }

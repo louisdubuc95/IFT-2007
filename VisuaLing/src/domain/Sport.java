@@ -6,13 +6,14 @@
 package domain;
 
 import domain.SurfaceJeu;
+import java.io.Serializable;
 import javafx.scene.image.Image;
 
 /**
  *
  * @author willl
  */
-public class Sport {
+public class Sport implements Serializable{
     private String m_nomSport;
     private Image m_imageSurface;
     

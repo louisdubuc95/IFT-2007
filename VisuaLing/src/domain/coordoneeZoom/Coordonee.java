@@ -5,11 +5,13 @@
  */
 package domain.coordoneeZoom;
 
+import java.io.Serializable;
+
 /**
  *
  * @author louis
  */
-public class Coordonee {
+public class Coordonee implements Serializable{
     
   
     private double m_dimensionX ; 

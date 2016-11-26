@@ -5,6 +5,7 @@
  */
 package gui;
 
+import controller.VisuaLigueController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +28,8 @@ import java.util.*;
 import java.awt.event.*;
 import javafx.event.EventHandler;
 import javafx.scene.control.ButtonBase;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.StageStyle;
 /**
  * FXML Controller class
  *
@@ -71,11 +74,36 @@ public class Interface_accueilController implements Initializable {
 
     @FXML
     private void boutonChargerAction(ActionEvent event)throws IOException {
-        Parent Interface_liste_complete_enregistrement_parent = FXMLLoader.load (getClass().getResource("Interface_liste_complete_enregistrement.fxml"));
-        Scene Interface_liste_complete_enregistrement_scene = new Scene (Interface_liste_complete_enregistrement_parent); 
-        Stage window = (Stage) boutonCharger.getScene().getWindow();
-        window.setScene(Interface_liste_complete_enregistrement_scene);
-        window.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
+
+            for(ToggleButton TB: listTB)
+            {
+                if(TB.isSelected())
+                {
+                    String s = TB.getText();
+                    String[] partiesPath = s.split("\n");
+                    String pathFichier = partiesPath[0];
+                    pathFichier = pathFichier.replaceAll("Nom du fichier  :  ", "");
+                    String extension = pathFichier.replaceAll(".*\\.", "");
+                    pathFichier = "src/savedStrategies/"+pathFichier;
+                    
+                   
+                    if(extension.equals("IPI"))
+                    {
+                        Stage stage = new Stage(StageStyle.DECORATED);
+                        stage.setTitle( "- mode Image par Images");
+                        stage.setScene(new Scene((AnchorPane) loader.load()));
+                        stage.setMaximized(true);
+                        Interface_image_par_imageController IPIController = loader.<Interface_image_par_imageController>getController();
+
+                        VisuaLigueController controller = IPIController.m_enregistrement.deSerialize(pathFichier);
+                        IPIController.setController(controller);
+                    
+                        //Show la nouvelle window
+                        stage.show();
+                    }
+                }
+            } 
     }
 
     //Quitter la scene

@@ -9,13 +9,14 @@ package domain.joueur;
  *
  * @author louis
  */
-import javafx.scene.paint.Color;
 import java.awt.Point; 
 import java.awt.geom.Point2D;
 import domain.equipe.Equipe;
+import java.awt.Color;
+import java.io.Serializable;
 
 
-public class Joueur{
+public class Joueur implements Serializable{
     
     public static int nb_joueur = 0;
     

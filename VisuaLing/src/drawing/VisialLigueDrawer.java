@@ -5,10 +5,12 @@
  */
 package drawing;
 
+import java.io.Serializable;
+
 /**
  *
  * @author louis
  */
-public class VisialLigueDrawer {
+public class VisialLigueDrawer implements Serializable{
     
 }

@@ -7,7 +7,6 @@ package controller;
 
 import java.awt.Point;
 import java.util.List;
-import javafx.scene.paint.Color;
 import domain.SurfaceJeu;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -16,6 +15,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import domain.equipe.Equipe;
 import domain.joueur.Joueur;
+import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -36,7 +36,7 @@ public class VisuaLigueController implements java.io.Serializable{
         m_surfaceJeu = new SurfaceJeu();
     }
     
-    public void setImageSurface(String p_pathImage)
+    public void setImageSurface(String p_pathImage) throws IOException
     {   
         m_surfaceJeu.setImageSurface(p_pathImage);
     }
@@ -106,5 +106,16 @@ public class VisuaLigueController implements java.io.Serializable{
     return m_surfaceJeu.getDimensionY();
     }
     
+    public VisuaLigueController getController(){
+        return this;
+    }
+    
+    public void setNombreEquipe(int p_nombreEquiep){
+        m_surfaceJeu.setNombreEquipe(p_nombreEquiep);
+    }
+    
+    public int getNombreEquipe(){
+        return m_surfaceJeu.getNombreEquipe();
+    }
     
 }
