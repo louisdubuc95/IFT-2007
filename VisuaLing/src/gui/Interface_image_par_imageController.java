@@ -632,6 +632,7 @@ public class Interface_image_par_imageController implements Initializable {
             if(t.getButton()==MouseButton.PRIMARY)
             {
             List<Equipe> listeEquipe = m_controller.getListEquipe();
+            
             cercleCourant.setCenterX(t.getX());
             cercleCourant.setCenterY(t.getY());
             float xCercle =(float)cercleCourant.getCenterX();
@@ -639,9 +640,7 @@ public class Interface_image_par_imageController implements Initializable {
             Point2D.Float point = new Point2D.Float(xCercle,yCercle);
             joueurCourant.setCoordonneesJoueur(point);
             //conteneurJoueur.getChildren().clear();
-            
-            
-            
+
             
             
             /*for(Equipe e : listeEquipe)
@@ -746,10 +745,13 @@ public class Interface_image_par_imageController implements Initializable {
             double doubleDimensionX;
             double doubleDimensionY ;
             doubleDimensionX = Double.valueOf(testDimensionX.getText());
-            doubleDimensionY = Double.valueOf(testDimensionX.getText());
+            doubleDimensionY = Double.valueOf(testDimensionY.getText());
+            testDimensionX.setVisible(false);
+            testDimensionY.setVisible(false);
             
             String msg0 = "X : " +  dimensionX + " Y : "  + dimensionY;
             String msg1 = "X : " +  dimensionX/doubleDimensionX + " Y : "  + dimensionY/doubleDimensionY;
+            labelcoordonneeI.setText(msg0);
             labelcoordonneeI1.setText(msg1);
         });
     }

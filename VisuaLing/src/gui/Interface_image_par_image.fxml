@@ -161,7 +161,7 @@
                </image>
             </ImageView>
             <Canvas fx:id="canevasInterface" height="537.0" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" onScroll="#zoom" width="1083.0" />
-            <Pane fx:id="conteneurJoueur" onMouseClicked="#ajouterJoueurInterface" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="conteneurJoueur" onMouseClicked="#ajouterJoueurInterface" onMouseMoved="#coordonnee_interfaceI" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </StackPane>
       <HBox fx:id="boiteHorizontaleBouton2" layoutY="82.0" prefHeight="90.0" prefWidth="1084.0">
@@ -191,6 +191,11 @@
                            </padding>
                         </Label>
                         <Label fx:id="testDimensionY" layoutX="212.0" layoutY="30.0" text="Y">
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="labelcoordonneeI1" layoutX="190.0" layoutY="30.0" text="X : 0   Y : 0">
                            <padding>
                               <Insets top="7.0" />
                            </padding>
