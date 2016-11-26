@@ -91,19 +91,23 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
     @FXML private Pane conteneurJoueur;
-
+    @FXML private CheckBox afficherRPJoueur;
+    @FXML private boolean desafficherRPJoueur;
     @FXML ImageView imgsurface ;
     
     
     
     private Joueur joueurCourant;
     private Color couleurCourante;
+    private Circle cercleCourant;
     
     
     
     
     //coordonée
     @FXML private Label labelcoordonneeI;
+    @FXML private Label labelcoordonneeI1;
+    
     @FXML private Label  coordoneeI ;
     
     @FXML private String imagePath;
@@ -350,6 +354,17 @@ public class Interface_image_par_imageController implements Initializable {
         }   
     }
     
+    @FXML void afficherRoleJoueur(ActionEvent e) throws IOException{
+        if(afficherRPJoueur.isSelected())
+        {
+            
+        }
+        if(!afficherRPJoueur.isSelected())
+        {
+            
+        }
+    }
+    
     @FXML
     public void ajouterObstacleAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
@@ -561,10 +576,14 @@ public class Interface_image_par_imageController implements Initializable {
                     if((xJoueur == xCercle) && (yJoueur == yCercle))
                     {
                         joueurCourant=j;
-                        /*System.out.println(j.getCoordonneesJoueur().x);
+                        cercleCourant= cercle;
+                        System.out.println(j.getCoordonneesJoueur().x);
                         System.out.println(j.getCoordonneesJoueur().y);
-                        System.out.println(cercle.getCenterX());
-                        System.out.println(cercle.getCenterY());*/
+                        System.out.println(cercleCourant.getCenterX());
+                        System.out.println(cercleCourant.getCenterY());
+                        System.out.println("--------------------------------------------------------");
+                        
+
                     }
                 }
             }
@@ -572,7 +591,7 @@ public class Interface_image_par_imageController implements Initializable {
 /////////////////////////////////////////////////////////////////
     EventHandler<MouseEvent> circleOnMousePressedEventHandler = 
         (MouseEvent t) -> {
-            if(t.getButton()==MouseButton.SECONDARY)
+            if(t.getButton()==MouseButton.PRIMARY)
             {
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
@@ -588,7 +607,7 @@ public class Interface_image_par_imageController implements Initializable {
  
         @Override
         public void handle(MouseEvent t) {
-            if(t.getButton()==MouseButton.SECONDARY)
+            if(t.getButton()==MouseButton.PRIMARY)
             {
                 double offsetX = t.getSceneX() - orgSceneX;
                 double offsetY = t.getSceneY() - orgSceneY;
@@ -612,13 +631,31 @@ public class Interface_image_par_imageController implements Initializable {
         public void handle(MouseEvent t) {
             if(t.getButton()==MouseButton.PRIMARY)
             {
-            Circle cercle = (Circle)t.getSource();
-            cercle.setCenterX(t.getX());
-            cercle.setCenterY(t.getY());
-            float xCercle =(float)cercle.getCenterX();
-            float yCercle=(float)cercle.getCenterY();
+            List<Equipe> listeEquipe = m_controller.getListEquipe();
+            cercleCourant.setCenterX(t.getX());
+            cercleCourant.setCenterY(t.getY());
+            float xCercle =(float)cercleCourant.getCenterX();
+            float yCercle=(float)cercleCourant.getCenterY();
             Point2D.Float point = new Point2D.Float(xCercle,yCercle);
             joueurCourant.setCoordonneesJoueur(point);
+            //conteneurJoueur.getChildren().clear();
+            
+            
+            
+            
+            
+            /*for(Equipe e : listeEquipe)
+            {
+                
+                for(Joueur j : e.getList_joueurs())
+                {   
+                    Circle cercle2 = new Circle(15, j.getCouleurChandail());
+                    cercle2.setCenterX(j.getCoordonneesJoueur().x);
+                    cercle2.setCenterY(j.getCoordonneesJoueur().y);
+                    conteneurJoueur.getChildren().add(cercle2);
+
+                }
+            }*/
             }
     };
    };
@@ -697,26 +734,25 @@ public class Interface_image_par_imageController implements Initializable {
      */
     @FXML
     public void coordonnee_interfaceI (){
-        canevasInterface.setOnMouseMoved(new EventHandler<MouseEvent>() {
-      @Override public void handle(MouseEvent event) {
-          // 1056 (nb de pixel de largeur) / 18.57 = 60.96m (grandeur patinoire nhl) 
-          // 537  (nb de pixel de hauteur  / 20.73 = 25.8m (grandeur patinoire ngl)
-          // on va remplacer la grandeur par les parametres entré par l'utilisateur.
-          //je suis pas certain si je peux mettre ca ici ou il faut que ce soit dans le controleur de larman. 
-          // et je sais pas trop comment limité au centième...ca reste a voir
-        double dimensionX = event.getX() ;
-        double dimensionY = event.getY(); 
-        
-        double doubleDimensionX; 
-        double doubleDimensionY ; 
-        doubleDimensionX = Double.valueOf(testDimensionX.getText());
-        doubleDimensionY = Double.valueOf(testDimensionX.getText());
-        
-        String msg1 = "X : " +  dimensionX/doubleDimensionX + " Y : "  + dimensionY/doubleDimensionY;
-        labelcoordonneeI.setText(msg1);
-       
-        }
-    });
+        conteneurJoueur.setOnMouseMoved((MouseEvent event) -> {
+            // 1056 (nb de pixel de largeur) / 18.57 = 60.96m (grandeur patinoire nhl)
+            // 537  (nb de pixel de hauteur  / 20.73 = 25.8m (grandeur patinoire ngl)
+            // on va remplacer la grandeur par les parametres entré par l'utilisateur.
+            //je suis pas certain si je peux mettre ca ici ou il faut que ce soit dans le controleur de larman.
+            // et je sais pas trop comment limité au centième...ca reste a voir
+            double dimensionX = event.getX() ;
+            double dimensionY = event.getY();
+            
+            double doubleDimensionX;
+            double doubleDimensionY ;
+            doubleDimensionX = Double.valueOf(testDimensionX.getText());
+            doubleDimensionY = Double.valueOf(testDimensionX.getText());
+            
+            String msg0 = "X : " +  dimensionX + " Y : "  + dimensionY;
+            String msg1 = "X : " +  dimensionX/doubleDimensionX + " Y : "  + dimensionY/doubleDimensionY;
+            labelcoordonneeI.setText(msg0);
+            labelcoordonneeI1.setText(msg1);
+        });
     }
     
    @FXML
