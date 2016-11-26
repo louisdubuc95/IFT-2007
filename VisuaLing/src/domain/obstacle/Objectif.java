@@ -5,14 +5,15 @@
  */
 package domain.obstacle;
 
+import java.awt.Image;
 import java.awt.geom.Point2D;
-import javafx.scene.image.Image;
+import java.io.Serializable;
 
 /**
  *
  * @author willl
  */
-public abstract class Objectif{
+public abstract class Objectif implements Serializable{
     private Point2D.Float m_position;
      
     public Objectif (Point2D.Float p_point){
