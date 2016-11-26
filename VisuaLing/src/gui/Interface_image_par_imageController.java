@@ -896,10 +896,15 @@ public class Interface_image_par_imageController implements Initializable {
             java.awt.Color couleurAWTEquipe = joueurAjouter.getCouleurChandail();
             Color colorJoueur = javafx.scene.paint.Color.rgb(couleurAWTEquipe.getRed(), couleurAWTEquipe.getGreen(), couleurAWTEquipe.getBlue(), couleurAWTEquipe.getAlpha()/255.0);
             
-            Circle cercle2 = new Circle(15, colorJoueur);
-            cercle2.setCenterX(joueurAjouter.getCoordonneesJoueur().x);
-            cercle2.setCenterY(joueurAjouter.getCoordonneesJoueur().y);
-            conteneurJoueur.getChildren().add(cercle2);
+            Circle cercle = new Circle(15, colorJoueur);
+            cercle.setLayoutX(joueurAjouter.getCoordonneesJoueur().x);
+            cercle.setLayoutY(joueurAjouter.getCoordonneesJoueur().y);
+            conteneurJoueur.getChildren().add(cercle);
+            cercle.setOnMousePressed(circleOnMousePressedEventHandler);
+            cercle.setOnMouseDragged(circleOnMouseDraggedEventHandler);
+            cercle.setOnMouseEntered(circleOnMouseEnteredEventHandler);
+            cercle.setOnMouseReleased(circleOnMouseReleasedEventHandler);
+            cercle.setOnMouseClicked(circleOnRightMouseClickEventHandler);
         }
     }
 
