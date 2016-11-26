@@ -750,7 +750,6 @@ public class Interface_image_par_imageController implements Initializable {
             
             String msg0 = "X : " +  dimensionX + " Y : "  + dimensionY;
             String msg1 = "X : " +  dimensionX/doubleDimensionX + " Y : "  + dimensionY/doubleDimensionY;
-            labelcoordonneeI.setText(msg0);
             labelcoordonneeI1.setText(msg1);
         });
     }
