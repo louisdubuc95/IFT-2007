@@ -97,7 +97,8 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private boolean desafficherRPJoueur;
     @FXML ImageView imgsurface ;
     
-    
+    @FXML private ToggleButton toggleRecommencer ;
+    @FXML private ToggleButton toggleDebuter ;
     
     private Joueur joueurCourant;
     private Color couleurCourante;
@@ -699,7 +700,26 @@ public class Interface_image_par_imageController implements Initializable {
     };
    };
             
+    @FXML 
+    public void toggleRecommencerAction (){
+        if (toggleRecommencer.isSelected()){
+            toggleDebuter.setDisable(true);
+        }
+        if (!toggleRecommencer.isSelected()){
+            toggleDebuter.setDisable(false);
+        }
+    }
     
+    @FXML
+    public void toggleDebuterAction (){
+        if (toggleDebuter.isSelected()){
+            toggleRecommencer.setDisable(true);
+        }
+        
+        if (!toggleDebuter.isSelected()){
+            toggleRecommencer.setDisable(false);
+        }
+    }
     //@FXML
     public void setEquipe(String p_equipe) {
         m_equipe= p_equipe;

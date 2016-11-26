@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="boiteverticale" prefHeight="716.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
+<AnchorPane fx:id="boiteverticale" prefHeight="716.0" prefWidth="1083.0" style="-fx-background-color: grey; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
    <children>
       <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1084.0">
          <menus>
@@ -44,7 +44,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <HBox fx:id="boiteHorizontaleBouton" layoutY="26.0" maxHeight="-Infinity" prefHeight="53.0" prefWidth="1083.0" spacing="8.0">
+      <HBox fx:id="boiteHorizontaleBouton" layoutY="26.0" maxHeight="-Infinity" prefHeight="53.0" prefWidth="1084.0" spacing="8.0">
          <children>
             <ImageView fitHeight="44.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -82,7 +82,7 @@
                <HBox.margin>
                   <Insets />
                </HBox.margin></Separator>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+            <ToggleButton fx:id="toggleRecommencer" mnemonicParsing="false" onAction="#toggleRecommencerAction" prefHeight="50.0" prefWidth="58.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,13 +90,10 @@
                      </image>
                   </ImageView>
                </graphic>
-               <tooltip>
-                  <Tooltip text="Reculer" />
-               </tooltip>
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
-            </Button>
+            </ToggleButton>
             <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
@@ -112,7 +109,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="59.0">
+            <ToggleButton fx:id="toggleDebuter" mnemonicParsing="false" onAction="#toggleDebuterAction" prefHeight="50.0" prefWidth="58.0">
                <graphic>
                   <ImageView fitHeight="46.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -123,8 +120,8 @@
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="37.0">
+            </ToggleButton>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -206,7 +203,7 @@
                   <Insets left="10.0" />
                </padding>
             </TitledPane>
-            <TitledPane animated="false" prefHeight="90.0" prefWidth="233.0" text="Contrainte sur l'affichage des joueurs">
+            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="233.0" text="Contrainte sur l'affichage des joueurs">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="80.0">
                      <children>
@@ -224,7 +221,7 @@
                </padding>
             </TitledPane>
             <Separator fx:id="separateur10" maxHeight="119.0" minHeight="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="40.0" visible="false" />
-            <TitledPane animated="false" prefHeight="90.0" prefWidth="238.0" text="Contrainte sur le nombre de joueur">
+            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="238.0" text="Contrainte sur le nombre de joueur">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="0.0">
                      <children>
@@ -261,7 +258,7 @@
                   </AnchorPane>
                </content>
                <HBox.margin>
-                  <Insets left="8.0" right="1.0" />
+                  <Insets left="8.0" right="2.0" />
                </HBox.margin>
             </TitledPane>
          </children>
