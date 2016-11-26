@@ -68,6 +68,9 @@ public class SurfaceJeu implements Serializable{
     //private Equipe m_equipe;
     
     
+    private List<List<Joueur>> listeImages;
+    
+    
     public SurfaceJeu()
     {
     this.m_ListeJoueur = new ArrayList();
@@ -365,5 +368,15 @@ public class SurfaceJeu implements Serializable{
 
     public String getImageSurface() {
         return m_imgFond;
+    }
+    
+    public void addListeSauvegardeJoueur(List<Joueur> liste)
+    {
+        listeImages.add(liste);
+    }
+    
+    public List<List<Joueur>> getListeSauvegardeJoueur()
+    {
+        return listeImages;
     }
 }

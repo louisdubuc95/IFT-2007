@@ -122,4 +122,15 @@ public class VisuaLigueController implements java.io.Serializable{
         return m_surfaceJeu.getImageSurface();
     }
     
+    
+    public void addListeSauvegardeJoueur(List<Joueur> list)
+    {
+        m_surfaceJeu.addListeSauvegardeJoueur(list);
+    }
+    
+    public List<List<Joueur>> getListeSauvegardeJoueur()
+    {
+        return m_surfaceJeu.getListeSauvegardeJoueur();
+    }
+    
 }

@@ -48,6 +48,7 @@ import javafx.stage.StageStyle;
 import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -104,7 +105,7 @@ public class Interface_image_par_imageController implements Initializable {
     private Color couleurCourante;
     private Circle cercleCourant;
     
-    
+    private int indexListe;
     
     
     //coordonée
@@ -699,6 +700,77 @@ public class Interface_image_par_imageController implements Initializable {
             
     };
    };
+        
+        
+        
+       @FXML   
+   public void creerImage(ActionEvent e)
+   {
+       ObservableList<Node> listeC = conteneurJoueur.getChildren();
+       List<Joueur> listeJ = m_controller.getListJoueurs();
+       List<Joueur> listeSauvegarde = new ArrayList<>();
+       for(Joueur j : listeJ)
+        { 
+                for(Node cercle : listeC)
+                {
+                    float xJoueur=j.getCoordonneesJoueur().x;
+                    float yJoueur=j.getCoordonneesJoueur().y;
+                    float xCercle =(float)cercle.getLayoutX();
+                    float yCercle=(float)cercle.getLayoutY();
+                    if((xJoueur == xCercle) && (yJoueur == yCercle))
+                    {
+                        if(cercle.isVisible()==true)
+                        {
+                        cercle.setVisible(false);
+                        listeSauvegarde.add(j);
+                        }
+                    }
+                }
+        }
+        m_controller.addListeSauvegardeJoueur(listeSauvegarde); 
+   }
+   
+   
+   @FXML
+   public void debuterStrategie(ActionEvent e)
+   {
+       List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
+       ObservableList<Node> listeC = conteneurJoueur.getChildren();
+       indexListe=0;
+       
+       
+       while(indexListe<listeSauvegardeJoueur.size())
+       {
+           for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+           {
+               for(Node cercle : listeC)
+               {
+                    float xJoueur=J.getCoordonneesJoueur().x;
+                    float yJoueur=J.getCoordonneesJoueur().y;
+                    float xCercle =(float)cercle.getLayoutX();
+                    float yCercle=(float)cercle.getLayoutY();
+                   
+                   
+                   
+                    if((xJoueur == xCercle) && (yJoueur == yCercle))
+                     {
+                         if(cercle.isVisible()==true)
+                         {
+                         cercle.setVisible(true);
+                         }
+                     }
+               } 
+            
+               
+               
+            //Timer
+            //3 secondes
+            
+           }
+       }
+       
+       
+   }
             
     @FXML 
     public void toggleRecommencerAction (){

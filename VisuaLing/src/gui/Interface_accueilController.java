@@ -129,9 +129,9 @@ public class Interface_accueilController implements Initializable {
     File[] listOfFiles = folder.listFiles();
     
     for (File file : listOfFiles) {
-      String extension = ".ser";
-      //if (file.getAbsolutePath().endsWith(extension)) {
-      if (file.isFile()) {
+      String extensionIPI = ".IPI";
+      String extensionTR = ".TR";
+      if (file.getAbsolutePath().endsWith(extensionIPI) || file.getAbsolutePath().endsWith(extensionTR)) {
         ToggleButton TB = new ToggleButton("Label " + file.getName());
         listTB.add(TB);
         TB.setMinHeight(100);
