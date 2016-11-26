@@ -5,6 +5,7 @@
  */
 package gui;
 
+import controller.VisuaLigueController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -83,7 +84,7 @@ public class Interface_creer_sport_IPIController implements Initializable {
     private VBox content;
     @FXML
     private List<ToggleButton> listTB = new ArrayList<ToggleButton>();
-    
+     public VisuaLigueController m_controller = new VisuaLigueController();
     //Accéder a l'interface image par image 
     @FXML
       public void bouton_InterfaceImageParImageAction (ActionEvent event)throws IOException {
@@ -134,7 +135,12 @@ public class Interface_creer_sport_IPIController implements Initializable {
 
                         int i = Integer.parseInt(txtNbEquipe.getText());
                         IPIController.setNombreEquipeInterface(i);
-
+                        
+                        /*double p_dimensionX = Double.valueOf(txtDimensionX.getText());
+                        
+                        m_controller.setDimensionX(p_dimensionX);
+                        double p_dimensionY = Double.valueOf(txtDimensionY.getText());
+                        m_controller.setDimensionY(p_dimensionY);*/
                         IPIController.getX(txtDimensionX.getText());
                         IPIController.getY(txtDimensionY.getText());
 

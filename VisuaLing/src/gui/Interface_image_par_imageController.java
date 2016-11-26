@@ -165,13 +165,11 @@ public class Interface_image_par_imageController implements Initializable {
     separateur5.prefWidthProperty().bind(boiteHorizontaleBouton.widthProperty());
     separateur10.prefWidthProperty().bind(boiteHorizontaleBouton2.widthProperty());
     boiteHorizontaleBouton2.prefWidthProperty().bind(boiteverticale.widthProperty());
-    /*separateur10.prefWidthProperty().bind(boutonTransfert.prefWidthProperty());
-    separateur10.prefWidthProperty().bind(boiteHorizontaleBouton2.prefWidthProperty());*/
+   
     
-    
-    stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
+   // stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
     stackSurface.toBack();
-    stackSurface.setAlignment(Pos.CENTER); 
+   // stackSurface.setAlignment(Pos.CENTER); 
     imgsurface.scaleXProperty().bind(myScale);
     imgsurface.scaleYProperty().bind(myScale);
     conteneurJoueur.scaleXProperty().bind(myScale);
@@ -182,11 +180,14 @@ public class Interface_image_par_imageController implements Initializable {
    public void getX(String dimensionX){
      testDimensionX.setText(dimensionX); 
      m_x = Double.parseDouble(dimensionX);
+     m_controller.setDimensionX(m_x);
      
    }
    public void getY(String dimensionY){
     testDimensionY.setText(dimensionY);
     m_y = Double.parseDouble(dimensionY);
+    m_controller.setDimensionY(m_y);
+     
    }
    
     @FXML
@@ -747,18 +748,14 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML
     public void coordonnee_interfaceI (){
         conteneurJoueur.setOnMouseMoved((MouseEvent event) -> {
-            // 1056 (nb de pixel de largeur) / 18.57 = 60.96m (grandeur patinoire nhl)
-            // 537  (nb de pixel de hauteur  / 20.73 = 25.8m (grandeur patinoire ngl)
-            // on va remplacer la grandeur par les parametres entré par l'utilisateur.
-            //je suis pas certain si je peux mettre ca ici ou il faut que ce soit dans le controleur de larman.
-            // et je sais pas trop comment limité au centième...ca reste a voir
+            
             double dimensionX = event.getX() ;
             double dimensionY = event.getY();
             
             double doubleDimensionX;
             double doubleDimensionY ;
-            doubleDimensionX = Double.valueOf(testDimensionX.getText());
-            doubleDimensionY = Double.valueOf(testDimensionY.getText());
+            doubleDimensionX = m_controller.getDimensionX() ;
+            doubleDimensionY = m_controller.getDimensionY();
             testDimensionX.setVisible(false);
             testDimensionY.setVisible(false);
             
@@ -788,14 +785,14 @@ public class Interface_image_par_imageController implements Initializable {
         @Override public void handle(MouseEvent event) { 
             if(event.isSecondaryButtonDown()){  
             conteneurJoueur.setTranslateX(transfererPositionX + 
-                    event.getSceneX() - sourisPositionX);
+                    (event.getSceneX() - sourisPositionX));
             conteneurJoueur.setTranslateY(transfererPositionY + 
-                    event.getSceneY() - sourisPositionY);
+                    (event.getSceneY() - sourisPositionY));
             
             imgsurface.setTranslateX(transfererPositionX + 
-                    event.getSceneX() - sourisPositionX);
+                    (event.getSceneX() - sourisPositionX));
             imgsurface.setTranslateY(transfererPositionY + 
-                    event.getSceneY() -  sourisPositionY);
+                    (event.getSceneY() -  sourisPositionY));
             event.consume();
             }
         }

@@ -227,6 +227,10 @@ public class SurfaceJeu {
         }
         m_ListeEquipes.add(new Equipe(nom,couleur));
     }
+     public void addCoordonee (Double p_dimensionX, Double p_dimensionY){
+         
+       
+    }
     
     public void addRole(String role) throws Exception
     {
@@ -377,4 +381,6 @@ public class SurfaceJeu {
     public double getDimensionY(){
         return m_Coordonee.getDimensionY();
     }
+    
+   
 }
