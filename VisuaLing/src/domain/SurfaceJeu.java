@@ -50,8 +50,8 @@ public class SurfaceJeu implements Serializable{
     private List<Obstacle> m_ListeObstacle;
     private List<Objectif> m_ListeObjectifs;
     private List<Equipe> m_ListeEquipes;
-    private List<String> m_ListeRole = new ArrayList<>();
-    private List<String> m_ListePosition = new ArrayList<>();
+    private List<String> m_ListeRole;
+    private List<String> m_ListePosition;
     private String m_imgFond;
     private boolean m_Etat;
     private int m_Temps;
@@ -81,9 +81,12 @@ public class SurfaceJeu implements Serializable{
     this.m_ListeObjectifs = new ArrayList();
     this.m_ListeEquipes = new ArrayList();
     this.m_Coordonee = new Coordonee ();
+    this.listeImages = new ArrayList();
     this.m_nombreEquipe = 0;
     this.m_joueurMax = 0;
     this.m_stateMaxJoueur = false;
+    this.m_ListePosition = new ArrayList<>();
+    this.m_ListeRole = new ArrayList<>();
 
     this.m_Etat = false;
     this.m_Temps = 0;
@@ -275,62 +278,6 @@ public class SurfaceJeu implements Serializable{
     {   
         m_imgFond = p_pathImage;
     }
-    
-//     public void Dessiner(Canvas p_graphics)
-//    {
-//        Point2D.Float coordJoueur;
-//        Point2D.Float coordObstacle;
-//        Point2D.Float coordObjectif;
-//        Image imgObs;
-//        Image imgObj;
-//        GraphicsContext gc = p_graphics.getGraphicsContext2D();
-//        
-//        for(int i=0;i < m_ListeJoueur.size();i++)
-//        {
-//            //Prend les joueurs de la liste 1 par 1
-//            Joueur ajouterJoueur = m_ListeJoueur.get(i);    
-//            
-//            //Prend la couleur de joueur
-//            Color couleurChandail = ajouterJoueur.getCouleurChandail();
-//            
-//            //Prend les coordonnée du joueur
-//            coordJoueur = ajouterJoueur.getCoordonneesJoueur();
-//                    
-//            //Dessine le joueur
-//            gc.setFill(couleurChandail);
-//            gc.fillOval(coordJoueur.x,coordJoueur.y, 20,20);
-//        }
-//        
-//        for(int j=0;j<m_ListeObstacle.size();j++)
-//        {
-//            //Prend les obstacle 1 par 1 
-//            Obstacle ajouterObs = m_ListeObstacle.get(j);
-//            
-//            //Prend l'image de l'obstacle
-//            imgObs = ajouterObs.getImageObs();
-//            
-//            //Prend la coordonnée de l'obstacle
-//            coordObstacle = ajouterObs.getCoordonneeObs();
-//            
-//            //Desine l'obstacle
-//            gc.drawImage(imgObs, coordObstacle.x, coordObstacle.y);
-//        }
-//        
-//        for(int x=0;x<m_ListeObjectifs.size();x++)
-//        {
-//            //Prend les obstacle 1 par 1 
-//            Objectif ajouterObj = m_ListeObjectifs.get(x);
-//            
-//            //Prend l'image de l'obstacle
-//            imgObj = ajouterObj.getImage();
-//            
-//            //Prend la coordonnée de l'obstacle
-//            coordObjectif = ajouterObj.getCoordonneesObj();
-//            
-//            //Desine l'obstacle
-//            gc.drawImage(imgObj, coordObjectif.x, coordObjectif.y);
-//        }
-//    }
 
     public List<Joueur> getListeJoueur(){
         return m_ListeJoueur;
