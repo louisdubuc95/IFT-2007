@@ -207,7 +207,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="80.0">
                      <children>
-                        <CheckBox fx:id="afficherRPJoueur" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" onAction="#cb_maxJoueur" prefHeight="17.0" prefWidth="248.0" text="Afficher le rôle et la position">
+                        <CheckBox fx:id="afficherRPJoueur" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" onAction="#afficherRPJoueurAction" prefHeight="17.0" prefWidth="248.0" text="Afficher le rôle et la position">
                            <padding>
                               <Insets left="4.0" />
                            </padding>

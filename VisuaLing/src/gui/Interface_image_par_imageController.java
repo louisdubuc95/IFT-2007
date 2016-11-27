@@ -140,8 +140,15 @@ public class Interface_image_par_imageController implements Initializable {
     private double m_x;
     private double m_y;
     
+    private List<Label> list_labelRolePosition = new ArrayList<>();
+    private Label label_rolePositionCourant;
+    private boolean label_afficherRolePosition = false;
+    
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
+    
+    double label_orgSceneX, label_orgSceneY;
+    double label_orgTranslateX, label_orgTranslateY;
     
     private DoubleProperty myScale = new SimpleDoubleProperty(1.0);
     double sourisPositionX;
@@ -453,6 +460,29 @@ public class Interface_image_par_imageController implements Initializable {
             stage.show();
     }
     
+    @FXML
+    public void afficherRPJoueurAction(ActionEvent event) throws IOException
+    {
+        if (label_afficherRolePosition)
+        {
+            for (Label label : list_labelRolePosition)
+            {
+                label.setVisible(false);
+            }
+            
+            label_afficherRolePosition = false;
+        }
+        else
+        {
+            for (Label label : list_labelRolePosition)
+            {
+                label.setVisible(true);
+            }
+            
+            label_afficherRolePosition = true;
+        }
+    }
+    
     @FXML 
     public void ajouterJoueurInterface()  {
         List<Equipe> listeEquipe = m_controller.getListEquipe();
@@ -535,7 +565,15 @@ public class Interface_image_par_imageController implements Initializable {
                                 {
                                     java.awt.Color couleurAWTEquipe = equipe.getCouleur();
                                     Color couleurEquipe = javafx.scene.paint.Color.rgb(couleurAWTEquipe.getRed(), couleurAWTEquipe.getGreen(), couleurAWTEquipe.getBlue(), couleurAWTEquipe.getAlpha()/255.0);
-
+                                    
+                                    m_controller.addJoueur(p, couleurAWTEquipe, m_role, m_position, m_orientation, equipe);
+                                    List<Joueur> liste_joueurs = m_controller.getListJoueurs();
+                                    Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
+                                    Equipe equipe_joueur = dernierJoueur.getEquipe();
+                                    equipe_joueur.addJoueur(dernierJoueur);
+                                    
+                                    int idJoueur = dernierJoueur.getId();
+                                    
                                     Circle cercle = new Circle(15, couleurEquipe);
                                     cercle.setLayoutX(event.getX());
                                     cercle.setLayoutY(event.getY());
@@ -545,17 +583,24 @@ public class Interface_image_par_imageController implements Initializable {
                                     cercle.setOnMouseEntered(circleOnMouseEnteredEventHandler);
                                     cercle.setOnMouseReleased(circleOnMouseReleasedEventHandler);
                                     cercle.setOnMouseClicked(circleOnRightMouseClickEventHandler);
+                                    cercle.setId(""+idJoueur);
+                                    
+                                    Label labelRolePosition = new Label(m_role + "\n" + m_position);
+                                    labelRolePosition.setLayoutX(event.getX()+20);
+                                    labelRolePosition.setLayoutY(event.getY()-15);
+                                    labelRolePosition.setId(""+idJoueur);
+                                    labelRolePosition.setVisible(false);
+                                    
+                                    if (label_afficherRolePosition)
+                                    {
+                                        labelRolePosition.setVisible(true);
+                                    }
+                                    
+                                    list_labelRolePosition.add(labelRolePosition);
 
-                                    conteneurJoueur.getChildren().add(cercle);
-                                    /*
-                                    GraphicsContext gc = canevasInterface.getGraphicsContext2D();
-                                    gc.setFill(couleurEquipe);
-                                    gc.fillOval(event.getX(),event.getY(),20,20);*/
-                                    m_controller.addJoueur(p, couleurAWTEquipe, m_role, m_position, m_orientation, equipe);
-                                    List<Joueur> liste_joueurs = m_controller.getListJoueurs();
-                                    Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
-                                    Equipe equipe_joueur = dernierJoueur.getEquipe();
-                                    equipe_joueur.addJoueur(dernierJoueur);
+                                    conteneurJoueur.getChildren().addAll(cercle, labelRolePosition);
+                                    
+                                    
                                 }
                             }
                         }
@@ -589,6 +634,7 @@ public class Interface_image_par_imageController implements Initializable {
                     {
                         joueurCourant=j;
                         cercleCourant= cercle;
+                        label_rolePositionCourant = getLabelRolePosition(j.getId());
                         System.out.println(j.getCoordonneesJoueur().x);
                         System.out.println(j.getCoordonneesJoueur().y);
                         System.out.println(cercleCourant.getLayoutX());
@@ -607,8 +653,12 @@ public class Interface_image_par_imageController implements Initializable {
             {
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
+            label_orgSceneX = t.getSceneX() + 20;
+            label_orgSceneY = t.getSceneY() - 15;
             orgTranslateX = ((Circle)(t.getSource())).getLayoutX();
             orgTranslateY = ((Circle)(t.getSource())).getLayoutY();
+            label_orgTranslateX = label_rolePositionCourant.getLayoutX();
+            label_orgTranslateY = label_rolePositionCourant.getLayoutY();
             }
             
     };
@@ -625,8 +675,14 @@ public class Interface_image_par_imageController implements Initializable {
                 double offsetY = t.getSceneY() - orgSceneY;
                 double newTranslateX = orgTranslateX + offsetX;
                 double newTranslateY = orgTranslateY + offsetY;
+                double label_offsetX = t.getSceneX() + 20 - label_orgSceneX;
+                double label_offsetY = t.getSceneY() - 15 - label_orgSceneY;
+                double label_newTranslateX = label_orgTranslateX + label_offsetX;
+                double label_newTranslateY = label_orgTranslateY + label_offsetY;
                 ((Circle)(t.getSource())).setLayoutX(newTranslateX);
                 ((Circle)(t.getSource())).setLayoutY(newTranslateY);
+                label_rolePositionCourant.setLayoutX(label_newTranslateX);
+                label_rolePositionCourant.setLayoutY(label_newTranslateY);
             }
         }
     };
@@ -641,25 +697,15 @@ public class Interface_image_par_imageController implements Initializable {
             {
             List<Equipe> listeEquipe = m_controller.getListEquipe();
             
-            cercleCourant.setCenterX(t.getX());
-            cercleCourant.setCenterY(t.getY());
+            //cercleCourant.setCenterX(t.getX());
+            //cercleCourant.setCenterY(t.getY());
             float xCercle =(float)cercleCourant.getLayoutX();
             float yCercle=(float)cercleCourant.getLayoutY();
+            label_rolePositionCourant.setLayoutX(xCercle+20);
+            label_rolePositionCourant.setLayoutY(yCercle-15);
             Point2D.Float point = new Point2D.Float(xCercle,yCercle);
             joueurCourant.setCoordonneesJoueur(point);
-            //conteneurJoueur.getChildren().clear();
-            /*for(Equipe e : listeEquipe)
-            {
-                
-                for(Joueur j : e.getList_joueurs())
-                {   
-                    Circle cercle2 = new Circle(15, j.getCouleurChandail());
-                    cercle2.setCenterX(j.getCoordonneesJoueur().x);
-                    cercle2.setCenterY(j.getCoordonneesJoueur().y);
-                    conteneurJoueur.getChildren().add(cercle2);
-
-                }
-            }*/
+            
             }
     };
    };
@@ -682,13 +728,14 @@ public class Interface_image_par_imageController implements Initializable {
                     for(Joueur j : e.getList_joueurs())
                     {   float xJoueur=j.getCoordonneesJoueur().x;
                         float yJoueur=j.getCoordonneesJoueur().y;
-                        float xCercle =(float)cercle.getCenterX();
-                        float yCercle=(float)cercle.getCenterY();
+                        float xCercle =(float)cercle.getLayoutX();
+                        float yCercle=(float)cercle.getLayoutY();
                         if((xJoueur == xCercle) && (yJoueur == yCercle))
                         {
                             e.getList_joueurs().remove(j);
                             System.out.println(e.getSize());
                             listeJoueur.remove(j);
+                            supprimerLabelRolePosition(j.getId());
                             break;
                         }
                     }
@@ -701,7 +748,48 @@ public class Interface_image_par_imageController implements Initializable {
     };
    };
         
+    public void supprimerLabelRolePosition(int idJoueur)
+    {
+        String idJoueurString = "" + idJoueur;
         
+        for (Label label : list_labelRolePosition)
+        {
+            if (idJoueurString.equals(label.getId()))
+            {
+                list_labelRolePosition.remove(label);
+                conteneurJoueur.getChildren().remove(label);
+                break;
+            }
+        }
+    }
+    
+    public Label getLabelRolePosition(String idJoueur)
+    {        
+        for (Iterator<Label> it = list_labelRolePosition.iterator(); it.hasNext();) {
+            Label label = it.next();
+            if (idJoueur.equals(label.getId()))
+            {
+                return label;
+            }
+        }
+        
+        return new Label();
+    }
+    
+    public Label getLabelRolePosition(int idJoueur)
+    {
+        String idJoueurString = "" + idJoueur;
+        
+        for (Iterator<Label> it = list_labelRolePosition.iterator(); it.hasNext();) {
+            Label label = it.next();
+            if (idJoueurString.equals(label.getId()))
+            {
+                return label;
+            }
+        }
+        
+        return new Label();
+    }
         
        @FXML   
    public void creerImage(ActionEvent e)
