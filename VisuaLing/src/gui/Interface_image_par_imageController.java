@@ -101,7 +101,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML ImageView imgsurface ;
     
     @FXML private ToggleButton toggleRecommencer ;
-    @FXML private ToggleButton toggleDebuter ;
+    @FXML private ToggleButton toggleDebuter;
     
     private Joueur joueurCourant;
     private Color couleurCourante;
@@ -834,17 +834,12 @@ public class Interface_image_par_imageController implements Initializable {
                     float yCercle=(float)cercle.getLayoutY();
                     if((xJoueur == xCercle) && (yJoueur == yCercle))
                     {      
-                        
-                        //System.out.println(String.valueOf(cercle.getOpacity()));  1.0
-                           if(cercle.getOpacity() == 1.0)
-                           {
-                                cercle.setOpacity(0.5);
-                                listeSauvegarde.add(j);
-                           }
-                           else
-                           {
-                               System.out.println("Else");
-                           }
+                        if(cercle.getOpacity() == 1.0)
+                        {
+                            cercle.setOpacity(127.0/255.0);
+                            listeSauvegarde.add(j);
+                        }
+
                     }
                 }
         }
@@ -862,25 +857,29 @@ public class Interface_image_par_imageController implements Initializable {
        
        while(indexListe<listeSauvegardeJoueur.size())
        {
-           for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+           if(indexListe == 0)
            {
-               for(Node cercle : listeC)
-               {
-                    float xJoueur=J.getCoordonneesJoueur().x;
-                    float yJoueur=J.getCoordonneesJoueur().y;
-                    float xCercle =(float)cercle.getLayoutX();
-                    float yCercle=(float)cercle.getLayoutY();
-                   
-                   
-                   
-                    if((xJoueur == xCercle) && (yJoueur == yCercle))
-                     {
-                         if(cercle.isVisible()==true)
-                         {
-                         cercle.setVisible(true);
-                         }
-                     }
-               }
+            for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+            {
+                for(Node cercle : listeC)
+                {
+                     float xJoueur=J.getCoordonneesJoueur().x;
+                     float yJoueur=J.getCoordonneesJoueur().y;
+                     float xCercle =(float)cercle.getLayoutX();
+                     float yCercle=(float)cercle.getLayoutY();
+
+
+
+                     if((xJoueur == xCercle) && (yJoueur == yCercle))
+                      {
+
+                      }
+                }
+            }
+           }
+           else
+           {
+               
            }
        }
             
@@ -1109,11 +1108,11 @@ public class Interface_image_par_imageController implements Initializable {
             
             //Convertie couleur AWT(domaine) à FX pour l'interface
             java.awt.Color couleurAWTEquipe = joueurAjouter.getCouleurChandail();
-            //System.out.println(String.valueOf(couleurAWTEquipe.getAlpha()));
-            Color colorJoueur = javafx.scene.paint.Color.rgb(couleurAWTEquipe.getRed(), couleurAWTEquipe.getGreen(), couleurAWTEquipe.getBlue(), couleurAWTEquipe.getAlpha()/255);
+            Color colorJoueur = javafx.scene.paint.Color.rgb(couleurAWTEquipe.getRed(), couleurAWTEquipe.getGreen(), couleurAWTEquipe.getBlue(), 1.0);
             
             
             Circle cercle = new Circle(15, colorJoueur);
+            cercle.setOpacity(couleurAWTEquipe.getAlpha()/255.0);
             cercle.setLayoutX(joueurAjouter.getCoordonneesJoueur().x);
             cercle.setLayoutY(joueurAjouter.getCoordonneesJoueur().y);
             cercle.setOnMousePressed(circleOnMousePressedEventHandler);
