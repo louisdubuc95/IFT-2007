@@ -48,6 +48,8 @@ import javafx.stage.StageStyle;
 import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -377,17 +379,6 @@ public class Interface_image_par_imageController implements Initializable {
         }   
     }
     
-    @FXML void afficherRoleJoueur(ActionEvent e) throws IOException{
-        if(afficherRPJoueur.isSelected())
-        {
-            
-        }
-        if(!afficherRPJoueur.isSelected())
-        {
-            
-        }
-    }
-    
     @FXML
     public void ajouterObstacleAction(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
@@ -457,6 +448,10 @@ public class Interface_image_par_imageController implements Initializable {
 
             Interface_SauvegardeController controllerSauvegarde = fxmlLoader.<Interface_SauvegardeController>getController();
             controllerSauvegarde.initialize(this);
+            if(!txtJoueurMax.getText().isEmpty())
+            {
+                controllerSauvegarde.setMaxJoueur(Integer.parseInt(txtJoueurMax.getText()));
+            }
             stage.show();
     }
     
@@ -469,8 +464,9 @@ public class Interface_image_par_imageController implements Initializable {
             {
                 label.setVisible(false);
             }
-            
+
             label_afficherRolePosition = false;
+            m_controller.setStateAfficherRP(label_afficherRolePosition);
         }
         else
         {
@@ -478,9 +474,11 @@ public class Interface_image_par_imageController implements Initializable {
             {
                 label.setVisible(true);
             }
-            
+
             label_afficherRolePosition = true;
+            m_controller.setStateAfficherRP(label_afficherRolePosition);
         }
+    
     }
     
     @FXML 
@@ -522,6 +520,13 @@ public class Interface_image_par_imageController implements Initializable {
                                             java.awt.Color couleurAWTEquipe = equipe.getCouleur();
                                             Color couleurEquipe = javafx.scene.paint.Color.rgb(couleurAWTEquipe.getRed(), couleurAWTEquipe.getGreen(), couleurAWTEquipe.getBlue(), couleurAWTEquipe.getAlpha()/255.0);
                                             
+                                            m_controller.addJoueur(p, couleurAWTEquipe, m_role, m_position, m_orientation, equipe);
+                                            List<Joueur> liste_joueurs = m_controller.getListJoueurs();
+                                            Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
+                                            dernierJoueur.getEquipe().addJoueur(dernierJoueur);
+                                            
+                                            int idJoueur = dernierJoueur.getId();
+                                            
                                             //Create Circles
                                             Circle cercle = new Circle(15, couleurEquipe);
                                             cercle.setLayoutX(event.getX());
@@ -532,13 +537,22 @@ public class Interface_image_par_imageController implements Initializable {
                                             cercle.setOnMouseEntered(circleOnMouseEnteredEventHandler);
                                             cercle.setOnMouseReleased(circleOnMouseReleasedEventHandler);
                                             cercle.setOnMouseClicked(circleOnRightMouseClickEventHandler);
-                                            
-                                            conteneurJoueur.getChildren().add(cercle);
-                                            
-                                            m_controller.addJoueur(p, couleurAWTEquipe, m_role, m_position, m_orientation, equipe);
-                                            List<Joueur> liste_joueurs = m_controller.getListJoueurs();
-                                            Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
-                                            dernierJoueur.getEquipe().addJoueur(dernierJoueur);
+                                            cercle.setId(""+idJoueur);
+                                    
+                                            Label labelRolePosition = new Label(m_role + "\n" + m_position);
+                                            labelRolePosition.setLayoutX(event.getX()+20);
+                                            labelRolePosition.setLayoutY(event.getY()-15);
+                                            labelRolePosition.setId(""+idJoueur);
+                                            labelRolePosition.setVisible(false);
+
+                                            if (label_afficherRolePosition)
+                                            {
+                                                labelRolePosition.setVisible(true);
+                                            }
+
+                                            list_labelRolePosition.add(labelRolePosition);
+
+                                            conteneurJoueur.getChildren().addAll(cercle, labelRolePosition);     
                                         }
                                     }
                                     else
@@ -901,10 +915,12 @@ public class Interface_image_par_imageController implements Initializable {
     public void cb_maxJoueur (ActionEvent event) throws IOException {
         if(cbJoueurMax.isSelected())
         {
+            m_controller.setStateMaxJoueur(true);
             txtJoueurMax.setDisable(false);
         }
         else
         {
+            m_controller.setStateMaxJoueur(false);
             txtJoueurMax.setDisable(true);
         }
     }
@@ -1079,13 +1095,59 @@ public class Interface_image_par_imageController implements Initializable {
             Circle cercle = new Circle(15, colorJoueur);
             cercle.setLayoutX(joueurAjouter.getCoordonneesJoueur().x);
             cercle.setLayoutY(joueurAjouter.getCoordonneesJoueur().y);
-            conteneurJoueur.getChildren().add(cercle);
             cercle.setOnMousePressed(circleOnMousePressedEventHandler);
             cercle.setOnMouseDragged(circleOnMouseDraggedEventHandler);
             cercle.setOnMouseEntered(circleOnMouseEnteredEventHandler);
             cercle.setOnMouseReleased(circleOnMouseReleasedEventHandler);
             cercle.setOnMouseClicked(circleOnRightMouseClickEventHandler);
+            cercle.setId(""+joueurAjouter.getId());
+
+            Label labelRolePosition = new Label(joueurAjouter.getRoleJoueur() + "\n" + joueurAjouter.getPositionJoueur());
+            labelRolePosition.setLayoutX(joueurAjouter.getCoordonneesJoueur().x+20);
+            labelRolePosition.setLayoutY(joueurAjouter.getCoordonneesJoueur().y-15);
+            labelRolePosition.setId(""+joueurAjouter.getId());
+            labelRolePosition.setVisible(false);
+            
+            if (afficherRPJoueur.isSelected())
+            {
+                labelRolePosition.setVisible(true);
+            }
+
+            list_labelRolePosition.add(labelRolePosition);
+
+            conteneurJoueur.getChildren().addAll(cercle, labelRolePosition);     
         }
+        
+    }
+    
+    public void setJoueurMax()
+    {
+        txtJoueurMax.setText(Integer.toString(m_controller.getJoueurMax()));
+    }
+    
+    
+    public void setStateMaxJoueur(){
+        if(m_controller.getStateMaxJoueur())
+        {
+            cbJoueurMax.setSelected(true);
+            txtJoueurMax.setDisable(false);
+        }
+        else
+        {
+            cbJoueurMax.setSelected(false);
+            txtJoueurMax.setDisable(true);
+        }
+    }
+    
+    public void setStateAfficherPosition(){
+        if(m_controller.getStateAfficherRP())
+        {
+            afficherRPJoueur.setSelected(true);
+        }
+        else
+        {
+            afficherRPJoueur.setSelected(false);
+        }    
     }
 
 

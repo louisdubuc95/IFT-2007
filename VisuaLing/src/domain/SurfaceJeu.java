@@ -56,6 +56,9 @@ public class SurfaceJeu implements Serializable{
     private boolean m_Etat;
     private int m_Temps;
     private int m_nombreEquipe;
+    private int m_joueurMax;
+    private boolean m_stateMaxJoueur;
+    private boolean m_stateAfficherRP;
     
     Rectangle.Float m_calculTaille;
     int m_largeurPx;
@@ -79,6 +82,8 @@ public class SurfaceJeu implements Serializable{
     this.m_ListeEquipes = new ArrayList();
     this.m_Coordonee = new Coordonee ();
     this.m_nombreEquipe = 0;
+    this.m_joueurMax = 0;
+    this.m_stateMaxJoueur = false;
 
     this.m_Etat = false;
     this.m_Temps = 0;
@@ -378,5 +383,29 @@ public class SurfaceJeu implements Serializable{
     public List<List<Joueur>> getListeSauvegardeJoueur()
     {
         return listeImages;
+    }
+
+    public void setJoueurMax(int p_joueurMax) {
+        m_joueurMax = p_joueurMax;
+    }
+
+    public int getJoueurMax() {
+        return m_joueurMax;
+    }
+
+    public void setStateMaxJoueur(boolean p_state) {
+        m_stateMaxJoueur = p_state;
+    }
+    
+    public boolean getStateMaxJoueur(){
+        return m_stateMaxJoueur;
+    }
+    
+     public void setStateAfficherRP(boolean p_state) {
+        m_stateAfficherRP = p_state;
+    }
+
+    public boolean getStateAfficherRP() {
+        return m_stateAfficherRP;
     }
 }

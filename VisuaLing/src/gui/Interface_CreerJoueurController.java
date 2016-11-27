@@ -188,45 +188,64 @@ public class Interface_CreerJoueurController implements Initializable {
     
     @FXML
     public void btnEnregistrerAction(ActionEvent event) throws IOException {
-        String role = cbRole.getSelectionModel().getSelectedItem().toString();
-        String position = cbPosition.getSelectionModel().getSelectedItem().toString();
-        String equipe = cbEquipe.getSelectionModel().getSelectedItem().toString();
-        String orientation = txtOrientation.getText();
-        float orientation_float = orientation_conversion(orientation);
-        if (orientation_float != -1000)
+        if(cbRole.getSelectionModel().getSelectedItem() == null)
         {
-            Stage window = (Stage) btnEnregistrer.getScene().getWindow();
-            try
-            {
-                try{
-                    
-                
-                parentController.setEquipe(equipe);
-                parentController.setRole(role);
-                parentController.setPosition(position);
-                parentController.setOrientation(orientation_float);
-                window.close();
-                }
-                catch(NullPointerException e)
-                {
-                parentControllerTR.setEquipe(equipe);
-                parentControllerTR.setRole(role);
-                parentControllerTR.setPosition(position);
-                parentControllerTR.setOrientation(orientation_float);
-                window.close();  
-                }
-                
-            }
-            catch(Exception e)
-            {
-                String message = e.getMessage();
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setHeaderText(null);
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
-            }
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText("Erreur sur la création de joueur");
+                        alert.setContentText("Vous devez entrer un role de joueur!");
+                        alert.showAndWait();
         }
+        else
+            if(cbPosition.getSelectionModel().getSelectedItem() == null){
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText("Erreur sur la création de joueur");
+                        alert.setContentText("Vous devez entrer une poisition de joueur!");
+                        alert.showAndWait();
+            }
+            else
+            {
+                String role = cbRole.getSelectionModel().getSelectedItem().toString();
+                String position = cbPosition.getSelectionModel().getSelectedItem().toString();
+                String equipe = cbEquipe.getSelectionModel().getSelectedItem().toString();
+                String orientation = txtOrientation.getText();
+                float orientation_float = orientation_conversion(orientation);
+                if (orientation_float != -1000)
+                {
+                    Stage window = (Stage) btnEnregistrer.getScene().getWindow();
+                    try
+                    {
+                        try{
+
+
+                        parentController.setEquipe(equipe);
+                        parentController.setRole(role);
+                        parentController.setPosition(position);
+                        parentController.setOrientation(orientation_float);
+                        window.close();
+                        }
+                        catch(NullPointerException e)
+                        {
+                        parentControllerTR.setEquipe(equipe);
+                        parentControllerTR.setRole(role);
+                        parentControllerTR.setPosition(position);
+                        parentControllerTR.setOrientation(orientation_float);
+                        window.close();  
+                        }
+
+                    }
+                    catch(Exception e)
+                    {
+                        String message = e.getMessage();
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText(null);
+                        alert.setContentText(e.getMessage());
+                        alert.showAndWait();
+                    }
+                }
+            }
     }
     
     public float orientation_conversion(String orientation)

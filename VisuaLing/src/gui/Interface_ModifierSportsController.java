@@ -142,12 +142,12 @@ public class Interface_ModifierSportsController implements Initializable {
                 alert.showAndWait();
               }
                 else
-                  if(m_nombreEquipe > Integer.parseInt(txtNbEquipe.getText()))
+                  if(Integer.parseInt(txtNbEquipe.getText()) < parentController.m_controller.getListEquipe().size())
                   {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information");
                     alert.setHeaderText("Information sur la création du sports");
-                    alert.setContentText("Le nombre d'équipe maximum NE PEUT être inférieur aux nombre d'équipe précédament spécifier!");
+                    alert.setContentText("Le nombre d'équipe maximum NE PEUT être inférieur aux nombre d'équipe déja existante!");
                     alert.showAndWait();
                   }
                 else

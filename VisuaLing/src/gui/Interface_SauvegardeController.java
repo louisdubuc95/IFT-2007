@@ -82,4 +82,9 @@ public class Interface_SauvegardeController implements Initializable {
             stage.close();    
         }
     }
+    
+    public void setMaxJoueur(int p_nbJoueurMax)
+    {
+        m_parentController.m_controller.setJoueurMax(p_nbJoueurMax);
+    }
 }

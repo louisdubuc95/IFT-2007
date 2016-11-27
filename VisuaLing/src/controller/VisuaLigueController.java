@@ -133,4 +133,27 @@ public class VisuaLigueController implements java.io.Serializable{
         return m_surfaceJeu.getListeSauvegardeJoueur();
     }
     
+    public void setJoueurMax(int p_joueurMax){
+        m_surfaceJeu.setJoueurMax(p_joueurMax);
+    }
+    
+    public int getJoueurMax(){
+        return m_surfaceJeu.getJoueurMax();
+    }
+
+    public void setStateMaxJoueur(boolean p_state) {
+        m_surfaceJeu.setStateMaxJoueur(p_state);
+    }
+    
+    public boolean getStateMaxJoueur(){
+        return m_surfaceJeu.getStateMaxJoueur();
+    }
+
+    public void setStateAfficherRP(boolean p_state) {
+        m_surfaceJeu.setStateAfficherRP(p_state);
+    }
+    
+    public boolean getStateAfficherRP(){
+        return m_surfaceJeu.getStateAfficherRP();
+    }
 }

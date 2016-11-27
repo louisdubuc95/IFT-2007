@@ -99,6 +99,11 @@ public class Interface_accueilController implements Initializable {
                         VisuaLigueController controller = IPIController.m_enregistrement.deSerialize(pathFichier);
                         IPIController.setController(controller);
                         IPIController.setImageInterface(controller.getImageSurface());
+                        IPIController.setStateMaxJoueur();
+                        IPIController.setStateAfficherPosition();
+                        IPIController.setJoueurMax();
+                        
+                        //Ajoute les joueurs
                         IPIController.setJoueur();
                     
                         //Show la nouvelle window
