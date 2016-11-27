@@ -822,10 +822,7 @@ public class Interface_image_par_imageController implements Initializable {
             java.awt.Color nColor = new java.awt.Color(r, g, b, 127);
 
             j.setCouleurChandail(nColor);
-            
-
-            
-
+ 
                 for(Node cercle : listeC)
                 {
                     float xJoueur=j.getCoordonneesJoueur().x;
@@ -850,10 +847,12 @@ public class Interface_image_par_imageController implements Initializable {
    @FXML
    public void debuterStrategie(ActionEvent e)
    {
+       long start = System.currentTimeMillis();
+       long end = start + 5*1000; // seconde de pause
+       
        List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
        ObservableList<Node> listeC = conteneurJoueur.getChildren();
        indexListe=0;
-       
        
        while(indexListe<listeSauvegardeJoueur.size())
        {
@@ -872,8 +871,12 @@ public class Interface_image_par_imageController implements Initializable {
 
                      if((xJoueur == xCercle) && (yJoueur == yCercle))
                       {
-
+                          cercle.setOpacity(0.5);
                       }
+                     else
+                     {
+                         cercle.setOpacity(1.0);
+                     }
                 }
             }
            }
@@ -881,13 +884,10 @@ public class Interface_image_par_imageController implements Initializable {
            {
                
            }
+           indexListe++;
+        while(System.currentTimeMillis() < end){
+        }
        }
-            
-               
-               
-            //Timer
-            //3 secondes
-
     }
        
        
