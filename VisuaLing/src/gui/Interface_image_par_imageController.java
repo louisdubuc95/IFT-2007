@@ -20,8 +20,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -51,6 +54,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -70,6 +74,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox ;  
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -84,6 +89,8 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonAjouterEquipe;
     @FXML private ToggleButton boutonObjectif;
     Group root = new Group();
+    
+     Thread th = new Thread();
    
     //@FXML private Boolean VerifAjoutJoueur = false;
 
@@ -101,7 +108,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML ImageView imgsurface ;
     
     @FXML private ToggleButton toggleRecommencer ;
-    @FXML private ToggleButton toggleDebuter;
+    @FXML private Button toggleDebuter;
     
     private Joueur joueurCourant;
     private Color couleurCourante;
@@ -836,60 +843,181 @@ public class Interface_image_par_imageController implements Initializable {
                             cercle.setOpacity(127.0/255.0);
                             listeSauvegarde.add(j);
                         }
-
                     }
                 }
         }
         m_controller.addListeSauvegardeJoueur(listeSauvegarde); 
    }
    
-   
+            
+
    @FXML
-   public void debuterStrategie(ActionEvent e)
+   public void debuterStrategie(ActionEvent e) throws InterruptedException
    {
-       long start = System.currentTimeMillis();
-       long end = start + 5*1000; // seconde de pause
-       
        List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
-       ObservableList<Node> listeC = conteneurJoueur.getChildren();
+       List<Node> listeC = conteneurJoueur.getChildren();
        indexListe=0;
        
        while(indexListe<listeSauvegardeJoueur.size())
        {
            if(indexListe == 0)
            {
-            for(Joueur J : listeSauvegardeJoueur.get(indexListe))
-            {
-                for(Node cercle : listeC)
+                
+            Task task = new Task<Void>() {
+              @Override
+              public Void call() throws Exception {
+
+                  Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(Joueur J : listeSauvegardeJoueur.get(indexListe))
                 {
-                     float xJoueur=J.getCoordonneesJoueur().x;
-                     float yJoueur=J.getCoordonneesJoueur().y;
-                     float xCercle =(float)cercle.getLayoutX();
-                     float yCercle=(float)cercle.getLayoutY();
+                    for(Node cercle : listeC)
+                    {
+                         float xJoueur=J.getCoordonneesJoueur().x;
+                         float yJoueur=J.getCoordonneesJoueur().y;
+                         float xCercle =(float)cercle.getLayoutX();
+                         float yCercle=(float)cercle.getLayoutY();
 
+                         if((xJoueur == xCercle) && (yJoueur == yCercle))
+                          {
+                                        
+                                      
+                                    });
 
+                                    Thread.sleep(1000);
+                                    return null;
+                                }
+                              };
+                              Thread th = new Thread(task);
+                              th.setDaemon(true);
+                              th.start();
 
-                     if((xJoueur == xCercle) && (yJoueur == yCercle))
-                      {
-                          cercle.setOpacity(0.5);
-                      }
-                     else
-                     {
-                         cercle.setOpacity(1.0);
-                     }
+                              
+                                
+                              
+                              /*Task<Void> task = new Task<Void>() {
+                                @Override
+                                public Void call() throws Exception {
+                                 
+                                    Platform.runLater(new Runnable() {
+                                      @Override
+                                      public void run() {
+                                        cercle.setOpacity(1.0);
+                                      }
+                                    });
+                                    Thread.sleep(1000);
+                                  return null;
+                                }
+                              };
+                              th = new Thread(task);
+                              th.setDaemon(true);
+                              th.setPriority(th.MAX_PRIORITY);
+                              th.start();*/
+                              
+                            
+                          }
+                    }
                 }
-            }
            }
            else
            {
+                for(Joueur J : listeSauvegardeJoueur.get(indexListe-1))
+                {
+                    for(Node cercle : listeC)
+                    {
+                         float xJoueur=J.getCoordonneesJoueur().x;
+                         float yJoueur=J.getCoordonneesJoueur().y;
+                         float xCercle =(float)cercle.getLayoutX();
+                         float yCercle=(float)cercle.getLayoutY();
+
+                         if((xJoueur == xCercle) && (yJoueur == yCercle))
+                          {
+                              Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                cercle.setOpacity(0.5);
+                                
+                                }
+                                });
+                                                              PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                                pause.play();
+                              
+
+                              /*if(!th.isAlive()){
+                              Task<Void> task = new Task<Void>() {
+                                @Override
+                                public Void call() throws Exception {
+                                 
+                                    Platform.runLater(new Runnable() {
+                                      @Override
+                                      public void run() {
+                                        cercle.setOpacity(0.5);
+                                      }
+                                    });
+                                    Thread.sleep(1000);
+                                  return null;
+                                }
+                              };
+                              th = new Thread(task);
+                              th.setDaemon(true);
+                              th.setPriority(th.MAX_PRIORITY);
+                              th.start();
+                          }*/
+                          }
+                    }
+                }
+                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+                {
+                    for(Node cercle : listeC)
+                    {
+                         float xJoueur=J.getCoordonneesJoueur().x;
+                         float yJoueur=J.getCoordonneesJoueur().y;
+                         float xCercle =(float)cercle.getLayoutX();
+                         float yCercle=(float)cercle.getLayoutY();
+
+                         if((xJoueur == xCercle) && (yJoueur == yCercle))
+                          {
+                                Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                cercle.setOpacity(1.0);
+                                }
+                                });
+                                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                                pause.play();
+                              /*if(!th.isAlive()){
+                                Task<Void> task = new Task<Void>() {
+                                @Override
+                                public Void call() throws Exception {
+                                 
+                                    Platform.runLater(new Runnable() {
+                                      @Override
+                                      public void run() {
+                                        cercle.setOpacity(1.0);
+                                      }
+                                    });
+                                    Thread.sleep(1000);
+                                  return null;
+                                }
+                              };
+                              th = new Thread(task);
+                              th.setDaemon(true);
+                              th.setPriority(th.MAX_PRIORITY);
+                              th.start();
+
+                          }*/
+                          }
+                    }
+                }
                
            }
-           indexListe++;
-        while(System.currentTimeMillis() < end){
-        }
+
+            indexListe++;
+            
        }
-    }
-       
+    };
+
        
             
     @FXML 
@@ -902,7 +1030,7 @@ public class Interface_image_par_imageController implements Initializable {
         }
     }
     
-    @FXML
+    /*@FXML
     public void toggleDebuterAction (){
         if (toggleDebuter.isSelected()){
             toggleRecommencer.setDisable(true);
@@ -911,7 +1039,7 @@ public class Interface_image_par_imageController implements Initializable {
         if (!toggleDebuter.isSelected()){
             toggleRecommencer.setDisable(false);
         }
-    }
+    }*/
     //@FXML
     public void setEquipe(String p_equipe) {
         m_equipe= p_equipe;
