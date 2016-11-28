@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="boiteverticale" prefHeight="716.0" prefWidth="1083.0" style="-fx-background-color: grey; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
+<AnchorPane fx:id="boiteverticale" prefHeight="716.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
    <children>
       <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1084.0">
          <menus>
@@ -51,39 +51,35 @@
                   <Image url="@../Photo/Capture.PNG" />
                </image>
                <HBox.margin>
-                  <Insets left="10.0" top="5.0" />
+                  <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ImageView>
-            <Separator fx:id="separateur1" maxHeight="61.0" minHeight="0.0" minWidth="6.0" orientation="VERTICAL" prefHeight="52.0" visible="false">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></Separator>
-            <Button fx:id="boutonAjouterEquipe" minHeight="-Infinity" minWidth="110.0" mnemonicParsing="false" onAction="#ajouterEquipeAction" prefHeight="50.0" prefWidth="110.0" text="Nouvelle Équipe">
+            <Button fx:id="boutonAjouterEquipe" minHeight="-Infinity" minWidth="103.0" mnemonicParsing="false" onAction="#ajouterEquipeAction" prefHeight="50.0" prefWidth="103.0" text="Nouvelle Équipe">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <ToggleButton fx:id="boutonAjouterJoueur" minHeight="-Infinity" minWidth="110.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="110.0" text="Nouveau Joueur">
+            <ToggleButton fx:id="boutonAjouterJoueur" minHeight="-Infinity" minWidth="104.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="104.0" text="Nouveau Joueur">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="boutonAjouterObstacle" minHeight="-Infinity" minWidth="110.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="100.0" text="Nouvel Obstacle">
+            <ToggleButton fx:id="boutonAjouterObstacle" minHeight="-Infinity" minWidth="105.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="105.0" text="Nouvel Obstacle">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="boutonObjectif" minHeight="-Infinity" minWidth="100.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="115.0" text="Nouvel Objectif">
+            <ToggleButton fx:id="boutonObjectif" minHeight="-Infinity" minWidth="99.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="99.0" text="Nouvel Objectif">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <Button fx:id="btnNouvelleImage" mnemonicParsing="false" onAction="#creerImage" prefHeight="53.0" prefWidth="47.0" text="Nouvelle Image" />
+            <Button fx:id="btnNouvelleImage" mnemonicParsing="false" onAction="#creerImage" prefHeight="53.0" prefWidth="55.0" text="Img" />
             <Separator fx:id="separateur5" maxHeight="52.0" minHeight="0.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="0.0" visible="false">
                <HBox.margin>
                   <Insets />
                </HBox.margin></Separator>
-            <ToggleButton fx:id="toggleRecommencer" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+            <ToggleButton fx:id="toggleRecommencer" mnemonicParsing="false" prefHeight="50.0" prefWidth="45.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -95,7 +91,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="43.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -110,7 +106,17 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="toggleDebuter" mnemonicParsing="false" onAction="#debuterStrategie" prefHeight="55.0" prefWidth="24.0" text="Button" />
+            <Button fx:id="toggleDebuter" mnemonicParsing="false" onAction="#debuterStrategie" prefHeight="49.0" prefWidth="47.0">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Photo/375.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets top="1.0" />
+               </HBox.margin></Button>
             <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
@@ -123,7 +129,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="boutonAvancer" mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+            <Button fx:id="boutonAvancer" mnemonicParsing="false" prefHeight="50.0" prefWidth="44.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
