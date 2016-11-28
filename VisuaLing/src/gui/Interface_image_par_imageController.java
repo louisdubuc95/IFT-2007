@@ -179,7 +179,7 @@ public class Interface_image_par_imageController implements Initializable {
        
     menuBarSport.prefWidthProperty().bind(boiteverticale.widthProperty());
     boiteHorizontaleBouton.prefWidthProperty().bind(boiteverticale.widthProperty());
-    separateur1.prefWidthProperty().bind(boutonAjouterEquipe.widthProperty());
+   
     separateur5.prefWidthProperty().bind(boutonAvancer.widthProperty());
     separateur5.prefWidthProperty().bind(boiteHorizontaleBouton.widthProperty());
     separateur10.prefWidthProperty().bind(boiteHorizontaleBouton2.widthProperty());
@@ -693,6 +693,7 @@ public class Interface_image_par_imageController implements Initializable {
         public void handle(MouseEvent t) {
             if(t.getButton()==MouseButton.PRIMARY)
             {
+                double scale = myScale.get() ;
                 double offsetX = t.getSceneX() - orgSceneX;
                 double offsetY = t.getSceneY() - orgSceneY;
                 double newTranslateX = orgTranslateX + offsetX;

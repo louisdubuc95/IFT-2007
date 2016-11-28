@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="boiteverticale" prefHeight="716.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
+<AnchorPane fx:id="boiteverticale" prefHeight="716.0" prefWidth="1085.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
    <children>
       <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1084.0">
          <menus>
@@ -74,7 +74,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <Button fx:id="btnNouvelleImage" mnemonicParsing="false" onAction="#creerImage" prefHeight="53.0" prefWidth="55.0" text="Img" />
+            <Button fx:id="btnNouvelleImage" mnemonicParsing="false" onAction="#creerImage" prefHeight="53.0" prefWidth="55.0" text="Img." />
             <Separator fx:id="separateur5" maxHeight="52.0" minHeight="0.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="0.0" visible="false">
                <HBox.margin>
                   <Insets />
