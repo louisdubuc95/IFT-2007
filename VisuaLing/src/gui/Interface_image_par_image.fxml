@@ -76,7 +76,7 @@
                <HBox.margin>
                   <Insets />
                </HBox.margin></Separator>
-            <ToggleButton fx:id="toggleRecommencer" mnemonicParsing="false" prefHeight="50.0" prefWidth="45.0">
+            <ToggleButton fx:id="toggleRecommencer" mnemonicParsing="false" onAction="#recommencerStrategie" prefHeight="50.0" prefWidth="45.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -857,7 +857,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     
    @FXML
-   public void debuterStrategie(ActionEvent e) throws InterruptedException
+   public void debuterStrategie(ActionEvent e) 
    {  
 
        List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
@@ -991,6 +991,43 @@ public class Interface_image_par_imageController implements Initializable {
             
        }
     };
+   
+   
+   @FXML public void recommencerStrategie(ActionEvent e)
+   {
+       ObservableList<Node> listeC = conteneurJoueur.getChildren();
+       List<List<Joueur>> listeJ = m_controller.getListeSauvegardeJoueur();
+       List<Joueur> listeSauvegarde = new ArrayList<>();
+       indexListe = 0;
+       for(List<Joueur> LJ : listeJ)
+       {
+        for(Joueur j : LJ)
+         { 
+             java.awt.Color color = j.getCouleurChandail();
+             int r = color.getRed();
+             int g = color.getGreen();
+             int b = color.getBlue();
+             int a = color.getAlpha();
+             java.awt.Color nColor = new java.awt.Color(r, g, b, 127);
+             j.setCouleurChandail(nColor);
+
+                 for(Node cercle : listeC)
+                 {
+                     float xJoueur=j.getCoordonneesJoueur().x;
+                     float yJoueur=j.getCoordonneesJoueur().y;
+                     float xCercle =(float)cercle.getLayoutX();
+                     float yCercle=(float)cercle.getLayoutY();
+                     if((xJoueur == xCercle) && (yJoueur == yCercle))
+                     {      
+                             cercle.setOpacity(127.0/255.0);
+                         }
+                     }
+                 }
+       }
+       debuterStrategie(e);
+        }
+   
+           
 
        
             
