@@ -1024,6 +1024,7 @@ public class Interface_image_par_imageController implements Initializable {
                      }
                  }
        }
+       
        debuterStrategie(e);
         }
    
