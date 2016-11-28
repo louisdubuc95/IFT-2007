@@ -57,15 +57,16 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.paint.*;
 import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView ;
@@ -74,21 +75,21 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox ;  
-import javafx.util.Duration;
-
+import javafx.scene.effect.Effect.*;
 /**
  * FXML Controller class
  *
  * @author louis
  */
 public class Interface_image_par_imageController implements Initializable {
+    
+
 
     @FXML private ImageView imgSurface;
     @FXML private Button boutonQuitter ;
     @FXML private ToggleButton boutonAjouterJoueur; 
     @FXML private Button boutonAjouterEquipe;
     @FXML private ToggleButton boutonObjectif;
-    Group root = new Group();
     
      Thread th = new Thread();
    
@@ -851,9 +852,13 @@ public class Interface_image_par_imageController implements Initializable {
    
             
 
+    
+    
+    
    @FXML
    public void debuterStrategie(ActionEvent e) throws InterruptedException
-   {
+   {  
+
        List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
        List<Node> listeC = conteneurJoueur.getChildren();
        indexListe=0;
@@ -862,15 +867,7 @@ public class Interface_image_par_imageController implements Initializable {
        {
            if(indexListe == 0)
            {
-                
-            Task task = new Task<Void>() {
-              @Override
-              public Void call() throws Exception {
-
-                  Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
                 {
                     for(Node cercle : listeC)
                     {
@@ -879,47 +876,33 @@ public class Interface_image_par_imageController implements Initializable {
                          float xCercle =(float)cercle.getLayoutX();
                          float yCercle=(float)cercle.getLayoutY();
 
-                         if((xJoueur == xCercle) && (yJoueur == yCercle))
+                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
                           {
-                                        
-                                      
-                                    });
-
-                                    Thread.sleep(1000);
-                                    return null;
-                                }
-                              };
-                              Thread th = new Thread(task);
-                              th.setDaemon(true);
-                              th.start();
-
-                              
-                                
-                              
-                              /*Task<Void> task = new Task<Void>() {
+                              Task<Void> task = new Task<Void>() {
                                 @Override
                                 public Void call() throws Exception {
                                  
-                                    Platform.runLater(new Runnable() {
+                                    /*Platform.runLater(new Runnable() {
                                       @Override
-                                      public void run() {
+                                      public void run() {*/
                                         cercle.setOpacity(1.0);
-                                      }
-                                    });
-                                    Thread.sleep(1000);
+                                          System.out.println("1.0");
+                                          
+                                      //}
+                                    //});
                                   return null;
                                 }
                               };
                               th = new Thread(task);
                               th.setDaemon(true);
-                              th.setPriority(th.MAX_PRIORITY);
-                              th.start();*/
-                              
-                            
+                              th.start();
+
                           }
                     }
                 }
            }
+           
+           
            else
            {
                 for(Joueur J : listeSauvegardeJoueur.get(indexListe-1))
@@ -931,39 +914,26 @@ public class Interface_image_par_imageController implements Initializable {
                          float xCercle =(float)cercle.getLayoutX();
                          float yCercle=(float)cercle.getLayoutY();
 
-                         if((xJoueur == xCercle) && (yJoueur == yCercle))
+                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
                           {
-                              Platform.runLater(new Runnable(){
-                                @Override
-                                public void run() {
-                                cercle.setOpacity(0.5);
-                                
-                                }
-                                });
-                                                              PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                                pause.play();
-                              
+                              while(true){
+                                if(th.getState()==Thread.State.TERMINATED){
+                                    
+                                 Task<Void> task = new Task<Void>() {
+                                              @Override
+                                              public Void call() throws Exception {
+                                                      cercle.setOpacity(0.5);
+                                                       Thread.sleep(1000);
+                                                return null;
+                                              }
+                                            };
+                                            th = new Thread(task);
+                                            th.setDaemon(true);
+                                            th.start();
+                                            break;
 
-                              /*if(!th.isAlive()){
-                              Task<Void> task = new Task<Void>() {
-                                @Override
-                                public Void call() throws Exception {
-                                 
-                                    Platform.runLater(new Runnable() {
-                                      @Override
-                                      public void run() {
-                                        cercle.setOpacity(0.5);
-                                      }
-                                    });
-                                    Thread.sleep(1000);
-                                  return null;
                                 }
-                              };
-                              th = new Thread(task);
-                              th.setDaemon(true);
-                              th.setPriority(th.MAX_PRIORITY);
-                              th.start();
-                          }*/
+                          }
                           }
                     }
                 }
@@ -976,37 +946,40 @@ public class Interface_image_par_imageController implements Initializable {
                          float xCercle =(float)cercle.getLayoutX();
                          float yCercle=(float)cercle.getLayoutY();
 
-                         if((xJoueur == xCercle) && (yJoueur == yCercle))
+                         if((xJoueur == xCercle) && (yJoueur == yCercle)&& cercle.getClass() == Circle.class)
                           {
-                                Platform.runLater(new Runnable(){
-                                @Override
-                                public void run() {
-                                cercle.setOpacity(1.0);
-                                }
-                                });
-                                PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                                pause.play();
-                              /*if(!th.isAlive()){
-                                Task<Void> task = new Task<Void>() {
-                                @Override
-                                public Void call() throws Exception {
-                                 
-                                    Platform.runLater(new Runnable() {
-                                      @Override
-                                      public void run() {
-                                        cercle.setOpacity(1.0);
-                                      }
-                                    });
-                                    Thread.sleep(1000);
-                                  return null;
-                                }
-                              };
-                              th = new Thread(task);
-                              th.setDaemon(true);
-                              th.setPriority(th.MAX_PRIORITY);
-                              th.start();
+                              while(true)
+                                {
+                                        if(th.getState()==Thread.State.TERMINATED)
+                                        {
+                                            if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
+                                          {
+                                              Task<Void> task = new Task<Void>() {
+                                              @Override
+                                              public Void call() throws Exception {
 
-                          }*/
+                                                  /*Platform.runLater(new Runnable() {
+                                                    @Override
+                                                    public void run() {*/
+                                                      cercle.setOpacity(1.0);
+                                                      System.out.println("1.0");
+                                                      
+
+                                                    //}
+                                                  //});
+                                                  Thread.sleep(1000);
+                                                return null;
+                                              }
+                                            };
+                                             
+                                            th = new Thread(task);
+                                            th.setDaemon(true);
+                                            th.start();
+                                            break;
+
+                                          }
+                                        }
+                                }
                           }
                     }
                 }
