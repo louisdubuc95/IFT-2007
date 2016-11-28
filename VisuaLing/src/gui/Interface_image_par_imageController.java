@@ -694,8 +694,8 @@ public class Interface_image_par_imageController implements Initializable {
             if(t.getButton()==MouseButton.PRIMARY)
             {
                 double scale = myScale.get() ;
-                double offsetX = t.getSceneX() - orgSceneX;
-                double offsetY = t.getSceneY() - orgSceneY;
+                double offsetX = (t.getSceneX() - orgSceneX)/scale;
+                double offsetY = (t.getSceneY() - orgSceneY)/scale;
                 double newTranslateX = orgTranslateX + offsetX;
                 double newTranslateY = orgTranslateY + offsetY;
                 double label_offsetX = t.getSceneX() + 20 - label_orgSceneX;

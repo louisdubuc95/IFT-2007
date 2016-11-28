@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="boiteverticale" prefHeight="716.0" prefWidth="1085.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
+<AnchorPane fx:id="boiteverticale" prefHeight="856.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
    <children>
-      <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1084.0">
+      <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1220.0">
          <menus>
             <Menu mnemonicParsing="false" text="Fichier">
                <items>
@@ -30,11 +30,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Modifier sport" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Suppression">
+            <Menu mnemonicParsing="false" text="Image">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Supprimer joueur" />
-                  <MenuItem mnemonicParsing="false" text="Supprimer obstacle" />
-                  <MenuItem mnemonicParsing="false" text="Supprimer objectif" />
+                  <MenuItem fx:id="btnNouvelleImage" mnemonicParsing="false" onAction="#creerImage" text="Nouvelle Image" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Aide">
@@ -44,7 +42,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <HBox fx:id="boiteHorizontaleBouton" layoutY="26.0" maxHeight="-Infinity" prefHeight="53.0" prefWidth="1084.0" spacing="8.0">
+      <HBox fx:id="boiteHorizontaleBouton" layoutY="26.0" maxHeight="-Infinity" prefHeight="53.0" prefWidth="1220.0" spacing="8.0">
          <children>
             <ImageView fitHeight="44.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -74,8 +72,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <Button fx:id="btnNouvelleImage" mnemonicParsing="false" onAction="#creerImage" prefHeight="53.0" prefWidth="55.0" text="Img." />
-            <Separator fx:id="separateur5" maxHeight="52.0" minHeight="0.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="0.0" visible="false">
+            <Separator fx:id="separateur5" maxHeight="52.0" minHeight="0.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="194.0" visible="false">
                <HBox.margin>
                   <Insets />
                </HBox.margin></Separator>
@@ -156,7 +153,7 @@
             <Pane fx:id="conteneurJoueur" onMouseClicked="#ajouterJoueurInterface" onMouseDragged="#bougerInterface" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" onMousePressed="#bougerInterface" onScroll="#zoom" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </StackPane>
-      <HBox fx:id="boiteHorizontaleBouton2" layoutY="82.0" prefHeight="90.0" prefWidth="1084.0">
+      <HBox fx:id="boiteHorizontaleBouton2" layoutY="82.0" prefHeight="90.0" prefWidth="1220.0">
          <children>
             <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="491.0" text="Informations sur la surface de jeu">
               <content>
@@ -215,8 +212,11 @@
                <padding>
                   <Insets left="11.0" />
                </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </TitledPane>
-            <Separator fx:id="separateur10" maxHeight="119.0" minHeight="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="40.0" visible="false" />
+            <Separator fx:id="separateur10" maxHeight="119.0" minHeight="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="168.0" visible="false" />
             <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="238.0" text="Contrainte sur le nombre de joueur">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="0.0">
@@ -234,7 +234,7 @@
                   <Insets />
                </HBox.margin>
             </TitledPane>
-            <TitledPane animated="false" prefHeight="90.0" prefWidth="62.0" text="Exporter">
+            <TitledPane animated="false" prefHeight="90.0" prefWidth="79.0" text="Exporter">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="76.0">
                      <children>
