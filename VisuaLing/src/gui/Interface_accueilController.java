@@ -6,6 +6,7 @@
 package gui;
 
 import controller.VisuaLigueController;
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +29,7 @@ import java.util.*;
 import java.awt.event.*;
 import javafx.event.EventHandler;
 import javafx.scene.control.ButtonBase;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.StageStyle;
 /**
@@ -45,6 +47,12 @@ public class Interface_accueilController implements Initializable {
     private Button boutonQuitter;
     @FXML
     private List<ToggleButton> listTB = new ArrayList<ToggleButton>();
+    
+    @FXML
+    private Label info;
+    
+    @FXML 
+    private Button boutonCourriel;
     
     @FXML
     private VBox content;
@@ -115,6 +123,42 @@ public class Interface_accueilController implements Initializable {
                 }
             } 
     }
+    
+    
+    @FXML
+    private void boutonCourriel(ActionEvent event)throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_ConnexionEmail.fxml"));
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setScene(new Scene((AnchorPane) loader.load()));
+        Interface_ConnexionEmailController ConnexionEmailController = loader.<Interface_ConnexionEmailController>getController();
+        
+   
+
+            for(ToggleButton TB: listTB)
+            {
+                if(TB.isSelected())
+                {   
+                    String s = TB.getText();
+                    String[] partiesPath = s.split("\n");
+                    String pathFichier = partiesPath[0];
+                    pathFichier = pathFichier.replaceAll("Nom du fichier  :  ", "");
+                    String extension = pathFichier.replaceAll(".*\\.", "");
+                    pathFichier = "src/savedStrategies/"+pathFichier;
+                    TB.setSelected(false);
+                    info = new Label("");
+                    stage.show();
+                    ConnexionEmailController.setFile(pathFichier);
+                    
+                    
+                }
+                
+                info.setText("Vous devez selectionner une strategie pour continuer!");
+                
+                
+                
+
+            }
+}
 
     //Quitter la scene
     @FXML

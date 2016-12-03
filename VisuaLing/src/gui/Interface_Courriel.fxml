@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="593.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_CourrielController">
+   <children>
+      <Label layoutX="27.0" layoutY="27.0" text="Envoyer la stratégie par courriel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="432.0" fitWidth="335.0" layoutX="27.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Photo/a2079191261539b4d06fdd_m__75236.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="432.0" fitWidth="335.0" layoutX="27.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Photo/62b8e1c9a38f5207ace8e204f2493b97.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="463.0" layoutY="78.0" text="De :" />
+      <Label layoutX="466.0" layoutY="129.0" text="À :" />
+      <TextArea fx:id="ToTextArea" layoutX="465.0" layoutY="146.0" prefHeight="73.0" prefWidth="437.0" text="Pour envoyer ce courriel à plusieurs personnes, ne faite qu'écrire leurs adresses&#10;ici en les séparants avec des virgules, sans espaces.&#10;" />
+      <TextArea fx:id="messageTextArea" layoutX="465.0" layoutY="306.0" prefHeight="201.0" prefWidth="437.0" />
+      <Label layoutX="465.0" layoutY="234.0" text="Objet:" />
+      <Label layoutX="465.0" layoutY="288.0" text="Message:" />
+      <Button fx:id="boutonEnvoyer" layoutX="464.0" layoutY="519.0" mnemonicParsing="false" onAction="#sendMail" prefHeight="48.0" prefWidth="437.0" text="Envoyer" />
+      <Label fx:id="FromLabel" layoutX="489.0" layoutY="94.0" prefHeight="25.0" prefWidth="414.0">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font></Label>
+      <Label fx:id="fichierLabel" layoutX="489.0" layoutY="251.0" prefHeight="25.0" prefWidth="414.0">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
