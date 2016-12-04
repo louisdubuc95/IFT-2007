@@ -10,16 +10,20 @@ import domain.Enregistrement;
 import domain.equipe.Equipe;
 import domain.joueur.Joueur;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,12 +55,15 @@ import javafx.stage.StageStyle;
 import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -76,6 +83,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox ;  
 import javafx.scene.effect.Effect.*;
+import javafx.concurrent.*;
+
 /**
  * FXML Controller class
  *
@@ -91,7 +100,13 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonAjouterEquipe;
     @FXML private ToggleButton boutonObjectif;
     
-     Thread th = new Thread();
+    
+    
+    
+    
+    
+    private Service service;
+
    
     //@FXML private Boolean VerifAjoutJoueur = false;
 
@@ -108,14 +123,14 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private boolean desafficherRPJoueur;
     @FXML ImageView imgsurface ;
     
-    @FXML private ToggleButton toggleRecommencer ;
+    @FXML private Button toggleRecommencer ;
     @FXML private Button toggleDebuter;
     
     private Joueur joueurCourant;
     private Color couleurCourante;
     private Circle cercleCourant;
     
-    private int indexListe;
+    private int indexListe = 0;
     
     
     //coordonée
@@ -850,21 +865,57 @@ public class Interface_image_par_imageController implements Initializable {
         }
         m_controller.addListeSauvegardeJoueur(listeSauvegarde); 
    }
-   
-            
 
     
-    
-    
-   @FXML
-   public void debuterStrategie(ActionEvent e) 
-   {  
 
-       List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
-       List<Node> listeC = conteneurJoueur.getChildren();
-       indexListe=0;
-       
-       while(indexListe<listeSauvegardeJoueur.size())
+     public class IteratingTask0 extends Task<Circle> {
+         private final Circle cercleFinal;
+
+         public IteratingTask0(Circle cercleParam) {
+             this.cercleFinal = cercleParam;
+         }
+         @Override protected Circle call() throws Exception {
+             cercleFinal.setOpacity(0.5);
+                    
+                 Platform.runLater(new Runnable() {
+                     @Override public void run() {
+                         
+                     }
+                 });
+                 
+             
+             return null;
+         }
+     };
+     
+
+      public class IteratingTask1 extends Task<Circle> {
+         private final Circle cercleFinal;
+
+         public IteratingTask1(Circle cercleParam) {
+             this.cercleFinal = cercleParam;
+         }
+         @Override protected Circle call() throws Exception {
+                 cercleFinal.setOpacity(1.0);
+                 Platform.runLater(new Runnable() {
+                     @Override public void run() {
+                         
+                     }
+                 });
+                 
+             
+             return null;
+         }
+     };
+      
+     Service process = new Service() {
+    @Override
+    protected Task createTask() {
+        return new Task() {
+            @Override protected Void call() throws Exception {
+             List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
+            List<Node> listeC = conteneurJoueur.getChildren();
+            while(indexListe<listeSauvegardeJoueur.size())
        {
            if(indexListe == 0)
            {
@@ -879,25 +930,10 @@ public class Interface_image_par_imageController implements Initializable {
 
                          if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
                           {
-                              Task<Void> task = new Task<Void>() {
-                                @Override
-                                public Void call() throws Exception {
-                                 
-                                    /*Platform.runLater(new Runnable() {
-                                      @Override
-                                      public void run() {*/
-                                        cercle.setOpacity(1.0);
-                                          System.out.println("1.0");
-                                          
-                                      //}
-                                    //});
-                                  return null;
-                                }
-                              };
-                              th = new Thread(task);
-                              th.setDaemon(true);
-                              th.start();
-
+                              IteratingTask1 task = new IteratingTask1((Circle)cercle);
+                              Thread th = new Thread(task);
+                                th.setDaemon(true);
+                                th.start();                              
                           }
                     }
                 }
@@ -917,24 +953,12 @@ public class Interface_image_par_imageController implements Initializable {
 
                          if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
                           {
-                              while(true){
-                                if(th.getState()==Thread.State.TERMINATED){
-                                    
-                                 Task<Void> task = new Task<Void>() {
-                                              @Override
-                                              public Void call() throws Exception {
-                                                      cercle.setOpacity(0.5);
-                                                       Thread.sleep(1000);
-                                                return null;
-                                              }
-                                            };
-                                            th = new Thread(task);
-                                            th.setDaemon(true);
-                                            th.start();
-                                            break;
+                              IteratingTask0 task = new IteratingTask0((Circle)cercle);
+                              Thread th = new Thread(task);
+                                th.setDaemon(true);
+                                th.start();
 
-                                }
-                          }
+  
                           }
                     }
                 }
@@ -949,38 +973,11 @@ public class Interface_image_par_imageController implements Initializable {
 
                          if((xJoueur == xCercle) && (yJoueur == yCercle)&& cercle.getClass() == Circle.class)
                           {
-                              while(true)
-                                {
-                                        if(th.getState()==Thread.State.TERMINATED)
-                                        {
-                                            if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
-                                          {
-                                              Task<Void> task = new Task<Void>() {
-                                              @Override
-                                              public Void call() throws Exception {
+                              IteratingTask1 task = new IteratingTask1((Circle)cercle);
+                              Thread th = new Thread(task);
+                                th.setDaemon(true);
+                                th.start();
 
-                                                  /*Platform.runLater(new Runnable() {
-                                                    @Override
-                                                    public void run() {*/
-                                                      cercle.setOpacity(1.0);
-                                                      System.out.println("1.0");
-                                                      
-
-                                                    //}
-                                                  //});
-                                                  Thread.sleep(1000);
-                                                return null;
-                                              }
-                                            };
-                                             
-                                            th = new Thread(task);
-                                            th.setDaemon(true);
-                                            th.start();
-                                            break;
-
-                                          }
-                                        }
-                                }
                           }
                     }
                 }
@@ -988,10 +985,28 @@ public class Interface_image_par_imageController implements Initializable {
            }
 
             indexListe++;
-            
+            Thread.sleep(1000);
        }
-    };
+             return null;
+         }
+        };
+    }
+};
+      
+     
    
+      
+      
+    @FXML
+    public void debuterStrategie()
+    {   
+        process.start();
+    }
+    
+    //
+        
+
+
    
    @FXML public void recommencerStrategie(ActionEvent e)
    {
@@ -1024,34 +1039,15 @@ public class Interface_image_par_imageController implements Initializable {
                      }
                  }
        }
-       
-       debuterStrategie(e);
-        }
+
+       process.restart();
+   }
    
            
 
        
             
-    @FXML 
-    public void toggleRecommencerAction (){
-        if (toggleRecommencer.isSelected()){
-            toggleDebuter.setDisable(true);
-        }
-        if (!toggleRecommencer.isSelected()){
-            toggleDebuter.setDisable(false);
-        }
-    }
-    
-    /*@FXML
-    public void toggleDebuterAction (){
-        if (toggleDebuter.isSelected()){
-            toggleRecommencer.setDisable(true);
-        }
-        
-        if (!toggleDebuter.isSelected()){
-            toggleRecommencer.setDisable(false);
-        }
-    }*/
+   
     //@FXML
     public void setEquipe(String p_equipe) {
         m_equipe= p_equipe;
