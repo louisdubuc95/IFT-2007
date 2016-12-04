@@ -1,0 +1,2 @@
+entraineur;qwerty
+joueur;12345

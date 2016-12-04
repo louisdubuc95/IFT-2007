@@ -56,6 +56,7 @@ public class Interface_accueilController implements Initializable {
     
     @FXML
     private VBox content;
+    public String typeUtilisateur;
 
 
     

@@ -26,8 +26,8 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Sport">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
-                  <MenuItem mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Modifier sport" />
+                  <MenuItem fx:id="menuChoixNouvSport" mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
+                  <MenuItem fx:id="menuChoixModifSport" mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Modifier sport" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Image">

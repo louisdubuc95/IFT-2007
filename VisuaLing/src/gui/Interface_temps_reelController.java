@@ -9,7 +9,9 @@ import controller.VisuaLigueController;
 import domain.Enregistrement;
 import domain.equipe.Equipe;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -60,9 +62,12 @@ public class Interface_temps_reelController implements Initializable {
 
     
     @FXML private MenuItem exit ;
+    @FXML private MenuItem menuChoixNouvSport ;
+    @FXML private MenuItem menuChoixModifSport ;
     @FXML private ImageView imgSurface;
     @FXML private ToggleButton boutonAjouterJoueur;
     @FXML private ToggleButton boutonAjouterObstacle;
+    @FXML private Button boutonAjouterEquipe;
     @FXML MenuBar menuBarSport;
     @FXML Canvas canevasInterface;
     @FXML private ToggleButton boutonObjectif ;
@@ -72,8 +77,7 @@ public class Interface_temps_reelController implements Initializable {
     @FXML private AnchorPane boiteverticale ; 
     
     @FXML ImageView imgsurface ;
-    
-    
+        
     //coordonée
     @FXML private Label labelcoordonnee;
     @FXML private Label  coordonee ;
@@ -94,12 +98,42 @@ public class Interface_temps_reelController implements Initializable {
     public VisuaLigueController m_controller = new VisuaLigueController();
     public Enregistrement m_enregistrement = new Enregistrement();
     
+    public String typeUtilisateur;
+    private String pathVerif = "src/savedUtilisateurs/connecte.txt";
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        try 
+        (BufferedReader br = new BufferedReader(new FileReader(pathVerif))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                typeUtilisateur = line;
+            }
+        }   
+        catch (IOException ex) {
+            Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (!typeUtilisateur.equals("entraineur"))
+        {
+            boutonAjouterEquipe.setDisable(true);
+            boutonAjouterJoueur.setDisable(true);
+            boutonAjouterObstacle.setDisable(true);
+            boutonObjectif.setDisable(true);
+            menuChoixNouvSport.setDisable(true);
+            menuChoixModifSport.setDisable(true);
+            //btnNouvelleImage.setDisable(true);
+            cbJoueurMax.setDisable(true);
+            Pane p_joueur = new Pane();
+            p_joueur.setLayoutX(0);
+            p_joueur.setLayoutY(0);
+            p_joueur.setMinHeight(537);
+            p_joueur.setMinWidth(1083);
+            //stackSurface.getChildren().add(p_joueur);
+        }
     }  
     
     public void setTitle(String p_title)

@@ -29,11 +29,11 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Sport">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
-                  <MenuItem mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Changer sport" />
+                <MenuItem fx:id="menuChoixNouvSport" mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
+                  <MenuItem fx:id="menuChoixModifSport" mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Changer sport" />
               </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Suppression">
+          <Menu disable="true" mnemonicParsing="false" text="Suppression">
             <items>
                   <MenuItem mnemonicParsing="false" text="Supprimer Joueur" />
                   <MenuItem mnemonicParsing="false" text="Supprimer Obstacle" />
@@ -64,7 +64,7 @@
                </HBox.margin>
             </ImageView>
             <Separator fx:id="separateur1" maxHeight="61.0" minHeight="0.0" minWidth="6.0" orientation="VERTICAL" prefHeight="52.0" visible="false" />
-            <Button mnemonicParsing="false" onAction="#ajouterEquipeAction" prefHeight="49.0" prefWidth="111.0" text="Nouvelle Équipe">
+            <Button fx:id="boutonAjouterEquipe" mnemonicParsing="false" onAction="#ajouterEquipeAction" prefHeight="49.0" prefWidth="111.0" text="Nouvelle Équipe">
                <HBox.margin>
                   <Insets left="10.0" top="1.0" />
                </HBox.margin>

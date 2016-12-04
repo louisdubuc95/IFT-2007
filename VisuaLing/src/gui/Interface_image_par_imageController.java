@@ -17,6 +17,7 @@ import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -117,6 +118,9 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Button boutonSauvegarder;
     @FXML private Button boutonChangerSports;
     @FXML MenuBar menuBarSport;
+    @FXML private MenuItem menuChoixNouvSport;
+    @FXML private MenuItem menuChoixModifSport;
+    @FXML private MenuItem btnNouvelleImage;
     
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
@@ -185,6 +189,9 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML public List<String> listeRoles = new ArrayList<>();
     
+    public String typeUtilisateur;
+    private String pathVerif = "src/savedUtilisateurs/connecte.txt";
+    
     //@FXML private 
     
     //instance du controller de Larman
@@ -210,6 +217,35 @@ public class Interface_image_par_imageController implements Initializable {
     imgsurface.scaleYProperty().bind(myScale);
     conteneurJoueur.scaleXProperty().bind(myScale);
     conteneurJoueur.scaleYProperty().bind(myScale);
+    
+    try 
+    (BufferedReader br = new BufferedReader(new FileReader(pathVerif))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            typeUtilisateur = line;
+        }
+    }   
+    catch (IOException ex) {
+        Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    if (!typeUtilisateur.equals("entraineur"))
+    {
+        boutonAjouterEquipe.setDisable(true);
+        boutonAjouterJoueur.setDisable(true);
+        boutonAjouterObstacle.setDisable(true);
+        boutonObjectif.setDisable(true);
+        menuChoixNouvSport.setDisable(true);
+        menuChoixModifSport.setDisable(true);
+        btnNouvelleImage.setDisable(true);
+        cbJoueurMax.setDisable(true);
+        Pane p_joueur = new Pane();
+        p_joueur.setLayoutX(0);
+        p_joueur.setLayoutY(0);
+        p_joueur.setMinHeight(537);
+        p_joueur.setMinWidth(1083);
+        stackSurface.getChildren().add(p_joueur);
+    }
     }
     
     

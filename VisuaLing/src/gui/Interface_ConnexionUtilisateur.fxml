@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="256.0" prefWidth="359.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_ConnexionUtilisateurController">
+   <children>
+      <Label layoutX="110.0" layoutY="29.0" text="Connexion">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="97.0" text="Nom d'utilisateur :" />
+      <Label layoutX="52.0" layoutY="139.0" text="Mot de passe :" />
+      <TextField fx:id="txtNomUtilisateur" layoutX="159.0" layoutY="92.0" />
+      <PasswordField fx:id="txtMotDePasse" layoutX="159.0" layoutY="134.0" />
+      <Button fx:id="btnConnexion" layoutX="138.0" layoutY="199.0" mnemonicParsing="false" onAction="#btnConnexionAction" text="Connexion" />
+      <Label fx:id="txtErreur" layoutX="28.0" layoutY="175.0" text="Le nom d'utilisateur ou le mot de passe est incorrecte" textFill="#e41a1a">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
