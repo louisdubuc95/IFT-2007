@@ -192,6 +192,8 @@ public class Interface_image_par_imageController implements Initializable {
     double sourisPositionY;
     double transfererPositionX;
     double transfererPositionY;
+    int dimensionObstacleX;
+    int dimensionObstacleY;
     
     @FXML public List<String> listeRoles = new ArrayList<>();
     
@@ -719,7 +721,7 @@ public class Interface_image_par_imageController implements Initializable {
                             float xBalle = (float) event.getX();
                             float yBalle = (float) event.getY();
                             Point2D.Float pBalle = new Point2D.Float(xBalle,yBalle);
-                            m_controller.addRondelle(pBalle);
+                            m_controller.addBalle(pBalle);
                             String imageBalle = "src/Photo/balle.jpg";
                             File imageFileBalle = new File(imageBalle);
                             String imagepathBalle = null;
@@ -746,8 +748,8 @@ public class Interface_image_par_imageController implements Initializable {
                             float xBallon = (float) event.getX();
                             float yBallon = (float) event.getY();
                             Point2D.Float pBallon = new Point2D.Float(xBallon,yBallon);
-                            m_controller.addRondelle(pBallon);
-                            String imageBallon = "src/Photo/ballon.jpg";
+                            m_controller.addBallon(pBallon);
+                            String imageBallon = "src/Photo/ballon.png";
                             File imageFileBallon = new File(imageBallon);
                             String imagepathBallon = null;
                             try {
@@ -1515,6 +1517,10 @@ public class Interface_image_par_imageController implements Initializable {
     
     public void setObjeticAjoueter(String p_Objectif){
         objectifAjouer = p_Objectif;
+    }
+    
+    public void setDimensionObstacle(int x, int y){
+        
     }
     
     
