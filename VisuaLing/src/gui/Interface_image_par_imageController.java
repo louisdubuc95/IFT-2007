@@ -11,8 +11,9 @@ import controller.VisuaLigueController;
 import domain.Enregistrement;
 import domain.equipe.Equipe;
 import domain.joueur.Joueur;
+import domain.obstacle.Objectif;
+import domain.obstacle.Obstacle;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
 import java.io.BufferedReader;
@@ -52,6 +53,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
@@ -122,6 +124,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private MenuItem menuChoixModifSport;
     @FXML private MenuItem btnNouvelleImage;
     
+    
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
     @FXML private Pane conteneurJoueur;
@@ -135,6 +138,8 @@ public class Interface_image_par_imageController implements Initializable {
     private Joueur joueurCourant;
     private Color couleurCourante;
     private Circle cercleCourant;
+    private Rectangle rectangleCourant;
+    private Objectif objectifCourant;
     
     private int indexListe = 0;
     
@@ -147,6 +152,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML private String imagePath;
     @FXML private Color color;
+    @FXML private String objectifAjouer = "";
     
     
     private double x0, y0;
@@ -460,14 +466,9 @@ public class Interface_image_par_imageController implements Initializable {
            boutonObjectif.setDisable(false);
            boutonAjouterJoueur.setDisable(false);
            stage.close();
-        }  
-         
+        } 
     }
-    @FXML
-    public void ajouterObstacleInterface (){
-        
-    }
-          
+                   
     @FXML
     public void ajouterObjectifButton(ActionEvent event) throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerObjectif.fxml"));
@@ -476,6 +477,8 @@ public class Interface_image_par_imageController implements Initializable {
           stage.setScene(new Scene((AnchorPane) loader.load()));
          if (boutonObjectif.isSelected()){
           Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+          Interface_CreerObjectifController CreerObjectif = loader.<Interface_CreerObjectifController>getController();
+          CreerObjectif.initialize(this);
           stage.initModality(Modality.WINDOW_MODAL);
           stage.initOwner(currentStage);
           
@@ -489,14 +492,7 @@ public class Interface_image_par_imageController implements Initializable {
             stage.close();
         }  
     }
-    
-    @FXML
-    public void ajouterObjectifInterface (){
-        
-    }
-     
-    
-    
+
     @FXML
     private void sauvegarderAction(ActionEvent event) throws IOException {
             Stage stage = new Stage();
@@ -548,7 +544,6 @@ public class Interface_image_par_imageController implements Initializable {
         conteneurJoueur.setOnMouseClicked((MouseEvent event) -> {
             if(event.getClickCount()==2)
             {
-                
                 if(boutonAjouterJoueur.isSelected()){
                     
                     Iterator<Equipe> iterateur = listeEquipe.iterator();
@@ -681,12 +676,99 @@ public class Interface_image_par_imageController implements Initializable {
                         }
                     }  
                 }
+                else
+                    if(boutonObjectif.isSelected()){
+                    switch (objectifAjouer) {
+                        case "Rondelle":
+                            Circle cercle = new Circle(10);
+                            cercle.setLayoutX(event.getX());
+                            cercle.setLayoutY(event.getY());
+                            cercle.setCursor(Cursor.HAND);
+                            cercle.setOnMousePressed(objOnMousePressedEventHandler);
+                            cercle.setOnMouseDragged(objOnMouseDraggedEventHandler);
+                            cercle.setOnMouseEntered(objOnMouseEnteredEventHandler);
+                            cercle.setOnMouseReleased(objOnMouseReleasedEventHandler);
+                            cercle.setOnMouseClicked(objOnRightMouseClickEventHandler);
+                            float x = (float) event.getX();
+                            float y = (float) event.getY();
+                            Point2D.Float p = new Point2D.Float(x,y);
+                            m_controller.addRondelle(p);
+                            String imagep = "src/Photo/rondelle.jpg";
+                            File imageFile = new File(imagep);
+                            String imagepath = null;
+                            try {
+                                imagepath = imageFile.toURI().toURL().toString();
+                            } catch (MalformedURLException ex) {
+                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            Image image = new Image(imagepath);
+                            ImagePattern imagePattern = new ImagePattern(image);
+                            cercle.setFill(imagePattern);
+                            conteneurJoueur.getChildren().addAll(cercle);
+                            break;
+                        case "Balle":
+                            Circle balle = new Circle(10);
+                            balle.setLayoutX(event.getX());
+                            balle.setLayoutY(event.getY());
+                            balle.setCursor(Cursor.HAND);
+                            balle.setOnMousePressed(objOnMousePressedEventHandler);
+                            balle.setOnMouseDragged(objOnMouseDraggedEventHandler);
+                            balle.setOnMouseEntered(objOnMouseEnteredEventHandler);
+                            balle.setOnMouseReleased(objOnMouseReleasedEventHandler);
+                            balle.setOnMouseClicked(objOnRightMouseClickEventHandler);
+                            float xBalle = (float) event.getX();
+                            float yBalle = (float) event.getY();
+                            Point2D.Float pBalle = new Point2D.Float(xBalle,yBalle);
+                            m_controller.addRondelle(pBalle);
+                            String imageBalle = "src/Photo/balle.jpg";
+                            File imageFileBalle = new File(imageBalle);
+                            String imagepathBalle = null;
+                            try {
+                                imagepathBalle = imageFileBalle.toURI().toURL().toString();
+                            } catch (MalformedURLException ex) {
+                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            Image ImageBalle = new Image(imagepathBalle);
+                            ImagePattern imagePatternBalle = new ImagePattern(ImageBalle);
+                            balle.setFill(imagePatternBalle);
+                            conteneurJoueur.getChildren().addAll(balle);
+                            break;
+                        case "Ballon":
+                            Circle ballon = new Circle(10);
+                            ballon.setLayoutX(event.getX());
+                            ballon.setLayoutY(event.getY());
+                            ballon.setCursor(Cursor.HAND);
+                            ballon.setOnMousePressed(objOnMousePressedEventHandler);
+                            ballon.setOnMouseDragged(objOnMouseDraggedEventHandler);
+                            ballon.setOnMouseEntered(objOnMouseEnteredEventHandler);
+                            ballon.setOnMouseReleased(objOnMouseReleasedEventHandler);
+                            ballon.setOnMouseClicked(objOnRightMouseClickEventHandler);
+                            float xBallon = (float) event.getX();
+                            float yBallon = (float) event.getY();
+                            Point2D.Float pBallon = new Point2D.Float(xBallon,yBallon);
+                            m_controller.addRondelle(pBallon);
+                            String imageBallon = "src/Photo/ballon.jpg";
+                            File imageFileBallon = new File(imageBallon);
+                            String imagepathBallon = null;
+                            try {
+                                imagepathBallon = imageFileBallon.toURI().toURL().toString();
+                            } catch (MalformedURLException ex) {
+                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            Image ImageBallon = new Image(imagepathBallon);
+                            ImagePattern imagePatternBallon = new ImagePattern(ImageBallon);
+                            ballon.setFill(imagePatternBallon);
+                            conteneurJoueur.getChildren().addAll(ballon);
+                            break;
+                        default:
+                            break;
+                    }
+                    }
             }
         });  
     }
     
 
-    
 /////////////////////////////////////////////////////////////////
 
     
@@ -721,6 +803,27 @@ public class Interface_image_par_imageController implements Initializable {
                 }
             }
     };
+    
+    EventHandler<MouseEvent> objOnMouseEnteredEventHandler = 
+        (MouseEvent t) -> {
+
+            Circle rect = (Circle)t.getSource();
+            List<Objectif> listeObj = m_controller.getListeObjectif();
+ 
+                for(Objectif o : listeObj)
+                {   float xJoueur=o.getCoordonneesObj().x;
+                    float yJoueur=o.getCoordonneesObj().y;
+                    float xRect =(float)rect.getLayoutX();
+                    float yRect=(float)rect.getLayoutY();
+                    if((xJoueur == xRect) && (yJoueur == yRect))
+                    {
+                        objectifCourant=o;
+                        cercleCourant= rect;
+                    }
+                }
+            
+    };
+    
 /////////////////////////////////////////////////////////////////
     EventHandler<MouseEvent> circleOnMousePressedEventHandler = 
         (MouseEvent t) -> {
@@ -734,6 +837,20 @@ public class Interface_image_par_imageController implements Initializable {
             orgTranslateY = ((Circle)(t.getSource())).getLayoutY();
             label_orgTranslateX = label_rolePositionCourant.getLayoutX();
             label_orgTranslateY = label_rolePositionCourant.getLayoutY();
+            }
+            
+    };
+    
+        EventHandler<MouseEvent> objOnMousePressedEventHandler = 
+        (MouseEvent t) -> {
+            if(t.getButton()==MouseButton.PRIMARY)
+            {
+                orgSceneX = t.getSceneX();
+                orgSceneY = t.getSceneY();
+                label_orgSceneX = t.getSceneX() + 20;
+                label_orgSceneY = t.getSceneY() - 15;
+                orgTranslateX = ((Circle)(t.getSource())).getLayoutX();
+                orgTranslateY = ((Circle)(t.getSource())).getLayoutY();
             }
             
     };
@@ -763,6 +880,24 @@ public class Interface_image_par_imageController implements Initializable {
         }
     };
     
+    EventHandler<MouseEvent> objOnMouseDraggedEventHandler = 
+        new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton()==MouseButton.PRIMARY)
+            {
+                double scale = myScale.get() ;
+                double offsetX = (t.getSceneX() - orgSceneX)/scale;
+                double offsetY = (t.getSceneY() - orgSceneY)/scale;
+                double newTranslateX = orgTranslateX + offsetX;
+                double newTranslateY = orgTranslateY + offsetY;
+                ((Circle)(t.getSource())).setLayoutX(newTranslateX);
+                ((Circle)(t.getSource())).setLayoutY(newTranslateY);
+            }
+        }
+    };
+    
 /////////////////////////////////////////////////////////////////////
         EventHandler<MouseEvent> circleOnMouseReleasedEventHandler = 
         new EventHandler<MouseEvent>() {
@@ -784,6 +919,21 @@ public class Interface_image_par_imageController implements Initializable {
             
             }
     };
+   };
+        EventHandler<MouseEvent> objOnMouseReleasedEventHandler = 
+        new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton()==MouseButton.PRIMARY)
+            { 
+            float xRect =(float)cercleCourant.getLayoutX();
+            float yRect=(float)cercleCourant.getLayoutY();
+            Point2D.Float point = new Point2D.Float(xRect,yRect);
+            objectifCourant.setCoordonneesObj(point);
+            }
+    };
+        
    };
         
         
@@ -824,6 +974,42 @@ public class Interface_image_par_imageController implements Initializable {
     };
    };
         
+        EventHandler<MouseEvent> objOnRightMouseClickEventHandler = 
+        new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton()==MouseButton.SECONDARY)
+            {
+                Circle rekt = (Circle)t.getSource();
+                List<Objectif> listeObjectif = m_controller.getListeObjectif();
+                for(Objectif o : listeObjectif)
+                {
+                    float xObstacle=o.getCoordonneesObj().x;
+                    float yObstacle=o.getCoordonneesObj().y;
+                    float xRekt =(float)rekt.getLayoutX();
+                    float yRekt=(float)rekt.getLayoutY();
+                    if((xObstacle == xRekt) && (yObstacle == yRekt))
+                        {
+                            listeObjectif.remove(o);
+                            break;
+                        }                    
+                }
+            
+                
+                conteneurJoueur.getChildren().remove(rekt);
+
+            }
+        
+            
+    };
+   };
+    
+        
+    /**
+     *
+     * @param idJoueur
+     */
     public void supprimerLabelRolePosition(int idJoueur)
     {
         String idJoueurString = "" + idJoueur;
@@ -1325,6 +1511,10 @@ public class Interface_image_par_imageController implements Initializable {
     public void setJoueurMax()
     {
         txtJoueurMax.setText(Integer.toString(m_controller.getJoueurMax()));
+    }
+    
+    public void setObjeticAjoueter(String p_Objectif){
+        objectifAjouer = p_Objectif;
     }
     
     

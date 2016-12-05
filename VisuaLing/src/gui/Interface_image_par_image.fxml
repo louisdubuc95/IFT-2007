@@ -62,12 +62,12 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="boutonAjouterObstacle" minHeight="-Infinity" minWidth="105.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="105.0" text="Nouvel Obstacle">
+            <ToggleButton fx:id="boutonAjouterObstacle" minHeight="-Infinity" minWidth="105.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="105.0" text="Nouvel Obstacle">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="boutonObjectif" minHeight="-Infinity" minWidth="99.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="99.0" text="Nouvel Objectif">
+            <ToggleButton fx:id="boutonObjectif" minHeight="-Infinity" minWidth="99.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="99.0" text="Nouvel Objectif">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>

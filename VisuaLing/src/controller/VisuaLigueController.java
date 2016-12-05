@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import domain.equipe.Equipe;
 import domain.joueur.Joueur;
+import domain.obstacle.Objectif;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
@@ -155,5 +156,13 @@ public class VisuaLigueController implements java.io.Serializable{
     
     public boolean getStateAfficherRP(){
         return m_surfaceJeu.getStateAfficherRP();
+    }
+    
+    public void addRondelle(Point2D.Float p_point){
+        m_surfaceJeu.addRondelle(p_point);
+    }
+    
+    public List<Objectif> getListeObjectif(){
+        return m_surfaceJeu.getListeObjectif();
     }
 }

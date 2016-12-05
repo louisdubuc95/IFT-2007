@@ -5,6 +5,7 @@
  */
 package gui;
 
+import controller.VisuaLigueController;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,18 +29,52 @@ public class Interface_CreerObjectifController implements Initializable {
     @FXML
     private Button boutonAnnuler;
     @FXML
-    private Button boutonOk;
+    private Button boutonRondelle;
+    @FXML
+    private Button boutonBalle;
+    @FXML
+    private Button boutonBallon;
     @FXML
      private Button boutonParcourir;
     @FXML
     private ImageView ivImage;
     
+    private Interface_image_par_imageController parentController;
+    private Interface_temps_reelController parentControllerTR;
+    public VisuaLigueController m_controller;
+    
 
     
+    //TR
+    public void initializeTR(Interface_temps_reelController controller) {
+        parentControllerTR = controller;
+        m_controller = parentControllerTR.m_controller;
+    }
     
-        @FXML 
-    public void boutonOkAction(ActionEvent event) throws MalformedURLException{
-        Stage stage = (Stage) boutonOk.getScene().getWindow();
+    //IPI
+    public void initialize(Interface_image_par_imageController controller) {
+        parentController = controller;
+        m_controller = parentController.m_controller;
+    }
+    
+    @FXML 
+    public void boutonRondelleAction(ActionEvent event) throws MalformedURLException{
+        parentController.setObjeticAjoueter("Rondelle");
+        Stage stage = (Stage) boutonRondelle.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML 
+    public void boutonBalleAction(ActionEvent event) throws MalformedURLException{
+        parentController.setObjeticAjoueter("Balle");
+        Stage stage = (Stage) boutonBalle.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML 
+    public void boutonBallonAction(ActionEvent event) throws MalformedURLException{
+        parentController.setObjeticAjoueter("Ballon");
+        Stage stage = (Stage) boutonBallon.getScene().getWindow();
         stage.close();
     }
     
