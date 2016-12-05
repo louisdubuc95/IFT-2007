@@ -8,11 +8,17 @@ package gui;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Observable;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -29,6 +35,10 @@ public class ModifObstacleController implements Initializable {
     @FXML private Button boutonParcourir;
     @FXML private Button boutonOk;
     @FXML private ImageView ivImage;
+    @FXML private ListView listviewList;
+    @FXML private TextField txtNom;
+    @FXML private TextField txtHauteur;
+    @FXML private TextField txtLargeur;
     /**
      * Initializes the controller class.
      */
@@ -63,6 +73,14 @@ public class ModifObstacleController implements Initializable {
                 ivImage.setImage(image);
          }
     }
+    
+    @FXML 
+    public void boutonAjouterAction(ActionEvent event){
+        String nom = txtNom.getText();
+        List<String> values = Arrays.asList(nom);
+        listviewList.setItems(FXCollections.observableList(values));
+    }
+    
     
 
     

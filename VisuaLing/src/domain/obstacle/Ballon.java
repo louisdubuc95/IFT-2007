@@ -27,13 +27,6 @@ public class Ballon extends Objectif implements Serializable{
     
     public Ballon (Point2D.Float p_point){
         super(p_point);
-        
-        imageFile = new File(imagepath);
-        try {
-            m_image = ImageIO.read(imageFile);
-        }   catch (IOException ex) {
-            Logger.getLogger(Balle.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     @Override

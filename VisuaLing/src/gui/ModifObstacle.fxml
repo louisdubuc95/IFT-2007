@@ -25,11 +25,11 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="231.0" prefWidth="176.0">
                                  <children>
-                                    <ListView editable="true" layoutX="2.0" prefHeight="229.0" prefWidth="176.0" />
+                                    <ListView fx:id="listviewList" editable="true" layoutX="2.0" prefHeight="229.0" prefWidth="176.0" />
                                  </children></AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="176.0">
                                  <children>
-                                    <Button layoutX="-1.0" layoutY="-3.0" mnemonicParsing="false" style="-fx-background-color: none;" text="+">
+                                    <Button fx:id="btnAjouter" layoutX="-1.0" layoutY="-3.0" mnemonicParsing="false" onAction="#boutonAjouterAction" style="-fx-background-color: none;" text="+">
                                        <font>
                                           <Font size="17.0" />
                                        </font></Button>
@@ -46,14 +46,14 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="315.0" prefWidth="365.0">
                      <children>
-                        <TextField layoutX="91.0" layoutY="37.0" prefHeight="27.0" prefWidth="186.0" promptText="Nom de l'obstacle" />
+                        <TextField fx:id="txtNom" layoutX="91.0" layoutY="37.0" prefHeight="27.0" prefWidth="186.0" promptText="Nom de l'obstacle" />
                         <Label layoutX="28.0" layoutY="42.0" text="Nom :" />
                         <Label layoutX="28.0" layoutY="93.0" text="Largeur :" />
                         <Label layoutX="156.0" layoutY="93.0" text="Hauteur :" />
                         <Label layoutX="28.0" layoutY="146.0" text="Image :" />
                         <Button layoutX="171.0" layoutY="182.0" mnemonicParsing="false" text="Enregistrer" />
-                        <TextField layoutX="91.0" layoutY="88.0" prefHeight="27.0" prefWidth="37.0" />
-                        <TextField layoutX="223.0" layoutY="88.0" prefHeight="27.0" prefWidth="37.0" />
+                        <TextField fx:id="txtLargeur" layoutX="91.0" layoutY="88.0" prefHeight="27.0" prefWidth="37.0" />
+                        <TextField fx:id="txtHauteur" layoutX="223.0" layoutY="88.0" prefHeight="27.0" prefWidth="37.0" />
                         <Label layoutX="130.0" layoutY="93.0" text="m" />
                         <Label layoutX="262.0" layoutY="93.0" text="m" />
                         <Button fx:id="boutonParcourir" layoutX="176.0" layoutY="150.0" mnemonicParsing="false" onAction="#boutonParcourirAction" text="Parcourir" />

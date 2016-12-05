@@ -162,6 +162,14 @@ public class VisuaLigueController implements java.io.Serializable{
         m_surfaceJeu.addRondelle(p_point);
     }
     
+    public void addBalle(Point2D.Float p_point){
+        m_surfaceJeu.addBalle(p_point);
+    }
+    
+    public void addBallon(Point.Float p_poFloat){
+        m_surfaceJeu.addBallon(p_poFloat);
+    }
+    
     public List<Objectif> getListeObjectif(){
         return m_surfaceJeu.getListeObjectif();
     }
