@@ -132,8 +132,10 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private boolean desafficherRPJoueur;
     @FXML ImageView imgsurface ;
     
-    @FXML private Button toggleRecommencer ;
-    @FXML private Button toggleDebuter;
+    @FXML private Button boutonRecommencer ;
+    @FXML private Button boutonDebuter;
+    @FXML private Button boutonPause;
+    private boolean onPause;
     
     private Joueur joueurCourant;
     private Color couleurCourante;
@@ -141,7 +143,7 @@ public class Interface_image_par_imageController implements Initializable {
     private Rectangle rectangleCourant;
     private Objectif objectifCourant;
     
-    private int indexListe = 0;
+    private int indexListe = -1;
     
     
     //coordonée
@@ -1140,9 +1142,13 @@ public class Interface_image_par_imageController implements Initializable {
         return new Task() {
             @Override protected Void call() throws Exception {
              List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
+                System.out.println(listeSauvegardeJoueur.size());
             List<Node> listeC = conteneurJoueur.getChildren();
-            while(indexListe<listeSauvegardeJoueur.size())
+            while(indexListe<listeSauvegardeJoueur.size()-1)
+
        {
+            indexListe = indexListe + 1;
+            System.out.println(indexListe);
            if(indexListe == 0)
            {
                 for(Joueur J : listeSauvegardeJoueur.get(indexListe))
@@ -1159,10 +1165,12 @@ public class Interface_image_par_imageController implements Initializable {
                               IteratingTask1 task = new IteratingTask1((Circle)cercle);
                               Thread th = new Thread(task);
                                 th.setDaemon(true);
-                                th.start();                              
+                                th.start();
+                                
                           }
                     }
                 }
+                
            }
            
            
@@ -1183,11 +1191,13 @@ public class Interface_image_par_imageController implements Initializable {
                               Thread th = new Thread(task);
                                 th.setDaemon(true);
                                 th.start();
+                                
 
   
                           }
                     }
                 }
+                
                 for(Joueur J : listeSauvegardeJoueur.get(indexListe))
                 {
                     for(Node cercle : listeC)
@@ -1207,10 +1217,13 @@ public class Interface_image_par_imageController implements Initializable {
                           }
                     }
                 }
+                
+                
                
            }
+           
 
-            indexListe++;
+            
             Thread.sleep(1000);
        }
              return null;
@@ -1220,16 +1233,153 @@ public class Interface_image_par_imageController implements Initializable {
 };
       
      
-   
-      
-      
+ 
     @FXML
     public void debuterStrategie()
     {   
         process.start();
+        onPause = false;
     }
     
-    //
+    
+    @FXML
+    public void stopStrategie()
+    {
+        
+        process.cancel();
+        process.reset();
+        onPause = true;
+    }
+    
+    
+    @FXML
+    public void avancerStrategie()
+    {
+        List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
+        
+        if(onPause==true)
+        {
+            if(indexListe<listeSauvegardeJoueur.size()-1)
+            {
+            
+            
+            List<Node> listeC = conteneurJoueur.getChildren();
+            indexListe = indexListe + 1;
+            for(Joueur J : listeSauvegardeJoueur.get(indexListe-1))
+                {
+                    for(Node cercle : listeC)
+                    {
+                         float xJoueur=J.getCoordonneesJoueur().x;
+                         float yJoueur=J.getCoordonneesJoueur().y;
+                         float xCercle =(float)cercle.getLayoutX();
+                         float yCercle=(float)cercle.getLayoutY();
+
+                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
+                          {
+                              /*IteratingTask0 task = new IteratingTask0((Circle)cercle);
+                              Thread th = new Thread(task);
+                                th.setDaemon(true);
+                                th.start();*/
+                              
+                              cercle.setOpacity(0.5);
+
+  
+                          }
+                    }
+                }
+                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+                {
+                    for(Node cercle : listeC)
+                    {
+                         float xJoueur=J.getCoordonneesJoueur().x;
+                         float yJoueur=J.getCoordonneesJoueur().y;
+                         float xCercle =(float)cercle.getLayoutX();
+                         float yCercle=(float)cercle.getLayoutY();
+
+                         if((xJoueur == xCercle) && (yJoueur == yCercle)&& cercle.getClass() == Circle.class)
+                          {
+                              /*IteratingTask1 task = new IteratingTask1((Circle)cercle);
+                              Thread th = new Thread(task);
+                                th.setDaemon(true);
+                                th.start();*/
+                              
+                              cercle.setOpacity(1.0);
+
+                          }
+                    }
+            
+            
+            
+                }
+            }
+        
+    }
+        
+    }
+    
+    @FXML
+    public void reculerStrategie()
+    {
+        List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
+        if(onPause==true)
+        {
+            if(indexListe>0)
+            {
+            
+            
+            List<Node> listeC = conteneurJoueur.getChildren();
+            indexListe = indexListe - 1;
+            for(Joueur J : listeSauvegardeJoueur.get(indexListe+1))
+                {
+                    for(Node cercle : listeC)
+                    {
+                         float xJoueur=J.getCoordonneesJoueur().x;
+                         float yJoueur=J.getCoordonneesJoueur().y;
+                         float xCercle =(float)cercle.getLayoutX();
+                         float yCercle=(float)cercle.getLayoutY();
+
+                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
+                          {
+                              /*IteratingTask0 task = new IteratingTask0((Circle)cercle);
+                              Thread th = new Thread(task);
+                                th.setDaemon(true);
+                                th.start();*/
+                              
+                              cercle.setOpacity(0.5);
+
+  
+                          }
+                    }
+                }
+                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+                {
+                    for(Node cercle : listeC)
+                    {
+                         float xJoueur=J.getCoordonneesJoueur().x;
+                         float yJoueur=J.getCoordonneesJoueur().y;
+                         float xCercle =(float)cercle.getLayoutX();
+                         float yCercle=(float)cercle.getLayoutY();
+
+                         if((xJoueur == xCercle) && (yJoueur == yCercle)&& cercle.getClass() == Circle.class)
+                          {
+                              /*IteratingTask1 task = new IteratingTask1((Circle)cercle);
+                              Thread th = new Thread(task);
+                                th.setDaemon(true);
+                                th.start();*/
+                              
+                              cercle.setOpacity(1.0);
+
+                          }
+                    }
+            
+            
+            
+                }
+            }
+        
+    }
+        
+    }
         
 
 
@@ -1239,7 +1389,7 @@ public class Interface_image_par_imageController implements Initializable {
        ObservableList<Node> listeC = conteneurJoueur.getChildren();
        List<List<Joueur>> listeJ = m_controller.getListeSauvegardeJoueur();
        List<Joueur> listeSauvegarde = new ArrayList<>();
-       indexListe = 0;
+       indexListe = -1;
        for(List<Joueur> LJ : listeJ)
        {
         for(Joueur j : LJ)
