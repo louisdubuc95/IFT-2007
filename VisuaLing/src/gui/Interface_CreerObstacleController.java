@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  *
  * @author antoinehudon
  */
-public class ModifObstacleController implements Initializable {
+public class Interface_CreerObstacleController implements Initializable {
 
     @FXML private Button boutonAnnuler;
     @FXML private Button boutonParcourir;
