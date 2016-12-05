@@ -156,6 +156,10 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Color color;
     @FXML private String objectifAjouer = "";
     @FXML private Image imageObjectif;
+    @FXML private Image imageObstacle;
+    @FXML private String imageObstaclePath;
+    @FXML private int xObstacle;
+    @FXML private int yObstacle;
     
     
     private double x0, y0;
@@ -453,13 +457,15 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML
     public void ajouterObstacleAction(ActionEvent event) throws IOException {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifObstacle.fxml"));
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_CreerObstacle.fxml"));
           Stage stage = new Stage(StageStyle.DECORATED);
           stage.setTitle("Ajout obstacle");
           stage.setScene(new Scene((AnchorPane) loader.load()));
          if (boutonAjouterObstacle.isSelected()){
           //Fonction qui bloque les window deriere la nouvelle
           Stage currentStage = (Stage) boiteverticale.getScene().getWindow();
+          Interface_CreerObstacleController CreerObstacle = loader.<Interface_CreerObstacleController>getController();
+          CreerObstacle.initialize(this);
           stage.initModality(Modality.WINDOW_MODAL);
           stage.initOwner(currentStage);
           
@@ -759,6 +765,26 @@ public class Interface_image_par_imageController implements Initializable {
                         default:
                             break;
                     }
+                }
+                else
+                    if(boutonAjouterObstacle.isSelected())
+                    {
+                            Circle cercle = new Circle(30);
+                            cercle.setLayoutX(event.getX());
+                            cercle.setLayoutY(event.getY());
+                            cercle.setCursor(Cursor.HAND);
+//                            cercle.setOnMousePressed(objOnMousePressedEventHandler);
+//                            cercle.setOnMouseDragged(objOnMouseDraggedEventHandler);
+                            cercle.setOnMouseEntered(objOnMouseEnteredEventHandler);
+//                            cercle.setOnMouseReleased(objOnMouseReleasedEventHandler);
+                            cercle.setOnMouseClicked(objOnRightMouseClickEventHandler);
+                            float x = (float) event.getX();
+                            float y = (float) event.getY();
+                            Point2D.Float p = new Point2D.Float(x,y);
+                            m_controller.addObstacle(p, imageObstaclePath);
+                            ImagePattern imagePattern = new ImagePattern(imageObstacle);
+                            cercle.setFill(imagePattern);
+                            conteneurJoueur.getChildren().addAll(cercle);
                     }
             }
         });  
@@ -1666,7 +1692,17 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
     public void setDimensionObstacle(int x, int y){
-        
+        xObstacle = x;
+        yObstacle = y;
+    }
+    
+    public void setImageObstacle(Image p_image){
+        imageObstacle = p_image;
+    }
+    
+    public void setImagePathObstacle(String p_path)
+    {
+        imageObstaclePath = p_path;
     }
     
     

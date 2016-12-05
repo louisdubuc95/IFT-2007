@@ -127,7 +127,7 @@ public class SurfaceJeu implements Serializable{
         return joueurTrouver;
     }
     
-    public void addObstacle(Point2D.Float p_coordObstacle, Image p_image){
+    public void addObstacle(Point2D.Float p_coordObstacle, String p_image){
         boolean ajouterObstacle = false;
         
         if(obstacleEstPresent(p_coordObstacle) == false){

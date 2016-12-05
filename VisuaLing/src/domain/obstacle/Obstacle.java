@@ -14,10 +14,10 @@ import java.io.Serializable;
  * @author louis
  */
 public class Obstacle implements Serializable{
-    private Image m_image;
+    private String m_image;
     private Point2D.Float m_point;
     
-    public Obstacle(Image p_image, Point2D.Float p_point){
+    public Obstacle(String p_image, Point2D.Float p_point){
         this.m_image = p_image;
         this.m_point = p_point;
     }
@@ -26,7 +26,7 @@ public class Obstacle implements Serializable{
         m_point = p_point;
     }
     
-    public void setImage(Image p_image){
+    public void setImage(String p_image){
         m_image = p_image;
     }
     
@@ -38,7 +38,7 @@ public class Obstacle implements Serializable{
         return m_point;
     }
     
-    public Image getImageObs(){
+    public String getImageObs(){
         return m_image;
     }
 }
