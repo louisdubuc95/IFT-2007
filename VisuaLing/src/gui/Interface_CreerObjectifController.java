@@ -10,10 +10,15 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -29,15 +34,13 @@ public class Interface_CreerObjectifController implements Initializable {
     @FXML
     private Button boutonAnnuler;
     @FXML
-    private Button boutonRondelle;
+    private Button boutonConfirmer;
     @FXML
-    private Button boutonBalle;
-    @FXML
-    private Button boutonBallon;
-    @FXML
-     private Button boutonParcourir;
+    private Button boutonParcourir;
     @FXML
     private ImageView ivImage;
+    @FXML
+    private ComboBox cbType;
     
     private Interface_image_par_imageController parentController;
     private Interface_temps_reelController parentControllerTR;
@@ -49,33 +52,87 @@ public class Interface_CreerObjectifController implements Initializable {
     public void initializeTR(Interface_temps_reelController controller) {
         parentControllerTR = controller;
         m_controller = parentControllerTR.m_controller;
+        cbType.valueProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                updateImage(newValue);
+        }
+
+        }); 
+        
+        cbType.getItems().add("Rondelle");
+        cbType.getItems().add("Balle");
+        cbType.getItems().add("Ballon");
+        cbType.getSelectionModel().selectFirst();
+        
+        String image = "src/Photo/rondelle.jpg";
+        File imageFile = new File(image);
+        String imagePath = null;
+        try {
+            imagePath = imageFile.toURI().toURL().toString();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Image ImageRondelle = new Image(imagePath);
+        ivImage.setImage(ImageRondelle);
     }
     
     //IPI
     public void initialize(Interface_image_par_imageController controller) {
         parentController = controller;
         m_controller = parentController.m_controller;
-    }
-    
-    @FXML 
-    public void boutonRondelleAction(ActionEvent event) throws MalformedURLException{
-        parentController.setObjeticAjoueter("Rondelle");
-        Stage stage = (Stage) boutonRondelle.getScene().getWindow();
-        stage.close();
-    }
-    
-    @FXML 
-    public void boutonBalleAction(ActionEvent event) throws MalformedURLException{
-        parentController.setObjeticAjoueter("Balle");
-        Stage stage = (Stage) boutonBalle.getScene().getWindow();
-        stage.close();
-    }
+        cbType.valueProperty().addListener(new ChangeListener<String>() {
 
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                updateImage(newValue);
+        }
+
+        }); 
+        
+        cbType.getItems().add("Rondelle");
+        cbType.getItems().add("Balle");
+        cbType.getItems().add("Ballon");
+        cbType.getSelectionModel().selectFirst();
+        
+        String image = "src/Photo/rondelle.jpg";
+        File imageFile = new File(image);
+        String imagePath = null;
+        try {
+            imagePath = imageFile.toURI().toURL().toString();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Image ImageRondelle = new Image(imagePath);
+        ivImage.setImage(ImageRondelle);
+    }
+    
     @FXML 
-    public void boutonBallonAction(ActionEvent event) throws MalformedURLException{
-        parentController.setObjeticAjoueter("Ballon");
-        Stage stage = (Stage) boutonBallon.getScene().getWindow();
-        stage.close();
+    public void boutonOKAction(ActionEvent event) throws MalformedURLException{
+        if(cbType.getSelectionModel().getSelectedItem() == "Rondelle")
+        {
+            parentController.setObjeticAjoueter("Rondelle");
+            parentController.setOjbectifImage(ivImage.getImage());
+            Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
+            stage.close();
+        }      
+        else
+            if(cbType.getSelectionModel().getSelectedItem() == "Balle")
+            {
+                parentController.setObjeticAjoueter("Rondelle");
+                parentController.setOjbectifImage(ivImage.getImage());
+                Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
+                stage.close();
+            }
+            else
+                if(cbType.getSelectionModel().getSelectedItem() == "Ballon")
+                {
+                    parentController.setObjeticAjoueter("Rondelle");
+                    parentController.setOjbectifImage(ivImage.getImage());
+                    Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
+                    stage.close();
+                }
     }
     
     @FXML
@@ -99,13 +156,52 @@ public class Interface_CreerObjectifController implements Initializable {
                 ivImage.setImage(image);
          }
     }
-    
+    private void updateImage(String newValue) {
+        switch (newValue){
+            case ("Rondelle"):
+                String imageRondelle = "src/Photo/rondelle.jpg";
+                File imageFileRondelle = new File(imageRondelle);
+                String imagepathRondelle = null;
+                try {
+                    imagepathRondelle = imageFileRondelle.toURI().toURL().toString();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Image ImageRondelle = new Image(imagepathRondelle);
+                ivImage.setImage(ImageRondelle);
+                break;
+            case ("Balle"):
+                String imageBalle = "src/Photo/balle.jpg";
+                File imageFileBalle = new File(imageBalle);
+                String imagepathBalle = null;
+                try {
+                    imagepathBalle = imageFileBalle.toURI().toURL().toString();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Image ImageBalle = new Image(imagepathBalle);
+                ivImage.setImage(ImageBalle);                
+                break;
+            case("Ballon"):
+                String imageBallon = "src/Photo/ballon.png";
+                File imageFileBallon = new File(imageBallon);
+                String imagepathBallon = null;
+                try {
+                    imagepathBallon = imageFileBallon.toURI().toURL().toString();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Image ImageBallon = new Image(imagepathBallon);
+                ivImage.setImage(ImageBallon);
+                break;
+        }
+    }  
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     } 
    
     

@@ -155,6 +155,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private String imagePath;
     @FXML private Color color;
     @FXML private String objectifAjouer = "";
+    @FXML private Image imageObjectif;
     
     
     private double x0, y0;
@@ -697,16 +698,7 @@ public class Interface_image_par_imageController implements Initializable {
                             float y = (float) event.getY();
                             Point2D.Float p = new Point2D.Float(x,y);
                             m_controller.addRondelle(p);
-                            String imagep = "src/Photo/rondelle.jpg";
-                            File imageFile = new File(imagep);
-                            String imagepath = null;
-                            try {
-                                imagepath = imageFile.toURI().toURL().toString();
-                            } catch (MalformedURLException ex) {
-                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            Image image = new Image(imagepath);
-                            ImagePattern imagePattern = new ImagePattern(image);
+                            ImagePattern imagePattern = new ImagePattern(imageObjectif);
                             cercle.setFill(imagePattern);
                             conteneurJoueur.getChildren().addAll(cercle);
                             break;
@@ -1667,6 +1659,10 @@ public class Interface_image_par_imageController implements Initializable {
     
     public void setObjeticAjoueter(String p_Objectif){
         objectifAjouer = p_Objectif;
+    }
+    
+    public void setOjbectifImage(Image p_image){
+        imageObjectif = p_image;
     }
     
     public void setDimensionObstacle(int x, int y){

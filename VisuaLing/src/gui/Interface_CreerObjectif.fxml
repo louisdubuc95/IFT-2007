@@ -15,22 +15,21 @@
             <Blend />
          </effect>
    <children>
-      <Button fx:id="boutonRondelle" layoutX="38.0" layoutY="366.0" mnemonicParsing="false" onAction="#boutonRondelleAction" text="Rondelle" />
-      <Button fx:id="boutonBalle" layoutX="131.0" layoutY="366.0" mnemonicParsing="false" onAction="#boutonBalleAction" prefHeight="25.0" prefWidth="63.0" text="Balle" />
-      <Button fx:id="boutonBallon" layoutX="223.0" layoutY="366.0" mnemonicParsing="false" onAction="#boutonBallonAction" prefHeight="25.0" prefWidth="63.0" text="Ballon" />
+      <Button fx:id="boutonConfirmer" layoutX="92.0" layoutY="366.0" mnemonicParsing="false" onAction="#boutonOKAction" text="Confirmer" />
+      <Button fx:id="boutonAnnuler" layoutX="223.0" layoutY="366.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefHeight="25.0" prefWidth="69.0" text="Annuler" />
       <Label layoutX="14.0" layoutY="15.0" text="Créer un objectif">
          <font>
             <Font name="Calibri Light" size="48.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="51.0" layoutY="134.0" prefHeight="25.0" prefWidth="275.0" />
       <Label layoutX="20.0" layoutY="107.0" text="Type:" />
-      <ImageView fitHeight="132.0" fitWidth="162.0" layoutX="57.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ivImage" fitHeight="132.0" fitWidth="162.0" layoutX="57.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Photo/default-placeholder.png" />
          </image>
       </ImageView>
-      <Button layoutX="244.0" layoutY="233.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="78.0" text="Parcourir" />
+      <Button fx:id="boutonParcourir" layoutX="244.0" layoutY="233.0" mnemonicParsing="false" onAction="#boutonParcourirAction" prefHeight="64.0" prefWidth="78.0" text="Parcourir" />
       <Label layoutX="20.0" layoutY="182.0" text="Image:" />
+      <ComboBox fx:id="cbType" layoutX="48.0" layoutY="124.0" prefHeight="25.0" prefWidth="277.0" />
    </children>
     </AnchorPane>
