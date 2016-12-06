@@ -24,6 +24,13 @@
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Undo/Redo">
+               <items>
+                  <MenuItem fx:id="undo" mnemonicParsing="false" onAction="#undoAction" text="Undo" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="redo" mnemonicParsing="false" onAction="#redoAction" text="Redo" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Sport">
                <items>
                   <MenuItem fx:id="menuChoixNouvSport" mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />

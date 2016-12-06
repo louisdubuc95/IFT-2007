@@ -124,6 +124,9 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private MenuItem menuChoixModifSport;
     @FXML private MenuItem btnNouvelleImage;
     
+    @FXML private MenuItem undo;
+    @FXML private MenuItem redo;
+    
     
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
@@ -145,6 +148,8 @@ public class Interface_image_par_imageController implements Initializable {
     private ArrayList<Shape> nodes = new ArrayList<>();
     
     private int indexListe = -1;
+    
+    private int indexUndoRedo = -1;
     
     
     //coordonée
@@ -278,6 +283,52 @@ public class Interface_image_par_imageController implements Initializable {
         stackSurface.getChildren().add(p_joueur);
     }
     }
+    
+    
+    @FXML
+    public void undoAction(ActionEvent e)
+    {
+       indexUndoRedo = indexUndoRedo - 1;
+       VisuaLigueController controllerUndo = m_enregistrement.deSerializeUR(m_enregistrement.getListeUR().get(indexUndoRedo));
+        setController(controllerUndo);
+        setJoueur();
+        setStateAfficherPosition();
+        setStateMaxJoueur();
+        setJoueurMax();
+
+        
+    }
+    
+    
+    @FXML
+    public void redoAction(ActionEvent e)
+    {
+       indexUndoRedo = indexUndoRedo + 1;
+       VisuaLigueController controllerUndo = m_enregistrement.deSerializeUR(m_enregistrement.getListeUR().get(indexUndoRedo));
+        setController(controllerUndo);
+        setJoueur();
+        setStateAfficherPosition();
+        setStateMaxJoueur();
+        setJoueurMax();
+
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
    public void getX(String dimensionX){
@@ -450,10 +501,7 @@ public class Interface_image_par_imageController implements Initializable {
             alert.setContentText("Il faut créer des équipe avant de créer des joueurs");
             alert.showAndWait();
             boutonAjouterJoueur.setSelected(false);
-        }
-        
-
-        
+        }  
     }
     
     public void addRoleToList(String Role)
@@ -947,8 +995,14 @@ public class Interface_image_par_imageController implements Initializable {
                         rekt.setFill(imagePattern);
                         conteneurJoueur.getChildren().addAll(rekt);
                     }
+            m_enregistrement.serializeUR(m_controller.getController(), indexUndoRedo);
+            indexUndoRedo ++;
             }
-        });  
+        }); 
+        
+        
+       
+       
     }
     
 
@@ -1119,6 +1173,8 @@ public class Interface_image_par_imageController implements Initializable {
             label_joueurRotationCourant.setLayoutY(yCercle-8);
             Point2D.Float point = new Point2D.Float(xCercle,yCercle);
             joueurCourant.setCoordonneesJoueur(point);
+            m_enregistrement.serializeUR(m_controller.getController(), indexUndoRedo);
+            indexUndoRedo ++;
             
             }
     };
@@ -1134,6 +1190,8 @@ public class Interface_image_par_imageController implements Initializable {
                 float yRect=(float)cercleCourant.getLayoutY();
                 Point2D.Float point = new Point2D.Float(xRect,yRect);
                 objectifCourant.setCoordonneesObj(point);
+                m_enregistrement.serializeUR(m_controller.getController(),indexUndoRedo);
+                indexUndoRedo ++;
             }
     };
         
@@ -1169,6 +1227,8 @@ public class Interface_image_par_imageController implements Initializable {
                 }
                 
                 conteneurJoueur.getChildren().remove(cercle);
+                m_enregistrement.serializeUR(m_controller.getController(),indexUndoRedo);
+                indexUndoRedo ++;
 
                 }
             
@@ -1199,6 +1259,8 @@ public class Interface_image_par_imageController implements Initializable {
                 }
 
                 conteneurJoueur.getChildren().remove(rekt);
+                m_enregistrement.serializeUR(m_controller.getController(),indexUndoRedo);
+                indexUndoRedo ++;
             }
     };
    };
@@ -1225,6 +1287,8 @@ public class Interface_image_par_imageController implements Initializable {
                         }                    
                 }
                 conteneurJoueur.getChildren().remove(rekt);
+                m_enregistrement.serializeUR(m_controller.getController(),indexUndoRedo);
+                indexUndoRedo ++;
             }
     };
    };

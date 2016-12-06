@@ -27,19 +27,19 @@
                   <MenuItem mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Undo/Redo">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Undo" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#quitterJeu" text="Redo" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Sport">
               <items>
                 <MenuItem fx:id="menuChoixNouvSport" mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
                   <MenuItem fx:id="menuChoixModifSport" mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Changer sport" />
               </items>
             </Menu>
-          <Menu disable="true" mnemonicParsing="false" text="Suppression">
-            <items>
-                  <MenuItem mnemonicParsing="false" text="Supprimer Joueur" />
-                  <MenuItem mnemonicParsing="false" text="Supprimer Obstacle" />
-                  <MenuItem mnemonicParsing="false" onAction="#ajouterObstacleAction" text="Supprimer Objectif" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" onAction="#OuvrirInfoAction" text="Aide">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#OuvrirInfoAction" text="À propos" />

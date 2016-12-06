@@ -115,9 +115,7 @@ public class Interface_CreerObstacleController implements Initializable {
     }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-    }
+    public void initialize(URL url, ResourceBundle rb) {}
     
     
     EventHandler<ActionEvent> updateButtonHandler = new EventHandler<ActionEvent>() 

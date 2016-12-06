@@ -177,6 +177,7 @@ public class Interface_accueilController implements Initializable {
     
     File folder = new File("src/savedStrategies");
     File[] listOfFiles = folder.listFiles();
+
     
     for (File file : listOfFiles) {
       String extensionIPI = ".IPI";
@@ -201,8 +202,6 @@ public class Interface_accueilController implements Initializable {
         content.getChildren().add(TB);
         
       }
-
-
     }
     }
     
