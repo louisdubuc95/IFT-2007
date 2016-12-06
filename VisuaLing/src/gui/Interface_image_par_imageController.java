@@ -157,10 +157,13 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Color color;
     @FXML private String objectifAjouer = "";
     @FXML private Image imageObjectif;
+    
+    @FXML private String nomObstacle;
+    @FXML private String typeObstacle;
+    @FXML private int hauteurObstacle;
+    @FXML private int largeurObstacle;
     @FXML private Image imageObstacle;
     @FXML private String imageObstaclePath;
-    @FXML private int xObstacle;
-    @FXML private int yObstacle;
     
         
     @FXML private CheckBox afficherRotation ;
@@ -565,7 +568,7 @@ public class Interface_image_par_imageController implements Initializable {
     public void ajouterJoueurInterface()  {
         List<Equipe> listeEquipe = m_controller.getListEquipe();
         conteneurJoueur.setOnMouseClicked((MouseEvent event) -> {
-            if(event.getClickCount()==2)
+            if(event.getClickCount()==2 && event.getButton() == MouseButton.PRIMARY)
             {
                 if(boutonAjouterJoueur.isSelected()){
                     
@@ -895,16 +898,16 @@ public class Interface_image_par_imageController implements Initializable {
                 else
                     if(boutonAjouterObstacle.isSelected())
                     {
-                        Rectangle rekt = new Rectangle(xObstacle,yObstacle);
-                        rekt.setLayoutX(event.getX()-xObstacle/2);
-                        rekt.setLayoutY(event.getY()-yObstacle/2);
+                        Rectangle rekt = new Rectangle(largeurObstacle,hauteurObstacle);
+                        rekt.setLayoutX(event.getX()-largeurObstacle/2);
+                        rekt.setLayoutY(event.getY()-hauteurObstacle/2);
                         rekt.setCursor(Cursor.HAND);
                         rekt.setOnMouseClicked(obsOnRightMouseClickEventHandler);
                         nodes.add(rekt);
                         float x = (float) event.getX();
                         float y = (float) event.getY();
                         Point2D.Float p = new Point2D.Float(x,y);
-                        m_controller.addObstacle(p, imageObstaclePath);
+                        m_controller.addObstacle(nomObstacle,typeObstacle,hauteurObstacle,largeurObstacle,p, imageObstaclePath);
                         ImagePattern imagePattern = new ImagePattern(imageObstacle);
                         rekt.setFill(imagePattern);
                         conteneurJoueur.getChildren().addAll(rekt);
@@ -1115,7 +1118,6 @@ public class Interface_image_par_imageController implements Initializable {
                 couleurCourante = (Color)cercle.getFill();
                 for(Equipe e : listeEquipe)
                 {
-                    System.out.println(e.getSize());
                     for(Joueur j : e.getList_joueurs())
                     {   float xJoueur=j.getCoordonneesJoueur().x;
                         float yJoueur=j.getCoordonneesJoueur().y;
@@ -1124,7 +1126,6 @@ public class Interface_image_par_imageController implements Initializable {
                         if((xJoueur == xCercle) && (yJoueur == yCercle))
                         {
                             e.getList_joueurs().remove(j);
-                            System.out.println(e.getSize());
                             listeJoueur.remove(j);
                             supprimerLabelRolePosition(j.getId());
                             break;
@@ -1902,13 +1903,25 @@ public class Interface_image_par_imageController implements Initializable {
         imageObjectif = p_image;
     }
     
-    public void setDimensionObstacle(int x, int y){
-        xObstacle = x;
-        yObstacle = y;
-    }
-    
     public void setImageObstacle(Image p_image){
         imageObstacle = p_image;
+    }
+    
+    public void setNomObstacle(String p_nom){
+       nomObstacle = p_nom;
+    }
+    
+    public void setTypeObstacle(String p_type){
+       typeObstacle = p_type;
+    }
+    
+    
+    public void setHautObstacle(int p_hauteur){
+       hauteurObstacle = p_hauteur;
+    }
+   
+    public void setLargObstacle(int p_largeur){
+       largeurObstacle = p_largeur;
     }
     
     public void setImagePathObstacle(String p_path)

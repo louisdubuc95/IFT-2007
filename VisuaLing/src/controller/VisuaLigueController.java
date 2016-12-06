@@ -172,8 +172,8 @@ public class VisuaLigueController implements java.io.Serializable{
         m_surfaceJeu.addBallon(p_poFloat);
     }
     
-    public void addObstacle(Point2D.Float p_coordObstacle, String p_image){
-        m_surfaceJeu.addObstacle(p_coordObstacle, p_image);
+    public void addObstacle(String p_nom, String p_type, int p_hauteur, int p_largeur,Point2D.Float p_coordObstacle, String p_image){
+        m_surfaceJeu.addObstacle(p_nom,p_type,p_hauteur,p_largeur,p_coordObstacle, p_image);
     }
     
     public List<Objectif> getListeObjectif(){
@@ -183,4 +183,5 @@ public class VisuaLigueController implements java.io.Serializable{
     public List<Obstacle> getListeObstacle(){
         return m_surfaceJeu.getListeObstacle();
     }
+    
 }
