@@ -161,6 +161,17 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private int xObstacle;
     @FXML private int yObstacle;
     
+        
+    @FXML private CheckBox afficherRotation ;
+    private List<Label> list_labelJoueurRotation = new ArrayList<>(); 
+    //private List<Label>  list_buttonJoueurRotation = new ArrayList<>(); 
+    private Label label_joueurRotationCourant ;
+    double label_RotationSceneX; 
+    double label_RotationSceneY; 
+    double labelRotation_orgTanslateX;
+    double labelRotation_orgTanslateY;
+    
+    
     
     private double x0, y0;
     @FXML private StackPane stackSurface ;
@@ -611,15 +622,72 @@ public class Interface_image_par_imageController implements Initializable {
                                             labelRolePosition.setLayoutY(event.getY()-15);
                                             labelRolePosition.setId(""+idJoueur);
                                             labelRolePosition.setVisible(false);
+                                            
+                                            Button boutonRotationDroite = new Button ("\u21BB") ; 
+                                            boutonRotationDroite.setLayoutX(event.getX()+5);
+                                            boutonRotationDroite.setLayoutY(event.getY()+20);
+                                            //boutonRotationDroite.setVisible(false);
+                                            
+                                            
+                                            Button boutonRotationGauche = new Button ("\u21BA") ;
+                                            boutonRotationGauche.setLayoutX(event.getX()-35);
+                                            boutonRotationGauche.setLayoutY(event.getY()+20);
+                                            //boutonRotationGauche.setVisible(false);
+                                            
+                                            Label labelJoueurRotation = new Label("\u27a4");
+                                            labelJoueurRotation.setRotate(m_orientation);
+                                            labelJoueurRotation.setLayoutX(event.getX()-6);
+                                            labelJoueurRotation.setLayoutY(event.getY()-8);
+                                          
+                                            labelJoueurRotation.setScaleX(labelJoueurRotation.getScaleX()*2);
+                                            labelJoueurRotation.setScaleY(labelJoueurRotation.getScaleY()*2);
+                                            
+                                            boutonRotationDroite.setVisible(false);
+                                            boutonRotationGauche.setVisible(false);
+                                            
+                                            boutonRotationDroite.setOnMouseClicked((MouseEvent eventrotation)->{
+                                                labelJoueurRotation.setRotate(labelJoueurRotation.getRotate()+20);
+                                            });
+                                            
+                                            boutonRotationGauche.setOnMousePressed((MouseEvent eventrotation)->{
+                                               labelJoueurRotation.setRotate(labelJoueurRotation.getRotate()-20);
+                                            });
 
                                             if (label_afficherRolePosition)
                                             {
                                                 labelRolePosition.setVisible(true);
+                                                
                                             }
-
+                                            
+                                              afficherRotation.setOnAction((ActionEvent event2) -> {
+                                            if(afficherRotation.isSelected()){
+                                            boutonRotationDroite.setVisible(true);
+                                            boutonRotationGauche.setVisible(true);
+                                            }
+                                            if(!afficherRotation.isSelected()){
+                                               boutonRotationDroite.setVisible(false);
+                                               boutonRotationGauche.setVisible(false);
+                                               } 
+            
+                                             });
+                                            
+                                           
+                                            
+                                            /*if(afficherRotation.isSelected()){
+                                                boutonRotationDroite.setVisible(true);
+                                                boutonRotationGauche.setVisible(true);
+                                            }
+                                              /*if(!afficherRotation.isSelected()){
+                                                boutonRotationDroite.setVisible(false);
+                                                boutonRotationGauche.setVisible(false);
+                                            }*/
+                                            
+                                            
                                             list_labelRolePosition.add(labelRolePosition);
+                                            list_labelJoueurRotation.add(labelJoueurRotation);
 
-                                            conteneurJoueur.getChildren().addAll(cercle, labelRolePosition);     
+                                            conteneurJoueur.getChildren().addAll(cercle, labelRolePosition, labelJoueurRotation,boutonRotationDroite,boutonRotationGauche);   
+                                    
                                         }
                                     }
                                     else
@@ -672,15 +740,72 @@ public class Interface_image_par_imageController implements Initializable {
                                     labelRolePosition.setId(""+idJoueur);
                                     labelRolePosition.setVisible(false);
                                     
-                                    if (label_afficherRolePosition)
-                                    {
-                                        labelRolePosition.setVisible(true);
-                                    }
-                                    
-                                    list_labelRolePosition.add(labelRolePosition);
+                                            
+                                 
+                                            Button boutonRotationDroite = new Button ("\u21BB") ; 
+                                            boutonRotationDroite.setLayoutX(event.getX()+5);
+                                            boutonRotationDroite.setLayoutY(event.getY()+20);
+                                            //boutonRotationDroite.setVisible(false);
+                                            
+                                            
+                                            Button boutonRotationGauche = new Button ("\u21BA") ;
+                                            boutonRotationGauche.setLayoutX(event.getX()-35);
+                                            boutonRotationGauche.setLayoutY(event.getY()+20);
+                                            //boutonRotationGauche.setVisible(false);
+                                            
+                                            Label labelJoueurRotation = new Label("\u27a4");
+                                            labelJoueurRotation.setRotate(m_orientation);
+                                            labelJoueurRotation.setLayoutX(event.getX()-6);
+                                            labelJoueurRotation.setLayoutY(event.getY()-8);
+                                          
+                                            labelJoueurRotation.setScaleX(labelJoueurRotation.getScaleX()*2);
+                                            labelJoueurRotation.setScaleY(labelJoueurRotation.getScaleY()*2);
+                                            
+                                            boutonRotationDroite.setVisible(false);
+                                            boutonRotationGauche.setVisible(false);
+                                            
+                                            boutonRotationDroite.setOnMouseClicked((MouseEvent eventrotation)->{
+                                                labelJoueurRotation.setRotate(labelJoueurRotation.getRotate()+20);
+                                            });
+                                            
+                                            boutonRotationGauche.setOnMousePressed((MouseEvent eventrotation)->{
+                                               labelJoueurRotation.setRotate(labelJoueurRotation.getRotate()-20);
+                                            });
+                                            
+                                            if (label_afficherRolePosition)
+                                            {
+                                                labelRolePosition.setVisible(true);
+                                                
+                                            }
+                                            
+                                              afficherRotation.setOnAction((ActionEvent event2) -> {
+                                            if(afficherRotation.isSelected()){
+                                            boutonRotationDroite.setVisible(true);
+                                            boutonRotationGauche.setVisible(true);
+                                            }
+                                            if(!afficherRotation.isSelected()){
+                                               boutonRotationDroite.setVisible(false);
+                                               boutonRotationGauche.setVisible(false);
+                                               } 
+            
+                                             });
+                                            
+                                           
+                                            
+                                            /*if(afficherRotation.isSelected()){
+                                                boutonRotationDroite.setVisible(true);
+                                                boutonRotationGauche.setVisible(true);
+                                            }
+                                              /*if(!afficherRotation.isSelected()){
+                                                boutonRotationDroite.setVisible(false);
+                                                boutonRotationGauche.setVisible(false);
+                                            }*/
+                                            
+                                            
+                                            list_labelRolePosition.add(labelRolePosition);
+                                            list_labelJoueurRotation.add(labelJoueurRotation);
 
-                                    conteneurJoueur.getChildren().addAll(cercle, labelRolePosition);
-                                    
+                                            conteneurJoueur.getChildren().addAll(cercle, labelRolePosition, labelJoueurRotation,boutonRotationDroite,boutonRotationGauche);   
                                     
                                 }
                             }
@@ -814,6 +939,8 @@ public class Interface_image_par_imageController implements Initializable {
                         joueurCourant=j;
                         cercleCourant= cercle;
                         label_rolePositionCourant = getLabelRolePosition(j.getId());
+                        label_joueurRotationCourant = getLabelJoueurRotation(j.getId());
+                      
                         System.out.println(j.getCoordonneesJoueur().x);
                         System.out.println(j.getCoordonneesJoueur().y);
                         System.out.println(cercleCourant.getLayoutX());
@@ -859,6 +986,10 @@ public class Interface_image_par_imageController implements Initializable {
             orgTranslateY = ((Circle)(t.getSource())).getLayoutY();
             label_orgTranslateX = label_rolePositionCourant.getLayoutX();
             label_orgTranslateY = label_rolePositionCourant.getLayoutY();
+            label_RotationSceneX = t.getSceneX()-6; 
+            label_RotationSceneX = t.getSceneX()-8; 
+            labelRotation_orgTanslateX =  label_joueurRotationCourant.getLayoutX();
+            labelRotation_orgTanslateY = label_joueurRotationCourant.getLayoutY();
             }
             
     };
@@ -890,6 +1021,7 @@ public class Interface_image_par_imageController implements Initializable {
                 double offsetY = (t.getSceneY() - orgSceneY)/scale;
                 double newTranslateX = orgTranslateX + offsetX;
                 double newTranslateY = orgTranslateY + offsetY;
+                
                 double label_offsetX = t.getSceneX() + 20 - label_orgSceneX;
                 double label_offsetY = t.getSceneY() - 15 - label_orgSceneY;
                 double label_newTranslateX = label_orgTranslateX + label_offsetX;
@@ -898,6 +1030,15 @@ public class Interface_image_par_imageController implements Initializable {
                 ((Circle)(t.getSource())).setLayoutY(newTranslateY);
                 label_rolePositionCourant.setLayoutX(label_newTranslateX);
                 label_rolePositionCourant.setLayoutY(label_newTranslateY);
+                
+                double label_RotationOffsetX = t.getSceneX()- 6 - label_RotationSceneX; 
+                double label_RotationOffsetY = t.getSceneY()- 8 - label_RotationSceneY;
+                double label_newRotationTranslateX = labelRotation_orgTanslateX + label_RotationOffsetX ;
+                double label_newRotationTranslateY = labelRotation_orgTanslateY + label_RotationOffsetY ;
+                ((Circle)(t.getSource())).setLayoutX(newTranslateX);
+                ((Circle)(t.getSource())).setLayoutY(newTranslateY);
+                label_joueurRotationCourant.setLayoutX(label_newRotationTranslateX);
+                label_joueurRotationCourant.setLayoutX(label_newRotationTranslateY);
             }
         }
     };
@@ -936,6 +1077,8 @@ public class Interface_image_par_imageController implements Initializable {
             float yCercle=(float)cercleCourant.getLayoutY();
             label_rolePositionCourant.setLayoutX(xCercle+20);
             label_rolePositionCourant.setLayoutY(yCercle-15);
+            label_joueurRotationCourant.setLayoutX(xCercle-6);
+            label_joueurRotationCourant.setLayoutY(yCercle-8);
             Point2D.Float point = new Point2D.Float(xCercle,yCercle);
             joueurCourant.setCoordonneesJoueur(point);
             
@@ -1067,6 +1210,21 @@ public class Interface_image_par_imageController implements Initializable {
         for (Iterator<Label> it = list_labelRolePosition.iterator(); it.hasNext();) {
             Label label = it.next();
             if (idJoueurString.equals(label.getId()))
+            {
+                return label;
+            }
+        }
+        
+        return new Label();
+    }
+    
+    public Label getLabelJoueurRotation(int rotation)
+    {
+        String rotationJoueurString = ""+rotation;
+        
+        for (Iterator<Label> it = list_labelJoueurRotation.iterator(); it.hasNext();) {
+            Label label = it.next();
+            if (rotationJoueurString.equals(label.getId()))
             {
                 return label;
             }
@@ -1657,6 +1815,15 @@ public class Interface_image_par_imageController implements Initializable {
             labelRolePosition.setLayoutY(joueurAjouter.getCoordonneesJoueur().y-15);
             labelRolePosition.setId(""+joueurAjouter.getId());
             labelRolePosition.setVisible(false);
+            
+            
+                       
+           // String i = String.valueOf(joueurAjouter.getOrientationJoueur()) ;
+            Label labelJoueurOrientation = new Label (""+joueurAjouter.getOrientationJoueur());
+            labelJoueurOrientation.setLayoutX(joueurAjouter.getCoordonneesJoueur().x-6);
+            labelJoueurOrientation.setLayoutY(joueurAjouter.getCoordonneesJoueur().y-8);
+            labelJoueurOrientation.setId(" "+joueurAjouter.getId());
+            
             
             if (afficherRPJoueur.isSelected())
             {
