@@ -142,6 +142,7 @@ public class Interface_image_par_imageController implements Initializable {
     private Circle cercleCourant;
     private Rectangle rectangleCourant;
     private Objectif objectifCourant;
+    private ArrayList<Shape> nodes = new ArrayList<>();
     
     private int indexListe = -1;
     
@@ -894,22 +895,20 @@ public class Interface_image_par_imageController implements Initializable {
                 else
                     if(boutonAjouterObstacle.isSelected())
                     {
-                            Circle cercle = new Circle(30);
-                            cercle.setLayoutX(event.getX());
-                            cercle.setLayoutY(event.getY());
-                            cercle.setCursor(Cursor.HAND);
-//                            cercle.setOnMousePressed(objOnMousePressedEventHandler);
-//                            cercle.setOnMouseDragged(objOnMouseDraggedEventHandler);
-                            cercle.setOnMouseEntered(objOnMouseEnteredEventHandler);
-//                            cercle.setOnMouseReleased(objOnMouseReleasedEventHandler);
-                            cercle.setOnMouseClicked(objOnRightMouseClickEventHandler);
-                            float x = (float) event.getX();
-                            float y = (float) event.getY();
-                            Point2D.Float p = new Point2D.Float(x,y);
-                            m_controller.addObstacle(p, imageObstaclePath);
-                            ImagePattern imagePattern = new ImagePattern(imageObstacle);
-                            cercle.setFill(imagePattern);
-                            conteneurJoueur.getChildren().addAll(cercle);
+                        Rectangle rekt = new Rectangle(xObstacle,yObstacle);
+                        rekt.setLayoutX(event.getX()-xObstacle/2);
+                        rekt.setLayoutY(event.getY()-yObstacle/2);
+                        rekt.setCursor(Cursor.HAND);
+                        rekt.setOnMouseClicked(obsOnRightMouseClickEventHandler);
+                        nodes.add(rekt);
+                        float x = (float) event.getX();
+                        float y = (float) event.getY();
+                        Point2D.Float p = new Point2D.Float(x,y);
+                        m_controller.addObstacle(p, imageObstaclePath);
+                        ImagePattern imagePattern = new ImagePattern(imageObstacle);
+                        rekt.setFill(imagePattern);
+                        conteneurJoueur.getChildren().addAll(rekt);
+                        checkShapeIntersection(rekt);
                     }
             }
         });  
@@ -1160,15 +1159,57 @@ public class Interface_image_par_imageController implements Initializable {
                             break;
                         }                    
                 }
-            
-                
-                conteneurJoueur.getChildren().remove(rekt);
 
+                conteneurJoueur.getChildren().remove(rekt);
             }
-        
-            
     };
    };
+        EventHandler<MouseEvent> obsOnRightMouseClickEventHandler = 
+        new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            if(t.getButton()==MouseButton.SECONDARY)
+            {
+                Rectangle rekt = (Rectangle)t.getSource();
+                List<Obstacle> listeObstacle = m_controller.getListeObstacle();
+                for(Obstacle o : listeObstacle)
+                {
+                    float xObstacle=o.getCoordonneeObs().x;
+                    float yObstacle=o.getCoordonneeObs().y;
+                    float xRekt =(float)rekt.getLayoutX();
+                    float yRekt=(float)rekt.getLayoutY();
+                    if((xObstacle == xRekt) && (yObstacle == yRekt))
+                        {
+                            listeObstacle.remove(o);
+                            break;
+                        }                    
+                }
+                conteneurJoueur.getChildren().remove(rekt);
+            }
+    };
+   };
+        
+    private void checkShapeIntersection(Shape block) {
+        boolean collisionDetected = false;
+        for (Shape static_bloc : nodes) {
+          if (static_bloc != block) {
+            static_bloc.setFill(Color.GREEN);
+
+            Shape intersect = Shape.intersect(block, static_bloc);
+            if (intersect.getBoundsInLocal().getWidth() != -1) {
+              collisionDetected = true;
+            }
+          }
+        }
+
+        if (collisionDetected) {
+          block.setFill(Color.BLUE);
+        } else {
+          block.setFill(Color.GREEN);
+        }
+    }
+
     
         
     /**
