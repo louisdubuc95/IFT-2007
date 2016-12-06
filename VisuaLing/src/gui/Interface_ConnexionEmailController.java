@@ -87,19 +87,29 @@ public class Interface_ConnexionEmailController implements Initializable {
     props.put("mail.smtp.starttls.enable", "true");
 
     Session session = Session.getInstance(props, null);
-    try {
-        Transport transport = session.getTransport("smtp");
-        try {
-            transport.connect("smtp.live.com", username, password);
-            connected = true;
-            
-        } catch (MessagingException ex) {
-            ex.printStackTrace();
+
+        try 
+        {
+            Transport transport = session.getTransport("smtp");
+                try 
+                {
+                    transport.connect("smtp.live.com", username, password);
+                    connected = true;
+
+                } 
+                catch(javax.mail.AuthenticationFailedException e)
+                {
+                    erreur.setText("Mauvais nom d'utilisateur ou mot de passe.");
+                }
+                catch (MessagingException ex) 
+                {
+                    erreur.setText("Une erreur s'est produite lors de la connexion.");
+                }
         }
-    } catch (NoSuchProviderException ex) {
-        ex.printStackTrace();
-    }
-    
+        catch (NoSuchProviderException ex) 
+        {
+            erreur.setText("Une erreur s'est produite lors de la connexion.");
+        }
     }
 
     
@@ -109,6 +119,7 @@ public class Interface_ConnexionEmailController implements Initializable {
     try{
 
         smtp();
+        System.out.println("tayeule");
         if(connected == true)
         {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_Courriel.fxml"));
