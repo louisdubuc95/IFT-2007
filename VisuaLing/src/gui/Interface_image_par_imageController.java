@@ -1092,10 +1092,10 @@ public class Interface_image_par_imageController implements Initializable {
         public void handle(MouseEvent t) {
             if(t.getButton()==MouseButton.PRIMARY)
             { 
-            float xRect =(float)cercleCourant.getLayoutX();
-            float yRect=(float)cercleCourant.getLayoutY();
-            Point2D.Float point = new Point2D.Float(xRect,yRect);
-            objectifCourant.setCoordonneesObj(point);
+                float xRect =(float)cercleCourant.getLayoutX();
+                float yRect=(float)cercleCourant.getLayoutY();
+                Point2D.Float point = new Point2D.Float(xRect,yRect);
+                objectifCourant.setCoordonneesObj(point);
             }
     };
         
@@ -1156,6 +1156,7 @@ public class Interface_image_par_imageController implements Initializable {
                     float yRekt=(float)rekt.getLayoutY();
                     if((xObstacle == xRekt) && (yObstacle == yRekt))
                         {
+                            m_controller.getListeObjectif().remove(o);
                             listeObjectif.remove(o);
                             break;
                         }                    
@@ -1182,6 +1183,7 @@ public class Interface_image_par_imageController implements Initializable {
                     float yRekt=(float)rekt.getLayoutY();
                     if((xObstacle == xRekt) && (yObstacle == yRekt))
                         {
+                            m_controller.getListeObstacle().remove(o);
                             listeObstacle.remove(o);
                             break;
                         }                    
