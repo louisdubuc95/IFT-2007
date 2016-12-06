@@ -129,11 +129,11 @@ public class SurfaceJeu implements Serializable{
         return joueurTrouver;
     }
     
-    public void addObstacle(Point2D.Float p_coordObstacle, String p_image){
+    public void addObstacle(String p_nom, String p_type, int p_hauteur, int p_largeur,Point2D.Float p_coordObstacle, String p_image){
         boolean ajouterObstacle = false;
         
         if(obstacleEstPresent(p_coordObstacle) == false){
-            m_ListeObstacle.add(new Obstacle(p_image, p_coordObstacle));
+            m_ListeObstacle.add(new Obstacle(p_nom,p_type,p_hauteur,p_largeur,p_image, p_coordObstacle));
             ajouterObstacle = true;
             m_Etat = true;
         }

@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import domain.equipe.Equipe;
 import domain.joueur.Joueur;
 import domain.obstacle.Objectif;
+import domain.obstacle.Obstacle;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.geom.Point2D;
@@ -180,11 +181,16 @@ public class VisuaLigueController implements java.io.Serializable{
         m_surfaceJeu.addBallon(p_poFloat);
     }
     
-    public void addObstacle(Point2D.Float p_coordObstacle, String p_image){
-        m_surfaceJeu.addObstacle(p_coordObstacle, p_image);
+    public void addObstacle(String p_nom, String p_type, int p_hauteur, int p_largeur,Point2D.Float p_coordObstacle, String p_image){
+        m_surfaceJeu.addObstacle(p_nom,p_type,p_hauteur,p_largeur,p_coordObstacle, p_image);
     }
     
     public List<Objectif> getListeObjectif(){
         return m_surfaceJeu.getListeObjectif();
     }
+    
+    public List<Obstacle> getListeObstacle(){
+        return m_surfaceJeu.getListeObstacle();
+    }
+    
 }
