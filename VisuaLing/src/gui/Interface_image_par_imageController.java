@@ -568,7 +568,7 @@ public class Interface_image_par_imageController implements Initializable {
     public void ajouterJoueurInterface()  {
         List<Equipe> listeEquipe = m_controller.getListEquipe();
         conteneurJoueur.setOnMouseClicked((MouseEvent event) -> {
-            if(event.getClickCount()==2)
+            if(event.getClickCount()==2 && event.getButton() == MouseButton.PRIMARY)
             {
                 if(boutonAjouterJoueur.isSelected()){
                     
@@ -1118,7 +1118,6 @@ public class Interface_image_par_imageController implements Initializable {
                 couleurCourante = (Color)cercle.getFill();
                 for(Equipe e : listeEquipe)
                 {
-                    System.out.println(e.getSize());
                     for(Joueur j : e.getList_joueurs())
                     {   float xJoueur=j.getCoordonneesJoueur().x;
                         float yJoueur=j.getCoordonneesJoueur().y;
@@ -1127,7 +1126,6 @@ public class Interface_image_par_imageController implements Initializable {
                         if((xJoueur == xCercle) && (yJoueur == yCercle))
                         {
                             e.getList_joueurs().remove(j);
-                            System.out.println(e.getSize());
                             listeJoueur.remove(j);
                             supprimerLabelRolePosition(j.getId());
                             break;
