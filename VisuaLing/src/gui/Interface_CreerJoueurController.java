@@ -209,6 +209,7 @@ public class Interface_CreerJoueurController implements Initializable {
                 String role = cbRole.getSelectionModel().getSelectedItem().toString();
                 String position = cbPosition.getSelectionModel().getSelectedItem().toString();
                 String equipe = cbEquipe.getSelectionModel().getSelectedItem().toString();
+                
                 String orientation = txtOrientation.getText();
                 float orientation_float = orientation_conversion(orientation);
                 if (orientation_float != -1000)
@@ -222,7 +223,7 @@ public class Interface_CreerJoueurController implements Initializable {
                         parentController.setEquipe(equipe);
                         parentController.setRole(role);
                         parentController.setPosition(position);
-                        parentController.setOrientation(orientation_float);
+                        parentController.setOrientation(360-orientation_float);
                         window.close();
                         }
                         catch(NullPointerException e)
@@ -230,7 +231,7 @@ public class Interface_CreerJoueurController implements Initializable {
                         parentControllerTR.setEquipe(equipe);
                         parentControllerTR.setRole(role);
                         parentControllerTR.setPosition(position);
-                        parentControllerTR.setOrientation(orientation_float);
+                        parentControllerTR.setOrientation(360-orientation_float);
                         window.close();  
                         }
 

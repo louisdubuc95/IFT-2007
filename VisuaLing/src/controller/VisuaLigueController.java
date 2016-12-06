@@ -159,6 +159,15 @@ public class VisuaLigueController implements java.io.Serializable{
         return m_surfaceJeu.getStateAfficherRP();
     }
     
+    /*public void setStateAfficherBD(boolean p_state){
+        m_surfaceJeu.setStateAfficherBD(p_state);
+    }
+    
+    public boolean getStateAfficherBD(){
+        return m_surfaceJeu.getStateAfficherBD();
+    }*/
+    
+    
     public void addRondelle(Point2D.Float p_point){
         m_surfaceJeu.addRondelle(p_point);
     }

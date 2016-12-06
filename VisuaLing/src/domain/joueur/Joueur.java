@@ -30,12 +30,12 @@ public class Joueur implements Serializable{
     private Equipe m_equipe;
     
     
-    public Joueur (Point2D.Float p_point, Color p_couleurChandail, String p_role, String p_position, float p_orientation, Equipe p_equipe){
+    public Joueur (Point2D.Float p_point, Color p_couleurChandail, String p_role, String p_position, float p_oriantationJoueur, Equipe p_equipe){
         m_point = p_point;
         m_couleurChandail = p_couleurChandail;
         m_roleJoueur = p_role;
         m_positionJoueur = p_position;
-        m_oriantationJoueur = p_orientation;
+        m_oriantationJoueur = p_oriantationJoueur;
         m_enPossesion = false;
         m_equipe = p_equipe;
         nb_joueur++;
@@ -77,6 +77,10 @@ public class Joueur implements Serializable{
     public void setCouleurChandail(Color p_couleurChandail){
         m_couleurChandail = p_couleurChandail;
     }
+    
+    /*public void setOrientationJoueur (float p_orientationJoueur){
+        m_oriantationJoueur = p_orientationJoueur ; 
+    }*/
     
     public void setCoordonneesJoueur(Point2D.Float p_point){
         m_point = p_point;
