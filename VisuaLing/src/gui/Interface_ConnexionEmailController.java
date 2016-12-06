@@ -48,6 +48,8 @@ public class Interface_ConnexionEmailController implements Initializable {
     @FXML
     public Button connexion;
     
+    private boolean connected;
+    
     
     public String id;
     public String passwd;
@@ -89,6 +91,8 @@ public class Interface_ConnexionEmailController implements Initializable {
         Transport transport = session.getTransport("smtp");
         try {
             transport.connect("smtp.live.com", username, password);
+            connected = true;
+            
         } catch (MessagingException ex) {
             ex.printStackTrace();
         }
@@ -103,7 +107,10 @@ public class Interface_ConnexionEmailController implements Initializable {
     @FXML
     private void connexion(ActionEvent event)throws IOException{
     try{
+
         smtp();
+        if(connected == true)
+        {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_Courriel.fxml"));
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setScene(new Scene((AnchorPane) loader.load()));
@@ -119,6 +126,7 @@ public class Interface_ConnexionEmailController implements Initializable {
             //Ferme le window actuel
             stage = (Stage) connexion.getScene().getWindow();
             stage.close();
+        }
     }
     catch(MessagingException e){
         erreur.setText("Mauvais nom d'utilisateur ou mot de passe. ");
