@@ -908,7 +908,6 @@ public class Interface_image_par_imageController implements Initializable {
                         ImagePattern imagePattern = new ImagePattern(imageObstacle);
                         rekt.setFill(imagePattern);
                         conteneurJoueur.getChildren().addAll(rekt);
-                        checkShapeIntersection(rekt);
                     }
             }
         });  
@@ -1038,6 +1037,7 @@ public class Interface_image_par_imageController implements Initializable {
                 ((Circle)(t.getSource())).setLayoutY(newTranslateY);
                 label_joueurRotationCourant.setLayoutX(label_newRotationTranslateX);
                 label_joueurRotationCourant.setLayoutX(label_newRotationTranslateY);
+                checkShapeIntersection(cercleCourant);
             }
         }
     };
@@ -1056,6 +1056,7 @@ public class Interface_image_par_imageController implements Initializable {
                 double newTranslateY = orgTranslateY + offsetY;
                 ((Circle)(t.getSource())).setLayoutX(newTranslateX);
                 ((Circle)(t.getSource())).setLayoutY(newTranslateY);
+                checkShapeIntersection(cercleCourant);
             }
         }
     };
@@ -1194,7 +1195,7 @@ public class Interface_image_par_imageController implements Initializable {
         boolean collisionDetected = false;
         for (Shape static_bloc : nodes) {
           if (static_bloc != block) {
-            static_bloc.setFill(Color.GREEN);
+            System.out.println("Collision non deteted");
 
             Shape intersect = Shape.intersect(block, static_bloc);
             if (intersect.getBoundsInLocal().getWidth() != -1) {
@@ -1206,7 +1207,7 @@ public class Interface_image_par_imageController implements Initializable {
         if (collisionDetected) {
           block.setFill(Color.BLUE);
         } else {
-          block.setFill(Color.GREEN);
+            System.out.println("Collision non deteted");
         }
     }
 
