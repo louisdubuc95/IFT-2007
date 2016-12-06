@@ -220,11 +220,20 @@ public class Interface_CreerObstacleController implements Initializable {
     
     @FXML 
     public void boutonOkAction(ActionEvent event) throws MalformedURLException{
+        if(txtNom.getText().equals("") || txtType.getText().equals(""))
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information sur la création de l'obstacle");
+            alert.setContentText("Les champs Nom et Type doivent être remplis afin de créer un obstacle!");
+            alert.showAndWait();
+        }
+        else
           if(!txtHauteur.getText().matches("^[1-9][0-9]*$"))
           {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
-            alert.setHeaderText("Information sur la création du sports");
+            alert.setHeaderText("Information sur la création de l'obstacle");
             alert.setContentText("La hauteur doit être un nombre entier et ne peut commencer par 0!");
             alert.showAndWait();
           }
@@ -233,7 +242,7 @@ public class Interface_CreerObstacleController implements Initializable {
               {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
-                alert.setHeaderText("Information sur la création du sports");
+                alert.setHeaderText("Information sur la création de l'obstacle");
                 alert.setContentText("La largeur doit être un nombre entier et ne peut commencer par 0!");
                 alert.showAndWait();
               }
@@ -266,7 +275,10 @@ public class Interface_CreerObstacleController implements Initializable {
          fileChooser.setTitle("Choisir une image");
          fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Fichier image", "*.png", "*.jpg"));
          File selectedFile = fileChooser.showOpenDialog(window);
-         m_path = selectedFile.getPath();
+         if(selectedFile != null)
+         {
+            m_path = selectedFile.getPath();
+         }
          System.out.println(m_path);
          File imageFile = new File(m_path);
             if (imageFile.exists()) {
