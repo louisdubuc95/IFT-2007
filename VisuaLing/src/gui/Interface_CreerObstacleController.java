@@ -50,6 +50,7 @@ public class Interface_CreerObstacleController implements Initializable {
     @FXML private ImageView ivImage;
     @FXML private ListView listviewList;
     @FXML private TextField txtNom;
+    @FXML private TextField txtType;
     @FXML private TextField txtHauteur;
     @FXML private TextField txtLargeur;
     
@@ -64,7 +65,7 @@ public class Interface_CreerObstacleController implements Initializable {
     @FXML
     private List<ToggleButton> listTB = new ArrayList<ToggleButton>();
     
-    @FXML private String m_path = "";
+    @FXML private String m_path = "src/Photo/cone.jpg";
     
     private Interface_image_par_imageController parentController;
     private Interface_temps_reelController parentControllerTR;
@@ -101,14 +102,14 @@ public class Interface_CreerObstacleController implements Initializable {
         
         String image = "src/Photo/cone.jpg";
         File imageFile = new File(image);
-        String imagePath = null;
         try {
-            imagePath = imageFile.toURI().toURL().toString();
+            String imagePath = imageFile.toURI().toURL().toString();
+            Image ImageCone = new Image(imagePath);
+            ivImage.setImage(ImageCone);   
         } catch (MalformedURLException ex) {
             Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Image ImageCone = new Image(imagePath);
-        ivImage.setImage(ImageCone);   
+        
             afficherObstacles();
     }
     
@@ -124,6 +125,21 @@ public class Interface_CreerObstacleController implements Initializable {
         public void handle(ActionEvent event) {
             ToggleButton source = (ToggleButton)event.getSource();
             String text = source.getText();
+            String[] parts = text.split("\n");
+            txtNom.setText(parts[0]);
+            txtType.setText(parts[1]);
+            txtHauteur.setText(parts[2]);
+            txtLargeur.setText(parts[3]);
+            String image = parts[4];
+            File imageFile = new File(image);
+            String imagePath;
+            try {
+                imagePath = imageFile.toURI().toURL().toString();
+                Image ImageCone = new Image(imagePath);
+                ivImage.setImage(ImageCone);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Interface_CreerObstacleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(!source.isSelected())
             {
                 for (ToggleButton button : listTB) 
@@ -143,7 +159,6 @@ public class Interface_CreerObstacleController implements Initializable {
 
     public void afficherObstacles() throws MalformedURLException
     {
-        int i = 0;
         if(m_controller.getListeObstacle().size()>0)
         {
             for(Obstacle obs : m_controller.getListeObstacle())
@@ -158,7 +173,10 @@ public class Interface_CreerObstacleController implements Initializable {
                 if(present != true)
                 {
                     paths.add(obs.getImageObs());
-                    String image = "src/Photo/cone.jpg";
+                    
+                    
+                    String image = obs.getImageObs();
+                    System.out.println("Image: "+image);
                     File imageFile = new File(image);
                     String imagePath = imageFile.toURI().toURL().toString();
                     Image ImageCone = new Image(imagePath);
@@ -167,23 +185,26 @@ public class Interface_CreerObstacleController implements Initializable {
                     IV.setFitHeight(60.0);
                     IV.setFitWidth(60.0);
 
-                    ToggleButton TB = new ToggleButton("Obs " + i);
+                    ToggleButton TB = new ToggleButton();
 
                     TB.setOnAction(updateButtonHandler);
 
                     TB.setMinHeight(100);
                     TB.setMinWidth(280);
                     
-                    Insets insets = new Insets(0,20,0,0);
+                    Insets insets = new Insets(0,0,0,0);
                     TB.setPadding(insets);
                     TB.setGraphic(IV);
-                    TB.setText("Obs" + i);
+                    TB.setText("Nom" + "\n" +
+                            "Type" + "\n" +
+                            "Hauteur"+"\n" +
+                            "Largeur" + "\n" +
+                            obs.getImageObs());
                     TB.setGraphicTextGap(-220);
                     listTB.add(TB);
 
                     content.setPrefHeight(content.getPrefHeight() + TB.getPrefHeight());
                     content.getChildren().add(TB);     
-                    i++;
                 }
             }
         }

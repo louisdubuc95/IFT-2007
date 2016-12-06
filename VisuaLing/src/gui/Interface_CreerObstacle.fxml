@@ -28,8 +28,8 @@
                         <Label layoutX="21.0" layoutY="151.0" text="Image :" />
                         <TextField fx:id="txtLargeur" layoutX="84.0" layoutY="106.0" prefHeight="27.0" prefWidth="37.0" />
                         <TextField fx:id="txtHauteur" layoutX="240.0" layoutY="106.0" prefHeight="27.0" prefWidth="37.0" />
-                        <Label layoutX="123.0" layoutY="111.0" text="m" />
-                        <Label layoutX="279.0" layoutY="106.0" text="m" />
+                        <Label layoutX="123.0" layoutY="109.0" text="px" />
+                        <Label layoutX="279.0" layoutY="110.0" text="px" />
                         <Button fx:id="boutonParcourir" layoutX="213.0" layoutY="167.0" mnemonicParsing="false" onAction="#boutonParcourirAction" prefHeight="76.0" prefWidth="77.0" text="Parcourir" />
                         <ImageView fx:id="ivImage" fitHeight="106.0" fitWidth="111.0" layoutX="84.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -37,7 +37,7 @@
                            </image>
                         </ImageView>
                   <Label layoutX="21.0" layoutY="67.0" text="Type:" />
-                  <TextField fx:id="txtNom1" layoutX="84.0" layoutY="62.0" prefHeight="27.0" prefWidth="212.0" promptText="Type d'obstacle" />
+                  <TextField fx:id="txtType" layoutX="84.0" layoutY="62.0" prefHeight="27.0" prefWidth="212.0" promptText="Type d'obstacle" />
                      </children>
                   </AnchorPane>
               </items>
