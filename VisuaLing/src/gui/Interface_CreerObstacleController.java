@@ -111,6 +111,7 @@ public class Interface_CreerObstacleController implements Initializable {
         }
         
             afficherObstacles();
+            System.out.println("WA");
     }
     
     @Override
@@ -159,19 +160,24 @@ public class Interface_CreerObstacleController implements Initializable {
 
     public void afficherObstacles() throws MalformedURLException
     {
+        
         if(m_controller.getListeObstacle().size()>0)
         {
+            System.out.println("size>0");
             for(Obstacle obs : m_controller.getListeObstacle())
             {
+                present = false;
                 for(String s : paths)
                 {
                     if(obs.getImageObs().equals(s))
                     {
+                        System.out.println("present");
                         present = true;
                     }
                 }
                 if(present != true)
                 {
+                    System.out.println("pas la");
                     paths.add(obs.getImageObs());
                     
                     
@@ -195,10 +201,10 @@ public class Interface_CreerObstacleController implements Initializable {
                     Insets insets = new Insets(0,0,0,0);
                     TB.setPadding(insets);
                     TB.setGraphic(IV);
-                    TB.setText("Nom" + "\n" +
-                            "Type" + "\n" +
-                            "Hauteur"+"\n" +
-                            "Largeur" + "\n" +
+                    TB.setText(obs.getNom() + "\n" +
+                            obs.getType() + "\n" +
+                            obs.getHauteur()+"\n" +
+                            obs.getLargeur() + "\n" +
                             obs.getImageObs());
                     TB.setGraphicTextGap(-220);
                     listTB.add(TB);
@@ -234,9 +240,12 @@ public class Interface_CreerObstacleController implements Initializable {
           else
               {
                 parentController.setImageObstacle(ivImage.getImage());
+                parentController.setNomObstacle(txtNom.getText());
+                parentController.setTypeObstacle(txtType.getText());
                 int x = Integer.parseInt(txtLargeur.getText());
                 int y = Integer.parseInt(txtHauteur.getText());
-                parentController.setDimensionObstacle(x,y);
+                parentController.setHautObstacle(y);
+                parentController.setLargObstacle(x);
                 parentController.setImagePathObstacle(m_path);
                 done = true;
                 Stage stage = (Stage) boutonOk.getScene().getWindow();
