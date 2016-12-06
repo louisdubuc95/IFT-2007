@@ -1844,7 +1844,7 @@ public class Interface_image_par_imageController implements Initializable {
             label_afficherRolePosition = false;
         }
     }
-    
+    //test
     public void setJoueurMax()
     {
         txtJoueurMax.setText(Integer.toString(m_controller.getJoueurMax()));
