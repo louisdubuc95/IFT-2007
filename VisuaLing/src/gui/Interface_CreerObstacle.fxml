@@ -44,9 +44,9 @@
             </SplitPane>
             <Pane layoutX="186.0" layoutY="361.0" prefHeight="27.0" prefWidth="155.0" />
       <ScrollPane layoutX="21.0" layoutY="79.0" prefHeight="276.0" prefWidth="297.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="328.0" prefWidth="302.0" />
-        </content>
+         <content>
+            <VBox fx:id="content" prefHeight="279.0" prefWidth="285.0" />
+         </content>
       </ScrollPane>
             <Button fx:id="boutonAnnuler" layoutX="539.0" layoutY="376.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" prefWidth="70.0" text="Annuler" />
             <Button fx:id="boutonOk" layoutX="433.0" layoutY="376.0" mnemonicParsing="false" onAction="#boutonOkAction" prefHeight="25.0" prefWidth="70.0" text="Ok" />
