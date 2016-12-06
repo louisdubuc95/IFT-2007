@@ -2023,6 +2023,23 @@ public class Interface_image_par_imageController implements Initializable {
        largeurObstacle = p_largeur;
     }
     
+    public void setNomObstacle(String p_nom){
+       nomObstacle = p_nom;
+    }
+    
+    public void setTypeObstacle(String p_type){
+       typeObstacle = p_type;
+    }
+    
+    
+    public void setHautObstacle(int p_hauteur){
+       hauteurObstacle = p_hauteur;
+    }
+   
+    public void setLargObstacle(int p_largeur){
+       largeurObstacle = p_largeur;
+    }
+    
     public void setImagePathObstacle(String p_path)
     {
         imageObstaclePath = p_path;
