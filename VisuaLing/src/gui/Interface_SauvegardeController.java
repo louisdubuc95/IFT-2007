@@ -56,7 +56,9 @@ public class Interface_SauvegardeController implements Initializable {
     private Interface_image_par_imageController m_parentController;
     
     private Interface_temps_reelController m_parentControllerTR;
-    public VisuaLigueController m_controller = new VisuaLigueController();
+    
+    
+    public VisuaLigueController m_controller;
     //private Interface_image_par_imageController parentController;
     /**
      * Initializes the controller class.
@@ -82,16 +84,7 @@ public class Interface_SauvegardeController implements Initializable {
     
     @FXML
     public void boutonExporterAction() {
-        Stage stage = (Stage) boutonExporter.getScene().getWindow();
-        
-                           /* line.setStyle("-fx-stroke: black;");
-                            //line.setScaleY(line.getScaleY()*2);
-                            
-                            line.setStartX(50);
-                            line.setStartY(50);
-                            line.setEndX(100);
-                            line.setEndY(100);
-                             m_parentController.conteneurJoueur.getChildren().add(line);*/
+        Stage stage = (Stage) boutonExporter.getScene().getWindow();            
         try {
                 SnapshotParameters parameters = new SnapshotParameters();
                 
@@ -106,7 +99,8 @@ public class Interface_SauvegardeController implements Initializable {
                 
                 System.out.println("screen fait");
                 
-                } catch (IOException ex) {
+                } 
+        catch (IOException ex) {
                     
                 System.out.println("fail");
                 Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,17 +109,15 @@ public class Interface_SauvegardeController implements Initializable {
            
            List<Node> listeC = m_parentController.conteneurJoueur.getChildren();
            
-            
-            System.out.println(m_controller.getListeSauvegardeJoueur().size());
-            while(i  <   m_controller.getListeSauvegardeJoueur().size()-1)
+            while(i  <   m_parentController.m_controller.getListeSauvegardeJoueur().size()-1)
                 
             {
             
                 i = i + 1;
             
             
-            Joueur J= m_controller.getListeSauvegardeJoueur().get(i).get(0);
-            Joueur Jnext=  m_controller.getListeSauvegardeJoueur().get(i+1).get(0);
+            Joueur J= m_parentController.m_controller.getListeSauvegardeJoueur().get(i).get(0);
+            Joueur Jnext=  m_parentController.m_controller.getListeSauvegardeJoueur().get(i+1).get(0);
                     
                     
                     
