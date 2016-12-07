@@ -78,14 +78,15 @@ public class Interface_creerEquipeController implements Initializable {
                 try
                 {
                 parentController.m_controller.addEquipe(nom_equipe, awtColor);
-               
-                System.out.println(parentControllerTR.m_controller.getListEquipe().size());
+                window.close();
+              
                 }
                 catch(NullPointerException e)
                 {
                     parentControllerTR.m_controller.addEquipe(nom_equipe, awtColor);
+                    window.close();
                 }
-                window.close();
+                
             }
             catch(Exception e)
             {
