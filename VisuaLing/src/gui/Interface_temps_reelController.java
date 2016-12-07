@@ -140,6 +140,8 @@ public class Interface_temps_reelController implements Initializable {
     @FXML private Button boutonPause;
     private boolean onPause;
     
+    private String imageObjectifPath;
+    
     private Joueur joueurCourant;
     private Color couleurCourante;
     private Circle cercleCourant;
@@ -915,7 +917,7 @@ public class Interface_temps_reelController implements Initializable {
                             float x = (float) event.getX();
                             float y = (float) event.getY();
                             Point2D.Float p = new Point2D.Float(x,y);
-                            m_controller.addRondelle(p);
+                            m_controller.addRondelle(p,);
                             ImagePattern imagePattern = new ImagePattern(imageObjectif);
                             cercle.setFill(imagePattern);
                             conteneurJoueur.getChildren().addAll(cercle);
@@ -1311,6 +1313,11 @@ public class Interface_temps_reelController implements Initializable {
         } else {
             System.out.println("Collision non deteted");
         }
+    }
+    
+    public void setImagePathObjectif(String p_path)
+    {
+        imageObjectifPath = p_path;
     }
 
     

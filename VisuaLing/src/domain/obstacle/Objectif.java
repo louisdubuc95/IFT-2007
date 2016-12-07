@@ -32,5 +32,5 @@ public abstract class Objectif implements Serializable{
         return (m_position.equals(p_coordObjectif));
     }
     
-    public abstract Image getImage();
+    public abstract String getImage();
 }

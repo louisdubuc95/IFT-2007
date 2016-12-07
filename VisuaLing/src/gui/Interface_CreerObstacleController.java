@@ -295,7 +295,6 @@ public class Interface_CreerObstacleController implements Initializable {
          {
             m_path = selectedFile.getPath();
          }
-         System.out.println(m_path);
          File imageFile = new File(m_path);
             if (imageFile.exists()) {
                 String imagepath = imageFile.toURI().toURL().toString();
