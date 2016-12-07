@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -89,6 +90,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox ;  
 import javafx.scene.effect.Effect.*;
 import javafx.concurrent.*;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -127,7 +132,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
-    @FXML private Pane conteneurJoueur;
+    @FXML public Pane conteneurJoueur;
     @FXML private CheckBox afficherRPJoueur;
     @FXML private boolean desafficherRPJoueur;
     @FXML ImageView imgsurface ;
@@ -144,8 +149,9 @@ public class Interface_image_par_imageController implements Initializable {
     private Objectif objectifCourant;
     private ArrayList<Shape> nodes = new ArrayList<>();
     
-    private int indexListe = -1;
+    public int indexListe = -1;
     
+   
     
     //coordonée
     @FXML private Label labelcoordonneeI;
@@ -178,7 +184,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     
     private double x0, y0;
-    @FXML private StackPane stackSurface ;
+    @FXML public StackPane stackSurface ;
     @FXML private Button btnnouveauSportAction;
     @FXML private AnchorPane boiteverticale ; 
     @FXML private HBox boiteHorizontaleBouton ; 
@@ -191,6 +197,9 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private Label testDimensionX;
     @FXML private Label testDimensionY;
     @FXML public static Stage primaryStage;
+    
+    @FXML private Button screenShotInterface ;
+   
     private String m_equipe;
     private String m_role;
     private String m_position;
@@ -243,11 +252,17 @@ public class Interface_image_par_imageController implements Initializable {
     
    // stackSurface.prefHeightProperty().bind(boiteverticale.heightProperty());
     stackSurface.toBack();
+    stackSurface.prefHeightProperty().bind(conteneurJoueur.prefHeightProperty());
+    stackSurface.prefWidthProperty().bind(conteneurJoueur.prefWidthProperty());
+    
+    
    // stackSurface.setAlignment(Pos.CENTER); 
     imgsurface.scaleXProperty().bind(myScale);
     imgsurface.scaleYProperty().bind(myScale);
     conteneurJoueur.scaleXProperty().bind(myScale);
     conteneurJoueur.scaleYProperty().bind(myScale);
+   // stackSurface.scaleXProperty().bind(myScale);
+   //stackSurface.scaleYProperty().bind(myScale);
     
     try 
     (BufferedReader br = new BufferedReader(new FileReader(pathVerif))) {
@@ -1348,6 +1363,7 @@ public class Interface_image_par_imageController implements Initializable {
                 }
         }
         m_controller.addListeSauvegardeJoueur(listeSauvegarde); 
+        System.out.println(m_controller.getListeSauvegardeJoueur().size());
    }
 
     
@@ -2037,6 +2053,12 @@ public class Interface_image_par_imageController implements Initializable {
     
     //public void setStateAfficherBD()
 
+    @FXML
+    public void screenShotInterfaceAction ()   {
+    
+            
+     
+}
 
 }  
 

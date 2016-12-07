@@ -11,7 +11,7 @@
       <AnchorPane layoutX="-1.0" prefHeight="185.0" prefWidth="417.0">
          <children>
             <Button fx:id="boutonSauvegarder" layoutX="121.0" layoutY="107.0" mnemonicParsing="false" onAction="#boutonEnregistrerAction" text="Sauvegarde en mode édition" />
-            <Button fx:id="boutonExporter" layoutX="121.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Exporter en image" />
+            <Button fx:id="boutonExporter" layoutX="121.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#boutonExporterAction" prefHeight="25.0" prefWidth="175.0" text="Exporter en image" />
             <Button fx:id="boutonAnnuler" layoutX="183.0" layoutY="146.0" mnemonicParsing="false" onAction="#boutonAnnulerAction" text="Annuler" />
             <TextField fx:id="txtNomSauvegarde" layoutX="27.0" layoutY="34.0" prefHeight="25.0" prefWidth="361.0" promptText="Le nom de la sauvegarde" />
          </children>

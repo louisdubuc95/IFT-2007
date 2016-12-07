@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="boiteverticale" prefHeight="856.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_image_par_imageController">
    <children>
-      <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1220.0">
+      <MenuBar fx:id="menuBarSport" layoutY="1.0" prefHeight="26.0" prefWidth="1220.0">
          <menus>
             <Menu mnemonicParsing="false" text="Fichier">
                <items>
