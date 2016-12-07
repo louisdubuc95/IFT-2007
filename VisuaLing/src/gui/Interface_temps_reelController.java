@@ -641,7 +641,7 @@ public class Interface_temps_reelController implements Initializable {
     
     }
     
-    @FXML 
+@FXML 
     public void ajouterJoueurInterface()  {
         List<Equipe> listeEquipe = m_controller.getListEquipe();
         conteneurJoueur.setOnMouseClicked((MouseEvent event) -> {
@@ -890,7 +890,7 @@ public class Interface_temps_reelController implements Initializable {
                                                 boutonRotationGauche.setVisible(false);
                                             }*/
                                             
-                                            //
+                                            
                                             list_labelRolePosition.add(labelRolePosition);
                                             list_labelJoueurRotation.add(labelJoueurRotation);
                                            // list_buttonJoueurRotation.add(boutonRotationDroite);
@@ -917,9 +917,17 @@ public class Interface_temps_reelController implements Initializable {
                             float x = (float) event.getX();
                             float y = (float) event.getY();
                             Point2D.Float p = new Point2D.Float(x,y);
-                            m_controller.addRondelle(p,);
-                            ImagePattern imagePattern = new ImagePattern(imageObjectif);
-                            cercle.setFill(imagePattern);
+                            m_controller.addRondelle(p,imageObjectifPath);
+                            File imageFileRondelle = new File(imageObjectifPath);
+                            String imagepathRondelle= null;
+                            try {
+                                imagepathRondelle = imageFileRondelle.toURI().toURL().toString();
+                            } catch (MalformedURLException ex) {
+                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            Image ImageRondelle= new Image(imagepathRondelle);
+                            ImagePattern imagePatternRondelle = new ImagePattern(ImageRondelle);
+                            cercle.setFill(imagePatternRondelle);
                             conteneurJoueur.getChildren().addAll(cercle);
                             break;
                         case "Balle":
@@ -935,14 +943,13 @@ public class Interface_temps_reelController implements Initializable {
                             float xBalle = (float) event.getX();
                             float yBalle = (float) event.getY();
                             Point2D.Float pBalle = new Point2D.Float(xBalle,yBalle);
-                            m_controller.addBalle(pBalle);
-                            String imageBalle = "src/Photo/balle.jpg";
-                            File imageFileBalle = new File(imageBalle);
+                            m_controller.addBalle(pBalle,imageObjectifPath);
+                            File imageFileBalle = new File(imageObjectifPath);
                             String imagepathBalle = null;
                             try {
                                 imagepathBalle = imageFileBalle.toURI().toURL().toString();
                             } catch (MalformedURLException ex) {
-                                Logger.getLogger(Interface_temps_reelController.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             Image ImageBalle = new Image(imagepathBalle);
                             ImagePattern imagePatternBalle = new ImagePattern(ImageBalle);
@@ -962,14 +969,13 @@ public class Interface_temps_reelController implements Initializable {
                             float xBallon = (float) event.getX();
                             float yBallon = (float) event.getY();
                             Point2D.Float pBallon = new Point2D.Float(xBallon,yBallon);
-                            m_controller.addBallon(pBallon);
-                            String imageBallon = "src/Photo/ballon.png";
-                            File imageFileBallon = new File(imageBallon);
+                            m_controller.addBallon(pBallon,imageObjectifPath);
+                            File imageFileBallon = new File(imageObjectifPath);
                             String imagepathBallon = null;
                             try {
                                 imagepathBallon = imageFileBallon.toURI().toURL().toString();
                             } catch (MalformedURLException ex) {
-                                Logger.getLogger(Interface_temps_reelController.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             Image ImageBallon = new Image(imagepathBallon);
                             ImagePattern imagePatternBallon = new ImagePattern(ImageBallon);
@@ -1006,6 +1012,7 @@ public class Interface_temps_reelController implements Initializable {
        
        
     }
+    
     
 
 /////////////////////////////////////////////////////////////////
