@@ -160,25 +160,25 @@ public class VisuaLigueController implements java.io.Serializable{
         return m_surfaceJeu.getStateAfficherRP();
     }
     
-    /*public void setStateAfficherBD(boolean p_state){
+    public void setStateAfficherOriantation(boolean p_state){
         m_surfaceJeu.setStateAfficherBD(p_state);
     }
     
-    public boolean getStateAfficherBD(){
+    public boolean setStateAfficherOriantation(){
         return m_surfaceJeu.getStateAfficherBD();
-    }*/
-    
-    
-    public void addRondelle(Point2D.Float p_point){
-        m_surfaceJeu.addRondelle(p_point);
     }
     
-    public void addBalle(Point2D.Float p_point){
-        m_surfaceJeu.addBalle(p_point);
+    
+    public void addRondelle(Point2D.Float p_point, String p_path){
+        m_surfaceJeu.addRondelle(p_point,p_path);
     }
     
-    public void addBallon(Point.Float p_poFloat){
-        m_surfaceJeu.addBallon(p_poFloat);
+    public void addBalle(Point2D.Float p_point, String p_path){
+        m_surfaceJeu.addBalle(p_point,p_path);
+    }
+    
+    public void addBallon(Point.Float p_poFloat, String p_path){
+        m_surfaceJeu.addBallon(p_poFloat, p_path);
     }
     
     public void addObstacle(String p_nom, String p_type, int p_hauteur, int p_largeur,Point2D.Float p_coordObstacle, String p_image){

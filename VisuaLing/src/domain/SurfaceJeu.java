@@ -86,6 +86,8 @@ public class SurfaceJeu implements Serializable{
     this.m_nombreEquipe = 0;
     this.m_joueurMax = 0;
     this.m_stateMaxJoueur = false;
+    this.m_stateAfficherRP = false;
+    this.m_stateAfficherBD = false;
     
     this.m_ListePosition = new ArrayList<>();
     this.m_ListeRole = new ArrayList<>();
@@ -162,31 +164,31 @@ public class SurfaceJeu implements Serializable{
         return obstacleTrouver;
     }
     
-    public void addRondelle(Point2D.Float p_coordObstacle){
+    public void addRondelle(Point2D.Float p_coordObstacle, String p_path){
         boolean ajouterRondelle = false;
         
         if(objectifEstPresent(p_coordObstacle) == false){
-            m_ListeObjectifs.add(new Rondelle(p_coordObstacle));
+            m_ListeObjectifs.add(new Rondelle(p_coordObstacle, p_path));
             ajouterRondelle = true;
             m_Etat = true;
         }
     }
     
-    public void addBalle(Point2D.Float p_coordObstacle){
+    public void addBalle(Point2D.Float p_coordObstacle, String p_path){
         boolean ajouterBalle = false;
         
         if(objectifEstPresent(p_coordObstacle) == false){
-            m_ListeObjectifs.add(new Balle(p_coordObstacle));
+            m_ListeObjectifs.add(new Balle(p_coordObstacle, p_path));
             ajouterBalle = true;
             m_Etat = true;
         }
     }
     
-    public void addBallon(Point2D.Float p_coordObstacle){
+    public void addBallon(Point2D.Float p_coordObstacle, String p_path){
         boolean ajouterBallon = false;
         
         if(objectifEstPresent(p_coordObstacle) == false){
-            m_ListeObjectifs.add(new Ballon(p_coordObstacle));
+            m_ListeObjectifs.add(new Ballon(p_coordObstacle, p_path));
             ajouterBallon = true;
             m_Etat = true;
         }
@@ -359,11 +361,11 @@ public class SurfaceJeu implements Serializable{
         return m_stateAfficherRP;
     }
     
-    /*public void setStateAfficherBD(boolean p_state){
+    public void setStateAfficherBD(boolean p_state){
         m_stateAfficherBD = p_state ;
     }
     
     public boolean getStateAfficherBD(){
         return  m_stateAfficherBD;
-    }*/
+    }
 }

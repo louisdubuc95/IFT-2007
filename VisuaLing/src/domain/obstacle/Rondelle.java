@@ -20,21 +20,20 @@ import javax.imageio.ImageIO;
  * @author louis
  */
 public class Rondelle extends Objectif implements Serializable{
-    private Image m_image;
-    String imagepath = "/Photo/rondelle.png";
-    File imageFile;
+    String imagepath;
     
-    public Rondelle (Point2D.Float p_point){
+    public Rondelle (Point2D.Float p_point, String p_path){
         super(p_point);
+        this.imagepath =  p_path;
     }
     
     @Override
-    public Image getImage()
+    public String getImage()
     {
-        return m_image;
+        return imagepath;
     }
     
-    public void setImage(Image p_image){
-        this.m_image = p_image;
+    public void setImage(String p_image){
+        this.imagepath = p_image;
     }  
 }

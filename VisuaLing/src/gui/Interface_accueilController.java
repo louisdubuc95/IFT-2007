@@ -111,9 +111,16 @@ public class Interface_accueilController implements Initializable {
                         IPIController.setStateMaxJoueur();
                         IPIController.setStateAfficherPosition();
                         IPIController.setJoueurMax();
+                        IPIController.setStateOrientation();
                         
                         //Ajoute les joueurs
                         IPIController.setJoueur();
+                        
+                        //Ajouter les obstacle
+                        IPIController.setObstacle();
+                        
+                        //Ajouter lse objectifs
+                        IPIController.setObjectif();
                     
                         //Show la nouvelle window
                         stage.show();

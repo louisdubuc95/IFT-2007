@@ -41,6 +41,10 @@ public class Interface_CreerObjectifController implements Initializable {
     private ImageView ivImage;
     @FXML
     private ComboBox cbType;
+
+    
+    @FXML
+    private String m_path = "src/Photo/rondelle.jpg";
     
     private Interface_image_par_imageController parentController;
     private Interface_temps_reelController parentControllerTR;
@@ -114,22 +118,25 @@ public class Interface_CreerObjectifController implements Initializable {
         {
             parentController.setObjeticAjoueter("Rondelle");
             parentController.setOjbectifImage(ivImage.getImage());
+            parentController.setImagePathObjectif(m_path);
             Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
             stage.close();
         }      
         else
             if(cbType.getSelectionModel().getSelectedItem() == "Balle")
             {
-                parentController.setObjeticAjoueter("Rondelle");
+                parentController.setObjeticAjoueter("Balle");
                 parentController.setOjbectifImage(ivImage.getImage());
+                parentController.setImagePathObjectif(m_path);
                 Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
                 stage.close();
             }
             else
                 if(cbType.getSelectionModel().getSelectedItem() == "Ballon")
                 {
-                    parentController.setObjeticAjoueter("Rondelle");
+                    parentController.setObjeticAjoueter("Ballon");
                     parentController.setOjbectifImage(ivImage.getImage());
+                    parentController.setImagePathObjectif(m_path);
                     Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
                     stage.close();
                 }
@@ -148,8 +155,11 @@ public class Interface_CreerObjectifController implements Initializable {
          fileChooser.setTitle("Choisir une image");
          fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Fichier image", "*.png", "*.jpg"));
          File selectedFile = fileChooser.showOpenDialog(window);
-         String path = selectedFile.getPath();
-         File imageFile = new File(path);
+         if(selectedFile != null)
+         {
+            m_path = selectedFile.getPath();
+         }
+            File imageFile = new File(m_path);
             if (imageFile.exists()) {
                 String imagepath = imageFile.toURI().toURL().toString();
                 Image image = new Image(imagepath);
@@ -160,6 +170,7 @@ public class Interface_CreerObjectifController implements Initializable {
         switch (newValue){
             case ("Rondelle"):
                 String imageRondelle = "src/Photo/rondelle.jpg";
+                m_path = "src/Photo/rondelle.jpg";
                 File imageFileRondelle = new File(imageRondelle);
                 String imagepathRondelle = null;
                 try {
@@ -172,6 +183,7 @@ public class Interface_CreerObjectifController implements Initializable {
                 break;
             case ("Balle"):
                 String imageBalle = "src/Photo/balle.jpg";
+                m_path = "src/Photo/balle.jpg";
                 File imageFileBalle = new File(imageBalle);
                 String imagepathBalle = null;
                 try {
@@ -184,6 +196,7 @@ public class Interface_CreerObjectifController implements Initializable {
                 break;
             case("Ballon"):
                 String imageBallon = "src/Photo/ballon.png";
+                m_path = "src/Photo/ballon.png";
                 File imageFileBallon = new File(imageBallon);
                 String imagepathBallon = null;
                 try {
