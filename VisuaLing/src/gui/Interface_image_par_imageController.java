@@ -156,6 +156,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     private int indexUndoRedo = -1;
     
+   
     
     //coordonée
     @FXML private Label labelcoordonneeI;
