@@ -890,7 +890,7 @@ public class Interface_temps_reelController implements Initializable {
                                                 boutonRotationGauche.setVisible(false);
                                             }*/
                                             
-                                            
+                                            //
                                             list_labelRolePosition.add(labelRolePosition);
                                             list_labelJoueurRotation.add(labelJoueurRotation);
                                            // list_buttonJoueurRotation.add(boutonRotationDroite);
