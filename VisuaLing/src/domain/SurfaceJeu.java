@@ -131,6 +131,20 @@ public class SurfaceJeu implements Serializable{
         return joueurTrouver;
     }
     
+    public Joueur obtenirJoueur (int id)
+    {
+        Joueur joueur1 = null;
+        for (Joueur joueur : m_ListeJoueur)
+        {
+            if (joueur.getId() == id)
+            {
+                joueur1 = joueur;
+            }
+        }
+        
+        return joueur1;
+    }
+    
     public void addObstacle(String p_nom, String p_type, int p_hauteur, int p_largeur,Point2D.Float p_coordObstacle, String p_image){
         boolean ajouterObstacle = false;
         

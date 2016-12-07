@@ -193,4 +193,9 @@ public class VisuaLigueController implements java.io.Serializable{
         return m_surfaceJeu.getListeObstacle();
     }
     
+    public Joueur getJoueur(int id)
+    {
+        return m_surfaceJeu.obtenirJoueur(id);
+    }
+    
 }
