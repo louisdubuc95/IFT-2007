@@ -27,10 +27,15 @@ import java.text.SimpleDateFormat;
 import javafx.scene.text.TextAlignment;
 import java.util.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.StageStyle;
 /**
  * FXML Controller class
@@ -56,10 +61,10 @@ public class Interface_accueilController implements Initializable {
     
     @FXML
     private VBox content;
-    public String typeUtilisateur;
-
-
     
+    public String typeUtilisateur;
+    private String pathVerif = "src/savedUtilisateurs/connecte.txt";
+
 
     /**
      * Initializes the controller class.
@@ -68,7 +73,21 @@ public class Interface_accueilController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         afficherSauvegardes();
         
-        
+        try 
+        (BufferedReader br = new BufferedReader(new FileReader(pathVerif))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                typeUtilisateur = line;
+            }
+        }   
+        catch (IOException ex) {
+            Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (!typeUtilisateur.equals("entraineur"))
+        {
+            boutonNouveau.setDisable(true);
+        }
     }    
     
     //test commentaire

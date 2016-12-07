@@ -77,12 +77,11 @@ public class Interface_ConnexionUtilisateurController implements Initializable {
                 (PrintWriter writer = new PrintWriter(pathVerif)) {
                     writer.println(login);
                 }
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_accueil.fxml"));
-                Parent parent = loader.load();
-                Scene scene = new Scene (parent); 
+                
+                Parent interface_accueil = FXMLLoader.load (getClass().getResource("Interface_accueil.fxml"));
+                Scene Interface_choix_mode_scene = new Scene (interface_accueil); 
                 Stage window = (Stage) btnConnexion.getScene().getWindow();
-                window.setScene(scene);
-                window.setTitle("VisuaLigue");
+                window.setScene(Interface_choix_mode_scene);
                 window.show();
             }
         }

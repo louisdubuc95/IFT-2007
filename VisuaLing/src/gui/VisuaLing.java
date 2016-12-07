@@ -32,7 +32,7 @@ public class VisuaLing extends Application {
 //        
 //        stage.setScene(scene); 
 //        stage.setTitle("VisuaLigue");
-        //stage.sizeToScene();
+//        stage.sizeToScene();
         
         stage.show();
     }
