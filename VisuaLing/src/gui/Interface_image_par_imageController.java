@@ -164,6 +164,7 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private int largeurObstacle;
     @FXML private Image imageObstacle;
     @FXML private String imageObstaclePath;
+    @FXML private String imageObjectifPath;
     
         
     @FXML private CheckBox afficherRotation ;
@@ -542,14 +543,14 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML
     public void afficherRotationAction (ActionEvent event) throws IOException
     {
-          /* if (label_afficherRotationPosition)
+        if (label_afficherRotationPosition)
         {
             for (Button buton : list_buttonJoueurRotation )
             {
                 buton.setVisible(false);
             }
             label_afficherRotationPosition = false ;
-            m_controller.setStateAfficherBD(label_afficherRotationPosition);
+            m_controller.setStateAfficherOriantation(label_afficherRotationPosition);
         }
         
         else
@@ -559,8 +560,8 @@ public class Interface_image_par_imageController implements Initializable {
                 buton.setVisible(false);
             }
             label_afficherRotationPosition = true ;
-            m_controller.setStateAfficherBD(label_afficherRotationPosition);
-        }*/
+            m_controller.setStateAfficherOriantation(label_afficherRotationPosition);
+        }
     }
     
     
@@ -867,9 +868,17 @@ public class Interface_image_par_imageController implements Initializable {
                             float x = (float) event.getX();
                             float y = (float) event.getY();
                             Point2D.Float p = new Point2D.Float(x,y);
-                            m_controller.addRondelle(p);
-                            ImagePattern imagePattern = new ImagePattern(imageObjectif);
-                            cercle.setFill(imagePattern);
+                            m_controller.addRondelle(p,imageObjectifPath);
+                            File imageFileRondelle = new File(imageObjectifPath);
+                            String imagepathRondelle= null;
+                            try {
+                                imagepathRondelle = imageFileRondelle.toURI().toURL().toString();
+                            } catch (MalformedURLException ex) {
+                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            Image ImageRondelle= new Image(imagepathRondelle);
+                            ImagePattern imagePatternRondelle = new ImagePattern(ImageRondelle);
+                            cercle.setFill(imagePatternRondelle);
                             conteneurJoueur.getChildren().addAll(cercle);
                             break;
                         case "Balle":
@@ -885,9 +894,8 @@ public class Interface_image_par_imageController implements Initializable {
                             float xBalle = (float) event.getX();
                             float yBalle = (float) event.getY();
                             Point2D.Float pBalle = new Point2D.Float(xBalle,yBalle);
-                            m_controller.addBalle(pBalle);
-                            String imageBalle = "src/Photo/balle.jpg";
-                            File imageFileBalle = new File(imageBalle);
+                            m_controller.addBalle(pBalle,imageObjectifPath);
+                            File imageFileBalle = new File(imageObjectifPath);
                             String imagepathBalle = null;
                             try {
                                 imagepathBalle = imageFileBalle.toURI().toURL().toString();
@@ -912,9 +920,8 @@ public class Interface_image_par_imageController implements Initializable {
                             float xBallon = (float) event.getX();
                             float yBallon = (float) event.getY();
                             Point2D.Float pBallon = new Point2D.Float(xBallon,yBallon);
-                            m_controller.addBallon(pBallon);
-                            String imageBallon = "src/Photo/ballon.png";
-                            File imageFileBallon = new File(imageBallon);
+                            m_controller.addBallon(pBallon,imageObjectifPath);
+                            File imageFileBallon = new File(imageObjectifPath);
                             String imagepathBallon = null;
                             try {
                                 imagepathBallon = imageFileBallon.toURI().toURL().toString();
@@ -1971,6 +1978,79 @@ public class Interface_image_par_imageController implements Initializable {
             label_afficherRolePosition = false;
         }
     }
+    
+    public void setObstacle()
+    {
+        List<Obstacle> obstacle = m_controller.getListeObstacle();
+        
+        Iterator<Obstacle> iterateur = obstacle.iterator();
+        
+        while(iterateur.hasNext())
+        {
+            Obstacle obstacleAjouter = iterateur.next();
+            int x = obstacleAjouter.getLargeur();
+            int y = obstacleAjouter.getHauteur();
+            String pathImage = obstacleAjouter.getImageObs();
+            System.out.println(pathImage);
+            File imageFile = new File(pathImage);
+            String imagepath;
+            try {
+                imagepath = imageFile.toURI().toURL().toString();
+                Image imageObs = new Image(imagepath);
+                ImagePattern imagePattern = new ImagePattern(imageObs);
+                Rectangle rekt = new Rectangle(x,y);
+                rekt.setLayoutX(obstacleAjouter.getCoordonneeObs().x - largeurObstacle/2);
+                rekt.setLayoutY(obstacleAjouter.getCoordonneeObs().y - hauteurObstacle/2);
+                rekt.setCursor(Cursor.HAND);
+                rekt.setOnMouseClicked(obsOnRightMouseClickEventHandler);
+                nodes.add(rekt);
+                rekt.setFill(imagePattern);
+                conteneurJoueur.getChildren().addAll(rekt);
+                
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+            }         
+        }
+        
+    }
+    
+    public void setObjectif()
+    {
+        List<Objectif> objectif = m_controller.getListeObjectif();
+        
+        Iterator<Objectif> iterateur = objectif.iterator();
+        
+        while(iterateur.hasNext())    
+        {
+            Objectif objectifAjouter = iterateur.next();
+            
+            String pathImage = objectifAjouter.getImage();
+            System.out.println(pathImage);
+            File imageFile = new File(pathImage);
+            String imagepath;
+            try {
+                imagepath = imageFile.toURI().toURL().toString();
+                Image imageObs = new Image(imagepath);
+                ImagePattern imagePattern = new ImagePattern(imageObs);
+                Circle cercle = new Circle(10);
+                cercle.setLayoutX(objectifAjouter.getCoordonneesObj().x);
+                cercle.setLayoutY(objectifAjouter.getCoordonneesObj().y);
+                cercle.setCursor(Cursor.HAND);
+                cercle.setOnMousePressed(objOnMousePressedEventHandler);
+                cercle.setOnMouseDragged(objOnMouseDraggedEventHandler);
+                cercle.setOnMouseEntered(objOnMouseEnteredEventHandler);
+                cercle.setOnMouseReleased(objOnMouseReleasedEventHandler);
+                cercle.setOnMouseClicked(objOnRightMouseClickEventHandler);
+                cercle.setFill(imagePattern);
+                conteneurJoueur.getChildren().addAll(cercle);
+
+                
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+    }
+    
     //test
     public void setJoueurMax()
     {
@@ -1979,6 +2059,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     public void setObjeticAjoueter(String p_Objectif){
         objectifAjouer = p_Objectif;
+        System.out.println(objectifAjouer);
     }
     
     public void setOjbectifImage(Image p_image){
@@ -2005,9 +2086,15 @@ public class Interface_image_par_imageController implements Initializable {
     public void setLargObstacle(int p_largeur){
        largeurObstacle = p_largeur;
     }
-        public void setImagePathObstacle(String p_path)
+    
+    public void setImagePathObstacle(String p_path)
     {
         imageObstaclePath = p_path;
+    }
+    
+    public void setImagePathObjectif(String p_path)
+    {
+        imageObjectifPath = p_path;
     }
     
     
@@ -2035,8 +2122,15 @@ public class Interface_image_par_imageController implements Initializable {
         }    
     }
     
-    //public void setStateAfficherBD()
-
-
+    public void setStateOrientation(){
+        if(m_controller.getStateAfficherRP())
+        {
+            afficherRotation.setSelected(true);
+        }
+        else
+        {
+            afficherRotation.setSelected(false);
+        }  
+    }
 }  
 

@@ -21,22 +21,21 @@ import javax.imageio.ImageIO;
  */
 
 public class Ballon extends Objectif implements Serializable{
-    private Image m_image;
-    String imagepath = "/Photo/ballon.png";
-    File imageFile;
+    String m_imagepath;
     
-    public Ballon (Point2D.Float p_point){
+    public Ballon (Point2D.Float p_point, String p_path){
         super(p_point);
+        this.m_imagepath = p_path;
     }
     
     @Override
-    public Image getImage()
+    public String getImage()
     {
-        return m_image;
+        return m_imagepath;
     }
     
-    public void setImage(Image p_image){
-        this.m_image = p_image;
+    public void setImage(String p_image){
+        this.m_imagepath = p_image;
     }  
 }
 
