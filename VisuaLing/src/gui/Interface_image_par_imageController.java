@@ -1991,7 +1991,6 @@ public class Interface_image_par_imageController implements Initializable {
             int x = obstacleAjouter.getLargeur();
             int y = obstacleAjouter.getHauteur();
             String pathImage = obstacleAjouter.getImageObs();
-            System.out.println(pathImage);
             File imageFile = new File(pathImage);
             String imagepath;
             try {
@@ -2025,7 +2024,6 @@ public class Interface_image_par_imageController implements Initializable {
             Objectif objectifAjouter = iterateur.next();
             
             String pathImage = objectifAjouter.getImage();
-            System.out.println(pathImage);
             File imageFile = new File(pathImage);
             String imagepath;
             try {
@@ -2059,7 +2057,6 @@ public class Interface_image_par_imageController implements Initializable {
     
     public void setObjeticAjoueter(String p_Objectif){
         objectifAjouer = p_Objectif;
-        System.out.println(objectifAjouer);
     }
     
     public void setOjbectifImage(Image p_image){
