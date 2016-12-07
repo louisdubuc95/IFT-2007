@@ -53,6 +53,8 @@ public class Interface_ModifierSportsController implements Initializable {
     @FXML
     public Button btnParcourir;
     
+    
+    private int nbEquipeExistante;
     private Interface_image_par_imageController parentController;
     private Interface_temps_reelController parentControllerTR;
     private String m_nom;
@@ -102,7 +104,6 @@ public class Interface_ModifierSportsController implements Initializable {
           if(txtNomIPI.getText().trim().isEmpty())
           {
               try
-              
               {
                   parentController.setTitle("Sans nom - mode Image par Image");
               }
@@ -133,56 +134,68 @@ public class Interface_ModifierSportsController implements Initializable {
             alert.showAndWait();
           }
           else
-              if(!txtDimensionX.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$") && !txtDimensionY.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$") )
-              {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information");
-                alert.setHeaderText("Information sur la création du sports");
-                alert.setContentText("Les dimensions doivent être des nombre décimaux (4 décimal après la virgule maximum)!");
-                alert.showAndWait();
-              }
-                else
-                  if(Integer.parseInt(txtNbEquipe.getText()) < parentController.m_controller.getListEquipe().size())
-                  {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information");
-                    alert.setHeaderText("Information sur la création du sports");
-                    alert.setContentText("Le nombre d'équipe maximum NE PEUT être inférieur aux nombre d'équipe déja existante!");
-                    alert.showAndWait();
-                  }
-                else
-                {
-                    try
+          {
+                    if(!txtDimensionX.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$") && !txtDimensionY.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$") )
                     {
-                    //Appel la classe qui set l'image
-                    parentController.setImageInterface(lblCheminImage.getText());
-                    
-                    int i = Integer.parseInt(txtNbEquipe.getText());
-                    parentController.setNombreEquipeInterface(i);
-                    
-                    parentController.getX(txtDimensionX.getText());
-                    parentController.getY(txtDimensionY.getText());
+                      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                      alert.setTitle("Information");
+                      alert.setHeaderText("Information sur la création du sports");
+                      alert.setContentText("Les dimensions doivent être des nombre décimaux (4 décimal après la virgule maximum)!");
+                      alert.showAndWait();
                     }
-                    catch(NullPointerException e)
+                      else
                     {
-                                            //Appel la classe qui set l'image
-                        parentControllerTR.setImageInterface(lblCheminImage.getText());
+                            try
+                            {
+                                nbEquipeExistante = parentController.m_controller.getListEquipe().size();
+                            }
+                            catch(NullPointerException e)
+                            {
+                                nbEquipeExistante = parentControllerTR.m_controller.getListEquipe().size();
+                            }
+                        if(Integer.parseInt(txtNbEquipe.getText()) < nbEquipeExistante)
+                        {
+                          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                          alert.setTitle("Information");
+                          alert.setHeaderText("Information sur la création du sports");
+                          alert.setContentText("Le nombre d'équipe maximum NE PEUT être inférieur aux nombre d'équipe déja existante!");
+                          alert.showAndWait();
+                        }
+                      else
+                      {
+                          try
+                          {
+                            //Appel la classe qui set l'image
+                            parentController.setImageInterface(lblCheminImage.getText());
 
-                        int i = Integer.parseInt(txtNbEquipe.getText());
-                        parentControllerTR.setNombreEquipeInterface(i);
+                            int i = Integer.parseInt(txtNbEquipe.getText());
+                            parentController.setNombreEquipeInterface(i);
 
-                        parentControllerTR.getX(txtDimensionX.getText());
-                        parentControllerTR.getY(txtDimensionY.getText());
-                    }
+                            parentController.getX(txtDimensionX.getText());
+                            parentController.getY(txtDimensionY.getText());
+                          }
+                          catch(NullPointerException e)
+                          {
+                                                  //Appel la classe qui set l'image
+                              parentControllerTR.setImageInterface(lblCheminImage.getText());
 
-                    //Show la nouvelle window
-                    stage.show();
+                              int i = Integer.parseInt(txtNbEquipe.getText());
+                              parentControllerTR.setNombreEquipeInterface(i);
 
-                    //Ferme le window actuel
-                    stage = (Stage) btnModifier.getScene().getWindow();
-                    stage.close();
-                }
+                              parentControllerTR.getX(txtDimensionX.getText());
+                              parentControllerTR.getY(txtDimensionY.getText());
+                          }
+                      }
 
+                          //Show la nouvelle window
+                          stage.show();
+
+                          //Ferme le window actuel
+                          stage = (Stage) btnModifier.getScene().getWindow();
+                          stage.close();
+
+            }
+          }
     }
     
     //Accèdre au module parcourir image

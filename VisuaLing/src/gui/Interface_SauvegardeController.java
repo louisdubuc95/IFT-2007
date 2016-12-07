@@ -31,6 +31,8 @@ public class Interface_SauvegardeController implements Initializable {
     @FXML TextField txtNomSauvegarde;
     
     private Interface_image_par_imageController m_parentController;
+    
+    private Interface_temps_reelController m_parentControllerTR;
     /**
      * Initializes the controller class.
      */
@@ -41,6 +43,10 @@ public class Interface_SauvegardeController implements Initializable {
 
     public void initialize(Interface_image_par_imageController p_controller) {
        m_parentController = p_controller;
+    }
+    
+    public void initializeTR(Interface_temps_reelController p_controller) {
+       m_parentControllerTR = p_controller;
     }
     
     @FXML

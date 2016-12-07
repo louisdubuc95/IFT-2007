@@ -1462,7 +1462,6 @@ public class Interface_image_par_imageController implements Initializable {
         return new Task() {
             @Override protected Void call() throws Exception {
              List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
-                System.out.println(listeSauvegardeJoueur.size());
             List<Node> listeC = conteneurJoueur.getChildren();
             while(indexListe<listeSauvegardeJoueur.size()-1)
 

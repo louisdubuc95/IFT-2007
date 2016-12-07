@@ -2,9 +2,6 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
-<?import javafx.scene.media.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.embed.swing.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -13,94 +10,92 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="boiteverticale" prefHeight="708.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_temps_reelController">
+<AnchorPane fx:id="boiteverticale" prefHeight="856.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_temps_reelController">
    <children>
-      <MenuBar fx:id="menuBarSport" layoutY="1.0" prefHeight="26.0" prefWidth="1069.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Fichier">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Sauvegarder" />
-                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Charger" />
+      <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1220.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Fichier">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Sauvegarder" />
+                  <MenuItem mnemonicParsing="false" onAction="#ChargerAction" text="Ouvrir" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#bouton_changerMode" text="Changer mode" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
-            </items>
-          </Menu>
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#quitterJeu" text="Quitter" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Undo/Redo">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#sauvegarderAction" text="Undo" />
+                  <MenuItem fx:id="undo" mnemonicParsing="false" onAction="#undoAction" text="Undo" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#quitterJeu" text="Redo" />
+                  <MenuItem fx:id="redo" mnemonicParsing="false" onAction="#redoAction" text="Redo" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Sport">
-              <items>
-                <MenuItem fx:id="menuChoixNouvSport" mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
-                  <MenuItem fx:id="menuChoixModifSport" mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Changer sport" />
-              </items>
+               <items>
+                  <MenuItem fx:id="menuChoixNouvSport" mnemonicParsing="false" onAction="#nouveauSportAction" text="Nouveau sport" />
+                  <MenuItem fx:id="menuChoixModifSport" mnemonicParsing="false" onAction="#bouton_ChangerSports" text="Modifier sport" />
+               </items>
             </Menu>
-          <Menu mnemonicParsing="false" onAction="#OuvrirInfoAction" text="Aide">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#OuvrirInfoAction" text="À propos" />
-            </items>
-          </Menu>
-        </menus>
+            <Menu mnemonicParsing="false" text="Image">
+               <items>
+                  <MenuItem fx:id="btnNouvelleImage" mnemonicParsing="false" onAction="#creerImage" text="Nouvelle Image" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Aide">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#OuvrirInfoAction" text="Informations" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
-      <ImageView fx:id="imgsurface" fitHeight="537.0" fitWidth="1062.0" layoutX="4.0" layoutY="164.0" pickOnBounds="true">
-         <image>
-            <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
-         </image>
-      </ImageView>
-      <Canvas fx:id="canevasInterface" height="537.0" layoutX="8.0" layoutY="164.0" onMouseClicked="#ajouterJoueurInterface" width="1062.0" />
-      <HBox layoutX="-5.0" layoutY="25.0" prefHeight="50.0" prefWidth="1076.0">
+      <HBox fx:id="boiteHorizontaleBouton" layoutY="26.0" maxHeight="-Infinity" prefHeight="53.0" prefWidth="1220.0" spacing="8.0">
          <children>
-            <ImageView fitHeight="42.0" fitWidth="461.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="44.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Photo/Capture.PNG" />
                </image>
                <HBox.margin>
-                  <Insets left="10.0" top="5.0" />
+                  <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ImageView>
-            <Separator fx:id="separateur1" maxHeight="61.0" minHeight="0.0" minWidth="6.0" orientation="VERTICAL" prefHeight="52.0" visible="false" />
-            <Button fx:id="boutonAjouterEquipe" mnemonicParsing="false" onAction="#ajouterEquipeAction" prefHeight="49.0" prefWidth="111.0" text="Nouvelle Équipe">
+            <Button fx:id="boutonAjouterEquipe" minHeight="-Infinity" minWidth="103.0" mnemonicParsing="false" onAction="#ajouterEquipeAction" prefHeight="50.0" prefWidth="103.0" text="Nouvelle Équipe">
                <HBox.margin>
-                  <Insets left="10.0" top="1.0" />
+                  <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <ToggleButton fx:id="boutonAjouterJoueur" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="105.0" text="Nouveau Joueur">
+            <ToggleButton fx:id="boutonAjouterJoueur" minHeight="-Infinity" minWidth="104.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="104.0" text="Nouveau Joueur">
                <HBox.margin>
-                  <Insets left="8.0" top="1.0" />
+                  <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="boutonAjouterObstacle" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterObstacleInterface" prefHeight="50.0" prefWidth="111.0" text="Nouvel Obstacle">
+            <ToggleButton fx:id="boutonAjouterObstacle" minHeight="-Infinity" minWidth="105.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="105.0" text="Nouvel Obstacle">
                <HBox.margin>
-                  <Insets left="8.0" top="1.0" />
+                  <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="boutonObjectif" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterObjectifInterface" prefHeight="50.0" prefWidth="111.0" text="Nouvel Objectif">
+            <ToggleButton fx:id="boutonObjectif" minHeight="-Infinity" minWidth="99.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="99.0" text="Nouvel Objectif">
                <HBox.margin>
-                  <Insets left="8.0" top="1.0" />
+                  <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <Separator fx:id="separateur5" maxHeight="52.0" minHeight="0.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="0.0" visible="false" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+            <Separator fx:id="separateur5" maxHeight="52.0" minHeight="0.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="194.0" visible="false">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Separator>
+            <Button fx:id="toggleRecommencer" mnemonicParsing="false" onAction="#recommencerStrategie" prefHeight="49.0" prefWidth="47.0">
                <graphic>
-                  <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Photo/80d3f6f5.png" />
                      </image>
                   </ImageView>
                </graphic>
-               <tooltip>
-                  <Tooltip text="Avancer" />
-               </tooltip>
                <HBox.margin>
-                  <Insets left="15.0" top="1.0" />
+                  <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+            <Button mnemonicParsing="false" onAction="#reculerStrategie" prefHeight="50.0" prefWidth="43.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -112,22 +107,21 @@
                   <Tooltip text="Reculer" />
                </tooltip>
                <HBox.margin>
-                  <Insets left="8.0" />
+                  <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+            <Button fx:id="toggleDebuter" mnemonicParsing="false" onAction="#debuterStrategie" prefHeight="49.0" prefWidth="47.0">
                <graphic>
-                  <ImageView fitHeight="46.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Photo/375.png" />
                      </image>
                   </ImageView>
                </graphic>
                <HBox.margin>
-                  <Insets left="8.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="37.0">
+                  <Insets top="1.0" />
+               </HBox.margin></Button>
+            <Button fx:id="boutonPause" mnemonicParsing="false" onAction="#stopStrategie" prefHeight="50.0" prefWidth="58.0">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -136,10 +130,10 @@
                   </ImageView>
                </graphic>
                <HBox.margin>
-                  <Insets left="8.0" />
+                  <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="58.0">
+            <Button fx:id="boutonAvancer" mnemonicParsing="false" onAction="#avancerStrategie" prefHeight="50.0" prefWidth="44.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -151,94 +145,122 @@
                   <Tooltip text="Avancer" />
                </tooltip>
                <HBox.margin>
-                  <Insets left="8.0" />
+                  <Insets top="1.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <TitledPane animated="false" layoutX="-6.0" layoutY="78.0" prefHeight="78.0" prefWidth="468.0" text="Informations sur la surface de jeu">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="52.0" prefWidth="430.0">
-               <children>
-                  <Label layoutX="6.0" layoutY="1.0" text="Position de la souris:">
-                     <padding>
-                        <Insets top="7.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="6.0" layoutY="26.0" prefHeight="24.0" prefWidth="121.0" text="Grandeur du terrain : ">
-                     <padding>
-                        <Insets top="7.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="testDimensionX" layoutX="127.0" layoutY="26.0" prefHeight="24.0" prefWidth="34.0" text="X">
-                     <padding>
-                        <Insets top="7.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="testDimensionX1" layoutX="161.0" layoutY="26.0" prefHeight="24.0" prefWidth="32.0" text="x">
-                     <padding>
-                        <Insets top="7.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="testDimensionY" layoutX="193.0" layoutY="26.0" prefHeight="24.0" prefWidth="32.0" text="Y">
-                     <padding>
-                        <Insets top="7.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="225.0" layoutY="26.0" prefHeight="24.0" prefWidth="65.0" text="(en mètres)">
-                     <padding>
-                        <Insets top="7.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="labelcoordonnee" layoutX="121.0" layoutY="9.0" text="X: 0    Y:  0" />
-               </children>
-            </AnchorPane>
-         </content>
-         <padding>
-            <Insets left="10.0" />
-         </padding>
-      </TitledPane>
-      <TitledPane animated="false" layoutX="736.0" layoutY="78.0" prefHeight="78.0" prefWidth="238.0" text="Contrainte sur le nombre de joueur">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="0.0">
-               <children>
-                  <CheckBox fx:id="cbJoueurMax" layoutX="7.0" layoutY="2.0" mnemonicParsing="false" onAction="#cb_maxJoueur" text="Nombre de joueur maximum/équipe:" />
-                  <TextField fx:id="txtJoueurMax" disable="true" layoutX="28.0" layoutY="21.0" prefHeight="25.0" prefWidth="197.0" />
-               </children>
-            </AnchorPane>
-         </content>
-      </TitledPane>
-      <TitledPane animated="false" layoutX="475.0" layoutY="77.0" prefHeight="78.0" prefWidth="241.0" text="Modification du temps du jeu">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="0.0">
-               <children>
-                  <Label layoutX="8.0" layoutY="17.0" prefHeight="17.0" prefWidth="75.0" text="Modifier de" />
-                  <Label layoutX="185.0" layoutY="15.0" prefHeight="17.0" prefWidth="55.0" text="secondes" />
-                  <TextField layoutX="75.0" layoutY="13.0" prefHeight="25.0" prefWidth="105.0" />
-               </children>
-            </AnchorPane>
-         </content>
-      </TitledPane>
-      <Separator fx:id="separateur10" layoutX="10.0" layoutY="10.0" maxHeight="119.0" minHeight="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="40.0" visible="false" />
-      <TitledPane animated="false" layoutX="985.0" layoutY="78.0" prefHeight="78.0" prefWidth="91.0" text="Exporter">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="89.0">
-               <children>
-                  <Button layoutX="16.0" layoutY="1.0" mnemonicParsing="false" onAction="#sauvegarderAction" prefHeight="50.0" prefWidth="58.0">
-                     <tooltip>
-                        <Tooltip text="Sauvegarder" />
-                     </tooltip>
-                     <graphic>
-                        <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Photo/export-icon-5.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </AnchorPane>
-         </content>
-      </TitledPane>
+      <StackPane fx:id="stackSurface" layoutY="177.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-position: 100;">
+         <children>
+            <ImageView fx:id="imgsurface" fitHeight="537.0" fitWidth="1083.0" onMouseDragged="#bougerInterface" onMousePressed="#bougerInterface" onScroll="#zoom" pickOnBounds="true">
+               <image>
+                  <Image url="@../Photo/%5E28C212DFD9632524D061D9D53482CD908188A15004C1096E60%5Epimgpsh_mobile_save_distr.jpg" />
+               </image>
+            </ImageView>
+            <Pane fx:id="conteneurJoueur" onMouseClicked="#ajouterJoueurInterface" onMouseDragged="#bougerInterface" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" onMousePressed="#bougerInterface" onScroll="#zoom" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </StackPane>
+      <HBox fx:id="boiteHorizontaleBouton2" layoutY="82.0" prefHeight="90.0" prefWidth="1220.0">
+         <children>
+            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="491.0" text="Informations sur la surface de jeu">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="346.0">
+                     <children>
+                        <Label layoutX="6.0" layoutY="1.0" text="Position de la souris:">
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="labelcoordonneeI" layoutX="191.0" layoutY="1.0" text="X : 0   Y : 0">
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="30.0" prefHeight="24.0" prefWidth="185.0" text="Grandeur du terrain (en mètres): ">
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="testDimensionX" layoutX="191.0" layoutY="30.0">
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="testDimensionY" layoutX="212.0" layoutY="30.0">
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="labelcoordonneeI1" layoutX="191.0" layoutY="30.0" text="X : 0   Y : 0">
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </TitledPane>
+            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="233.0" text="Contrainte sur l'affichage des joueurs">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="80.0">
+                     <children>
+                        <CheckBox fx:id="afficherRPJoueur" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#afficherRPJoueurAction" prefHeight="17.0" prefWidth="186.0" text="Afficher le rôle et la position" />
+                        <CheckBox fx:id="afficherRotation" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" onAction="#afficherRotationAction" text="Modifier orientation" />
+                     </children>
+                  </AnchorPane>
+               </content>
+               <padding>
+                  <Insets left="11.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TitledPane>
+            <Separator fx:id="separateur10" maxHeight="119.0" minHeight="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="168.0" visible="false" />
+            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="238.0" text="Contrainte sur le nombre de joueur">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="0.0">
+                     <children>
+                        <CheckBox fx:id="cbJoueurMax" layoutX="-2.0" layoutY="5.0" mnemonicParsing="false" onAction="#cb_maxJoueur" prefHeight="17.0" prefWidth="248.0" text="Nombre de joueur maximum/équipe:">
+                           <padding>
+                              <Insets left="4.0" />
+                           </padding>
+                        </CheckBox>
+                        <TextField fx:id="txtJoueurMax" disable="true" layoutX="34.0" layoutY="28.0" prefHeight="25.0" prefWidth="172.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TitledPane>
+            <TitledPane animated="false" prefHeight="90.0" prefWidth="79.0" text="Exporter">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="76.0">
+                     <children>
+                        <Button fx:id="boutonTransfert" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#sauvegarderAction" prefHeight="50.0" prefWidth="58.0">
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Photo/export-icon-5.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Sauvegarder" />
+                           </tooltip>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <HBox.margin>
+                  <Insets left="8.0" right="2.0" />
+               </HBox.margin>
+            </TitledPane>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

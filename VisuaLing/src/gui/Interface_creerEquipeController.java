@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import gui.Interface_image_par_imageController;
+import gui.Interface_temps_reelController;
 
 /**
  * FXML Controller class
@@ -70,17 +71,19 @@ public class Interface_creerEquipeController implements Initializable {
         Stage window = (Stage) btn_enregistrer.getScene().getWindow();
             try
             {
+                java.awt.Color awtColor = new java.awt.Color((float) couleur_equipe.getRed(),
+                (float) couleur_equipe.getGreen(),
+                (float) couleur_equipe.getBlue(),
+                (float) couleur_equipe.getOpacity());
                 try
                 {
-                    java.awt.Color awtColor = new java.awt.Color((float) couleur_equipe.getRed(),
-                                                 (float) couleur_equipe.getGreen(),
-                                                 (float) couleur_equipe.getBlue(),
-                                                 (float) couleur_equipe.getOpacity());
-
                 parentController.m_controller.addEquipe(nom_equipe, awtColor);
+               
+                System.out.println(parentControllerTR.m_controller.getListEquipe().size());
                 }
                 catch(NullPointerException e)
                 {
+                    parentControllerTR.m_controller.addEquipe(nom_equipe, awtColor);
                 }
                 window.close();
             }

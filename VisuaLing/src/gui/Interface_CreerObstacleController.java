@@ -246,17 +246,35 @@ public class Interface_CreerObstacleController implements Initializable {
               }
           else
               {
-                parentController.setImageObstacle(ivImage.getImage());
-                parentController.setNomObstacle(txtNom.getText());
-                parentController.setTypeObstacle(txtType.getText());
-                int x = Integer.parseInt(txtLargeur.getText());
-                int y = Integer.parseInt(txtHauteur.getText());
-                parentController.setHautObstacle(y);
-                parentController.setLargObstacle(x);
-                parentController.setImagePathObstacle(m_path);
-                done = true;
-                Stage stage = (Stage) boutonOk.getScene().getWindow();
-                stage.close();
+                  try{
+                        parentController.setImageObstacle(ivImage.getImage());
+                        parentController.setNomObstacle(txtNom.getText());
+                        parentController.setTypeObstacle(txtType.getText());
+                        int x = Integer.parseInt(txtLargeur.getText());
+                        int y = Integer.parseInt(txtHauteur.getText());
+                        parentController.setHautObstacle(y);
+                        parentController.setLargObstacle(x);
+                        parentController.setImagePathObstacle(m_path);
+                        done = true;
+                        Stage stage = (Stage) boutonOk.getScene().getWindow();
+                        stage.close();
+                      
+                  }
+                  catch(NullPointerException e)
+                  {
+                    parentControllerTR.setImageObstacle(ivImage.getImage());
+                    parentControllerTR.setNomObstacle(txtNom.getText());
+                    parentControllerTR.setTypeObstacle(txtType.getText());
+                    int x = Integer.parseInt(txtLargeur.getText());
+                    int y = Integer.parseInt(txtHauteur.getText());
+                    parentControllerTR.setHautObstacle(y);
+                    parentControllerTR.setLargObstacle(x);
+                    parentControllerTR.setImagePathObstacle(m_path);
+                    done = true;
+                    Stage stage = (Stage) boutonOk.getScene().getWindow();
+                    stage.close();
+                  }
+                
               }
     }
     

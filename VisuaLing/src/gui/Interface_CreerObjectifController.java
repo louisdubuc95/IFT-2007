@@ -112,26 +112,56 @@ public class Interface_CreerObjectifController implements Initializable {
     public void boutonOKAction(ActionEvent event) throws MalformedURLException{
         if(cbType.getSelectionModel().getSelectedItem() == "Rondelle")
         {
+            try{
             parentController.setObjeticAjoueter("Rondelle");
             parentController.setOjbectifImage(ivImage.getImage());
             Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
             stage.close();
+            }
+            catch(NullPointerException e)
+            {
+            parentControllerTR.setObjeticAjoueter("Rondelle");
+            parentControllerTR.setOjbectifImage(ivImage.getImage());
+            Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
+            stage.close();
+                
+            }
         }      
         else
             if(cbType.getSelectionModel().getSelectedItem() == "Balle")
             {
-                parentController.setObjeticAjoueter("Rondelle");
-                parentController.setOjbectifImage(ivImage.getImage());
-                Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
-                stage.close();
-            }
-            else
-                if(cbType.getSelectionModel().getSelectedItem() == "Ballon")
-                {
+                try{
                     parentController.setObjeticAjoueter("Rondelle");
                     parentController.setOjbectifImage(ivImage.getImage());
                     Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
                     stage.close();
+                }
+                catch(NullPointerException e)
+                {
+                    parentControllerTR.setObjeticAjoueter("Rondelle");
+                    parentControllerTR.setOjbectifImage(ivImage.getImage());
+                    Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
+                    stage.close();
+                    
+                }
+            }
+            else
+                if(cbType.getSelectionModel().getSelectedItem() == "Ballon")
+                {
+                    try{
+                        parentController.setObjeticAjoueter("Rondelle");
+                        parentController.setOjbectifImage(ivImage.getImage());
+                        Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
+                        stage.close();
+                    }
+                    catch(NullPointerException e)
+                    {
+                        parentControllerTR.setObjeticAjoueter("Rondelle");
+                        parentControllerTR.setOjbectifImage(ivImage.getImage());
+                        Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
+                        stage.close();
+                        
+                    }
                 }
     }
     
