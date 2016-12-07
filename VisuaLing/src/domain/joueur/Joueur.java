@@ -78,7 +78,7 @@ public class Joueur implements Serializable{
         m_couleurChandail = p_couleurChandail;
     }
     
-    public void setOrientationJoueur (float p_orientationJoueur){
+    public void setOrientationJoueurFloat (float p_orientationJoueur){
         m_oriantationJoueur = p_orientationJoueur ; 
     }
     

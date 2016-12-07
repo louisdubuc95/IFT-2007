@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -764,12 +765,25 @@ public class Interface_image_par_imageController implements Initializable {
 
                                             //EVENT POUR LES BOUTONS
                                             boutonRotationDroite.setOnMouseClicked((MouseEvent eventrotation)->{
-                                                labelJoueurRotation.setRotate(labelJoueurRotation.getRotate()+20);
+                                                double rotation = labelJoueurRotation.getRotate()+20;
+                                                labelJoueurRotation.setRotate(rotation);
+                                                Button bouton = (Button)eventrotation.getSource();
+                                                int id = Integer.parseInt(bouton.getId());
+                                                BigDecimal number = new BigDecimal(rotation);
+                                                float rotation_float = number.floatValue();
 
+                                                m_controller.getJoueur(id).setOrientationJoueurFloat(rotation_float);
                                             });
 
                                             boutonRotationGauche.setOnMousePressed((MouseEvent eventrotation)->{
-                                                labelJoueurRotation.setRotate(labelJoueurRotation.getRotate()-20);
+                                                double rotation = labelJoueurRotation.getRotate()-20;
+                                                labelJoueurRotation.setRotate(rotation);
+                                                Button bouton = (Button)eventrotation.getSource();
+                                                int id = Integer.parseInt(bouton.getId());
+                                                BigDecimal number = new BigDecimal(rotation);
+                                                float rotation_float = number.floatValue();
+
+                                                m_controller.getJoueur(id).setOrientationJoueurFloat(rotation_float);
                                             });
 
                                             if (label_afficherRolePosition)
@@ -868,11 +882,25 @@ public class Interface_image_par_imageController implements Initializable {
                                     
                                     //EVENT POUR LES BOUTONS
                                     boutonRotationDroite.setOnMouseClicked((MouseEvent eventrotation)->{
-                                        labelJoueurRotation.setRotate(labelJoueurRotation.getRotate()+20);
+                                        double rotation = labelJoueurRotation.getRotate()+20;
+                                        labelJoueurRotation.setRotate(rotation);
+                                        Button bouton = (Button)eventrotation.getSource();
+                                        int id = Integer.parseInt(bouton.getId());
+                                        BigDecimal number = new BigDecimal(rotation);
+                                        float rotation_float = number.floatValue();
+                                        
+                                        m_controller.getJoueur(id).setOrientationJoueurFloat(rotation_float);
                                     });
                                             
                                     boutonRotationGauche.setOnMousePressed((MouseEvent eventrotation)->{
-                                        labelJoueurRotation.setRotate(labelJoueurRotation.getRotate()-20);
+                                        double rotation = labelJoueurRotation.getRotate()-20;
+                                        labelJoueurRotation.setRotate(rotation);
+                                        Button bouton = (Button)eventrotation.getSource();
+                                        int id = Integer.parseInt(bouton.getId());
+                                        BigDecimal number = new BigDecimal(rotation);
+                                        float rotation_float = number.floatValue();
+
+                                        m_controller.getJoueur(id).setOrientationJoueurFloat(rotation_float);
                                     });
                                     
                                     if (label_afficherRolePosition)
