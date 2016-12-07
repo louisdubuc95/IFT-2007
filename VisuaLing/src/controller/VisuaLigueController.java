@@ -102,7 +102,7 @@ public class VisuaLigueController implements java.io.Serializable{
         
         return m_surfaceJeu.getDimensionX();
     }   
-
+// test
 
     public double getDimensionY(){
         
