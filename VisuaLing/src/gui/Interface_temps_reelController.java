@@ -461,6 +461,12 @@ public class Interface_temps_reelController implements Initializable {
           IPIcontrolleur.setJoueurMax();
           IPIcontrolleur.setStateOrientation();
           
+          List<Joueur> listeJ = m_controller.getListJoueurs();
+          for(Joueur j : listeJ)
+          { 
+            j.getListeDeplacement().clear();
+          }
+          
           //Ajoute les joueurs
           IPIcontrolleur.setJoueur();
 
@@ -1175,6 +1181,10 @@ public class Interface_temps_reelController implements Initializable {
                 ((Circle)(t.getSource())).setLayoutY(newTranslateY);
                 label_joueurRotationCourant.setLayoutX(label_newRotationTranslateX);
                 label_joueurRotationCourant.setLayoutX(label_newRotationTranslateY);
+                float x = (float) cercleCourant.getLayoutX();
+                float y = (float) cercleCourant.getLayoutY();
+                Point2D.Float point = new Point2D.Float(x,y);
+                joueurCourant.getListeDeplacement().add(point);
                 checkShapeIntersection(cercleCourant);
             }
         }

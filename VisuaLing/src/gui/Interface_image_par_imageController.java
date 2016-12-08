@@ -503,6 +503,7 @@ public class Interface_image_par_imageController implements Initializable {
             
             java.awt.Color nColor = new java.awt.Color(r, g, b, 255);  
             j.setCouleurChandail(nColor);
+            j.getListeDeplacement().clear();
           }
           
           //Ajoute les joueurs
