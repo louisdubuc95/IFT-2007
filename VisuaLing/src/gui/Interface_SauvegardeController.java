@@ -91,10 +91,7 @@ public class Interface_SauvegardeController implements Initializable {
     public void boutonExporterAction(MouseEvent event) {
         
         Stage stage = (Stage) boutonExporter.getScene().getWindow();            
-      
-           
-       
-         
+
         List<Node> listeC = m_parentController.conteneurJoueur.getChildren();
            
             while(i  <   m_parentController.m_controller.getListeSauvegardeJoueur().size()-1)
@@ -215,74 +212,94 @@ public class Interface_SauvegardeController implements Initializable {
             catch(NullPointerException e)
             {
                 m_parentController.m_enregistrement.serialize(validateDot, m_parentController.m_controller.getController(), "IPI"); 
+                
                 List<Node> listeC = m_parentController.conteneurJoueur.getChildren();
-           
-                while(i  <   m_parentController.m_controller.getListeSauvegardeJoueur().size()-1)
 
-                {
-                    //event.getEventType().equals(MouseEvent.MOUSE_CLICKED) ;
-                    Joueur J= m_parentController.m_controller.getListeSauvegardeJoueur().get(i).get(0) ;
+                    while(i  <   m_parentController.m_controller.getListeSauvegardeJoueur().size()-1)
 
-                    Joueur Jnext=  m_parentController.m_controller.getListeSauvegardeJoueur().get(i+1).get(0);
-
-                    Line line = new Line() ;
-                    line.setStyle("-fx-stroke: black;");
-
-                    line.setStartX(J.getCoordonneesJoueur().x);                           
-                    line.setStartY(J.getCoordonneesJoueur().y);
-
-                    line.setEndX(Jnext.getCoordonneesJoueur().x);                           
-                    line.setEndY(Jnext.getCoordonneesJoueur().y);
-
-                    double arrowAngle = Math.toRadians(45.0);
-                    double arrowLength = 10.0;
-
-                    double lineAngle = Math.atan2(J.getCoordonneesJoueur().y - Jnext.getCoordonneesJoueur().y,
-                    J.getCoordonneesJoueur().x - Jnext.getCoordonneesJoueur().x);
-
-                    double x1 = Math.cos(lineAngle + arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().x;
-                    double y1 = Math.sin(lineAngle + arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().y;
-
-                    double x2 = Math.cos(lineAngle - arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().x;
-                    double y2 = Math.sin(lineAngle - arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().y;
-
-                    Line arrowHead1 = new Line(Jnext.getCoordonneesJoueur().x, Jnext.getCoordonneesJoueur().y, x1, y1);
-                    Line arrowHead2 = new Line(Jnext.getCoordonneesJoueur().x, Jnext.getCoordonneesJoueur().y, x2, y2);
-
-            //Group root = new Group();
-
-                    m_parentController.conteneurJoueur.getChildren().addAll(line,arrowHead1, arrowHead2);
-                    i = i + 1;       
-                }
-                 try {
-                    SnapshotParameters parameters = new SnapshotParameters();
-
-
-                    WritableImage wi = new WritableImage((int)m_parentController.stackSurface.getBoundsInParent().getWidth(), (int)m_parentController.stackSurface.getBoundsInParent().getHeight());
-                    WritableImage snapshot = m_parentController.stackSurface.snapshot(new SnapshotParameters(), wi);
-
-                    File output = new File("/src/Captures/validateDot" + "IPI" + ".png");
-                    ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
-
-                    //////
-                    //Delete lignes
-                    for(Iterator<Node> it = m_parentController.conteneurJoueur.getChildren().iterator(); it.hasNext();)
                     {
-                        Node n = it.next();
-                        if(n.getClass()==Line.class)
-                        {
-                            it.remove();
-                        }
+                        //event.getEventType().equals(MouseEvent.MOUSE_CLICKED) ;
+                        Joueur J= m_parentController.m_controller.getListeSauvegardeJoueur().get(i).get(0) ;
+
+                        Joueur Jnext=  m_parentController.m_controller.getListeSauvegardeJoueur().get(i+1).get(0);
+
+                        Line line = new Line() ;
+                        Line arrow1 = new Line();
+                        Line arrow2 = new Line();
+                        line.setStyle("-fx-stroke: black;");
+
+                        line.setStartX(J.getCoordonneesJoueur().x);                           
+                        line.setStartY(J.getCoordonneesJoueur().y);
+
+                        line.setEndX(Jnext.getCoordonneesJoueur().x);                           
+                        line.setEndY(Jnext.getCoordonneesJoueur().y);
+
+                        double arrowAngle = Math.toRadians(45.0);
+                        double longueurArrow = 10.0;
+
+                        double lineAngle = Math.atan2(J.getCoordonneesJoueur().y - Jnext.getCoordonneesJoueur().y,
+                        J.getCoordonneesJoueur().x - Jnext.getCoordonneesJoueur().x);
+
+                        double Xfin1 = Math.cos(lineAngle + arrowAngle) * longueurArrow 
+                                                 + Jnext.getCoordonneesJoueur().x;
+                        double Yfin1 = Math.sin(lineAngle + arrowAngle) * longueurArrow 
+                                                 + Jnext.getCoordonneesJoueur().y;
+
+                        double Xfin2 = Math.cos(lineAngle - arrowAngle) * longueurArrow + 
+                                                    Jnext.getCoordonneesJoueur().x;
+                        double Yfin2 = Math.sin(lineAngle - arrowAngle) * longueurArrow + 
+                                Jnext.getCoordonneesJoueur().y;
+
+
+                        arrow1.setStartX(Jnext.getCoordonneesJoueur().x);                           
+                        arrow1.setStartY(Jnext.getCoordonneesJoueur().y);
+                        arrow1.setEndX(Xfin1);
+                        arrow1.setEndY(Yfin1);
+                        arrow2.setStartX(Jnext.getCoordonneesJoueur().x);                           
+                        arrow2.setStartY(Jnext.getCoordonneesJoueur().y);
+                        arrow2.setEndX(Xfin2);
+                        arrow2.setEndY(Yfin2);
+                        line.setEndX(Jnext.getCoordonneesJoueur().x);                           
+                        line.setEndY(Jnext.getCoordonneesJoueur().y);
+
+
+                //Group root = new Group();
+
+                        m_parentController.conteneurJoueur.getChildren().addAll(line,arrow1, arrow2);
+                        i = i + 1;       
                     }
+                     try {
+                        SnapshotParameters parameters = new SnapshotParameters();
 
-                    System.out.println("screen fait");
 
-                    } 
-            catch (IOException ex) {
+                        WritableImage wi = new WritableImage((int)m_parentController.stackSurface.getBoundsInParent().getWidth(), (int)m_parentController.stackSurface.getBoundsInParent().getHeight());
+                        WritableImage snapshot = m_parentController.stackSurface.snapshot(new SnapshotParameters(), wi);
 
-                    System.out.println("fail");
-                    Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
-                }                 
+
+
+
+                        File output = new File("src/Captures/" + validateDot + ".IPI"+ ".png");
+                        ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
+
+                        //////
+                        //Delete lignes
+                        for(Iterator<Node> it = m_parentController.conteneurJoueur.getChildren().iterator(); it.hasNext();)
+                        {
+                            Node n = it.next();
+                            if(n.getClass()==Line.class)
+                            {
+                                it.remove();
+                            }
+                        }
+
+                        System.out.println("screen fait");
+
+                        } 
+                catch (IOException ex) {
+
+                        System.out.println("fail");
+                        Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                    }   
             }   
             Stage stage = (Stage) boutonSauvegarder.getScene().getWindow();
             stage.close();   
