@@ -480,10 +480,39 @@ public class Interface_image_par_imageController implements Initializable {
           titreWindow = titreWindow + " - mode Temps Reel";
           stage.setTitle(titreWindow);
           stage.setScene(new Scene((AnchorPane) loader.load()));
+          stage.setMaximized(true);
           Interface_temps_reelController TRcontrolleur = loader.<Interface_temps_reelController>getController();
           
           //Appel la classe qui set l'image
-          TRcontrolleur.setImageInterface(imagePath);
+          TRcontrolleur.setController(m_controller);
+          TRcontrolleur.setImageInterface(m_controller.getImageSurface());
+          TRcontrolleur.setStateMaxJoueur();
+          TRcontrolleur.setStateAfficherPosition();
+          TRcontrolleur.setJoueurMax();
+          TRcontrolleur.setStateOrientation();
+
+          m_controller.getListeSauvegardeJoueur().clear();
+          List<Joueur> listeJ = m_controller.getListJoueurs();
+          for(Joueur j : listeJ)
+          { 
+            java.awt.Color color = j.getCouleurChandail();
+            int r = color.getRed();
+            int g = color.getGreen();
+            int b = color.getBlue();
+            int a = color.getAlpha();
+            
+            java.awt.Color nColor = new java.awt.Color(r, g, b, 255);  
+            j.setCouleurChandail(nColor);
+          }
+          
+          //Ajoute les joueurs
+          TRcontrolleur.setJoueur();
+
+          //Ajouter les obstacle
+          TRcontrolleur.setObstacle();
+
+          //Ajouter lse objectifs
+          TRcontrolleur.setObjectif();
           
           //Show la nouvelle window
           stage.show();
@@ -1204,7 +1233,8 @@ public class Interface_image_par_imageController implements Initializable {
                 label_rolePositionCourant.setLayoutY(label_newTranslateY);
                 label_joueurRotationCourant.setLayoutX(label_newRotationTranslateX);
                 label_joueurRotationCourant.setLayoutY(label_newRotationTranslateY);
-                
+                System.out.println(String.valueOf(cercleCourant.getLayoutX()));
+                System.out.println(String.valueOf(cercleCourant.getLayoutY()));
                 checkShapeIntersection(cercleCourant);
             }
         }

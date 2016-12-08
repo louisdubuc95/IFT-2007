@@ -442,18 +442,33 @@ public class Interface_temps_reelController implements Initializable {
       
     @FXML
     public void bouton_changerMode (ActionEvent event)throws IOException {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_temps_reel.fxml"));
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
           Stage Window = (Stage) menuBarSport.getScene().getWindow();
           Stage stage = new Stage(StageStyle.DECORATED);
           String titreWindow = Window.getTitle();
-          titreWindow = titreWindow.replaceAll(" - mode Image par Image", "");
-          titreWindow = titreWindow + " - mode Temps Reel";
+          titreWindow = titreWindow.replaceAll(" - mode Temps Reel", "");
+          titreWindow = titreWindow + " - mode Image par Image";
           stage.setTitle(titreWindow);
           stage.setScene(new Scene((AnchorPane) loader.load()));
-          Interface_temps_reelController TRcontrolleur = loader.<Interface_temps_reelController>getController();
+          stage.setMaximized(true);
+          Interface_image_par_imageController IPIcontrolleur = loader.<Interface_image_par_imageController>getController();
           
           //Appel la classe qui set l'image
-          TRcontrolleur.setImageInterface(imagePath);
+          IPIcontrolleur.setController(m_controller);
+          IPIcontrolleur.setImageInterface(m_controller.getImageSurface());
+          IPIcontrolleur.setStateMaxJoueur();
+          IPIcontrolleur.setStateAfficherPosition();
+          IPIcontrolleur.setJoueurMax();
+          IPIcontrolleur.setStateOrientation();
+          
+          //Ajoute les joueurs
+          IPIcontrolleur.setJoueur();
+
+          //Ajouter les obstacle
+          IPIcontrolleur.setObstacle();
+
+          //Ajouter lse objectifs
+          IPIcontrolleur.setObjectif();
           
           //Show la nouvelle window
           stage.show();
@@ -461,6 +476,7 @@ public class Interface_temps_reelController implements Initializable {
           //Ferme le window actuel
           stage = (Stage) menuBarSport.getScene().getWindow();
           stage.close();
+      
       }
     
     @FXML 
@@ -946,7 +962,7 @@ public class Interface_temps_reelController implements Initializable {
                             try {
                                 imagepathRondelle = imageFileRondelle.toURI().toURL().toString();
                             } catch (MalformedURLException ex) {
-                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(Interface_temps_reelController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             Image ImageRondelle= new Image(imagepathRondelle);
                             ImagePattern imagePatternRondelle = new ImagePattern(ImageRondelle);
@@ -972,7 +988,7 @@ public class Interface_temps_reelController implements Initializable {
                             try {
                                 imagepathBalle = imageFileBalle.toURI().toURL().toString();
                             } catch (MalformedURLException ex) {
-                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(Interface_temps_reelController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             Image ImageBalle = new Image(imagepathBalle);
                             ImagePattern imagePatternBalle = new ImagePattern(ImageBalle);
@@ -998,7 +1014,7 @@ public class Interface_temps_reelController implements Initializable {
                             try {
                                 imagepathBallon = imageFileBallon.toURI().toURL().toString();
                             } catch (MalformedURLException ex) {
-                                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(Interface_temps_reelController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             Image ImageBallon = new Image(imagepathBallon);
                             ImagePattern imagePatternBallon = new ImagePattern(ImageBallon);
@@ -2100,7 +2116,7 @@ public class Interface_temps_reelController implements Initializable {
                 conteneurJoueur.getChildren().addAll(rekt);
                 
             } catch (MalformedURLException ex) {
-                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Interface_temps_reelController.class.getName()).log(Level.SEVERE, null, ex);
             }         
         }
         
@@ -2137,7 +2153,7 @@ public class Interface_temps_reelController implements Initializable {
 
                 
             } catch (MalformedURLException ex) {
-                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Interface_temps_reelController.class.getName()).log(Level.SEVERE, null, ex);
             } 
         }
     }    
