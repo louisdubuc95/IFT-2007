@@ -238,6 +238,7 @@ public class Interface_temps_reelController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    clearUR();
        
     menuBarSport.prefWidthProperty().bind(boiteverticale.widthProperty());
     boiteHorizontaleBouton.prefWidthProperty().bind(boiteverticale.widthProperty());
@@ -287,50 +288,57 @@ public class Interface_temps_reelController implements Initializable {
     }
     
     
+    public void clearUR()
+    {
+        File folder = new File("src/UndoRedo");
+        File[] listOfFiles = folder.listFiles();
+
+    
+        for (File file : listOfFiles) 
+        {
+            file.delete();
+        }
+    }
+        
+    
+    
     @FXML
     public void undoAction(ActionEvent e)
     {
+        if(indexUndoRedo==0)
+        {
+            clearUR();
+            conteneurJoueur.getChildren().clear();   
+        }
+        if(indexUndoRedo>0)
+        {
        indexUndoRedo = indexUndoRedo - 1;
        VisuaLigueController controllerUndo = m_enregistrement.deSerializeUR(m_enregistrement.getListeUR().get(indexUndoRedo));
+       conteneurJoueur.getChildren().clear();
         setController(controllerUndo);
         setJoueur();
         setStateAfficherPosition();
         setStateMaxJoueur();
         setJoueurMax();
-
-        
+        }
     }
     
     
     @FXML
     public void redoAction(ActionEvent e)
     {
-       indexUndoRedo = indexUndoRedo + 1;
-       VisuaLigueController controllerUndo = m_enregistrement.deSerializeUR(m_enregistrement.getListeUR().get(indexUndoRedo));
-        setController(controllerUndo);
-        setJoueur();
-        setStateAfficherPosition();
-        setStateMaxJoueur();
-        setJoueurMax();
-
-        
+        if(indexUndoRedo<m_enregistrement.getListeUR().size()-1)
+        {
+        indexUndoRedo = indexUndoRedo + 1;
+        VisuaLigueController controllerUndo = m_enregistrement.deSerializeUR(m_enregistrement.getListeUR().get(indexUndoRedo));
+        conteneurJoueur.getChildren().clear();
+         setController(controllerUndo);
+         setJoueur();
+         setStateAfficherPosition();
+         setStateMaxJoueur();
+         setJoueurMax();
+        }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
    public void getX(String dimensionX){

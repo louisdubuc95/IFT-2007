@@ -77,22 +77,24 @@ public class Interface_CreerObstacleController implements Initializable {
     
     /**
      * Initializes the controller class.
+     * @param controller
      */
         //TR
-    public void initializeTR(Interface_temps_reelController controller) {
-        parentControllerTR = controller;
+    public void initializeTR(Interface_temps_reelController controller) throws MalformedURLException {
+       parentControllerTR = controller;
         m_controller = parentControllerTR.m_controller;
         
         String image = "src/Photo/cone.jpg";
         File imageFile = new File(image);
-        String imagePath = null;
         try {
-            imagePath = imageFile.toURI().toURL().toString();
+            String imagePath = imageFile.toURI().toURL().toString();
+            Image ImageCone = new Image(imagePath);
+            ivImage.setImage(ImageCone);   
         } catch (MalformedURLException ex) {
             Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Image ImageCone = new Image(imagePath);
-        ivImage.setImage(ImageCone);        
+        
+            afficherObstacles();
     }
     
     //IPI
@@ -111,12 +113,10 @@ public class Interface_CreerObstacleController implements Initializable {
         }
         
             afficherObstacles();
-            System.out.println("WA");
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {}
-    
     
     EventHandler<ActionEvent> updateButtonHandler = new EventHandler<ActionEvent>() 
     {
