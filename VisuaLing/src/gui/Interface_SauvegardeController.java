@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import controller.VisuaLigueController;
@@ -34,6 +29,11 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.Color ;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import static java.lang.System.gc;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -48,7 +48,10 @@ public class Interface_SauvegardeController implements Initializable {
     @FXML Button boutonExporter;
     @FXML Button boutonCharger;
     @FXML TextField txtNomSauvegarde;
-     public int i = -1 ;
+    public int i = 0 ;
+    public int a =0 ; 
+    private final int ARR_SIZE = 8;
+    
     
     //FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_accueil.fxml")); //public  Interface_image_par_imageController IPIController = new IPIController();
    // Interface_image_par_imageController IPIcontroleur = loader.<Interface_image_par_imageController>getController();
@@ -83,9 +86,36 @@ public class Interface_SauvegardeController implements Initializable {
     }
     
     @FXML
-    public void boutonExporterAction() {
+    public void boutonExporterAction(MouseEvent event) {
+        
         Stage stage = (Stage) boutonExporter.getScene().getWindow();            
-        try {
+      
+           
+       
+         
+        List<Node> listeC = m_parentController.conteneurJoueur.getChildren();
+           
+            while(i  <   m_parentController.m_controller.getListeSauvegardeJoueur().size()-1)
+                
+            {
+                //event.getEventType().equals(MouseEvent.MOUSE_CLICKED) ;
+                Joueur J= m_parentController.m_controller.getListeSauvegardeJoueur().get(i).get(0) ;
+
+                Joueur Jnext=  m_parentController.m_controller.getListeSauvegardeJoueur().get(i+1).get(0);
+
+                Line line = new Line() ;
+                line.setStyle("-fx-stroke: black;");
+
+                line.setStartX(J.getCoordonneesJoueur().x);                           
+                line.setStartY(J.getCoordonneesJoueur().y);
+
+                line.setEndX(Jnext.getCoordonneesJoueur().x);                           
+                line.setEndY(Jnext.getCoordonneesJoueur().y);
+
+                m_parentController.conteneurJoueur.getChildren().addAll(line);
+                i = i + 1;       
+            }
+             try {
                 SnapshotParameters parameters = new SnapshotParameters();
                 
                 
@@ -104,58 +134,20 @@ public class Interface_SauvegardeController implements Initializable {
                     
                 System.out.println("fail");
                 Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           
-           
-           List<Node> listeC = m_parentController.conteneurJoueur.getChildren();
-           
-            while(i  <   m_parentController.m_controller.getListeSauvegardeJoueur().size()-1)
-                
-            {
-            
-                i = i + 1;
-            
-            
-            Joueur J= m_parentController.m_controller.getListeSauvegardeJoueur().get(i).get(0);
-            Joueur Jnext=  m_parentController.m_controller.getListeSauvegardeJoueur().get(i+1).get(0);
-                    
-                    
-                    
-                    
-                    
-                    
-                    for(Node cercle : listeC)
-                    {
-                        
-                        float xJoueur=J.getCoordonneesJoueur().x;
-                        float yJoueur=J.getCoordonneesJoueur().y;
-                        float xCercle =(float)cercle.getLayoutX();
-                        float yCercle=(float)cercle.getLayoutY();
-
-                        if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class){
-                          
-                              //System.out.println("skrrr"); 
-                            Line line = new Line() ;
-                            line.setStyle("-fx-stroke: red;");
-                            line.setStartX(cercle.getLayoutX());
-                            line.setStartY(cercle.getLayoutY());
-                            line.setEndX(Jnext.getCoordonneesJoueur().x);
-                            line.setEndY(Jnext.getCoordonneesJoueur().y);
-                            m_parentController.conteneurJoueur.getChildren().add(line);         
-                        }      
-                             
-                             
-                    }   
-          
-                     
-                
+            } 
              
+        for(Node n : m_parentController.conteneurJoueur.getChildren())
+        {
+            if(n.getClass()==Line.class)
+            {
+                m_parentController.conteneurJoueur.getChildren().remove(n);
             }
-           
+        }
             
         stage.close();
    
     }
+    
     
             
             @FXML
@@ -195,4 +187,7 @@ public class Interface_SauvegardeController implements Initializable {
     {
         m_parentController.m_controller.setJoueurMax(p_nbJoueurMax);
     }
+    
+
 }
+
