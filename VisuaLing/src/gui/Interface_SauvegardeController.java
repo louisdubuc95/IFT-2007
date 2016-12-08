@@ -106,6 +106,8 @@ public class Interface_SauvegardeController implements Initializable {
                 Joueur Jnext=  m_parentController.m_controller.getListeSauvegardeJoueur().get(i+1).get(0);
 
                 Line line = new Line() ;
+                Line arrow1 = new Line();
+                Line arrow2 = new Line();
                 line.setStyle("-fx-stroke: black;");
 
                 line.setStartX(J.getCoordonneesJoueur().x);                           
@@ -115,23 +117,37 @@ public class Interface_SauvegardeController implements Initializable {
                 line.setEndY(Jnext.getCoordonneesJoueur().y);
  
                 double arrowAngle = Math.toRadians(45.0);
-                double arrowLength = 10.0;
+                double longueurArrow = 10.0;
         
                 double lineAngle = Math.atan2(J.getCoordonneesJoueur().y - Jnext.getCoordonneesJoueur().y,
                 J.getCoordonneesJoueur().x - Jnext.getCoordonneesJoueur().x);
 
-                double x1 = Math.cos(lineAngle + arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().x;
-                double y1 = Math.sin(lineAngle + arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().y;
+                double Xfin1 = Math.cos(lineAngle + arrowAngle) * longueurArrow 
+                                         + Jnext.getCoordonneesJoueur().x;
+                double Yfin1 = Math.sin(lineAngle + arrowAngle) * longueurArrow 
+                                         + Jnext.getCoordonneesJoueur().y;
 
-                double x2 = Math.cos(lineAngle - arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().x;
-                double y2 = Math.sin(lineAngle - arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().y;
-                 
-                Line arrowHead1 = new Line(Jnext.getCoordonneesJoueur().x, Jnext.getCoordonneesJoueur().y, x1, y1);
-                Line arrowHead2 = new Line(Jnext.getCoordonneesJoueur().x, Jnext.getCoordonneesJoueur().y, x2, y2);
+                double Xfin2 = Math.cos(lineAngle - arrowAngle) * longueurArrow + 
+                                            Jnext.getCoordonneesJoueur().x;
+                double Yfin2 = Math.sin(lineAngle - arrowAngle) * longueurArrow + 
+                        Jnext.getCoordonneesJoueur().y;
+                
+              
+                arrow1.setStartX(Jnext.getCoordonneesJoueur().x);                           
+                arrow1.setStartY(Jnext.getCoordonneesJoueur().y);
+                arrow1.setEndX(Xfin1);
+                arrow1.setEndY(Yfin1);
+                arrow2.setStartX(Jnext.getCoordonneesJoueur().x);                           
+                arrow2.setStartY(Jnext.getCoordonneesJoueur().y);
+                arrow2.setEndX(Xfin2);
+                arrow2.setEndY(Yfin2);
+                line.setEndX(Jnext.getCoordonneesJoueur().x);                           
+                line.setEndY(Jnext.getCoordonneesJoueur().y);
+               
         
         //Group root = new Group();
 
-                m_parentController.conteneurJoueur.getChildren().addAll(line,arrowHead1, arrowHead2);
+                m_parentController.conteneurJoueur.getChildren().addAll(line,arrow1, arrow2);
                 i = i + 1;       
             }
              try {
@@ -140,6 +156,9 @@ public class Interface_SauvegardeController implements Initializable {
                 
                 WritableImage wi = new WritableImage((int)m_parentController.stackSurface.getBoundsInParent().getWidth(), (int)m_parentController.stackSurface.getBoundsInParent().getHeight());
                 WritableImage snapshot = m_parentController.stackSurface.snapshot(new SnapshotParameters(), wi);
+                File folder = new File(".../src/Captures");
+                
+                
                 
                 File output = new File("capture" + new Date().getTime() + ".png");
                 ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
