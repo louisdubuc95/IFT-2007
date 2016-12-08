@@ -232,6 +232,23 @@ public class Interface_accueilController implements Initializable {
     }
     
     
+    
+    
+    //Afficher strategies sauvegardee
+    @FXML
+    private void deleteSauvegardes() 
+    {
+    
+    File folder = new File("src/savedStrategies");
+    File[] listOfFiles = folder.listFiles();
+
+    for (File file : listOfFiles) {
+        file.delete();
+    }
+    content.getChildren().clear();
+    }
+    
+    
     EventHandler<ActionEvent> updateButtonHandler = new EventHandler<ActionEvent>() 
     {
         @Override
