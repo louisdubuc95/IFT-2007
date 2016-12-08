@@ -162,23 +162,14 @@ public class Interface_SauvegardeController implements Initializable {
                     
                 System.out.println("fail");
                 Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-             
-        for(Node n : m_parentController.conteneurJoueur.getChildren())
-        {
-            if(n.getClass()==Line.class)
-            {
-                n.setVisible(false);
-            }
-        }
-            
+            }   
         stage.close();
    
     }
     
     
             
-            @FXML
+    @FXML
     public void boutonEnregistrerAction(ActionEvent even){
         String validateDot = txtNomSauvegarde.getText();
         if(validateDot.isEmpty())
@@ -205,6 +196,7 @@ public class Interface_SauvegardeController implements Initializable {
             catch(NullPointerException e)
             {
                 m_parentController.m_enregistrement.serialize(validateDot, m_parentController.m_controller.getController(), "IPI"); 
+                
             }   
             Stage stage = (Stage) boutonSauvegarder.getScene().getWindow();
             stage.close();   
