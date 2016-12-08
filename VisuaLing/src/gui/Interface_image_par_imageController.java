@@ -153,6 +153,7 @@ public class Interface_image_par_imageController implements Initializable {
     private Rectangle rectangleCourant;
     private Objectif objectifCourant;
     private ArrayList<Shape> nodes = new ArrayList<>();
+    private ArrayList<Shape> joueurCercle = new ArrayList<>();
     
     public int indexListe = -1;
     
@@ -218,10 +219,15 @@ public class Interface_image_par_imageController implements Initializable {
     private double m_x;
     private double m_y;
     
+    private List<Circle> list_objectif = new ArrayList<>();
     private List<Label> list_labelRolePosition = new ArrayList<>();
     private Label label_rolePositionCourant;
     private boolean label_afficherRolePosition = false;
     private boolean label_afficherRotationPosition = false ;
+    
+    private Circle cercle_objectifJoueur_courant;
+    double objectif_orgSceneX, objectif_orgSceneY;
+    double objectif_orgTranslateX, objectif_orgTranslateY;
     
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
@@ -359,23 +365,6 @@ public class Interface_image_par_imageController implements Initializable {
         setJoueurMax();
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
    public void getX(String dimensionX){
      testDimensionX.setText(dimensionX); 
@@ -785,8 +774,9 @@ public class Interface_image_par_imageController implements Initializable {
                                             m_controller.addJoueur(p, couleurAWTEquipe, m_role, m_position, m_orientation, equipe);
                                             List<Joueur> liste_joueurs = m_controller.getListJoueurs();
                                             Joueur dernierJoueur = liste_joueurs.get(liste_joueurs.size()-1);
-                                            dernierJoueur.getEquipe().addJoueur(dernierJoueur);
-                                            
+                                            Equipe equipe_joueur = dernierJoueur.getEquipe();
+                                            equipe_joueur.addJoueur(dernierJoueur);
+
                                             //AJOUT DU JOUEUR
                                             int idJoueur = dernierJoueur.getId();
                                             Circle cercle = new Circle(15, couleurEquipe);
@@ -829,6 +819,7 @@ public class Interface_image_par_imageController implements Initializable {
                                             labelJoueurRotation.setScaleX(labelJoueurRotation.getScaleX()*2);
                                             labelJoueurRotation.setScaleY(labelJoueurRotation.getScaleY()*2);
                                             labelJoueurRotation.setId("" + idJoueur);
+                                            labelJoueurRotation.setVisible(false);
 
                                             //EVENT POUR LES BOUTONS
                                             boutonRotationDroite.setOnMouseClicked((MouseEvent eventrotation)->{
@@ -862,12 +853,14 @@ public class Interface_image_par_imageController implements Initializable {
                                             {
                                                 boutonRotationGauche.setVisible(true);
                                                 boutonRotationDroite.setVisible(true);
+                                                labelJoueurRotation.setVisible(true);
                                             }
 
                                             list_labelRolePosition.add(labelRolePosition);
                                             list_labelJoueurRotation.add(labelJoueurRotation);
                                             list_buttonRotationGauche.add(boutonRotationGauche);
                                             list_buttonRotationDroite.add(boutonRotationDroite);
+                                            joueurCercle.add(cercle);
 
                                             conteneurJoueur.getChildren().addAll(cercle, labelRolePosition, labelJoueurRotation,boutonRotationDroite,boutonRotationGauche);
                                         }
@@ -986,6 +979,7 @@ public class Interface_image_par_imageController implements Initializable {
                                     list_labelJoueurRotation.add(labelJoueurRotation);
                                     list_buttonRotationGauche.add(boutonRotationGauche);
                                     list_buttonRotationDroite.add(boutonRotationDroite);
+                                    joueurCercle.add(cercle);
                                     
                                     conteneurJoueur.getChildren().addAll(cercle, labelRolePosition, labelJoueurRotation,boutonRotationDroite,boutonRotationGauche);
                                 }
@@ -1020,6 +1014,7 @@ public class Interface_image_par_imageController implements Initializable {
                             Image ImageRondelle= new Image(imagepathRondelle);
                             ImagePattern imagePatternRondelle = new ImagePattern(ImageRondelle);
                             cercle.setFill(imagePatternRondelle);
+                            list_objectif.add(cercle);
                             conteneurJoueur.getChildren().addAll(cercle);
                             break;
                         case "Balle":
@@ -1046,6 +1041,7 @@ public class Interface_image_par_imageController implements Initializable {
                             Image ImageBalle = new Image(imagepathBalle);
                             ImagePattern imagePatternBalle = new ImagePattern(ImageBalle);
                             balle.setFill(imagePatternBalle);
+                            list_objectif.add(balle);
                             conteneurJoueur.getChildren().addAll(balle);
                             break;
                         case "Ballon":
@@ -1072,6 +1068,7 @@ public class Interface_image_par_imageController implements Initializable {
                             Image ImageBallon = new Image(imagepathBallon);
                             ImagePattern imagePatternBallon = new ImagePattern(ImageBallon);
                             ballon.setFill(imagePatternBallon);
+                            list_objectif.add(ballon);
                             conteneurJoueur.getChildren().addAll(ballon);
                             break;
                         default:
@@ -1132,14 +1129,33 @@ public class Interface_image_par_imageController implements Initializable {
                         label_joueurRotationCourant = getLabelJoueurRotation(j.getId());
                         btn_gaucheCourant = getBoutonsOrientationGauche(j.getId());
                         btn_droitCourant = getBoutonsOrientationDroit(j.getId());
+                        
+                        if (j.getPossesion())
+                        {
+                            cercle_objectifJoueur_courant = getObjectif(j.getId());
+                            List<Objectif> listeObj = m_controller.getListeObjectif();
+                            for(Objectif o : listeObj)
+                            {   
+                                float xObj = o.getCoordonneesObj().x;
+                                float yObj = o.getCoordonneesObj().y;
+                                float xRect = (float)cercle_objectifJoueur_courant.getLayoutX();
+                                float yRect=(float)cercle_objectifJoueur_courant.getLayoutY();
+                                if((xObj == xRect) && (yObj == yRect))
+                                {
+                                    objectifCourant=o;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            cercle_objectifJoueur_courant = null;
+                        }
                       
                         System.out.println(j.getCoordonneesJoueur().x);
                         System.out.println(j.getCoordonneesJoueur().y);
                         System.out.println(cercleCourant.getLayoutX());
                         System.out.println(cercleCourant.getLayoutY());
                         System.out.println("--------------------------------------------------------");
-                        
-
                     }
                 }
             }
@@ -1170,18 +1186,25 @@ public class Interface_image_par_imageController implements Initializable {
         (MouseEvent t) -> {
             if(t.getButton()==MouseButton.PRIMARY)
             {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-            label_orgSceneX = t.getSceneX() + 20;
-            label_orgSceneY = t.getSceneY() - 15;
-            label_RotationSceneX = t.getSceneX()-6; 
-            label_RotationSceneY = t.getSceneY()-35; 
-            orgTranslateX = ((Circle)(t.getSource())).getLayoutX();
-            orgTranslateY = ((Circle)(t.getSource())).getLayoutY();
-            label_orgTranslateX = label_rolePositionCourant.getLayoutX();
-            label_orgTranslateY = label_rolePositionCourant.getLayoutY();
-            labelRotation_orgTanslateX =  label_joueurRotationCourant.getLayoutX();
-            labelRotation_orgTanslateY = label_joueurRotationCourant.getLayoutY();
+                orgSceneX = t.getSceneX();
+                orgSceneY = t.getSceneY();
+                label_orgSceneX = t.getSceneX() + 20;
+                label_orgSceneY = t.getSceneY() - 15;
+                label_RotationSceneX = t.getSceneX()-6; 
+                label_RotationSceneY = t.getSceneY()-35;
+                orgTranslateX = ((Circle)(t.getSource())).getLayoutX();
+                orgTranslateY = ((Circle)(t.getSource())).getLayoutY();
+                label_orgTranslateX = label_rolePositionCourant.getLayoutX();
+                label_orgTranslateY = label_rolePositionCourant.getLayoutY();
+                labelRotation_orgTanslateX =  label_joueurRotationCourant.getLayoutX();
+                labelRotation_orgTanslateY = label_joueurRotationCourant.getLayoutY();
+                if (cercle_objectifJoueur_courant != null)
+                {
+                    objectif_orgSceneX = t.getSceneX() - 30;
+                    objectif_orgSceneY = t.getSceneY() + 5;
+                    objectif_orgTranslateX = cercle_objectifJoueur_courant.getLayoutX();
+                    objectif_orgTranslateY = cercle_objectifJoueur_courant.getLayoutY();
+                }
             }
             
     };
@@ -1236,6 +1259,17 @@ public class Interface_image_par_imageController implements Initializable {
                 label_rolePositionCourant.setLayoutY(label_newTranslateY);
                 label_joueurRotationCourant.setLayoutX(label_newRotationTranslateX);
                 label_joueurRotationCourant.setLayoutY(label_newRotationTranslateY);
+                
+                if (cercle_objectifJoueur_courant != null)
+                {
+                    double obj_offsetX = (t.getSceneX() - 30 - objectif_orgSceneX)/scale;
+                    double obj_offsetY = (t.getSceneY() + 5 - objectif_orgSceneY)/scale;
+                    double obj_newTranslateX = objectif_orgTranslateX + obj_offsetX;
+                    double obj_newTranslateY = objectif_orgTranslateY + obj_offsetY;
+                    cercle_objectifJoueur_courant.setLayoutX(obj_newTranslateX);
+                    cercle_objectifJoueur_courant.setLayoutY(obj_newTranslateY);
+                }
+                
                 System.out.println(String.valueOf(cercleCourant.getLayoutX()));
                 System.out.println(String.valueOf(cercleCourant.getLayoutY()));
                 checkShapeIntersection(cercleCourant);
@@ -1282,22 +1316,34 @@ public class Interface_image_par_imageController implements Initializable {
                 label_joueurRotationCourant.setLayoutY(yCercle-35);
                 Point2D.Float point = new Point2D.Float(xCercle,yCercle);
                 joueurCourant.setCoordonneesJoueur(point);
-                m_enregistrement.serializeUR(m_controller.getController(), indexUndoRedo);
-                indexUndoRedo ++;
                 
                 btn_gaucheCourant.setLayoutX(xCercle - 35);
                 btn_gaucheCourant.setLayoutY(yCercle + 20);
                 btn_droitCourant.setLayoutX(xCercle + 5);
                 btn_droitCourant.setLayoutY(yCercle + 20);
+                
+                if (cercle_objectifJoueur_courant != null)
+                {
+                    cercle_objectifJoueur_courant.setLayoutX(xCercle - 30);
+                    cercle_objectifJoueur_courant.setLayoutY(yCercle + 5);
+                    float xRect =(float)cercle_objectifJoueur_courant.getLayoutX();
+                    float yRect=(float)cercle_objectifJoueur_courant.getLayoutY();
+                    Point2D.Float pointObj = new Point2D.Float(xRect,yRect);
+                    objectifCourant.setCoordonneesObj(pointObj);
+                }
 
                 if (label_afficherRotationPosition)
                 {
                     btn_gaucheCourant.setVisible(true);
                     btn_droitCourant.setVisible(true);
                 }
+                
+                m_enregistrement.serializeUR(m_controller.getController(), indexUndoRedo);
+                indexUndoRedo ++;
             }
     };
    };
+        
         EventHandler<MouseEvent> objOnMouseReleasedEventHandler = 
         new EventHandler<MouseEvent>() {
  
@@ -1305,17 +1351,47 @@ public class Interface_image_par_imageController implements Initializable {
         public void handle(MouseEvent t) {
             if(t.getButton()==MouseButton.PRIMARY)
             { 
+                Shape shape = checkIntersectionObjectif(cercleCourant);
+                if (shape != null)
+                {
+                    if (cercleCourant.getId() != null && cercleCourant.getId() != "123456789")
+                    {
+                        int id = Integer.parseInt(cercleCourant.getId());
+                        m_controller.getJoueur(id).setPossession(false);
+                        cercleCourant.setId("123456789");
+                    }
+                    cercleCourant.setLayoutX(shape.getLayoutX() - 30);
+                    cercleCourant.setLayoutY(shape.getLayoutY() + 5);
+                    cercleCourant.setId(shape.getId());
+                    int id = Integer.parseInt(shape.getId());
+                    m_controller.getJoueur(id).setPossession(true);
+                }
+                else
+                {
+                    if (cercleCourant.getId() != null)
+                    {
+                        int id = Integer.parseInt(cercleCourant.getId());
+                        if (id != 123456789)
+                        {
+                            m_controller.getJoueur(id).setPossession(false);
+                            cercleCourant.setId("123456789");
+                        }
+                    }
+                }
+                    
+                String iddd = cercleCourant.getId();
                 float xRect =(float)cercleCourant.getLayoutX();
                 float yRect=(float)cercleCourant.getLayoutY();
                 Point2D.Float point = new Point2D.Float(xRect,yRect);
                 objectifCourant.setCoordonneesObj(point);
+                //cercle_objectifJoueur_courant = null;
+                //objectifCourant = null;
                 m_enregistrement.serializeUR(m_controller.getController(),indexUndoRedo);
                 indexUndoRedo ++;
             }
     };
         
    };
-        
         
         EventHandler<MouseEvent> circleOnRightMouseClickEventHandler = 
         new EventHandler<MouseEvent>() {
@@ -1351,11 +1427,9 @@ public class Interface_image_par_imageController implements Initializable {
                 conteneurJoueur.getChildren().remove(cercle);
                 m_enregistrement.serializeUR(m_controller.getController(),indexUndoRedo);
                 indexUndoRedo ++;
-
-                }
-            
+            } 
+        };
     };
-   };
         
         EventHandler<MouseEvent> objOnRightMouseClickEventHandler = 
         new EventHandler<MouseEvent>() {
@@ -1386,6 +1460,7 @@ public class Interface_image_par_imageController implements Initializable {
             }
     };
    };
+        
         EventHandler<MouseEvent> obsOnRightMouseClickEventHandler = 
         new EventHandler<MouseEvent>() {
  
@@ -1419,7 +1494,7 @@ public class Interface_image_par_imageController implements Initializable {
         boolean collisionDetected = false;
         for (Shape static_bloc : nodes) {
           if (static_bloc != block) {
-            System.out.println("Collision non deteted");
+            //System.out.println("Collision non deteted");
 
             Shape intersect = Shape.intersect(block, static_bloc);
             if (intersect.getBoundsInLocal().getWidth() != -1) {
@@ -1431,11 +1506,35 @@ public class Interface_image_par_imageController implements Initializable {
         if (collisionDetected) {
           block.setFill(Color.BLUE);
         } else {
-            System.out.println("Collision non deteted");
+            //System.out.println("Collision non deteted");
         }
     }
 
-    
+    private Shape checkIntersectionObjectif(Shape block) {
+        boolean collisionDetected = false;
+        Shape shape = null;
+        for (Shape joueur : joueurCercle) {
+          if (joueur != block) {
+            //System.out.println("Collision non deteted");
+
+            Shape intersect = Shape.intersect(block, joueur);
+            if (intersect.getBoundsInLocal().getWidth() != -1) {
+              collisionDetected = true;
+              shape = joueur;
+              break;
+            }
+          }
+        }
+
+        if (collisionDetected) 
+        {
+            return shape;
+        } 
+        else 
+        {
+            return null;
+        }
+    }
         
     /**
      *
@@ -1573,6 +1672,21 @@ public class Interface_image_par_imageController implements Initializable {
         
         return new Button();
     }
+    
+    public Circle getObjectif(int idJoueur)
+    {
+        String idJoueurString = "" + idJoueur;
+        
+        for (Iterator<Circle> it = list_objectif.iterator(); it.hasNext();) {
+            Circle obj = it.next();
+            if (idJoueurString.equals(obj.getId()))
+            {
+                return obj;
+            }
+        }
+        
+        return new Circle();
+    }
         
     @FXML   
     public void creerImage(ActionEvent e)
@@ -1612,9 +1726,7 @@ public class Interface_image_par_imageController implements Initializable {
         System.out.println(m_controller.getListeSauvegardeJoueur().size());
    }
 
-    
-
-     public class IteratingTask0 extends Task<Circle> {
+    public class IteratingTask0 extends Task<Circle> {
          private final Circle cercleFinal;
 
          public IteratingTask0(Circle cercleParam) {
@@ -1634,8 +1746,7 @@ public class Interface_image_par_imageController implements Initializable {
          }
      };
      
-
-      public class IteratingTask1 extends Task<Circle> {
+    public class IteratingTask1 extends Task<Circle> {
          private final Circle cercleFinal;
 
          public IteratingTask1(Circle cercleParam) {
@@ -1654,7 +1765,7 @@ public class Interface_image_par_imageController implements Initializable {
          }
      };
       
-     Service process = new Service() {
+    Service process = new Service() {
     @Override
     protected Task createTask() {
         return new Task() {
@@ -1748,16 +1859,13 @@ public class Interface_image_par_imageController implements Initializable {
         };
     }
 };
-      
-     
- 
+    
     @FXML
     public void debuterStrategie()
     {   
         process.start();
         onPause = false;
     }
-    
     
     @FXML
     public void stopStrategie()
@@ -1767,7 +1875,6 @@ public class Interface_image_par_imageController implements Initializable {
         process.reset();
         onPause = true;
     }
-    
     
     @FXML
     public void avancerStrategie()
@@ -1897,50 +2004,42 @@ public class Interface_image_par_imageController implements Initializable {
     }
         
     }
-        
-
-
-   
-   @FXML public void recommencerStrategie(ActionEvent e)
-   {
-       ObservableList<Node> listeC = conteneurJoueur.getChildren();
-       List<List<Joueur>> listeJ = m_controller.getListeSauvegardeJoueur();
-       List<Joueur> listeSauvegarde = new ArrayList<>();
-       indexListe = -1;
-       for(List<Joueur> LJ : listeJ)
-       {
-        for(Joueur j : LJ)
-         { 
-             java.awt.Color color = j.getCouleurChandail();
-             int r = color.getRed();
-             int g = color.getGreen();
-             int b = color.getBlue();
-             int a = color.getAlpha();
-             java.awt.Color nColor = new java.awt.Color(r, g, b, 127);
-             j.setCouleurChandail(nColor);
-
-                 for(Node cercle : listeC)
-                 {
-                     float xJoueur=j.getCoordonneesJoueur().x;
-                     float yJoueur=j.getCoordonneesJoueur().y;
-                     float xCercle =(float)cercle.getLayoutX();
-                     float yCercle=(float)cercle.getLayoutY();
-                     if((xJoueur == xCercle) && (yJoueur == yCercle))
-                     {      
-                             cercle.setOpacity(127.0/255.0);
-                         }
-                     }
-                 }
-       }
-
-       process.restart();
-   }
-   
-           
-
        
-            
-   
+    @FXML public void recommencerStrategie(ActionEvent e)
+    {
+        ObservableList<Node> listeC = conteneurJoueur.getChildren();
+        List<List<Joueur>> listeJ = m_controller.getListeSauvegardeJoueur();
+        List<Joueur> listeSauvegarde = new ArrayList<>();
+        indexListe = -1;
+        for(List<Joueur> LJ : listeJ)
+        {
+         for(Joueur j : LJ)
+          { 
+              java.awt.Color color = j.getCouleurChandail();
+              int r = color.getRed();
+              int g = color.getGreen();
+              int b = color.getBlue();
+              int a = color.getAlpha();
+              java.awt.Color nColor = new java.awt.Color(r, g, b, 127);
+              j.setCouleurChandail(nColor);
+
+                  for(Node cercle : listeC)
+                  {
+                      float xJoueur=j.getCoordonneesJoueur().x;
+                      float yJoueur=j.getCoordonneesJoueur().y;
+                      float xCercle =(float)cercle.getLayoutX();
+                      float yCercle=(float)cercle.getLayoutY();
+                      if((xJoueur == xCercle) && (yJoueur == yCercle))
+                      {      
+                              cercle.setOpacity(127.0/255.0);
+                          }
+                      }
+                  }
+        }
+
+        process.restart();
+    }
+    
     //@FXML
     public void setEquipe(String p_equipe) {
         m_equipe= p_equipe;
@@ -2139,7 +2238,6 @@ public class Interface_image_par_imageController implements Initializable {
             java.awt.Color couleurAWTEquipe = joueurAjouter.getCouleurChandail();
             Color colorJoueur = javafx.scene.paint.Color.rgb(couleurAWTEquipe.getRed(), couleurAWTEquipe.getGreen(), couleurAWTEquipe.getBlue(), 1.0);
             
-            
             Circle cercle = new Circle(15, colorJoueur);
             cercle.setOpacity(couleurAWTEquipe.getAlpha()/255.0);
             cercle.setLayoutX(joueurAjouter.getCoordonneesJoueur().x);
@@ -2212,7 +2310,7 @@ public class Interface_image_par_imageController implements Initializable {
             list_labelJoueurRotation.add(labelJoueurRotation);
             list_buttonRotationGauche.add(boutonRotationGauche);
             list_buttonRotationDroite.add(boutonRotationDroite);
-            conteneurJoueur.getChildren().addAll(cercle, labelRolePosition,labelJoueurRotation,boutonRotationGauche,boutonRotationDroite);     
+            conteneurJoueur.getChildren().addAll(cercle, labelRolePosition,labelJoueurRotation,boutonRotationGauche,boutonRotationDroite);        
         }
         
         if (afficherRotation.isSelected())
