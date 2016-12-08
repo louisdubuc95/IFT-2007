@@ -34,6 +34,8 @@ import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.StageStyle;
@@ -242,19 +244,63 @@ public class Interface_accueilController implements Initializable {
       String extensionTR = ".TR";
       if (file.getAbsolutePath().endsWith(extensionIPI) || file.getAbsolutePath().endsWith(extensionTR)) {
         ToggleButton TB = new ToggleButton("Label " + file.getName());
-        listTB.add(TB);
+        
+        
         TB.setMinHeight(100);
         TB.setMinWidth(625);
         TB.setOnAction(updateButtonHandler);
         
         
+        
+        
+        File folderCapture = new File("src/Captures");
+        File[] listOfFilesCapture = folderCapture.listFiles();
+        
+        
+        String[] parts = file.getAbsolutePath().split("\\\\");
+        
+        String nom = parts[parts.length-1];
+        String[] parts2 = nom.split("\\.");
+        nom = parts2[0];
+        
+        String pathPhoto="src/Captures/noPreviewFound.png";
+        
+       for(File fileCapture : listOfFilesCapture)
+       {
+            String[] partsCapture = fileCapture.getAbsolutePath().split("\\\\");
+            String nomCapture = partsCapture[partsCapture.length-1];
+            String[] partsCapture2 = nomCapture.split("\\.");
+            nomCapture = partsCapture2[0];
+            
+            if(nomCapture.equals(nom))
+            {
+                pathPhoto = partsCapture[partsCapture.length-3] + "\\" +
+                        partsCapture[partsCapture.length-2] + "\\" +
+                        partsCapture[partsCapture.length-1];
+                System.out.println(pathPhoto);
+                
+                
+            }
+           
+       }
+        
+       
+        
+        Image imagePreview = new Image("file:" + pathPhoto);
+        ImageView IV = new ImageView();
+        IV.setImage(imagePreview);
+        IV.setFitHeight(80.0);
+        IV.setFitWidth(150.0);
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/DD HH:mm:ss");
         TB.setText("Nom du fichier  :  "+ file.getName() + "\n" + "Derniere modification  :  " 
                 +sdf.format(file.lastModified())
                 + "\n" + "Taille  :  " + file.length() + " octets");
         TB.setTextAlignment(TextAlignment.JUSTIFY);
-        Insets insets = new Insets(0,350,0,0);
+        Insets insets = new Insets(0,0,0,80);
         TB.setPadding(insets);
+        TB.setGraphic(IV);
+        TB.setGraphicTextGap(-570);
+        listTB.add(TB);
                
         content.setPrefHeight(content.getPrefHeight() + TB.getPrefHeight());
         content.getChildren().add(TB);
