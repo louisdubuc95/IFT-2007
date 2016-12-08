@@ -156,11 +156,11 @@ public class Interface_SauvegardeController implements Initializable {
                 
                 WritableImage wi = new WritableImage((int)m_parentController.stackSurface.getBoundsInParent().getWidth(), (int)m_parentController.stackSurface.getBoundsInParent().getHeight());
                 WritableImage snapshot = m_parentController.stackSurface.snapshot(new SnapshotParameters(), wi);
-                File folder = new File(".../src/Captures");
+               
                 
                 
                 
-                File output = new File("capture" + new Date().getTime() + ".png");
+                File output = new File("src/Captures/" + new Date().getTime() + ".png");
                 ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
                 
                 //////
