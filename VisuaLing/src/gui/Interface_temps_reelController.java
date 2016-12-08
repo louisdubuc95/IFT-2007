@@ -89,6 +89,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox ;  
 import javafx.scene.effect.Effect.*;
 import javafx.concurrent.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -240,6 +242,7 @@ public class Interface_temps_reelController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     clearUR();
        
+    
     menuBarSport.prefWidthProperty().bind(boiteverticale.widthProperty());
     boiteHorizontaleBouton.prefWidthProperty().bind(boiteverticale.widthProperty());
    
@@ -302,8 +305,8 @@ public class Interface_temps_reelController implements Initializable {
         
     
     
-    @FXML
-    public void undoAction(ActionEvent e)
+
+    public void undoAction()
     {
         if(indexUndoRedo==0)
         {
@@ -324,8 +327,8 @@ public class Interface_temps_reelController implements Initializable {
     }
     
     
-    @FXML
-    public void redoAction(ActionEvent e)
+
+    public void redoAction()
     {
         if(indexUndoRedo<m_enregistrement.getListeUR().size()-1)
         {
@@ -468,6 +471,18 @@ public class Interface_temps_reelController implements Initializable {
     
     @FXML
     public void ajouterJoueurAction(ActionEvent event) throws IOException {
+        
+        stackSurface.getScene().setOnKeyPressed(e -> {
+    if (e.getCode() == KeyCode.Z) {
+        System.out.println("undo");
+        undoAction();
+    if (e.getCode() == KeyCode.X) {
+        System.out.println("redo");
+        redoAction();
+    }
+    }
+});
+
         List<Equipe> listeEquipe = m_controller.getListEquipe();
         if(!listeEquipe.isEmpty())
         {

@@ -94,6 +94,7 @@ import javafx.concurrent.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
 import javax.imageio.ImageIO;
 
 /**
@@ -318,8 +319,8 @@ public class Interface_image_par_imageController implements Initializable {
         
     
     
-    @FXML
-    public void undoAction(ActionEvent e)
+
+    public void undoAction()
     {
         if(indexUndoRedo==0)
         {
@@ -340,8 +341,8 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
     
-    @FXML
-    public void redoAction(ActionEvent e)
+
+    public void redoAction()
     {
         if(indexUndoRedo<m_enregistrement.getListeUR().size()-1)
         {
@@ -500,6 +501,17 @@ public class Interface_image_par_imageController implements Initializable {
     
     @FXML
     public void ajouterJoueurAction(ActionEvent event) throws IOException {
+                
+        stackSurface.getScene().setOnKeyPressed(e -> {
+    if (e.getCode() == KeyCode.Z) {
+        System.out.println("undo");
+        undoAction();
+    if (e.getCode() == KeyCode.X) {
+        System.out.println("redo");
+        redoAction();
+    }
+    }
+});
         List<Equipe> listeEquipe = m_controller.getListEquipe();
         if(!listeEquipe.isEmpty())
         {
