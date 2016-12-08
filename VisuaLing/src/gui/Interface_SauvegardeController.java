@@ -33,6 +33,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import static java.lang.System.gc;
+import java.util.Iterator;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -126,8 +127,15 @@ public class Interface_SauvegardeController implements Initializable {
                 ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
                 
                 
-                
-                System.out.println("screen fait");
+                //Delete lignes
+                for(Iterator<Node> it = m_parentController.conteneurJoueur.getChildren().iterator(); it.hasNext();)
+                {
+                    Node n = it.next();
+                    if(n.getClass()==Line.class)
+                    {
+                        it.remove();
+                    }
+                }
                 
                 } 
         catch (IOException ex) {
@@ -136,13 +144,6 @@ public class Interface_SauvegardeController implements Initializable {
                 Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
             } 
              
-        for(Node n : m_parentController.conteneurJoueur.getChildren())
-        {
-            if(n.getClass()==Line.class)
-            {
-                n.setVisible(false);
-            }
-        }
             
         stage.close();
    
