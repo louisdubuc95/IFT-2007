@@ -14,6 +14,8 @@ import java.awt.geom.Point2D;
 import domain.equipe.Equipe;
 import java.awt.Color;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Joueur implements Serializable{
@@ -28,6 +30,7 @@ public class Joueur implements Serializable{
     private Point2D.Float m_point;
     private boolean m_enPossesion;
     private Equipe m_equipe;
+    private List<Point2D.Float> m_listeDeplacement;
     
     
     public Joueur (Point2D.Float p_point, Color p_couleurChandail, String p_role, String p_position, float p_oriantationJoueur, Equipe p_equipe){
@@ -40,6 +43,7 @@ public class Joueur implements Serializable{
         m_equipe = p_equipe;
         nb_joueur++;
         m_idJoueur = nb_joueur;
+        m_listeDeplacement = new ArrayList<>();
     }
     
     public boolean estMemeCoord(Point2D.Float p_coordJoueur){
@@ -112,6 +116,10 @@ public class Joueur implements Serializable{
 
     public void setEquipe(Equipe m_equipe) {
         this.m_equipe = m_equipe;
+    }
+    
+    public List<Point2D.Float> getListeDeplacement(){
+        return m_listeDeplacement;
     }
     
     
