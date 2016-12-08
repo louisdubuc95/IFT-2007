@@ -140,7 +140,7 @@ public class Interface_SauvegardeController implements Initializable {
         {
             if(n.getClass()==Line.class)
             {
-                m_parentController.conteneurJoueur.getChildren().remove(n);
+                n.setVisible(false);
             }
         }
             
