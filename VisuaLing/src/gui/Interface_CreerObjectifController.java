@@ -159,6 +159,7 @@ public class Interface_CreerObjectifController implements Initializable {
                     try{
                         parentController.setObjeticAjoueter("Ballon");
                         parentController.setOjbectifImage(ivImage.getImage());
+                        parentControllerTR.setImagePathObjectif(m_path);
                         Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
                         stage.close();
                     }
@@ -166,6 +167,7 @@ public class Interface_CreerObjectifController implements Initializable {
                     {
                         parentControllerTR.setObjeticAjoueter("Ballon");
                         parentControllerTR.setOjbectifImage(ivImage.getImage());
+                        parentControllerTR.setImagePathObjectif(m_path);
                         Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
                         stage.close();
                         

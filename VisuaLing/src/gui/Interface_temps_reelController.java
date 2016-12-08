@@ -2049,6 +2049,75 @@ public class Interface_temps_reelController implements Initializable {
             label_afficherRolePosition = false;
         }
     }
+    public void setObstacle()
+    {
+        List<Obstacle> obstacle = m_controller.getListeObstacle();
+        
+        Iterator<Obstacle> iterateur = obstacle.iterator();
+        
+        while(iterateur.hasNext())
+        {
+            Obstacle obstacleAjouter = iterateur.next();
+            int x = obstacleAjouter.getLargeur();
+            int y = obstacleAjouter.getHauteur();
+            String pathImage = obstacleAjouter.getImageObs();
+            File imageFile = new File(pathImage);
+            String imagepath;
+            try {
+                imagepath = imageFile.toURI().toURL().toString();
+                Image imageObs = new Image(imagepath);
+                ImagePattern imagePattern = new ImagePattern(imageObs);
+                Rectangle rekt = new Rectangle(x,y);
+                rekt.setLayoutX(obstacleAjouter.getCoordonneeObs().x - largeurObstacle/2);
+                rekt.setLayoutY(obstacleAjouter.getCoordonneeObs().y - hauteurObstacle/2);
+                rekt.setCursor(Cursor.HAND);
+                rekt.setOnMouseClicked(obsOnRightMouseClickEventHandler);
+                nodes.add(rekt);
+                rekt.setFill(imagePattern);
+                conteneurJoueur.getChildren().addAll(rekt);
+                
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+            }         
+        }
+        
+    }
+    
+    public void setObjectif()
+    {
+        List<Objectif> objectif = m_controller.getListeObjectif();
+        
+        Iterator<Objectif> iterateur = objectif.iterator();
+        
+        while(iterateur.hasNext())    
+        {
+            Objectif objectifAjouter = iterateur.next();
+            
+            String pathImage = objectifAjouter.getImage();
+            File imageFile = new File(pathImage);
+            String imagepath;
+            try {
+                imagepath = imageFile.toURI().toURL().toString();
+                Image imageObs = new Image(imagepath);
+                ImagePattern imagePattern = new ImagePattern(imageObs);
+                Circle cercle = new Circle(10);
+                cercle.setLayoutX(objectifAjouter.getCoordonneesObj().x);
+                cercle.setLayoutY(objectifAjouter.getCoordonneesObj().y);
+                cercle.setCursor(Cursor.HAND);
+                cercle.setOnMousePressed(objOnMousePressedEventHandler);
+                cercle.setOnMouseDragged(objOnMouseDraggedEventHandler);
+                cercle.setOnMouseEntered(objOnMouseEnteredEventHandler);
+                cercle.setOnMouseReleased(objOnMouseReleasedEventHandler);
+                cercle.setOnMouseClicked(objOnRightMouseClickEventHandler);
+                cercle.setFill(imagePattern);
+                conteneurJoueur.getChildren().addAll(cercle);
+
+                
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+    }    
     //test
     public void setJoueurMax()
     {
@@ -2111,5 +2180,16 @@ public class Interface_temps_reelController implements Initializable {
         {
             afficherRPJoueur.setSelected(false);
         }    
+    }
+    
+    public void setStateOrientation(){
+        if(m_controller.getStateAfficherOriantation())
+        {
+            afficherRotation.setSelected(true);
+        }
+        else
+        {
+            afficherRotation.setSelected(false);
+        }  
     }
 }

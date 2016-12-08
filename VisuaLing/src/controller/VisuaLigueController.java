@@ -164,7 +164,7 @@ public class VisuaLigueController implements java.io.Serializable{
         m_surfaceJeu.setStateAfficherBD(p_state);
     }
     
-    public boolean setStateAfficherOriantation(){
+    public boolean getStateAfficherOriantation(){
         return m_surfaceJeu.getStateAfficherBD();
     }
     

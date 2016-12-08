@@ -179,10 +179,15 @@ public class Interface_SauvegardeController implements Initializable {
                 alert.setContentText("Le nom de la sauvegarde ne peut contenir de POINT");
                 alert.showAndWait();
             }
-
-            m_parentController.m_enregistrement.serialize(validateDot, m_parentController.m_controller.getController());
+            try{
+                m_parentControllerTR.m_enregistrement.serialize(validateDot, m_parentControllerTR.m_controller.getController(), "TR");
+            }
+            catch(NullPointerException e)
+            {
+                m_parentController.m_enregistrement.serialize(validateDot, m_parentController.m_controller.getController(), "IPI"); 
+            }   
             Stage stage = (Stage) boutonSauvegarder.getScene().getWindow();
-            stage.close();    
+            stage.close();   
         }
     }
     

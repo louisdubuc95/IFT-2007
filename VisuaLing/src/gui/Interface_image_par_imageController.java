@@ -2308,7 +2308,7 @@ public class Interface_image_par_imageController implements Initializable {
     }
     
     public void setStateOrientation(){
-        if(m_controller.getStateAfficherRP())
+        if(m_controller.getStateAfficherOriantation())
         {
             afficherRotation.setSelected(true);
         }

@@ -35,10 +35,10 @@ public class Enregistrement {
        this.compteur = 0;
     }
     
-    public void serialize(String p_nomSauvegarde, VisuaLigueController p_controller){
+    public void serialize(String p_nomSauvegarde, VisuaLigueController p_controller, String p_mode){
         ObjectOutputStream oos = null;
         try {
-            final FileOutputStream fichier = new FileOutputStream("src/savedStrategies/"+ p_nomSauvegarde+".IPI");
+            final FileOutputStream fichier = new FileOutputStream("src/savedStrategies/"+ p_nomSauvegarde+"."+p_mode);
             oos = new ObjectOutputStream(fichier);
             oos.writeObject(p_controller);
             oos.flush();

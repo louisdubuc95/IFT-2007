@@ -102,8 +102,6 @@ public class Interface_accueilController implements Initializable {
 
     @FXML
     private void boutonChargerAction(ActionEvent event)throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
-
             for(ToggleButton TB: listTB)
             {
                 if(TB.isSelected())
@@ -118,6 +116,7 @@ public class Interface_accueilController implements Initializable {
                    
                     if(extension.equals("IPI"))
                     {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_image_par_image.fxml"));
                         Stage stage = new Stage(StageStyle.DECORATED);
                         stage.setTitle( "- mode Image par Images");
                         stage.setScene(new Scene((AnchorPane) loader.load()));
@@ -147,6 +146,39 @@ public class Interface_accueilController implements Initializable {
                         stage = (Stage) boutonCharger.getScene().getWindow();
                         stage.close();
                     }
+                    else
+                        if(extension.equals("TR"))
+                        {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("Interface_temps_reel.fxml"));
+                            Stage stage = new Stage(StageStyle.DECORATED);
+                            stage.setTitle( "- mode Temps Reel");
+                            stage.setScene(new Scene((AnchorPane) loader.load()));
+                            stage.setMaximized(true);
+                            Interface_temps_reelController TRController = loader.<Interface_temps_reelController>getController();
+
+                            VisuaLigueController controller = TRController.m_enregistrement.deSerialize(pathFichier);
+                            TRController.setController(controller);
+                            TRController.setImageInterface(controller.getImageSurface());
+                            TRController.setStateMaxJoueur();
+                            TRController.setStateAfficherPosition();
+                            TRController.setJoueurMax();
+                            TRController.setStateOrientation();
+
+                            //Ajoute les joueurs
+                            TRController.setJoueur();
+
+                            //Ajouter les obstacle
+                            TRController.setObstacle();
+
+                            //Ajouter lse objectifs
+                            TRController.setObjectif();
+
+                            //Show la nouvelle window
+                            stage.show();
+
+                            stage = (Stage) boutonCharger.getScene().getWindow();
+                            stage.close();                            
+                        }
                 }
             } 
     }
