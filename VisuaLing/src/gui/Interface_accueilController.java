@@ -256,12 +256,12 @@ public class Interface_accueilController implements Initializable {
         File folderCapture = new File("src/Captures");
         File[] listOfFilesCapture = folderCapture.listFiles();
         
-        
+        //
         String[] parts = file.getAbsolutePath().split("\\\\");
         
         String nom = parts[parts.length-1];
         String[] parts2 = nom.split("\\.");
-        nom = parts2[0];
+        nom = parts2[0] + "." + parts2[1];
         
         String pathPhoto="src/Captures/noPreviewFound.png";
         
@@ -270,15 +270,14 @@ public class Interface_accueilController implements Initializable {
             String[] partsCapture = fileCapture.getAbsolutePath().split("\\\\");
             String nomCapture = partsCapture[partsCapture.length-1];
             String[] partsCapture2 = nomCapture.split("\\.");
-            nomCapture = partsCapture2[0];
+            nomCapture = partsCapture2[0] + "." + partsCapture2[1];
+            System.out.println(nomCapture);
             
             if(nomCapture.equals(nom))
             {
                 pathPhoto = partsCapture[partsCapture.length-3] + "\\" +
                         partsCapture[partsCapture.length-2] + "\\" +
                         partsCapture[partsCapture.length-1];
-                System.out.println(pathPhoto);
-                
                 
             }
            
