@@ -250,7 +250,10 @@ public class Interface_image_par_imageController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try{
         clearUR();
+        }
+        catch(Exception e) {}
        
     menuBarSport.prefWidthProperty().bind(boiteverticale.widthProperty());
     boiteHorizontaleBouton.prefWidthProperty().bind(boiteverticale.widthProperty());
