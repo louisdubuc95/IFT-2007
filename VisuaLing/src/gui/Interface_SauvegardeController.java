@@ -144,7 +144,7 @@ public class Interface_SauvegardeController implements Initializable {
                 File output = new File("capture" + new Date().getTime() + ".png");
                 ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
                 
-                
+                //////
                 //Delete lignes
                 for(Iterator<Node> it = m_parentController.conteneurJoueur.getChildren().iterator(); it.hasNext();)
                 {
