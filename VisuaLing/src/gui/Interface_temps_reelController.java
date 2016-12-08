@@ -461,6 +461,12 @@ public class Interface_temps_reelController implements Initializable {
           IPIcontrolleur.setJoueurMax();
           IPIcontrolleur.setStateOrientation();
           
+          List<Joueur> listeJ = m_controller.getListJoueurs();
+          for(Joueur j : listeJ)
+          { 
+            j.getListeDeplacement().clear();
+          }
+          
           //Ajoute les joueurs
           IPIcontrolleur.setJoueur();
 
