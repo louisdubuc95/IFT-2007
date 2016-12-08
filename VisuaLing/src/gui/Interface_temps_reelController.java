@@ -310,8 +310,8 @@ public class Interface_temps_reelController implements Initializable {
     {
         if(indexUndoRedo==0)
         {
-            clearUR();
-            conteneurJoueur.getChildren().clear();   
+            indexUndoRedo = indexUndoRedo - 1;
+            conteneurJoueur.getChildren().clear();    
         }
         if(indexUndoRedo>0)
         {
@@ -490,12 +490,10 @@ public class Interface_temps_reelController implements Initializable {
         
         stackSurface.getScene().setOnKeyPressed(e -> {
     if (e.getCode() == KeyCode.Z) {
-        System.out.println("undo");
         undoAction();
-    if (e.getCode() == KeyCode.X) {
-        System.out.println("redo");
-        redoAction();
     }
+    if (e.getCode() == KeyCode.X) {
+        redoAction();
     }
 });
 

@@ -324,12 +324,12 @@ public class Interface_image_par_imageController implements Initializable {
     {
         if(indexUndoRedo==0)
         {
-            clearUR();
+            indexUndoRedo = indexUndoRedo - 1;
             conteneurJoueur.getChildren().clear();   
         }
         if(indexUndoRedo>0)
         {
-       indexUndoRedo = indexUndoRedo - 1;
+       
        VisuaLigueController controllerUndo = m_enregistrement.deSerializeUR(m_enregistrement.getListeUR().get(indexUndoRedo));
        conteneurJoueur.getChildren().clear();
         setController(controllerUndo);
@@ -533,12 +533,11 @@ public class Interface_image_par_imageController implements Initializable {
                 
         stackSurface.getScene().setOnKeyPressed(e -> {
     if (e.getCode() == KeyCode.Z) {
-        System.out.println("undo");
         undoAction();
-    if (e.getCode() == KeyCode.X) {
-        System.out.println("redo");
-        redoAction();
     }
+        
+    if (e.getCode() == KeyCode.X) {
+        redoAction();
     }
 });
         List<Equipe> listeEquipe = m_controller.getListEquipe();
