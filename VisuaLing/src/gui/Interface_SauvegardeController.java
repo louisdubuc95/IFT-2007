@@ -34,6 +34,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import static java.lang.System.gc;
 import java.util.Iterator;
+import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -112,8 +113,25 @@ public class Interface_SauvegardeController implements Initializable {
 
                 line.setEndX(Jnext.getCoordonneesJoueur().x);                           
                 line.setEndY(Jnext.getCoordonneesJoueur().y);
+ 
+                double arrowAngle = Math.toRadians(45.0);
+                double arrowLength = 10.0;
+        
+                double lineAngle = Math.atan2(J.getCoordonneesJoueur().y - Jnext.getCoordonneesJoueur().y,
+                J.getCoordonneesJoueur().x - Jnext.getCoordonneesJoueur().x);
 
-                m_parentController.conteneurJoueur.getChildren().addAll(line);
+                double x1 = Math.cos(lineAngle + arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().x;
+                double y1 = Math.sin(lineAngle + arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().y;
+
+                double x2 = Math.cos(lineAngle - arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().x;
+                double y2 = Math.sin(lineAngle - arrowAngle) * arrowLength + Jnext.getCoordonneesJoueur().y;
+                 
+                Line arrowHead1 = new Line(Jnext.getCoordonneesJoueur().x, Jnext.getCoordonneesJoueur().y, x1, y1);
+                Line arrowHead2 = new Line(Jnext.getCoordonneesJoueur().x, Jnext.getCoordonneesJoueur().y, x2, y2);
+        
+        //Group root = new Group();
+
+                m_parentController.conteneurJoueur.getChildren().addAll(line,arrowHead1, arrowHead2);
                 i = i + 1;       
             }
              try {
@@ -126,7 +144,7 @@ public class Interface_SauvegardeController implements Initializable {
                 File output = new File("capture" + new Date().getTime() + ".png");
                 ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
                 
-                
+                //////
                 //Delete lignes
                 for(Iterator<Node> it = m_parentController.conteneurJoueur.getChildren().iterator(); it.hasNext();)
                 {
@@ -137,6 +155,8 @@ public class Interface_SauvegardeController implements Initializable {
                     }
                 }
                 
+                System.out.println("screen fait");
+                
                 } 
         catch (IOException ex) {
                     
@@ -144,6 +164,13 @@ public class Interface_SauvegardeController implements Initializable {
                 Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
             } 
              
+        for(Node n : m_parentController.conteneurJoueur.getChildren())
+        {
+            if(n.getClass()==Line.class)
+            {
+                n.setVisible(false);
+            }
+        }
             
         stage.close();
    
