@@ -113,11 +113,20 @@ public class Interface_image_par_imageController implements Initializable {
     @FXML private ToggleButton boutonObjectif;
     
     
+    public boolean capture = false;
+    
+    public List<File> listExport;
+    
+    
     
     
     
     
     private Service service;
+    
+    
+    
+    public Service serviceExport;
 
    
     //@FXML private Boolean VerifAjoutJoueur = false;
@@ -260,7 +269,9 @@ public class Interface_image_par_imageController implements Initializable {
         clearUR();
         }
         catch(Exception e) {}
-       
+      
+    
+    serviceExport = process;
     menuBarSport.prefWidthProperty().bind(boiteverticale.widthProperty());
     boiteHorizontaleBouton.prefWidthProperty().bind(boiteverticale.widthProperty());
    
@@ -1764,6 +1775,45 @@ public class Interface_image_par_imageController implements Initializable {
              return null;
          }
      };
+    
+    
+   
+    public class UpdateCustomerTask extends Task<Void> {
+
+
+         public UpdateCustomerTask() {}
+         @Override protected Void call() throws Exception {
+
+             Platform.runLater(new Runnable() {
+                 @Override public void run() {
+                     try {
+                SnapshotParameters parameters = new SnapshotParameters();
+                
+                WritableImage wi = new WritableImage((int)stackSurface.getBoundsInParent().getWidth(), (int)stackSurface.getBoundsInParent().getHeight());
+                WritableImage snapshot = stackSurface.snapshot(new SnapshotParameters(), wi);
+
+                File output = new File("src/Captures/" + new Date().getTime() + ".png");
+                listExport.add(output);
+                ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
+                
+                
+                System.out.println("screen fait");
+                
+                } 
+        catch (Exception ex) {
+                    
+            System.out.println(ex.getMessage());
+            }   
+                 }
+             });
+
+             return null;
+         }
+     }
+    
+    
+    
+   
       
     Service process = new Service() {
     @Override
@@ -1773,92 +1823,92 @@ public class Interface_image_par_imageController implements Initializable {
              List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
             List<Node> listeC = conteneurJoueur.getChildren();
             while(indexListe<listeSauvegardeJoueur.size()-1)
+        {
+             indexListe = indexListe + 1;
+             System.out.println(indexListe);
+            if(indexListe == 0)
+            {
+                 for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+                 {
+                     for(Node cercle : listeC)
+                     {
+                          float xJoueur=J.getCoordonneesJoueur().x;
+                          float yJoueur=J.getCoordonneesJoueur().y;
+                          float xCercle =(float)cercle.getLayoutX();
+                          float yCercle=(float)cercle.getLayoutY();
 
-       {
-            indexListe = indexListe + 1;
-            System.out.println(indexListe);
-           if(indexListe == 0)
-           {
-                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
-                {
-                    for(Node cercle : listeC)
-                    {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
-                         float xCercle =(float)cercle.getLayoutX();
-                         float yCercle=(float)cercle.getLayoutY();
+                          if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
+                           {
+                               IteratingTask1 task = new IteratingTask1((Circle)cercle);
+                               Thread th = new Thread(task);
+                                 th.setDaemon(true);
+                                 th.start();
 
-                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
-                          {
-                              IteratingTask1 task = new IteratingTask1((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();
-                                
-                          }
-                    }
-                }
-                
-           }
-           
-           
-           else
-           {
-                for(Joueur J : listeSauvegardeJoueur.get(indexListe-1))
-                {
-                    for(Node cercle : listeC)
-                    {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
-                         float xCercle =(float)cercle.getLayoutX();
-                         float yCercle=(float)cercle.getLayoutY();
+                           }
+                     }
+                 }
 
-                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
-                          {
-                              IteratingTask0 task = new IteratingTask0((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();
-                                
+            }
 
-  
-                          }
-                    }
-                }
-                
-                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
-                {
-                    for(Node cercle : listeC)
-                    {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
-                         float xCercle =(float)cercle.getLayoutX();
-                         float yCercle=(float)cercle.getLayoutY();
 
-                         if((xJoueur == xCercle) && (yJoueur == yCercle)&& cercle.getClass() == Circle.class)
-                          {
-                              IteratingTask1 task = new IteratingTask1((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();
+            else
+            {
+                 for(Joueur J : listeSauvegardeJoueur.get(indexListe-1))
+                 {
+                     for(Node cercle : listeC)
+                     {
+                          float xJoueur=J.getCoordonneesJoueur().x;
+                          float yJoueur=J.getCoordonneesJoueur().y;
+                          float xCercle =(float)cercle.getLayoutX();
+                          float yCercle=(float)cercle.getLayoutY();
 
-                          }
-                    }
-                }
-                
-                
-               
-           }
-           
+                          if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
+                           {
+                               IteratingTask0 task = new IteratingTask0((Circle)cercle);
+                               Thread th = new Thread(task);
+                                 th.setDaemon(true);
+                                 th.start();
+                           }
+                     }
+                 }
 
-            
-            Thread.sleep(1000);
-       }
-             return null;
-         }
-        };
-    }
-};
+                 for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+                 {
+                     for(Node cercle : listeC)
+                     {
+                          float xJoueur=J.getCoordonneesJoueur().x;
+                          float yJoueur=J.getCoordonneesJoueur().y;
+                          float xCercle =(float)cercle.getLayoutX();
+                          float yCercle=(float)cercle.getLayoutY();
+
+                          if((xJoueur == xCercle) && (yJoueur == yCercle)&& cercle.getClass() == Circle.class)
+                           {
+                               IteratingTask1 task = new IteratingTask1((Circle)cercle);
+                               Thread th = new Thread(task);
+                                 th.setDaemon(true);
+                                 th.start();
+
+                           }
+                     }
+                 }
+            }
+            if(capture==true)
+            {
+            UpdateCustomerTask task = new UpdateCustomerTask();
+            Thread th = new Thread(task);
+              th.setDaemon(true);
+              th.start();
+            }
+             Thread.sleep(1000);
+
+             
+        }
+              return null;
+          }
+         };
+     }
+ };
+     
     
     @FXML
     public void debuterStrategie()
