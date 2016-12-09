@@ -1817,7 +1817,38 @@ public class Interface_temps_reelController extends Application implements Initi
     @FXML
     public void GoToTime()
     {
+        String temps = GoTo.getText();
+        Duration dur = new Duration(Integer.parseInt(temps));
+        for(PathTransition p : listPathTrans)
+        {
+            p.jumpTo(dur);
+        }
         
+    }
+    
+    
+    
+    @FXML
+    public void avanceRapide()
+    {
+        for(PathTransition p : listPathTrans)
+        {
+            Duration dur = p.getCurrentTime();
+            Duration add = new Duration(1000);
+            p.jumpTo(dur.add(add));
+        }
+        
+    }
+    
+    @FXML
+    public void reculeRapide()
+    {
+        for(PathTransition p : listPathTrans)
+        {
+            Duration dur = p.getCurrentTime();
+            Duration neg = new Duration(-1000);
+            p.jumpTo(dur.add(neg));
+        }
         
     }
             
