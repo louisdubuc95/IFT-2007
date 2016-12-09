@@ -33,7 +33,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Animation;
+import javafx.animation.PathTransition;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -92,6 +94,7 @@ import javafx.scene.effect.Effect.*;
 import javafx.concurrent.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -163,6 +166,9 @@ public class Interface_temps_reelController implements Initializable {
     @FXML private Label labelcoordonneeI1;
     
     @FXML private Label  coordoneeI ;
+    
+    
+    private List<PathTransition> listPathTrans = new ArrayList<>();
     
     @FXML private String imagePath;
     @FXML private Color color;
@@ -1253,6 +1259,10 @@ public class Interface_temps_reelController implements Initializable {
                 System.out.println(String.valueOf(cercleCourant.getLayoutX()));
                 System.out.println(String.valueOf(cercleCourant.getLayoutY()));
                 checkShapeIntersection(cercleCourant);
+                
+                
+                Point2D.Float p = new Point2D.Float((float)cercleCourant.getLayoutX(),(float)cercleCourant.getLayoutY());
+                joueurCourant.getListeDeplacement().add(p);
             }
         }
     };
@@ -1669,364 +1679,155 @@ public class Interface_temps_reelController implements Initializable {
         return new Circle();
     }
         
-    @FXML   
-    public void creerImage(ActionEvent e)
-    {
-       ObservableList<Node> listeC = conteneurJoueur.getChildren();
-       List<Joueur> listeJ = m_controller.getListJoueurs();
-       List<Joueur> listeSauvegarde = new ArrayList<>();
-       for(Joueur j : listeJ)
-        { 
-            java.awt.Color color = j.getCouleurChandail();
-            int r = color.getRed();
-            int g = color.getGreen();
-            int b = color.getBlue();
-            int a = color.getAlpha();
-            
-            java.awt.Color nColor = new java.awt.Color(r, g, b, 127);
-
-            j.setCouleurChandail(nColor);
- 
-                for(Node cercle : listeC)
-                {
-                    float xJoueur=j.getCoordonneesJoueur().x;
-                    float yJoueur=j.getCoordonneesJoueur().y;
-                    float xCercle =(float)cercle.getLayoutX();
-                    float yCercle=(float)cercle.getLayoutY();
-                    if((xJoueur == xCercle) && (yJoueur == yCercle))
-                    {      
-                        if(cercle.getOpacity() == 1.0)
-                        {
-                            cercle.setOpacity(127.0/255.0);
-                            listeSauvegarde.add(j);
-                        }
-                    }
-                }
-        }
-        m_controller.addListeSauvegardeJoueur(listeSauvegarde); 
-   }
     
-    public class IteratingTask0 extends Task<Circle> {
-         private final Circle cercleFinal;
-
-         public IteratingTask0(Circle cercleParam) {
-             this.cercleFinal = cercleParam;
-         }
-         @Override protected Circle call() throws Exception {
-             cercleFinal.setOpacity(0.5);
-                    
-                 Platform.runLater(new Runnable() {
-                     @Override public void run() {
-                         
-                     }
-                 });
-                 
-             
-             return null;
-         }
-     };
-    
-    public class IteratingTask1 extends Task<Circle> {
-         private final Circle cercleFinal;
-
-         public IteratingTask1(Circle cercleParam) {
-             this.cercleFinal = cercleParam;
-         }
-         @Override protected Circle call() throws Exception {
-                 cercleFinal.setOpacity(1.0);
-                 Platform.runLater(new Runnable() {
-                     @Override public void run() {
-                         
-                     }
-                 });
-                 
-             
-             return null;
-         }
-     };
-      
-    Service process = new Service() {
-    @Override
-    protected Task createTask() {
-        return new Task() {
-            @Override protected Void call() throws Exception {
-             List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
-                System.out.println(listeSauvegardeJoueur.size());
-            List<Node> listeC = conteneurJoueur.getChildren();
-            while(indexListe<listeSauvegardeJoueur.size()-1)
-
-       {
-            indexListe = indexListe + 1;
-            System.out.println(indexListe);
-           if(indexListe == 0)
-           {
-                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
-                {
-                    for(Node cercle : listeC)
-                    {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
-                         float xCercle =(float)cercle.getLayoutX();
-                         float yCercle=(float)cercle.getLayoutY();
-
-                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
-                          {
-                              IteratingTask1 task = new IteratingTask1((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();
-                                
-                          }
-                    }
-                }
-                
-           }
-           
-           
-           else
-           {
-                for(Joueur J : listeSauvegardeJoueur.get(indexListe-1))
-                {
-                    for(Node cercle : listeC)
-                    {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
-                         float xCercle =(float)cercle.getLayoutX();
-                         float yCercle=(float)cercle.getLayoutY();
-
-                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
-                          {
-                              IteratingTask0 task = new IteratingTask0((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();
-                                
-
   
-                          }
-                    }
-                }
-                
-                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
+      
+     private void generateCurvyPath(final double pathOpacity)
+   {
+        List<Node> listeC = conteneurJoueur.getChildren();
+       
+       
+       for(Joueur j : m_controller.getListJoueurs())
                 {
                     for(Node cercle : listeC)
                     {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
+                         float xJoueur=j.getCoordonneesJoueur().x;
+                         float yJoueur=j.getCoordonneesJoueur().y;
                          float xCercle =(float)cercle.getLayoutX();
                          float yCercle=(float)cercle.getLayoutY();
 
-                         if((xJoueur == xCercle) && (yJoueur == yCercle)&& cercle.getClass() == Circle.class)
+                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
                           {
-                              IteratingTask1 task = new IteratingTask1((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();
+                                Path path = new Path();
+                                path.setLayoutX(0-j.getListeDeplacement().get(0).x);
 
+                                path.setLayoutY((0-j.getListeDeplacement().get(0).y));
+
+                                path.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y));
+                                int i = 1;
+                                while(i<j.getListeDeplacement().size())
+                                {
+                                    path.getElements().add(new LineTo(j.getListeDeplacement().get(i).x,j.getListeDeplacement().get(i).y ));
+                                    i++;
+                                }
+
+                                path.setOpacity(1.0);
+                                path.setFill(Color.BLACK);
+                                
+                                PathTransition transition = generatePathTransition((Circle)cercle, path);
+                                listPathTrans.add(transition);
+                          }
+                    }
+        
+                }
+       
+        for(Joueur j : m_controller.getListJoueurs())
+                {
+                    for(Node cercle : listeC)
+                    {
+                         float xJoueur=j.getCoordonneesJoueur().x;
+                         float yJoueur=j.getCoordonneesJoueur().y;
+                         float xCercle =(float)cercle.getLayoutX();
+                         float yCercle=(float)cercle.getLayoutY();
+
+                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
+                          {
+                              cercle.setLayoutX(j.getListeDeplacement().get(0).x);
+                              cercle.setLayoutY(j.getListeDeplacement().get(0).y);
+                              
                           }
                     }
                 }
-                
-                
-               
-           }
-           
-
-            
-            Thread.sleep(1000);
-       }
-             return null;
-         }
-        };
-    }
-};
-      
+       
+   }
      
+     
+      private PathTransition generatePathTransition(final Shape shape, final Path path)
+   {
+      final PathTransition pathTransition = new PathTransition();
+      pathTransition.setDuration(Duration.seconds(5.0));
+      pathTransition.setDelay(Duration.seconds(0.0));
+      pathTransition.setPath(path);
+      pathTransition.setNode(shape);
+      pathTransition.setOrientation(PathTransition.OrientationType.NONE);
+      pathTransition.setCycleCount(1);
+
+      return pathTransition;
+   }
  
     @FXML
     public void debuterStrategie()
-    {   
-        process.start();
-        onPause = false;
-    }
-    
-    
-    @FXML
-    public void stopStrategie()
     {
-        
-        process.cancel();
-        process.reset();
-        onPause = true;
-    }
-    
-    
-    @FXML
-    public void avancerStrategie()
-    {
-        List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
-        
-        if(onPause==true)
+        boolean ok = false;
+        for(Joueur j : m_controller.getListJoueurs())
         {
-            if(indexListe<listeSauvegardeJoueur.size()-1)
+            if(!j.getListeDeplacement().isEmpty())
             {
-            
-            
-            List<Node> listeC = conteneurJoueur.getChildren();
-            indexListe = indexListe + 1;
-            for(Joueur J : listeSauvegardeJoueur.get(indexListe-1))
-                {
-                    for(Node cercle : listeC)
-                    {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
-                         float xCercle =(float)cercle.getLayoutX();
-                         float yCercle=(float)cercle.getLayoutY();
-
-                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
-                          {
-                              /*IteratingTask0 task = new IteratingTask0((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();*/
-                              
-                              cercle.setOpacity(0.5);
-
-  
-                          }
-                    }
-                }
-                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
-                {
-                    for(Node cercle : listeC)
-                    {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
-                         float xCercle =(float)cercle.getLayoutX();
-                         float yCercle=(float)cercle.getLayoutY();
-
-                         if((xJoueur == xCercle) && (yJoueur == yCercle)&& cercle.getClass() == Circle.class)
-                          {
-                              /*IteratingTask1 task = new IteratingTask1((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();*/
-                              
-                              cercle.setOpacity(1.0);
-
-                          }
-                    }
-            
-            
-            
-                }
+                ok = true;
             }
-        
-    }
-        
+        }
+        if(ok == true)
+        {
+            generateCurvyPath(1.0);
+            for(PathTransition p : listPathTrans)
+            {
+                p.play();
+
+            }
+        }
     }
     
+    
     @FXML
-    public void reculerStrategie()
+    public void pauseStrategie() throws InterruptedException
     {
-        List<List<Joueur>> listeSauvegardeJoueur = m_controller.getListeSauvegardeJoueur();
-        if(onPause==true)
+        for(PathTransition p : listPathTrans)
+            
         {
-            if(indexListe>0)
-            {
+            p.pause();
             
-            
-            List<Node> listeC = conteneurJoueur.getChildren();
-            indexListe = indexListe - 1;
-            for(Joueur J : listeSauvegardeJoueur.get(indexListe+1))
-                {
-                    for(Node cercle : listeC)
-                    {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
-                         float xCercle =(float)cercle.getLayoutX();
-                         float yCercle=(float)cercle.getLayoutY();
-
-                         if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
-                          {
-                              /*IteratingTask0 task = new IteratingTask0((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();*/
-                              
-                              cercle.setOpacity(0.5);
-
-  
-                          }
-                    }
-                }
-                for(Joueur J : listeSauvegardeJoueur.get(indexListe))
-                {
-                    for(Node cercle : listeC)
-                    {
-                         float xJoueur=J.getCoordonneesJoueur().x;
-                         float yJoueur=J.getCoordonneesJoueur().y;
-                         float xCercle =(float)cercle.getLayoutX();
-                         float yCercle=(float)cercle.getLayoutY();
-
-                         if((xJoueur == xCercle) && (yJoueur == yCercle)&& cercle.getClass() == Circle.class)
-                          {
-                              /*IteratingTask1 task = new IteratingTask1((Circle)cercle);
-                              Thread th = new Thread(task);
-                                th.setDaemon(true);
-                                th.start();*/
-                              
-                              cercle.setOpacity(1.0);
-
-                          }
-                    }
-            
-            
-            
-                }
-            }
+        }
         
+       
     }
+    
+     @FXML
+    public void stopStrategie() throws InterruptedException
+    {
+        for(PathTransition p : listPathTrans)
+            
+        {
+            p.stop();
+            
+        }
         
+       
     }
+    
+        @FXML
+    public void recommencerStrategie() throws InterruptedException
+    {
+        for(PathTransition p : listPathTrans)
+        {
+            p.stop();
+        }
+        for(PathTransition p : listPathTrans)
+            
+        {
+            p.play();
+        }
+        
+       
+    }
+    
+    
+   
+    
+    
         
 
 
    
-   @FXML public void recommencerStrategie(ActionEvent e)
-   {
-       ObservableList<Node> listeC = conteneurJoueur.getChildren();
-       List<List<Joueur>> listeJ = m_controller.getListeSauvegardeJoueur();
-       List<Joueur> listeSauvegarde = new ArrayList<>();
-       indexListe = -1;
-       for(List<Joueur> LJ : listeJ)
-       {
-        for(Joueur j : LJ)
-         { 
-             java.awt.Color color = j.getCouleurChandail();
-             int r = color.getRed();
-             int g = color.getGreen();
-             int b = color.getBlue();
-             int a = color.getAlpha();
-             java.awt.Color nColor = new java.awt.Color(r, g, b, 127);
-             j.setCouleurChandail(nColor);
-
-                 for(Node cercle : listeC)
-                 {
-                     float xJoueur=j.getCoordonneesJoueur().x;
-                     float yJoueur=j.getCoordonneesJoueur().y;
-                     float xCercle =(float)cercle.getLayoutX();
-                     float yCercle=(float)cercle.getLayoutY();
-                     if((xJoueur == xCercle) && (yJoueur == yCercle))
-                     {      
-                             cercle.setOpacity(127.0/255.0);
-                         }
-                     }
-                 }
-       }
-
-       process.restart();
-   }
    
            
 
