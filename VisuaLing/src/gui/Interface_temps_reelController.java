@@ -112,6 +112,10 @@ public class Interface_temps_reelController extends Application implements Initi
     @FXML private ToggleButton boutonObjectif;
     
     
+    @FXML private TextField GoTo;
+    @FXML private Button Go;
+    
+    
     
     
     
@@ -1803,10 +1807,20 @@ public class Interface_temps_reelController extends Application implements Initi
             for(PathTransition p : listPathTrans)
             {
                 p.play();
+                
+                
 
             }
         }
     }
+    
+    @FXML
+    public void GoToTime()
+    {
+        
+        
+    }
+            
     
     
     @FXML
