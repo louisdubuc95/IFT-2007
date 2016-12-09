@@ -255,7 +255,14 @@ public class Interface_temps_reelController extends Application implements Initi
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    clearUR();
+    try
+    {
+        clearUR();
+    }
+    catch(Exception e)
+    {
+        
+    }
        
     
     menuBarSport.prefWidthProperty().bind(boiteverticale.widthProperty());
