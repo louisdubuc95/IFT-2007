@@ -198,14 +198,7 @@ public class Interface_SauvegardeController implements Initializable {
         m_parentController.capture = true;
         m_parentController.serviceExport.start();
         
-        ImageOutputStream output = new FileImageOutputStream(new File("src/Captures/a.gif"));
-        GifSequenceWriter writer = new GifSequenceWriter(output,m_parentController.listExport.get(0),1000, true);
-        for(BufferedImage bi:m_parentController.listExport.get(0))
-        {
-             writer.writeToSequence(bi);
-        }
-        writer.close();
-        output.close();
+        
         
         
         
