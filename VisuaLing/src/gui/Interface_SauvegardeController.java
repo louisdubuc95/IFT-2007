@@ -95,7 +95,7 @@ public class Interface_SauvegardeController implements Initializable {
     }
     
     @FXML
-    public void boutonExporterAction(MouseEvent event) {
+    public void boutonExporterAction(MouseEvent event) throws IOException {
         
         Stage stage = (Stage) boutonExporter.getScene().getWindow();            
 
@@ -189,6 +189,38 @@ public class Interface_SauvegardeController implements Initializable {
         stage.close();*/
         m_parentController.capture = true;
         m_parentController.serviceExport.start();
+        if(!m_parentController.serviceExport.isRunning())
+        {
+        String[] args = m_parentController.listExport.toArray(new String[0]);
+        
+            if (args.length > 1) {
+      // grab the output image type from the first image in the sequence
+      BufferedImage firstImage = ImageIO.read(new File(args[0]));
+
+      // create a new BufferedOutputStream with the last argument
+      ImageOutputStream output = 
+        new FileImageOutputStream(new File(args[args.length - 1]));
+      
+      // create a gif sequence with the type of the first image, 1 second
+      // between frames, which loops continuously
+      GifSequenceWriter writer = 
+        new GifSequenceWriter(output, firstImage.getType(), 1, false);
+      
+      // write out the first image to our sequence...
+      writer.writeToSequence(firstImage);
+      for(int i=1; i<args.length-1; i++) {
+        BufferedImage nextImage = ImageIO.read(new File(args[i]));
+        writer.writeToSequence(nextImage);
+      }
+      
+        System.out.println(writer.toString());
+      //File gif = new File(writer.toString());
+      writer.close();
+      output.close();
+      
+      
+    } 
+        }
         
         
         
@@ -452,44 +484,5 @@ public class Interface_SauvegardeController implements Initializable {
     rootNode.appendChild(node);
     return(node);
   }
-  
-  /**
-  public GifSequenceWriter(
-       BufferedOutputStream outputStream,
-       int imageType,
-       int timeBetweenFramesMS,
-       boolean loopContinuously) {
-   
-   */
-  
-  public void main(String[] args) throws Exception {
-    if (args.length > 1) {
-      // grab the output image type from the first image in the sequence
-      BufferedImage firstImage = ImageIO.read(new File(args[0]));
-
-      // create a new BufferedOutputStream with the last argument
-      ImageOutputStream output = 
-        new FileImageOutputStream(new File(args[args.length - 1]));
-      
-      // create a gif sequence with the type of the first image, 1 second
-      // between frames, which loops continuously
-      GifSequenceWriter writer = 
-        new GifSequenceWriter(output, firstImage.getType(), 1, false);
-      
-      // write out the first image to our sequence...
-      writer.writeToSequence(firstImage);
-      for(int i=1; i<args.length-1; i++) {
-        BufferedImage nextImage = ImageIO.read(new File(args[i]));
-        writer.writeToSequence(nextImage);
-      }
-      
-      writer.close();
-      output.close();
-    } else {
-      System.out.println(
-        "Usage: java GifSequenceWriter [list of gif files] [output file]");
-    }
-  }
+ }
 }
-}
-

@@ -115,7 +115,7 @@ public class Interface_image_par_imageController implements Initializable {
     
     public boolean capture = false;
     
-    public List<File> listExport;
+    public List<String> listExport =  new ArrayList<>();
     
     
     
@@ -1786,23 +1786,22 @@ public class Interface_image_par_imageController implements Initializable {
 
              Platform.runLater(new Runnable() {
                  @Override public void run() {
-                     try {
+                try {
                 SnapshotParameters parameters = new SnapshotParameters();
                 
                 WritableImage wi = new WritableImage((int)stackSurface.getBoundsInParent().getWidth(), (int)stackSurface.getBoundsInParent().getHeight());
                 WritableImage snapshot = stackSurface.snapshot(new SnapshotParameters(), wi);
-
+                
                 File output = new File("src/Captures/" + new Date().getTime() + ".png");
-                listExport.add(output);
+                listExport.add(output.getPath());
                 ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
                 
                 
-                System.out.println("screen fait");
                 
                 } 
         catch (Exception ex) {
                     
-            System.out.println(ex.getMessage());
+            //System.out.println(ex.getMessage());
             }   
                  }
              });
@@ -1825,7 +1824,6 @@ public class Interface_image_par_imageController implements Initializable {
             while(indexListe<listeSauvegardeJoueur.size()-1)
         {
              indexListe = indexListe + 1;
-             System.out.println(indexListe);
             if(indexListe == 0)
             {
                  for(Joueur J : listeSauvegardeJoueur.get(indexListe))
