@@ -1829,19 +1829,20 @@ public class Interface_temps_reelController extends Application implements Initi
     
     
     @FXML
-    public void avanceRapide()
+    public void avanceTempsDef()
     {
         for(PathTransition p : listPathTrans)
         {
             Duration dur = p.getCurrentTime();
             Duration add = new Duration(1000);
             p.jumpTo(dur.add(add));
+            
         }
         
     }
     
     @FXML
-    public void reculeRapide()
+    public void reculeTempsDef()
     {
         for(PathTransition p : listPathTrans)
         {
