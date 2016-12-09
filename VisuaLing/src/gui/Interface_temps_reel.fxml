@@ -175,8 +175,8 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="220.0">
                      <children>
-                        <CheckBox fx:id="afficherRPJoueur" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#afficherRPJoueurAction" prefHeight="17.0" prefWidth="186.0" text="Afficher le rôle et la position" />
-                        <CheckBox fx:id="afficherRotation" layoutX="14.0" layoutY="36.0" mnemonicParsing="false" onAction="#afficherRotationAction" text="Modifier orientation" />
+                        <CheckBox fx:id="afficherRPJoueur" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#afficherRPJoueurAction" prefHeight="17.0" prefWidth="186.0" text="Afficher le rôle et la position" />
+                        <CheckBox fx:id="afficherRotation" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" onAction="#afficherRotationAction" text="Modifier orientation" />
                      </children>
                   </AnchorPane>
                </content>

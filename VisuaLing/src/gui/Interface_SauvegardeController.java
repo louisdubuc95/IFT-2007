@@ -32,6 +32,7 @@ import java.awt.Color ;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import static java.lang.System.gc;
 import java.util.Iterator;
 import javafx.scene.Group;
@@ -48,6 +49,7 @@ import javax.imageio.stream.*;
 import java.awt.image.*;
 import java.io.*;
 import java.util.Iterator;
+import javafx.scene.shape.StrokeType;
 
 /**
  * FXML Controller class
@@ -99,8 +101,8 @@ public class Interface_SauvegardeController implements Initializable {
           stage.close();
     }
     
-    @FXML
-    public void boutonExporterAction(MouseEvent event) throws IOException {
+    
+    public void boutonExporterAction() throws IOException {
         
         Stage stage = (Stage) boutonExporter.getScene().getWindow();  
         
@@ -120,6 +122,7 @@ public class Interface_SauvegardeController implements Initializable {
                 Line arrow1 = new Line();
                 Line arrow2 = new Line();
                 line.setStyle("-fx-stroke: black;");
+                
 
                 line.setStartX(J.getCoordonneesJoueur().x);                           
                 line.setStartY(J.getCoordonneesJoueur().y);
@@ -194,47 +197,93 @@ public class Interface_SauvegardeController implements Initializable {
                 Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
             }   
         stage.close();
-        /*m_parentController.capture = true;
-        m_parentController.serviceExport.start();
-        if(!m_parentController.serviceExport.isRunning())
-        {
-        String[] args = m_parentController.listExport.toArray(new String[0]);
+    }
+    
+    
+    
+    
+    
+    public void boutonExporterActionTR() throws IOException {
         
-            if (args.length > 1) {
-      // grab the output image type from the first image in the sequence
-      BufferedImage firstImage = ImageIO.read(new File(args[0]));
+        Stage stage = (Stage) boutonExporter.getScene().getWindow();            
 
-      // create a new BufferedOutputStream with the last argument
-      ImageOutputStream output = 
-        new FileImageOutputStream(new File(args[args.length - 1]));
-      
-      // create a gif sequence with the type of the first image, 1 second
-      // between frames, which loops continuously
-      GifSequenceWriter writer = 
-        new GifSequenceWriter(output, firstImage.getType(), 1, false);
-      
-      // write out the first image to our sequence...
-      writer.writeToSequence(firstImage);
-      for(int i=1; i<args.length-1; i++) {
-        BufferedImage nextImage = ImageIO.read(new File(args[i]));
-        writer.writeToSequence(nextImage);
-      }
-      
-        System.out.println(writer.toString());
-      //File gif = new File(writer.toString());
-      writer.close();
-      output.close();
-      
-      
-    } 
-        }*/
+        List<Node> listeC = m_parentControllerTR.conteneurJoueur.getChildren();
+          
+            for(Joueur j : m_parentControllerTR.m_controller.getListJoueurs())
+                
+            {
+                int y = 0;
+            
+                while(y < j.getListeDeplacement().size()-1)
+                {
+                //event.getEventType().equals(MouseEvent.MOUSE_CLICKED) ;
+                Point2D.Float Jpresent= j.getListeDeplacement().get(y);
+                Point2D.Float Jnext= j.getListeDeplacement().get(y+1);
+
+                Line line = new Line() ;
+                
+                line.setStyle("-fx-stroke: black;");
+
+
+                line.setStartX(Jpresent.x);                           
+                line.setStartY(Jpresent.y);
+
+                line.setEndX(Jnext.x);                           
+                line.setEndY(Jnext.y);
+
+                m_parentControllerTR.conteneurJoueur.getChildren().addAll(line);
+                y++;
+                }
+            }
+
+             try {
+                SnapshotParameters parameters = new SnapshotParameters();
+                
+                
+                WritableImage wi = new WritableImage((int)m_parentControllerTR.stackSurface.getBoundsInParent().getWidth(), (int)m_parentControllerTR.stackSurface.getBoundsInParent().getHeight());
+                WritableImage snapshot = m_parentControllerTR.stackSurface.snapshot(new SnapshotParameters(), wi);
+                File output = new File("src/Captures/" + new Date().getTime() + ".png");
+                ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
+                
+                //////
+                //Delete lignes
+                for(Iterator<Node> it = m_parentControllerTR.conteneurJoueur.getChildren().iterator(); it.hasNext();)
+                {
+                    Node n = it.next();
+                    if(n.getClass()==Line.class)
+                    {
+                        it.remove();
+                    }
+                }
+                
+                System.out.println("screen fait");
+                
+                } 
+        catch (IOException ex) {
+                    
+                System.out.println("fail");
+                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        stage.close();
+    }
+    
+    public void exportImage() throws IOException
+    {
+        try{
+            boutonExporterAction();
+        }
+        catch(NullPointerException e)
+        {
+            boutonExporterActionTR();
+        }
     }
     
     
             
     @FXML
-    public void boutonEnregistrerAction(ActionEvent even){
+    public void boutonEnregistrerAction(ActionEvent event){
         String validateDot = txtNomSauvegarde.getText();
+        Stage stage = (Stage) txtNomSauvegarde.getScene().getWindow();   
         if(validateDot.isEmpty())
         {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -253,13 +302,78 @@ public class Interface_SauvegardeController implements Initializable {
                 alert.setContentText("Le nom de la sauvegarde ne peut contenir de POINT");
                 alert.showAndWait();
             }
-            try{
+            
+            
+            try
+            {
                 m_parentControllerTR.m_enregistrement.serialize(validateDot, m_parentControllerTR.m_controller.getController(), "TR");
-            }
+                List<Node> listeC = m_parentControllerTR.conteneurJoueur.getChildren();
+          
+                for(Joueur j : m_parentControllerTR.m_controller.getListJoueurs())
+
+                {
+                    int y = 0;
+
+                    while(y < j.getListeDeplacement().size()-1)
+                        {
+                        //event.getEventType().equals(MouseEvent.MOUSE_CLICKED) ;
+                        Point2D.Float Jpresent= j.getListeDeplacement().get(y);
+                        Point2D.Float Jnext= j.getListeDeplacement().get(y+1);
+
+                        Line line = new Line() ;
+
+                        line.setStyle("-fx-stroke: black;");
+
+
+                        line.setStartX(Jpresent.x);                           
+                        line.setStartY(Jpresent.y);
+
+                        line.setEndX(Jnext.x);                           
+                        line.setEndY(Jnext.y);
+
+                        m_parentControllerTR.conteneurJoueur.getChildren().addAll(line);
+                        y++;
+                        }
+                }
+                
+                
+             try 
+                {
+
+                   SnapshotParameters parameters = new SnapshotParameters();
+
+
+                   WritableImage wi = new WritableImage((int)m_parentControllerTR.stackSurface.getBoundsInParent().getWidth(), (int)m_parentControllerTR.stackSurface.getBoundsInParent().getHeight());
+                   WritableImage snapshot = m_parentControllerTR.stackSurface.snapshot(new SnapshotParameters(), wi);
+                   File output = new File("src/Captures/" + validateDot + ".TR"+ ".png");
+                   ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
+
+                   //////
+                   //Delete lignes
+                   for(Iterator<Node> it = m_parentControllerTR.conteneurJoueur.getChildren().iterator(); it.hasNext();)
+                   {
+                       Node n = it.next();
+                       if(n.getClass()==Line.class)
+                       {
+                           it.remove();
+                       }
+                   }
+
+                   System.out.println("screen fait");
+                   
+
+                   }
+              catch (IOException ex) 
+                {
+
+                  System.out.println("fail");
+                  Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+             
+            }   
             catch(NullPointerException e)
             {
-                m_parentController.m_enregistrement.serialize(validateDot, m_parentController.m_controller.getController(), "IPI"); 
-                
+                m_parentController.m_enregistrement.serialize(validateDot, m_parentController.m_controller.getController(), "IPI");
                 List<Node> listeC = m_parentController.conteneurJoueur.getChildren();
 
                     while(i  <   m_parentController.m_controller.getListeSauvegardeJoueur().size()-1)
@@ -347,15 +461,24 @@ public class Interface_SauvegardeController implements Initializable {
                         System.out.println("fail");
                         Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
                     }   
-            }   
-            Stage stage = (Stage) boutonSauvegarder.getScene().getWindow();
-            stage.close();   
+            }
         }
+        stage.close();
     }
+
+            
+                
+                
     
     public void setMaxJoueur(int p_nbJoueurMax)
     {
+        try{
         m_parentController.m_controller.setJoueurMax(p_nbJoueurMax);
+        }
+        catch(NullPointerException e)
+        {
+            m_parentControllerTR.m_controller.setJoueurMax(p_nbJoueurMax);
+        }
     }
     
 

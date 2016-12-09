@@ -246,7 +246,7 @@ public class Interface_accueilController implements Initializable {
         ToggleButton TB = new ToggleButton("Label " + file.getName());
         
         
-        TB.setMinHeight(100);
+        TB.setMinHeight(200);
         TB.setMinWidth(625);
         TB.setOnAction(updateButtonHandler);
         
@@ -288,14 +288,14 @@ public class Interface_accueilController implements Initializable {
         Image imagePreview = new Image("file:" + pathPhoto);
         ImageView IV = new ImageView();
         IV.setImage(imagePreview);
-        IV.setFitHeight(80.0);
-        IV.setFitWidth(150.0);
+        IV.setFitHeight(180.0);
+        IV.setFitWidth(250.0);
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/DD HH:mm:ss");
         TB.setText("Nom du fichier  :  "+ file.getName() + "\n" + "Derniere modification  :  " 
                 +sdf.format(file.lastModified())
                 + "\n" + "Taille  :  " + file.length() + " octets");
         TB.setTextAlignment(TextAlignment.JUSTIFY);
-        Insets insets = new Insets(0,0,0,80);
+        Insets insets = new Insets(0,0,0,0);
         TB.setPadding(insets);
         TB.setGraphic(IV);
         TB.setGraphicTextGap(-570);
