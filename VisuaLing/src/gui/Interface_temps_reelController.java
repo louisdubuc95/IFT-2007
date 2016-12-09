@@ -201,7 +201,7 @@ public class Interface_temps_reelController extends Application implements Initi
     private Button btn_droitCourant;
     
     private double x0, y0;
-    @FXML private StackPane stackSurface ;
+    @FXML  StackPane stackSurface ;
     @FXML private Button btnnouveauSportAction;
     @FXML private AnchorPane boiteverticale ; 
     @FXML private HBox boiteHorizontaleBouton ; 
