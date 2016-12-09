@@ -254,7 +254,7 @@
                   <Insets left="6.0" />
                </padding>
             </TitledPane>
-            <TitledPane animated="false" prefHeight="90.0" prefWidth="118.0" text="Aller à">
+            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="118.0" text="Aller à">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="76.0">
                      <children>
