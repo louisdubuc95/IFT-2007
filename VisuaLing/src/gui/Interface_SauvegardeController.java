@@ -32,6 +32,7 @@ import java.awt.Color ;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import static java.lang.System.gc;
 import java.util.Iterator;
 import javafx.scene.Group;
@@ -187,40 +188,73 @@ public class Interface_SauvegardeController implements Initializable {
                 Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
             }   
         stage.close();
-        /*m_parentController.capture = true;
-        m_parentController.serviceExport.start();
-        if(!m_parentController.serviceExport.isRunning())
-        {
-        String[] args = m_parentController.listExport.toArray(new String[0]);
+    }
+    
+    
+    
+    
+    @FXML
+    public void boutonExporterActionTR(MouseEvent event) throws IOException {
         
-            if (args.length > 1) {
-      // grab the output image type from the first image in the sequence
-      BufferedImage firstImage = ImageIO.read(new File(args[0]));
+        Stage stage = (Stage) boutonExporter.getScene().getWindow();            
 
-      // create a new BufferedOutputStream with the last argument
-      ImageOutputStream output = 
-        new FileImageOutputStream(new File(args[args.length - 1]));
-      
-      // create a gif sequence with the type of the first image, 1 second
-      // between frames, which loops continuously
-      GifSequenceWriter writer = 
-        new GifSequenceWriter(output, firstImage.getType(), 1, false);
-      
-      // write out the first image to our sequence...
-      writer.writeToSequence(firstImage);
-      for(int i=1; i<args.length-1; i++) {
-        BufferedImage nextImage = ImageIO.read(new File(args[i]));
-        writer.writeToSequence(nextImage);
-      }
-      
-        System.out.println(writer.toString());
-      //File gif = new File(writer.toString());
-      writer.close();
-      output.close();
-      
-      
-    } 
-        }*/
+        List<Node> listeC = m_parentControllerTR.conteneurJoueur.getChildren();
+          
+            for(Joueur j : m_controller.getListJoueurs())
+                
+            {
+                int y = 0;
+            
+                while(y < j.getListeDeplacement().size()-1)
+                {
+                //event.getEventType().equals(MouseEvent.MOUSE_CLICKED) ;
+                Point2D.Float Jpresent= j.getListeDeplacement().get(y);
+                Point2D.Float Jnext= j.getListeDeplacement().get(y+1);
+
+                Line line = new Line() ;
+                line.setStyle("-fx-stroke: black;");
+
+                line.setStartX(Jpresent.x);                           
+                line.setStartY(Jpresent.y);
+
+                line.setEndX(Jnext.x);                           
+                line.setEndY(Jnext.y);
+ 
+
+                m_parentController.conteneurJoueur.getChildren().addAll(line);
+                y++;
+                }
+            }
+
+             try {
+                SnapshotParameters parameters = new SnapshotParameters();
+                
+                
+                WritableImage wi = new WritableImage((int)m_parentController.stackSurface.getBoundsInParent().getWidth(), (int)m_parentController.stackSurface.getBoundsInParent().getHeight());
+                WritableImage snapshot = m_parentController.stackSurface.snapshot(new SnapshotParameters(), wi);
+                File output = new File("src/Captures/" + new Date().getTime() + ".png");
+                ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", output);
+                
+                //////
+                //Delete lignes
+                for(Iterator<Node> it = m_parentController.conteneurJoueur.getChildren().iterator(); it.hasNext();)
+                {
+                    Node n = it.next();
+                    if(n.getClass()==Line.class)
+                    {
+                        it.remove();
+                    }
+                }
+                
+                System.out.println("screen fait");
+                
+                } 
+        catch (IOException ex) {
+                    
+                System.out.println("fail");
+                Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        stage.close();
     }
     
     

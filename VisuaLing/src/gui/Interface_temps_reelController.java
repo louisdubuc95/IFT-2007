@@ -140,7 +140,7 @@ public class Interface_temps_reelController extends Application implements Initi
     
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
-    @FXML private Pane conteneurJoueur;
+    @FXML  Pane conteneurJoueur;
     @FXML private CheckBox afficherRPJoueur;
     @FXML private boolean desafficherRPJoueur;
     @FXML ImageView imgsurface ;
