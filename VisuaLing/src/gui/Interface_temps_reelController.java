@@ -101,7 +101,7 @@ import javafx.util.Duration;
  *
  * @author louis
  */
-public class Interface_temps_reelController implements Initializable {
+public class Interface_temps_reelController extends Application implements Initializable  {
     
 
 
@@ -1710,8 +1710,8 @@ public class Interface_temps_reelController implements Initializable {
                                     path.getElements().add(new LineTo(j.getListeDeplacement().get(i).x,j.getListeDeplacement().get(i).y ));
                                     i++;
                                 }
-
-                                path.setOpacity(1.0);
+                                path.setOpacity(pathOpacity);
+                                
                                 path.setFill(Color.BLACK);
                                 
                                 PathTransition transition = generatePathTransition((Circle)cercle, path);
@@ -1740,6 +1740,29 @@ public class Interface_temps_reelController implements Initializable {
                 }
        
    }
+     /*
+    private double determinePathOpacity()
+   {
+      final Application.Parameters params = getParameters();
+      final List<String> parameters = params.getRaw();
+      double pathOpacity = 1;
+      if (!parameters.isEmpty())
+      {
+         try
+         {
+            pathOpacity = Double.valueOf(parameters.get(0));
+         }
+         catch (NumberFormatException nfe)
+         {
+            pathOpacity = 1;
+         }
+      }
+      return pathOpacity;
+   }  */
+    
+    
+    
+     
      
      
       private PathTransition generatePathTransition(final Shape shape, final Path path)
@@ -1751,6 +1774,7 @@ public class Interface_temps_reelController implements Initializable {
       pathTransition.setNode(shape);
       pathTransition.setOrientation(PathTransition.OrientationType.NONE);
       pathTransition.setCycleCount(1);
+    
 
       return pathTransition;
    }
@@ -1821,7 +1845,10 @@ public class Interface_temps_reelController implements Initializable {
     }
     
     
-   
+   @FXML
+   public void boutonAvancerSecondeAction (){
+       System.err.println("test");
+   }
     
     
         
@@ -2269,5 +2296,10 @@ public class Interface_temps_reelController implements Initializable {
         {
             afficherRotation.setSelected(false);
         }  
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

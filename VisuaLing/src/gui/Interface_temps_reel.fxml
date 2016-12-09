@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="boiteverticale" prefHeight="856.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_temps_reelController">
+<AnchorPane fx:id="boiteverticale" prefHeight="856.0" prefWidth="1268.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Interface_temps_reelController">
    <children>
-      <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1220.0">
+      <MenuBar fx:id="menuBarSport" prefHeight="26.0" prefWidth="1268.0">
          <menus>
             <Menu mnemonicParsing="false" text="Fichier">
                <items>
@@ -44,7 +44,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <HBox fx:id="boiteHorizontaleBouton" layoutY="26.0" maxHeight="-Infinity" prefHeight="53.0" prefWidth="1220.0" spacing="8.0">
+      <HBox fx:id="boiteHorizontaleBouton" layoutY="26.0" maxHeight="-Infinity" prefHeight="53.0" prefWidth="1268.0" spacing="8.0">
          <children>
             <ImageView fitHeight="44.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -54,22 +54,22 @@
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ImageView>
-            <Button fx:id="boutonAjouterEquipe" minHeight="-Infinity" minWidth="103.0" mnemonicParsing="false" onAction="#ajouterEquipeAction" prefHeight="50.0" prefWidth="258.0" text="Nouvelle Équipe">
+            <Button fx:id="boutonAjouterEquipe" minHeight="-Infinity" minWidth="103.0" mnemonicParsing="false" onAction="#ajouterEquipeAction" prefHeight="50.0" prefWidth="106.0" text="Nouvelle Équipe">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <ToggleButton fx:id="boutonAjouterJoueur" minHeight="-Infinity" minWidth="104.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="254.0" text="Nouveau Joueur">
+            <ToggleButton fx:id="boutonAjouterJoueur" minHeight="-Infinity" minWidth="104.0" mnemonicParsing="false" onAction="#ajouterJoueurAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="107.0" text="Nouveau Joueur">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="boutonAjouterObstacle" minHeight="-Infinity" minWidth="105.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="262.0" text="Nouvel Obstacle">
+            <ToggleButton fx:id="boutonAjouterObstacle" minHeight="-Infinity" minWidth="105.0" mnemonicParsing="false" onAction="#ajouterObstacleAction" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="109.0" text="Nouvel Obstacle">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="boutonObjectif" minHeight="-Infinity" minWidth="99.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="252.0" text="Nouvel Objectif">
+            <ToggleButton fx:id="boutonObjectif" minHeight="-Infinity" minWidth="99.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="136.0" text="Nouvel Objectif">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
@@ -90,7 +90,8 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="280.0">
+            <Button fx:id="boutonReculerX2" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="53.0" prefWidth="77.0" text="Reculer 2X" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -128,7 +129,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="boutonAvancer" mnemonicParsing="false" prefHeight="50.0" prefWidth="280.0">
+            <Button fx:id="boutonAvancer" mnemonicParsing="false" prefHeight="50.0" prefWidth="56.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -143,6 +144,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
+            <Button fx:id="boutonAvancerX2" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="53.0" prefWidth="77.0" text="Avancer 2X" />
          </children>
       </HBox>
       <StackPane fx:id="stackSurface" layoutY="177.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-position: 100;">
@@ -155,7 +157,7 @@
             <Pane fx:id="conteneurJoueur" onMouseClicked="#ajouterJoueurInterface" onMouseDragged="#bougerInterface" onMouseExited="#sortieInterfaceI" onMouseMoved="#coordonnee_interfaceI" onMousePressed="#bougerInterface" onScroll="#zoom" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </StackPane>
-      <HBox fx:id="boiteHorizontaleBouton2" layoutY="82.0" prefHeight="90.0" prefWidth="1220.0">
+      <HBox fx:id="boiteHorizontaleBouton2" layoutY="82.0" prefHeight="90.0" prefWidth="1268.0">
          <children>
             <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="491.0" text="Informations sur la surface de jeu">
               <content>
@@ -214,17 +216,17 @@
                   <Insets />
                </HBox.margin>
             </TitledPane>
-            <Separator fx:id="separateur10" maxHeight="119.0" minHeight="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="168.0" visible="false" />
+            <Separator fx:id="separateur10" maxHeight="119.0" minHeight="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="0.0" visible="false" />
             <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="239.0" text="Contrainte sur le nombre de joueur">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="0.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="229.0">
                      <children>
-                        <CheckBox fx:id="cbJoueurMax" layoutX="-2.0" layoutY="5.0" mnemonicParsing="false" onAction="#cb_maxJoueur" prefHeight="17.0" prefWidth="248.0" text="Nombre de joueur maximum/équipe:">
+                        <CheckBox fx:id="cbJoueurMax" layoutX="-2.0" layoutY="5.0" mnemonicParsing="false" onAction="#cb_maxJoueur" prefHeight="17.0" prefWidth="241.0" text="Nombre de joueur maximum/équipe:">
                            <padding>
                               <Insets left="4.0" />
                            </padding>
                         </CheckBox>
-                        <TextField fx:id="txtJoueurMax" disable="true" layoutX="34.0" layoutY="30.0" prefHeight="25.0" prefWidth="172.0" />
+                        <TextField fx:id="txtJoueurMax" disable="true" layoutX="34.0" layoutY="30.0" prefHeight="25.0" prefWidth="184.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -252,12 +254,13 @@
                   <Insets left="6.0" />
                </padding>
             </TitledPane>
-            <TitledPane animated="false" prefHeight="90.0" prefWidth="79.0" text="Aller à">
+            <TitledPane animated="false" prefHeight="90.0" prefWidth="118.0" text="Aller à">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="76.0">
                      <children>
-                        <TextField layoutX="18.0" layoutY="10.0" prefHeight="25.0" prefWidth="41.0" />
+                        <TextField layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="41.0" />
                         <Label layoutX="14.0" layoutY="37.0" text="secondes" />
+                        <Button fx:id="boutonAvancerSeconde" layoutX="68.0" layoutY="7.0" mnemonicParsing="false" onAction="#boutonAvancerSecondeAction" prefHeight="25.0" prefWidth="39.0" text="Go" />
                      </children>
                   </AnchorPane>
                </content>
