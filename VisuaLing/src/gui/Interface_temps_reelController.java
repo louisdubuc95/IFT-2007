@@ -1702,6 +1702,8 @@ public class Interface_temps_reelController extends Application implements Initi
        
        for(Joueur j : m_controller.getListJoueurs())
                 {
+                    if(!j.getListeDeplacement().isEmpty())
+                    {
                     for(Node cercle : listeC)
                     {
                          float xJoueur=j.getCoordonneesJoueur().x;
@@ -1731,11 +1733,13 @@ public class Interface_temps_reelController extends Application implements Initi
                                 listPathTrans.add(transition);
                           }
                     }
-        
+                    }
                 }
        
         for(Joueur j : m_controller.getListJoueurs())
                 {
+                    if(!j.getListeDeplacement().isEmpty())
+                    {
                     for(Node cercle : listeC)
                     {
                          float xJoueur=j.getCoordonneesJoueur().x;
@@ -1751,8 +1755,9 @@ public class Interface_temps_reelController extends Application implements Initi
                           }
                     }
                 }
+                }
+        }
        
-   }
      /*
     private double determinePathOpacity()
    {
