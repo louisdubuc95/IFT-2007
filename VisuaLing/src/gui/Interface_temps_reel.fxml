@@ -44,7 +44,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <HBox fx:id="boiteHorizontaleBouton" layoutY="26.0" maxHeight="-Infinity" prefHeight="53.0" prefWidth="1306.0" spacing="8.0">
+      <HBox fx:id="boiteHorizontaleBouton" layoutY="26.0" maxHeight="-Infinity" onDragDetected="#avanceRapide" prefHeight="53.0" prefWidth="1306.0" spacing="8.0">
          <children>
             <ImageView fitHeight="44.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -91,7 +91,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0">
+            <Button mnemonicParsing="false" onAction="#reculeRapide" prefHeight="50.0" prefWidth="60.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -130,7 +130,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="boutonAvancer" mnemonicParsing="false" prefHeight="50.0" prefWidth="56.0">
+            <Button fx:id="boutonAvancer" mnemonicParsing="false" onAction="#avanceRapide" prefHeight="50.0" prefWidth="56.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -253,14 +253,14 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="84.0" prefWidth="245.0">
                      <children>
-                        <TextField layoutX="79.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="67.0" promptText="Seconde" text="secondes" />
+                        <TextField fx:id="txtAvancer" layoutX="79.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="67.0" promptText="Seconde" />
                         <Label layoutX="14.0" layoutY="6.0" text="Avancer : " />
-                        <Button layoutX="163.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Aller" />
+                        <Button layoutX="163.0" layoutY="2.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#avanceTempsDef" prefHeight="25.0" prefWidth="50.0" text="Aller" />
                         <Label layoutX="14.0" layoutY="32.0" text="Reculer : " />
-                        <Button layoutX="163.0" layoutY="28.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Aller" />
-                        <TextField layoutX="79.0" layoutY="28.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="67.0" promptText="Seconde" text="secondes" />
-                        <TextField layoutX="79.0" layoutY="53.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="67.0" promptText="Seconde" text="secondes" />
-                        <Button fx:id="boutonAvancerSeconde" layoutX="163.0" layoutY="53.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#boutonAvancerSecondeAction" prefHeight="25.0" prefWidth="50.0" text="Aller" />
+                        <Button layoutX="163.0" layoutY="28.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reculeTempsDef" prefHeight="25.0" prefWidth="50.0" text="Aller" />
+                        <TextField fx:id="txtReculer" layoutX="79.0" layoutY="28.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="67.0" promptText="Seconde" />
+                        <TextField fx:id="txtGoTo" layoutX="79.0" layoutY="53.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="67.0" promptText="Seconde" />
+                        <Button fx:id="boutonAvancerSeconde" layoutX="163.0" layoutY="53.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#GoToTime" prefHeight="25.0" prefWidth="50.0" text="Aller" />
                         <Label layoutX="14.0" layoutY="57.0" text="Aller à :" />
                      </children>
                   </AnchorPane>
