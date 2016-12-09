@@ -1890,13 +1890,13 @@ public class Interface_image_par_imageController implements Initializable {
                      }
                  }
             }
-            if(capture==true)
+            /*if(capture==true)
             {
             UpdateCustomerTask task = new UpdateCustomerTask();
             Thread th = new Thread(task);
               th.setDaemon(true);
               th.start();
-            }
+            }*/
              Thread.sleep(1000);
 
              

@@ -99,7 +99,7 @@ public class Interface_SauvegardeController implements Initializable {
         
         Stage stage = (Stage) boutonExporter.getScene().getWindow();            
 
-        /*List<Node> listeC = m_parentController.conteneurJoueur.getChildren();
+        List<Node> listeC = m_parentController.conteneurJoueur.getChildren();
            
             while(i  <   m_parentController.m_controller.getListeSauvegardeJoueur().size()-1)
                 
@@ -186,8 +186,8 @@ public class Interface_SauvegardeController implements Initializable {
                 System.out.println("fail");
                 Logger.getLogger(Interface_image_par_imageController.class.getName()).log(Level.SEVERE, null, ex);
             }   
-        stage.close();*/
-        m_parentController.capture = true;
+        stage.close();
+        /*m_parentController.capture = true;
         m_parentController.serviceExport.start();
         if(!m_parentController.serviceExport.isRunning())
         {
@@ -220,16 +220,7 @@ public class Interface_SauvegardeController implements Initializable {
       
       
     } 
-        }
-        
-        
-        
-        
-        
-        
-        
-        stage.close();
-   
+        }*/
     }
     
     
