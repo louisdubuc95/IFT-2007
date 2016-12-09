@@ -69,7 +69,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="boutonObjectif" minHeight="-Infinity" minWidth="99.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="136.0" text="Nouvel Objectif">
+            <ToggleButton fx:id="boutonObjectif" minHeight="-Infinity" minWidth="99.0" mnemonicParsing="false" onAction="#ajouterObjectifButton" onMouseClicked="#ajouterJoueurInterface" prefHeight="50.0" prefWidth="121.0" text="Nouvel Objectif">
                <HBox.margin>
                   <Insets top="1.0" />
                </HBox.margin>
@@ -90,7 +90,6 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="boutonReculerX2" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="53.0" prefWidth="77.0" text="Reculer 2X" />
             <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0">
                <graphic>
                   <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
@@ -144,7 +143,29 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="boutonAvancerX2" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="53.0" prefWidth="77.0" text="Avancer 2X" />
+            <Button mnemonicParsing="false" onAction="#stopStrategie" prefHeight="50.0" prefWidth="56.0">
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Photo/Stop.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Avancer" />
+               </tooltip>
+            </Button>
+            <Label text="Aller à :">
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </Label>
+            <TextField prefHeight="25.0" prefWidth="67.0" text="secondes">
+               <HBox.margin>
+                  <Insets left="-50.0" top="25.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="boutonAvancerSeconde" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#boutonAvancerSecondeAction" prefHeight="25.0" prefWidth="39.0" text="Go" />
          </children>
       </HBox>
       <StackPane fx:id="stackSurface" layoutY="177.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-position: 100;">
@@ -254,19 +275,21 @@
                   <Insets left="6.0" />
                </padding>
             </TitledPane>
-            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="118.0" text="Aller à">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="76.0">
-                     <children>
-                        <TextField layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="41.0" />
-                        <Label layoutX="14.0" layoutY="37.0" text="secondes" />
-                        <Button fx:id="boutonAvancerSeconde" layoutX="68.0" layoutY="7.0" mnemonicParsing="false" onAction="#boutonAvancerSecondeAction" prefHeight="25.0" prefWidth="39.0" text="Go" />
-                     </children>
-                  </AnchorPane>
-               </content>
+            <TitledPane animated="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="118.0" text="Exporter">
                <HBox.margin>
                   <Insets left="8.0" right="2.0" />
                </HBox.margin>
+               <content>
+                  <Button fx:id="boutonPause1" mnemonicParsing="false" onAction="#sauvegarderAction" prefHeight="50.0" prefWidth="58.0">
+                     <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Photo/export-icon-5.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </content>
             </TitledPane>
          </children>
       </HBox>
