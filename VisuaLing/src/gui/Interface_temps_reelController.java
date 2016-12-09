@@ -1808,9 +1808,8 @@ public class Interface_temps_reelController extends Application implements Initi
             generateCurvyPath(1.0);
             for(PathTransition p : listPathTrans)
             {
+                p.setRate(1.0);
                 p.play();
-                
-                
 
             }
         }
@@ -1951,6 +1950,7 @@ public class Interface_temps_reelController extends Application implements Initi
         for(PathTransition p : listPathTrans)
             
         {
+            p.setRate(1.0);
             p.play();
         }
         
@@ -1962,8 +1962,8 @@ public class Interface_temps_reelController extends Application implements Initi
     {
         for(PathTransition p : listPathTrans)
         {
-            p.setRate(-10.0);
-            System.out.println("Avance Rapide");
+            p.setRate(5.0);
+            p.play();
         }    
     }
     
@@ -1972,8 +1972,8 @@ public class Interface_temps_reelController extends Application implements Initi
     {
         for(PathTransition p : listPathTrans)
         {
-          p.setRate(10.0);
-          System.out.println("Avance Rapide");
+          p.setRate(-5.0);
+          p.play();
         }         
     }
     
