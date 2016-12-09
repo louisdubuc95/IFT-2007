@@ -37,6 +37,11 @@ import static java.lang.System.gc;
 import java.util.Iterator;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
+import javax.imageio.IIOException;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.metadata.IIOMetadata;
+import javax.imageio.stream.ImageOutputStream;
 
 import javax.imageio.*;
 import javax.imageio.metadata.*;
@@ -98,7 +103,9 @@ public class Interface_SauvegardeController implements Initializable {
     @FXML
     public void boutonExporterAction(MouseEvent event) throws IOException {
         
-        Stage stage = (Stage) boutonExporter.getScene().getWindow();            
+        Stage stage = (Stage) boutonExporter.getScene().getWindow();  
+        
+       
 
         List<Node> listeC = m_parentController.conteneurJoueur.getChildren();
            
