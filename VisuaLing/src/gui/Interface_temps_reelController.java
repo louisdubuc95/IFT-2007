@@ -1745,24 +1745,71 @@ public class Interface_temps_reelController extends Application implements Initi
 
                          if((xJoueur == xCercle) && (yJoueur == yCercle) && cercle.getClass() == Circle.class)
                           {
+                                
                                 Path path = new Path();
+                                Path pathRole = new Path();
+                                Path pathOrientation = new Path();
+                                Path pathGauche = new Path();
+                                Path pathDroite = new Path();
+                                Label role = getLabelRolePosition(j.getId());
+                                Label orientation = getLabelJoueurRotation(j.getId());
+                                Button gauche = getBoutonsOrientationGauche(j.getId());
+                                Button droite = getBoutonsOrientationDroit(j.getId());
+                                
+                                
                                 path.setLayoutX(0-j.getListeDeplacement().get(0).x);
-
                                 path.setLayoutY((0-j.getListeDeplacement().get(0).y));
-
                                 path.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y));
+                                
+                                pathRole.setLayoutX((0-j.getListeDeplacement().get(0).x)+0);
+                                pathRole.setLayoutY((0-j.getListeDeplacement().get(0).y)-0);
+                                pathRole.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y));
+                                
+                                
+                                pathOrientation.setLayoutX((0-j.getListeDeplacement().get(0).x)-0);
+                                pathOrientation.setLayoutY((0-j.getListeDeplacement().get(0).y)-0);
+                                pathOrientation.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y ));
+                                
+                                pathGauche.setLayoutX((0-j.getListeDeplacement().get(0).x)-0);
+                                pathGauche.setLayoutY((0-j.getListeDeplacement().get(0).y)-0);
+                                pathGauche.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y));
+                                
+                                pathDroite.setLayoutX((0-j.getListeDeplacement().get(0).x)+0);
+                                pathDroite.setLayoutY((0-j.getListeDeplacement().get(0).y)+0);
+                                pathDroite.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y));
+                                
+                                
+                                
                                 int i = 1;
                                 while(i<j.getListeDeplacement().size())
                                 {
                                     path.getElements().add(new LineTo(j.getListeDeplacement().get(i).x,j.getListeDeplacement().get(i).y ));
+                                    pathRole.getElements().add(new LineTo(j.getListeDeplacement().get(i).x+20,j.getListeDeplacement().get(i).y-15 ));
+                                    pathOrientation.getElements().add(new LineTo(j.getListeDeplacement().get(i).x-6,j.getListeDeplacement().get(i).y-35 ));
+                                    pathGauche.getElements().add(new LineTo(j.getListeDeplacement().get(i).x-35,j.getListeDeplacement().get(i).y-20 ));
+                                    pathDroite.getElements().add(new LineTo(j.getListeDeplacement().get(i).x+5,j.getListeDeplacement().get(i).y+20 ));
+
                                     i++;
                                 }
                                 path.setOpacity(pathOpacity);
                                 
                                 path.setFill(Color.BLACK);
+                                pathRole.setFill(Color.BLACK);
+                                pathOrientation.setFill(Color.BLACK);
+                                pathGauche.setFill(Color.BLACK);
+                                pathDroite.setFill(Color.BLACK);
+                                
                                 
                                 PathTransition transition = generatePathTransition((Circle)cercle, path);
+                                PathTransition transitionRole = generatePathTransitionLabel(role, pathRole);
+                                PathTransition transitionOrientation = generatePathTransitionLabel(orientation, pathOrientation);
+                                PathTransition transitionGauche = generatePathTransitionButton(droite, pathGauche);
+                                PathTransition transitionDroite = generatePathTransitionButton(gauche, pathDroite);
                                 listPathTrans.add(transition);
+                                listPathTrans.add(transitionRole);
+                                listPathTrans.add(transitionOrientation);
+                                listPathTrans.add(transitionGauche);
+                                listPathTrans.add(transitionDroite);
                           }
                     }
                     }
@@ -1783,6 +1830,18 @@ public class Interface_temps_reelController extends Application implements Initi
                           {
                               cercle.setLayoutX(j.getListeDeplacement().get(0).x);
                               cercle.setLayoutY(j.getListeDeplacement().get(0).y);
+                              Label role = getLabelRolePosition(j.getId());
+                              role.setLayoutX(j.getListeDeplacement().get(0).x+20);
+                              role.setLayoutY(j.getListeDeplacement().get(0).x-15);
+                              Label orientation = getLabelJoueurRotation(j.getId());
+                              orientation.setLayoutX(j.getListeDeplacement().get(0).x-6);
+                              orientation.setLayoutY(j.getListeDeplacement().get(0).x-35);
+                                Button gauche = getBoutonsOrientationGauche(j.getId());
+                                gauche.setLayoutX(j.getListeDeplacement().get(0).x-35);
+                              gauche.setLayoutY(j.getListeDeplacement().get(0).x-20);
+                                Button droite = getBoutonsOrientationDroit(j.getId());
+                                droite.setLayoutX(j.getListeDeplacement().get(0).x+5);
+                              droite.setLayoutY(j.getListeDeplacement().get(0).x+20);
                               
                           }
                     }
@@ -1822,6 +1881,35 @@ public class Interface_temps_reelController extends Application implements Initi
       pathTransition.setDelay(Duration.seconds(0.0));
       pathTransition.setPath(path);
       pathTransition.setNode(shape);
+      pathTransition.setOrientation(PathTransition.OrientationType.NONE);
+      pathTransition.setCycleCount(1);
+    
+
+      return pathTransition;
+   }
+      
+      
+    private PathTransition generatePathTransitionLabel(final Label label, final Path path)
+   {
+      final PathTransition pathTransition = new PathTransition();
+      pathTransition.setDuration(Duration.seconds(5.0));
+      pathTransition.setDelay(Duration.seconds(0.0));
+      pathTransition.setPath(path);
+      pathTransition.setNode(label);
+      pathTransition.setOrientation(PathTransition.OrientationType.NONE);
+      pathTransition.setCycleCount(1);
+    
+
+      return pathTransition;
+   }
+    
+      private PathTransition generatePathTransitionButton(final Button b, final Path path)
+   {
+      final PathTransition pathTransition = new PathTransition();
+      pathTransition.setDuration(Duration.seconds(5.0));
+      pathTransition.setDelay(Duration.seconds(0.0));
+      pathTransition.setPath(path);
+      pathTransition.setNode(b);
       pathTransition.setOrientation(PathTransition.OrientationType.NONE);
       pathTransition.setCycleCount(1);
     
