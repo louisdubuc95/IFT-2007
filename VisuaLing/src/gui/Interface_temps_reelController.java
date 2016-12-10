@@ -112,7 +112,9 @@ public class Interface_temps_reelController extends Application implements Initi
     @FXML private ToggleButton boutonObjectif;
     
     
-    @FXML private TextField GoTo;
+    @FXML private TextField txtGoTo;
+    @FXML private TextField txtAvancer;
+    @FXML private TextField txtReculer;
     @FXML private Button Go;
     
     
@@ -140,7 +142,7 @@ public class Interface_temps_reelController extends Application implements Initi
     
     @FXML private CheckBox cbJoueurMax;
     @FXML private TextField txtJoueurMax;
-    @FXML private Pane conteneurJoueur;
+    @FXML  Pane conteneurJoueur;
     @FXML private CheckBox afficherRPJoueur;
     @FXML private boolean desafficherRPJoueur;
     @FXML ImageView imgsurface ;
@@ -201,7 +203,7 @@ public class Interface_temps_reelController extends Application implements Initi
     private Button btn_droitCourant;
     
     private double x0, y0;
-    @FXML private StackPane stackSurface ;
+    @FXML  StackPane stackSurface ;
     @FXML private Button btnnouveauSportAction;
     @FXML private AnchorPane boiteverticale ; 
     @FXML private HBox boiteHorizontaleBouton ; 
@@ -1732,6 +1734,8 @@ public class Interface_temps_reelController extends Application implements Initi
        
        for(Joueur j : m_controller.getListJoueurs())
                 {
+                    if(!j.getListeDeplacement().isEmpty())
+                    {
                     for(Node cercle : listeC)
                     {
                          float xJoueur=j.getCoordonneesJoueur().x;
@@ -1761,11 +1765,13 @@ public class Interface_temps_reelController extends Application implements Initi
                                 listPathTrans.add(transition);
                           }
                     }
-        
+                    }
                 }
        
         for(Joueur j : m_controller.getListJoueurs())
                 {
+                    if(!j.getListeDeplacement().isEmpty())
+                    {
                     for(Node cercle : listeC)
                     {
                          float xJoueur=j.getCoordonneesJoueur().x;
@@ -1781,8 +1787,9 @@ public class Interface_temps_reelController extends Application implements Initi
                           }
                     }
                 }
+                }
+        }
        
-   }
      /*
     private double determinePathOpacity()
    {
@@ -1838,9 +1845,8 @@ public class Interface_temps_reelController extends Application implements Initi
             generateCurvyPath(1.0);
             for(PathTransition p : listPathTrans)
             {
+                p.setRate(1.0);
                 p.play();
-                
-                
 
             }
         }
@@ -1849,39 +1855,97 @@ public class Interface_temps_reelController extends Application implements Initi
     @FXML
     public void GoToTime()
     {
-        String temps = GoTo.getText();
-        Duration dur = new Duration(Integer.parseInt(temps));
+        if(txtGoTo.getText().isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information les mode de jeux");
+            alert.setContentText("Le temps définie ne doit pas être vide!");
+            alert.showAndWait();
+        }
+        else
+            if(!txtGoTo.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$"))
+            {
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setTitle("Information");
+              alert.setHeaderText("Information sur la création du sports");
+              alert.setContentText("Le temps doivent être des nombre décimaux (4 décimal après la virgule maximum)!");
+              alert.showAndWait();
+            }
+        String temps = txtGoTo.getText();
+        Duration dur = new Duration(Double.parseDouble(temps)*1000);
         for(PathTransition p : listPathTrans)
         {
             p.jumpTo(dur);
+            p.pause();
         }
         
     }
     
     
-    
+    //
     @FXML
     public void avanceTempsDef()
     {
-        for(PathTransition p : listPathTrans)
+        if(txtAvancer.getText().isEmpty())
         {
-            Duration dur = p.getCurrentTime();
-            Duration add = new Duration(1000);
-            p.jumpTo(dur.add(add));
-            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information les mode de jeux");
+            alert.setContentText("Le temps définie ne doit pas être vide!");
+            alert.showAndWait();
         }
+        else
+            if(!txtAvancer.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$"))
+            {
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setTitle("Information");
+              alert.setHeaderText("Information les mode de jeux");
+              alert.setContentText("Les temps doivent être des nombre décimaux (4 décimal après la virgule maximum)!");
+              alert.showAndWait();
+            }
+            else
+                for(PathTransition p : listPathTrans)
+                {
+                    Duration dur = p.getCurrentTime();
+                    Duration add = new Duration(Double.parseDouble(txtAvancer.getText()) * 1000);
+                    p.jumpTo(dur.add(add));
+                    p.pause();
+
+                }
         
     }
     
     @FXML
     public void reculeTempsDef()
     {
-        for(PathTransition p : listPathTrans)
+        if(txtReculer.getText().isEmpty())
         {
-            Duration dur = p.getCurrentTime();
-            Duration neg = new Duration(-1000);
-            p.jumpTo(dur.add(neg));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information les mode de jeux");
+            alert.setContentText("Le temps définie ne doit pas être vide!");
+            alert.showAndWait();
         }
+        else
+            if(!txtReculer.getText().matches("^[0-9]{1,10}([.,][0-9]{1,4})?$"))
+            {
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setTitle("Information");
+              alert.setHeaderText("Information les mode de jeux");
+              alert.setContentText("Les temps doivent être des nombre décimaux (4 décimal après la virgule maximum)!");
+              alert.showAndWait();
+            }
+            else
+                for(PathTransition p : listPathTrans)
+                {
+                    Duration dur = p.getCurrentTime();
+                    Duration add = new Duration(Double.parseDouble(txtReculer.getText()) * -1000);
+                    System.out.println(Double.parseDouble(txtReculer.getText()) * -1000);
+                    p.jumpTo(dur.add(add));
+                    p.pause();
+
+                }
         
     }
             
@@ -1923,29 +1987,33 @@ public class Interface_temps_reelController extends Application implements Initi
         for(PathTransition p : listPathTrans)
             
         {
+            p.setRate(1.0);
             p.play();
         }
         
        
     }
     
+    @FXML
+    public void avanceRapide()
+    {
+        for(PathTransition p : listPathTrans)
+        {
+            p.setRate(5.0);
+            p.play();
+        }    
+    }
     
-   @FXML
-   public void boutonAvancerSecondeAction (){
-       System.err.println("test");
-   }
+    @FXML 
+    public void reculeRapide()
+    {
+        for(PathTransition p : listPathTrans)
+        {
+          p.setRate(-5.0);
+          p.play();
+        }         
+    }
     
-    
-        
-
-
-   
-   
-           
-
-       
-            
-   
     //@FXML
     public void setEquipe(String p_equipe) {
         m_equipe= p_equipe;
