@@ -1088,6 +1088,7 @@ public class Interface_temps_reelController extends Application implements Initi
                         ImagePattern imagePattern = new ImagePattern(imageObstacle);
                         rekt.setFill(imagePattern);
                         conteneurJoueur.getChildren().addAll(rekt);
+                        rekt.setOnMouseEntered(objOnMouseEnteredEventHandler);
                     }
             m_enregistrement.serializeUR(m_controller.getController(), indexUndoRedo);
             indexUndoRedo ++;
@@ -1490,9 +1491,10 @@ public class Interface_temps_reelController extends Application implements Initi
             }
     };
    };
-        
+       
     private void checkShapeIntersection(Shape block) {
         boolean collisionDetected = false;
+         
         for (Shape static_bloc : nodes) {
           if (static_bloc != block) {
             System.out.println("Collision non deteted");
@@ -1500,12 +1502,42 @@ public class Interface_temps_reelController extends Application implements Initi
             Shape intersect = Shape.intersect(block, static_bloc);
             if (intersect.getBoundsInLocal().getWidth() != -1) {
               collisionDetected = true;
+              
             }
           }
         }
 
         if (collisionDetected) {
           block.setFill(Color.BLUE);
+          //List<String> l = m_controller.getListePosition() ;
+         // block.setLayoutX(l);
+          
+         
+          
+          block.setLayoutX(block.getLayoutX()-30);
+          block.setLayoutY(block.getLayoutY()+30);
+          //block.setLayoutY(block.getLayoutY()-30);
+          //while (block.getLayoutX())
+          
+        /* if (block.getLayoutY()==block.getLayoutY()){
+         block.setLayoutX(block.getLayoutX()-30);
+          
+         }  
+          if (block.getLayoutY()==block.getLayoutY()){
+          //block.setLayoutX(block.getLayoutX()-30);
+          block.setLayoutY(block.getLayoutY()+30);
+          }   
+          
+          /*if (block.getLayoutX()<block.getLayoutX()){
+              block.setLayoutX(block.getLayoutX()-30);
+          }*/
+          
+          /*if (
+                  block.getLayoutX()>block.getLayoutX()){
+              block.setLayoutX(block.getLayoutX()+30);
+          }*/
+          
+      
         } else {
             System.out.println("Collision non deteted");
         }
@@ -2230,9 +2262,12 @@ public class Interface_temps_reelController extends Application implements Initi
                 rekt.setLayoutY(obstacleAjouter.getCoordonneeObs().y - hauteurObstacle/2);
                 rekt.setCursor(Cursor.HAND);
                 rekt.setOnMouseClicked(obsOnRightMouseClickEventHandler);
+                //rekt.setOnMouseEntered(obsEnter);
                 nodes.add(rekt);
                 rekt.setFill(imagePattern);
+                
                 conteneurJoueur.getChildren().addAll(rekt);
+                
                 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(Interface_temps_reelController.class.getName()).log(Level.SEVERE, null, ex);
