@@ -1761,21 +1761,21 @@ public class Interface_temps_reelController extends Application implements Initi
                                 path.setLayoutY((0-j.getListeDeplacement().get(0).y));
                                 path.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y));
                                 
-                                pathRole.setLayoutX((0-j.getListeDeplacement().get(0).x)+0);
-                                pathRole.setLayoutY((0-j.getListeDeplacement().get(0).y)-0);
+                                pathRole.setLayoutX((0-j.getListeDeplacement().get(0).x)+20);
+                                pathRole.setLayoutY((0-j.getListeDeplacement().get(0).y)-15);
                                 pathRole.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y));
                                 
                                 
-                                pathOrientation.setLayoutX((0-j.getListeDeplacement().get(0).x)-0);
-                                pathOrientation.setLayoutY((0-j.getListeDeplacement().get(0).y)-0);
+                                pathOrientation.setLayoutX((0-j.getListeDeplacement().get(0).x)-6);
+                                pathOrientation.setLayoutY((0-j.getListeDeplacement().get(0).y)-35);
                                 pathOrientation.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y ));
                                 
-                                pathGauche.setLayoutX((0-j.getListeDeplacement().get(0).x)-0);
-                                pathGauche.setLayoutY((0-j.getListeDeplacement().get(0).y)-0);
+                                pathGauche.setLayoutX((0-j.getListeDeplacement().get(0).x)-35);
+                                pathGauche.setLayoutY((0-j.getListeDeplacement().get(0).y)-20);
                                 pathGauche.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y));
                                 
-                                pathDroite.setLayoutX((0-j.getListeDeplacement().get(0).x)+0);
-                                pathDroite.setLayoutY((0-j.getListeDeplacement().get(0).y)+0);
+                                pathDroite.setLayoutX((0-j.getListeDeplacement().get(0).x)+5);
+                                pathDroite.setLayoutY((0-j.getListeDeplacement().get(0).y)+20);
                                 pathDroite.getElements().add(new MoveTo(j.getListeDeplacement().get(0).x,j.getListeDeplacement().get(0).y));
                                 
                                 
@@ -1784,10 +1784,10 @@ public class Interface_temps_reelController extends Application implements Initi
                                 while(i<j.getListeDeplacement().size())
                                 {
                                     path.getElements().add(new LineTo(j.getListeDeplacement().get(i).x,j.getListeDeplacement().get(i).y ));
-                                    pathRole.getElements().add(new LineTo(j.getListeDeplacement().get(i).x+20,j.getListeDeplacement().get(i).y-15 ));
-                                    pathOrientation.getElements().add(new LineTo(j.getListeDeplacement().get(i).x-6,j.getListeDeplacement().get(i).y-35 ));
-                                    pathGauche.getElements().add(new LineTo(j.getListeDeplacement().get(i).x-35,j.getListeDeplacement().get(i).y-20 ));
-                                    pathDroite.getElements().add(new LineTo(j.getListeDeplacement().get(i).x+5,j.getListeDeplacement().get(i).y+20 ));
+                                    pathRole.getElements().add(new LineTo(j.getListeDeplacement().get(i).x+20,j.getListeDeplacement().get(i).y-0 ));
+                                    pathOrientation.getElements().add(new LineTo(j.getListeDeplacement().get(i).x-6,j.getListeDeplacement().get(i).y-0 ));
+                                    pathGauche.getElements().add(new LineTo(j.getListeDeplacement().get(i).x-35,j.getListeDeplacement().get(i).y-0 ));
+                                    pathDroite.getElements().add(new LineTo(j.getListeDeplacement().get(i).x+5,j.getListeDeplacement().get(i).y+0 ));
 
                                     i++;
                                 }
