@@ -92,6 +92,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox ;  
 import javafx.scene.effect.Effect.*;
 import javafx.concurrent.*;
+import javafx.geometry.Bounds;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
@@ -1494,30 +1495,85 @@ public class Interface_temps_reelController extends Application implements Initi
     };
    };
        
-    private void checkShapeIntersection(Shape block) {
+   private void checkShapeIntersection(Shape block) {
+       
         boolean collisionDetected = false;
-         
+        double deltaX = 30 ;
+        double deltaY = 30 ;   
+        Shape intersect ;
         for (Shape static_bloc : nodes) {
           if (static_bloc != block) {
             System.out.println("Collision non deteted");
 
-            Shape intersect = Shape.intersect(block, static_bloc);
+            intersect = Shape.intersect(block, static_bloc);
             if (intersect.getBoundsInLocal().getWidth() != -1) {
               collisionDetected = true;
-              
+              if (collisionDetected){
+                //block.setLayoutX(block.getLayoutX()-deltaX);
+                //block.setLayoutY(block.getLayoutY()-deltaY);                   
+                block.setFill(Color.BLUE);
+                final Bounds bounds = intersect.getBoundsInLocal();
+                final boolean atRightBorder = block.getLayoutX() >= (bounds.getMaxX() - (block.getLayoutX()/2));
+                //System.out.println(block.getLayoutX());
+                //System.out.println(block.getBoundsInLocal());  
+                //System.out.println(bounds.getMaxX());
+                final boolean atLeftBorder = block.getLayoutX() <= (bounds.getMinX() + (block.getLayoutX()/2));
+                final boolean atBottomBorder = block.getLayoutY() >= (bounds.getMaxY() - (block.getLayoutY()/2));
+                final boolean atTopBorder = block.getLayoutY() <= (bounds.getMinY() + (block.getLayoutY()/2));
+
+                if (atRightBorder) {
+                    block.setLayoutX(block.getLayoutX()+deltaX);
+                    block.setLayoutY(block.getLayoutY()-0);  
+                    
+                    System.out.println("Droite");
+                }
+                
+                if (atLeftBorder){
+                   System.out.println("Gauche");
+                    block.setLayoutX(block.getLayoutX()-deltaX);
+                    block.setLayoutY(block.getLayoutY()-0);  
+                }
+                
+                if (atBottomBorder) {
+                   System.out.println("BAS");
+                    deltaY *= -1;
+                   
+                  
+              }
+                if (atTopBorder){
+                    System.out.println("HAUT");
+                    
+                }
             }
           }
-        }
+        } 
 
-        if (collisionDetected) {
+        /*if (collisionDetected) {
+            // intersect = Shape.intersect(block, static_bloc);
+                final Bounds bounds = intersect.getBoundsInLocal();
+                final boolean atRightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
+                final boolean atLeftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
+                final boolean atBottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
+                final boolean atTopBorder = circle.getLayoutY() <= (bounds.getMinY() + circle.getRadius());
+
+                if (atRightBorder || atLeftBorder) {
+                    deltaX *= -1;
+                }
+                if (atBottomBorder || atTopBorder) {
+                    deltaY *= -1;
+                }
           block.setFill(Color.BLUE);
+          
           //List<String> l = m_controller.getListePosition() ;
          // block.setLayoutX(l);
+          //block.setLayoutX(d);
+         //block.getLayoutX(block.OUT_TOP);
+        // block.OUT_TOP ;
           
+         block.setLayoutX(block.getLayoutX()-deltaX);
+         block.setLayoutY(block.getLayoutY()-deltaY);
          
-          
-          block.setLayoutX(block.getLayoutX()-30);
-          block.setLayoutY(block.getLayoutY()+30);
+         
           //block.setLayoutY(block.getLayoutY()-30);
           //while (block.getLayoutX())
           
@@ -1537,11 +1593,12 @@ public class Interface_temps_reelController extends Application implements Initi
           /*if (
                   block.getLayoutX()>block.getLayoutX()){
               block.setLayoutX(block.getLayoutX()+30);
-          }*/
+          }
           
       
         } else {
             System.out.println("Collision non deteted");
+        }*/
         }
     }
     
